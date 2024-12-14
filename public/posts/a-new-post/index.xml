@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>test on Kamaboko Home</title>
+    <link>http://localhost:1313/posts/a-new-post/</link>
+    <description>Recent content in test on Kamaboko Home</description>
+    <generator>Hugo</generator>
+    <language>en-US</language>
+    <copyright>Kamaboko 2024</copyright>
+    <lastBuildDate></lastBuildDate>
+    <atom:link href="http://localhost:1313/posts/a-new-post/index.xml" rel="self" type="application/rss+xml" />
+  </channel>
+</rss>

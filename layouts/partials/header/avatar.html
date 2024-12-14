@@ -1,0 +1,10 @@
+{{ $avatar := resources.GetMatch .Site.Params.avatar }} 
+
+<div class="flex justify-center items-center">
+  <div class="w-25 h-25 rounded-full overflow-hidden">
+    <a href="{{ .Site.BaseURL }}">
+      <img src="{{ $avatar.RelPermalink }}" alt="{{ .Site.Title }}" width="90" height="90" />
+    </a>
+  </div>
+</div>
+

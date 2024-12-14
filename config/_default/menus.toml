@@ -1,0 +1,49 @@
+[[main]]
+    identifier = "home"
+    name = "Home"
+    url = "/"
+    weight = 1
+
+[[main]]
+    identifier = "posts"
+    name = "Posts"
+    url = "/posts"
+    weight = 2
+
+[[main]]
+    identifier = "collection"
+    name = "Collection"
+    url = "/collection"
+    weight = 3
+
+[[main]]
+    identifier = "none"
+    name = "还没想好"
+    url = "/"
+    weight = 4
+
+# [[main]]
+ #   identifier = "tags"
+ #   name = "Tags"
+ #   url = "/tags"
+ #   weight = 4
+    
+# Social Media Configuration
+
+[[social]]
+    identifier = "orcid"
+    name = "Orcid"
+    url = "https://orcid.org/0009-0003-1218-4855"
+    weight = 1
+
+[[social]]
+    identifier = "linkedin"
+    name = "LinkedIn"
+    url = "https://www.linkedin.com/in/danyang-jiang-161324213/"
+    weight = 2
+
+[[social]]
+    identifier = "instagram"
+    name = "Instagram"
+    url = "https://www.instagram.com/treeeeowo/"
+    weight = 3

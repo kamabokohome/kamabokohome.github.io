@@ -1,0 +1,29 @@
+User-agent: *
+
+Disallow: /
+
+Disallow: /posts/
+
+Disallow: /posts/a-new-post/
+
+Disallow: /posts/a-new-post-copy-3/
+
+Disallow: /posts/a-new-post-copy-4/
+
+Disallow: /posts/a-new-post-copy-2/
+
+Disallow: /posts/a-new-post-copy/
+
+Disallow: /categories/
+
+Disallow: /categories/hello/
+
+Disallow: /posts/markdown-cheat-sheet/
+
+Disallow: /collection/
+
+Disallow: /collection/empa-office/
+
+Disallow: /tags/
+
+Disallow: /collection/bench/

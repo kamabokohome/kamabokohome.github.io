@@ -1,0 +1,20 @@
+<div class="">
+  <ul class="flex justify-center gap-5">
+    {{ with site.Menus.social }}
+    {{ range . }}
+    <li>    
+      <a href="{{ .URL }}" target="_blank" rel="noopener noreferrer">
+        {{ $iconPath := printf "icons/%s.png" .Name }}
+        {{ $icon := resources.Get $iconPath}}
+        
+        {{ if $icon }}
+          <img src="{{ $icon.RelPermalink }}" alt="{{ .Name }}" style="width: 23px;" />
+        {{ else }}
+          {{ .Name }}
+        {{ end }}
+      </a>
+    </li>
+    {{ end }}
+    {{ end }}
+  </ul>
+</div>
