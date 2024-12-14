@@ -1,0 +1,16 @@
+<footer>
+    {{ $color := .Params.banner }}
+
+    {{ if not $color }}
+        {{ $color = "green" }}
+    {{ end }}
+
+    {{ $banner := printf "banner_%s.png" $color }}
+
+    <img src="{{ "/img/" | relURL }}{{ $banner }}" class="mb-5">
+
+    <div class="grid items-center justify-center pb-10 gap-3">
+        {{ partial "footer/copyright" . }}
+        {{ partial "footer/social" . }} 
+    </div>
+</footer>

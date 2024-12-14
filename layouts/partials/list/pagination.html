@@ -1,0 +1,42 @@
+{{ $paginator := .Paginator }}
+
+<div class="flex items-center justify-between font-semibold w-full pb-10 mt-4">
+  <!-- Previous page. -->
+  <div class="flex justify-start">
+    {{ if $paginator.HasPrev }}
+      <a href="{{ $paginator.Prev.URL }}" class="pagination-button">
+        <!-- 使用 Hugo resources 加载图片 -->
+        {{ $prevArrow := resources.Get "icons/arrow-left.png" }}
+        <img src="{{ $prevArrow.RelPermalink }}" alt="Previous" />
+      </a>
+    {{ else }}
+      <a href="#" class="pagination-button pointer-events-none">
+        <!-- 使用 Hugo resources 加载图片 -->
+        {{ $prevArrow := resources.Get "icons/arrow-left.png" }}
+        <img src="{{ $prevArrow.RelPermalink }}" alt="Previous" />
+      </a>
+    {{ end }}
+  </div>
+
+  <!-- Page Number (always displayed in 'current/total' format) -->
+  <div class="flex justify-center items-center mx-auto px-4">
+    <span class="text-xs font-semibold" style="color: #9CA3AF;">{{ $paginator.PageNumber }}/{{ $paginator.TotalPages }}</span>
+  </div>
+
+  <!-- Next page. -->
+  <div class="flex justify-end">
+    {{ if $paginator.HasNext }}
+      <a href="{{ $paginator.Next.URL }}" class="pagination-button">
+        <!-- 使用 Hugo resources 加载图片 -->
+        {{ $nextArrow := resources.Get "icons/arrow-right.png" }}
+        <img src="{{ $nextArrow.RelPermalink }}" alt="Next" />
+      </a>
+    {{ else }}
+      <a href="#" class="pagination-button pointer-events-none">
+        <!-- 使用 Hugo resources 加载图片 -->
+        {{ $nextArrow := resources.Get "icons/arrow-right.png" }}
+        <img src="{{ $nextArrow.RelPermalink }}" alt="Next" />
+      </a>
+    {{ end }}
+  </div>
+</div>
