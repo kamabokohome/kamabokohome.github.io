@@ -4,12 +4,12 @@
   <!-- Previous page. -->
   <div class="flex justify-start">
     {{ if $paginator.HasPrev }}
-      <a href="{{ $paginator.Prev.URL }}" class="pagination-button">
+      <a href="{{ $paginator.Prev.URL }}" class="pagination-button" title="新一页">
         {{ $prevArrow := resources.Get "icons/arrow-left.png" }}
         <img src="{{ $prevArrow.RelPermalink }}" alt="Previous" />
       </a>
     {{ else }}
-      <a href="#" class="pagination-button pointer-events-none">
+      <a href="#" class="pagination-button pointer-events-none" title="没有啦">
         {{ $prevArrow := resources.Get "icons/arrow-left.png" }}
         <img src="{{ $prevArrow.RelPermalink }}" alt="Previous" />
       </a>
@@ -24,12 +24,12 @@
   <!-- Next page. -->
   <div class="flex justify-end">
     {{ if $paginator.HasNext }}
-      <a href="{{ $paginator.Next.URL }}" class="pagination-button">
+      <a href="{{ $paginator.Next.URL }}" class="pagination-button" title="旧一页">
         {{ $nextArrow := resources.Get "icons/arrow-right.png" }}
         <img src="{{ $nextArrow.RelPermalink }}" alt="Next" />
       </a>
     {{ else }}
-      <a href="#" class="pagination-button pointer-events-none">
+      <a href="#" class="pagination-button pointer-events-none" title="没有啦">
         {{ $nextArrow := resources.Get "icons/arrow-right.png" }}
         <img src="{{ $nextArrow.RelPermalink }}" alt="Next" />
       </a>
