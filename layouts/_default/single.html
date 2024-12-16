@@ -41,12 +41,12 @@
   <div class="flex justify-start w-1/2">
     {{ $prev := .Prev }}
     {{ if and $prev (eq $prev.Section .Section) }}
-      <a href="{{ $prev.Permalink }}" class="pagination-button">
+      <a href="{{ $prev.Permalink }}" class="pagination-button" title="前一篇">
         {{ $prevArrow := resources.Get "icons/arrow-left.png" }}
         <img src="{{ $prevArrow.RelPermalink }}" alt="Previous" />
       </a>
     {{ else }}
-      <a href="#" class="pagination-button pointer-events-none">
+      <a href="#" class="pagination-button pointer-events-none" title="没有啦">
         {{ $prevArrow := resources.Get "icons/arrow-left.png" }}
         <img src="{{ $prevArrow.RelPermalink }}" alt="Previous" />
       </a>
@@ -56,7 +56,7 @@
   <!-- Back to Home Link (unchanged) -->
   <div class="flex justify-center items-center mx-auto px-4 mt-4">
     <a href="/" class="text-xs font-semibold" style="color: #9CA3AF; text-decoration: none;">
-      Back to Home
+      Take Me Home
     </a>
   </div>
 
@@ -64,12 +64,12 @@
   <div class="flex justify-end w-1/2">
     {{ $next := .Next }}
     {{ if and $next (eq $next.Section .Section) }}
-      <a href="{{ $next.Permalink }}" class="pagination-button">
+      <a href="{{ $next.Permalink }}" class="pagination-button" title="后一篇">
         {{ $nextArrow := resources.Get "icons/arrow-right.png" }}
         <img src="{{ $nextArrow.RelPermalink }}" alt="Next" />
       </a>
     {{ else }}
-      <a href="#" class="pagination-button pointer-events-none">
+      <a href="#" class="pagination-button pointer-events-none" title="没有啦">
         {{ $nextArrow := resources.Get "icons/arrow-right.png" }}
         <img src="{{ $nextArrow.RelPermalink }}" alt="Next" />
       </a>
