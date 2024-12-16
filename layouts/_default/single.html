@@ -35,47 +35,47 @@
   </footer>
   -->
 
-  <!-- Previous and Next Post Buttons -->
-  <div class="flex items-center justify-between font-semibold w-full mt-4">
-    <!-- Previous post (left side). -->
-    <div class="flex justify-start w-1/2">
-      {{ $prev := .Prev }}
-      {{ if and $prev (in $prev.Section "posts") }}
-        <a href="{{ $prev.Permalink }}" class="pagination-button">
-          {{ $prevArrow := resources.Get "icons/arrow-left.png" }}
-          <img src="{{ $prevArrow.RelPermalink }}" alt="Previous" />
-        </a>
-      {{ else }}
-        <a href="#" class="pagination-button pointer-events-none">
-          {{ $prevArrow := resources.Get "icons/arrow-left.png" }}
-          <img src="{{ $prevArrow.RelPermalink }}" alt="Previous" />
-        </a>
-      {{ end }}
-    </div>
-
-<!-- Back to List Link -->
-<div class="flex justify-center items-center mx-auto px-4 mt-4">
-  <a href="/posts" class="text-xs font-semibold" style="color: #9CA3AF; text-decoration: none;">
-    Back to List
-  </a>
-</div>
-
-    <!-- Next post (right side). -->
-    <div class="flex justify-end w-1/2">
-      {{ $next := .Next }}
-      {{ if and $next (in $next.Section "posts") }}
-        <a href="{{ $next.Permalink }}" class="pagination-button">
-          {{ $nextArrow := resources.Get "icons/arrow-right.png" }}
-          <img src="{{ $nextArrow.RelPermalink }}" alt="Next" />
-        </a>
-      {{ else }}
-        <a href="#" class="pagination-button pointer-events-none">
-          {{ $nextArrow := resources.Get "icons/arrow-right.png" }}
-          <img src="{{ $nextArrow.RelPermalink }}" alt="Next" />
-        </a>
-      {{ end }}
-    </div>
+<!-- Previous and Next Post Buttons -->
+<div class="flex items-center justify-between font-semibold w-full mt-4">
+  <!-- Previous post (left side). -->
+  <div class="flex justify-start w-1/2">
+    {{ $prev := .Prev }}
+    {{ if and $prev (eq $prev.Section .Section) }}
+      <a href="{{ $prev.Permalink }}" class="pagination-button">
+        {{ $prevArrow := resources.Get "icons/arrow-left.png" }}
+        <img src="{{ $prevArrow.RelPermalink }}" alt="Previous" />
+      </a>
+    {{ else }}
+      <a href="#" class="pagination-button pointer-events-none">
+        {{ $prevArrow := resources.Get "icons/arrow-left.png" }}
+        <img src="{{ $prevArrow.RelPermalink }}" alt="Previous" />
+      </a>
+    {{ end }}
   </div>
+
+  <!-- Back to Home Link (unchanged) -->
+  <div class="flex justify-center items-center mx-auto px-4 mt-4">
+    <a href="/" class="text-xs font-semibold" style="color: #9CA3AF; text-decoration: none;">
+      Back to Home
+    </a>
+  </div>
+
+  <!-- Next post (right side). -->
+  <div class="flex justify-end w-1/2">
+    {{ $next := .Next }}
+    {{ if and $next (eq $next.Section .Section) }}
+      <a href="{{ $next.Permalink }}" class="pagination-button">
+        {{ $nextArrow := resources.Get "icons/arrow-right.png" }}
+        <img src="{{ $nextArrow.RelPermalink }}" alt="Next" />
+      </a>
+    {{ else }}
+      <a href="#" class="pagination-button pointer-events-none">
+        {{ $nextArrow := resources.Get "icons/arrow-right.png" }}
+        <img src="{{ $nextArrow.RelPermalink }}" alt="Next" />
+      </a>
+    {{ end }}
+  </div>
+</div>
 
 </article>
 
