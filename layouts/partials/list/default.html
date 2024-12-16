@@ -17,14 +17,14 @@
 
   </div>
   
-  <div class="description">
+  <!-- <div class="description">
     {{ if .Params.description }}
       {{ .Params.description }}
     {{ else if .Summary }}
       {{ .Summary }}
     {{ end }}
   
-    <!-- "Read More" and Arrow together at the end of the summary 
+    "Read More" and Arrow together at the end of the summary 
     <a class="read-more inline-flex items-center mt-2" href="{{ .Permalink }}">
       {{ i18n "readMore" }}
       <span class="w-4 h-4 stroke-2 inline-block ml-2">
