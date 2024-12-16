@@ -13,19 +13,6 @@
     </div>
     
     <h5 class="title-large">{{ .Title }}</h5>
-
-      <!--
-      {{/* Categories */}} 
-      {{ with (.GetTerms "categories") }} — 
-        {{ range . }}
-          <a class="categories" href="{{ .RelPermalink }}" alt="{{ .LinkTitle }}">
-            {{ .LinkTitle }}
-          </a>
-        {{ end }} 
-      {{ end }}
-        -->
-
-    </div>
   </header>
 
   {{ partial "single/table-of-contents" . }}
@@ -34,17 +21,62 @@
 
   {{ partial "single/comments/index" . }}
 
+  <!--  
   <footer>
     {{ with (.GetTerms "tags") }}
       <div class="pb-14 taxonomy-list tags-list">
-      {{ range . }}
-        <a href="{{ .RelPermalink }}" alt="{{ .LinkTitle }}">
-          {{ .LinkTitle }}
-        </a>
-      {{ end }}
+        {{ range . }}
+          <a href="{{ .RelPermalink }}" alt="{{ .LinkTitle }}">
+            {{ .LinkTitle }}
+          </a>
+        {{ end }}
       </div>
     {{ end }}
   </footer>
+  -->
+
+  <!-- Previous and Next Post Buttons -->
+  <div class="flex items-center justify-between font-semibold w-full mt-4">
+    <!-- Previous post (left side). -->
+    <div class="flex justify-start w-1/2">
+      {{ $prev := .Prev }}
+      {{ if and $prev (in $prev.Section "posts") }}
+        <a href="{{ $prev.Permalink }}" class="pagination-button">
+          {{ $prevArrow := resources.Get "icons/arrow-left.png" }}
+          <img src="{{ $prevArrow.RelPermalink }}" alt="Previous" />
+        </a>
+      {{ else }}
+        <a href="#" class="pagination-button pointer-events-none">
+          {{ $prevArrow := resources.Get "icons/arrow-left.png" }}
+          <img src="{{ $prevArrow.RelPermalink }}" alt="Previous" />
+        </a>
+      {{ end }}
+    </div>
+
+<!-- Back to List Link -->
+<div class="flex justify-center items-center mx-auto px-4 mt-4">
+  <a href="/posts" class="text-xs font-semibold" style="color: #9CA3AF; text-decoration: none;">
+    Back to List
+  </a>
+</div>
+
+    <!-- Next post (right side). -->
+    <div class="flex justify-end w-1/2">
+      {{ $next := .Next }}
+      {{ if and $next (in $next.Section "posts") }}
+        <a href="{{ $next.Permalink }}" class="pagination-button">
+          {{ $nextArrow := resources.Get "icons/arrow-right.png" }}
+          <img src="{{ $nextArrow.RelPermalink }}" alt="Next" />
+        </a>
+      {{ else }}
+        <a href="#" class="pagination-button pointer-events-none">
+          {{ $nextArrow := resources.Get "icons/arrow-right.png" }}
+          <img src="{{ $nextArrow.RelPermalink }}" alt="Next" />
+        </a>
+      {{ end }}
+    </div>
+  </div>
+
 </article>
 
 {{ end }}
