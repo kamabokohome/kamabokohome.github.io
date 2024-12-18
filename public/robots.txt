@@ -6,10 +6,6 @@ Disallow: /posts/
 
 Disallow: /posts/%E6%B5%8B%E8%AF%95%E6%B5%8B%E8%AF%95/
 
-Disallow: /posts/a-new-post-copy-3/
-
-Disallow: /posts/a-new-post-copy-4/
-
 Disallow: /collection/
 
 Disallow: /contact/

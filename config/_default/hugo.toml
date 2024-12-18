@@ -6,6 +6,7 @@ theme = "enchanted-lowkey"
 title = "Kamaboko Home"
 enableRobotsTXT = true
 summaryLength = 15
+
 [pagination]
 pagerSize = 10
 
@@ -22,5 +23,5 @@ pagerSize = 10
     lineNumbersInTable = false
     noClasses = true
     noHl = false
-    style = 'dracula'
+    style = "dracula"  # changed to double quotes
     tabWidth = 5
