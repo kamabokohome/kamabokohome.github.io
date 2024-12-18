@@ -4,22 +4,3 @@ languageCode = 'en-US'
 defaultContentLanguage = 'en'
 theme = 'enchanted-lowkey'
 title = 'Kamaboko Home'
-enableRobotsTXT = true
-summaryLength = 15
-ignoreLogs = ['warning-goldmark-raw-html']
-
-[pagination]
-pagerSize = 10
-
-[markup]
-  [markup.highlight]
-  anchorLineNos = false
-  codeFences = true
-  guessSyntax = false
-  lineAnchors = ''
-  lineNoStart = 1
-  lineNos = false
-  lineNumbersInTable = false
-  noClasses = true
-  style = 'dracula'
-  tabWidth = 5
