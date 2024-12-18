@@ -7,7 +7,7 @@ title = "Kamaboko Home"
 enableRobotsTXT = true
 summaryLength = 15
 [pagination]
-pagerSize = 5
+pagerSize = 10
 
 [markup]
   [markup.highlight]

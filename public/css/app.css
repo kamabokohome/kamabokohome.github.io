@@ -612,7 +612,7 @@ video {
   --tw-bg-opacity: 1;
   background-color: rgb(38 38 38 / var(--tw-bg-opacity, 1));
   --tw-text-opacity: 1;
-  color: rgb(209 213 219 / var(--tw-text-opacity, 1));
+  color: rgb(243 244 246 / var(--tw-text-opacity, 1));
 }
   
   h1, h2, h3, h4, h5 {
@@ -625,7 +625,7 @@ video {
   
   h1:is(.dark *), h2:is(.dark *), h3:is(.dark *), h4:is(.dark *), h5:is(.dark *) {
   --tw-text-opacity: 1;
-  color: rgb(209 213 219 / var(--tw-text-opacity, 1));
+  color: rgb(243 244 246 / var(--tw-text-opacity, 1));
 }
   
   h6 {
@@ -638,7 +638,7 @@ video {
   
   h6:is(.dark *) {
   --tw-text-opacity: 1;
-  color: rgb(209 213 219 / var(--tw-text-opacity, 1));
+  color: rgb(243 244 246 / var(--tw-text-opacity, 1));
 }
 
   h1 {
@@ -1072,14 +1072,14 @@ nav a.active:is(.dark *) {
 }
 #content h5 > a:is(.dark *) {
   --tw-text-opacity: 1;
-  color: rgb(209 213 219 / var(--tw-text-opacity, 1));
+  color: rgb(243 244 246 / var(--tw-text-opacity, 1));
 }
 #content h5 > a:hover:is(.dark *) {
   --tw-text-opacity: 1;
   color: rgb(243 244 246 / var(--tw-text-opacity, 1));
 }
 #content .meta {
-  margin-top: 0.75rem;
+  margin-top: 0.5rem;
   display: flex;
   font-size: 0.75rem;
   line-height: 1rem;
@@ -1095,14 +1095,15 @@ nav a.active:is(.dark *) {
   text-decoration-line: none;
 }
 #content .description {
-  font-size: 1rem;
-  line-height: 1.5rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 600;
   --tw-text-opacity: 1;
-  color: rgb(75 85 99 / var(--tw-text-opacity, 1));
+  color: rgb(156 163 175 / var(--tw-text-opacity, 1));
 }
 #content .description:is(.dark *) {
   --tw-text-opacity: 1;
-  color: rgb(209 213 219 / var(--tw-text-opacity, 1));
+  color: rgb(156 163 175 / var(--tw-text-opacity, 1));
 }
 #content .read-more {
   display: inline-flex;
@@ -1249,8 +1250,8 @@ nav a.active:is(.dark *) {
 /* 默认透明度为 0.7 */
 #content .pagination-button img {
     display: inline-block; /* 使图像显示为内联块元素 */
-    height: 45px; /* 设置图像大小，根据需要调整 */
-    width: 45px; /* 根据需要调整图像大小 */
+    height: 40px; /* 设置图像大小，根据需要调整 */
+    width: 40px; /* 根据需要调整图像大小 */
     opacity: 0.8; /* 默认透明度 */
   }
 /* 鼠标悬浮且按钮可点击时，透明度变为100% */
@@ -1294,7 +1295,7 @@ nav a.active:is(.dark *) {
   --tw-bg-opacity: 1;
   background-color: rgb(31 41 55 / var(--tw-bg-opacity, 1));
   --tw-text-opacity: 1;
-  color: rgb(156 163 175 / var(--tw-text-opacity, 1));
+  color: rgb(243 244 246 / var(--tw-text-opacity, 1));
 }
 #content .taxonomy-list a:hover:is(.dark *) {
   --tw-bg-opacity: 1;
@@ -1331,14 +1332,14 @@ nav a.active:is(.dark *) {
   align-items: center;
   justify-content: space-between;
   padding-top: 3rem;
-  padding-bottom: 1.25rem;
+  padding-bottom: 1.5rem;
 }
 @media (min-width: 640px) {
 
   .header {
     flex-direction: row;
     align-items: center;
-    padding-bottom: 2.5rem;
+    padding-bottom: 1rem;
   }
 }
 .header .toggle-theme {
@@ -1354,18 +1355,18 @@ nav a.active:is(.dark *) {
 }
 .title-large:is(.dark *) {
   --tw-text-opacity: 1;
-  color: rgb(209 213 219 / var(--tw-text-opacity, 1));
+  color: rgb(243 244 246 / var(--tw-text-opacity, 1));
 }
 .title-small {
   font-size: 1.125rem;
   line-height: 1.75rem;
-  font-weight: 800;
+  font-weight: 700;
   --tw-text-opacity: 1;
   color: rgb(17 24 39 / var(--tw-text-opacity, 1));
 }
 .title-small:is(.dark *) {
   --tw-text-opacity: 1;
-  color: rgb(209 213 219 / var(--tw-text-opacity, 1));
+  color: rgb(243 244 246 / var(--tw-text-opacity, 1));
 }
 @media (min-width: 640px) {
 
