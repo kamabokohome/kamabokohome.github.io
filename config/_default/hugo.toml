@@ -6,6 +6,7 @@ theme = "enchanted-lowkey"
 title = "Kamaboko Home"
 enableRobotsTXT = true
 summaryLength = 15
+ignoreLogs = ['warning-goldmark-raw-html']
 
 [pagination]
 pagerSize = 10
