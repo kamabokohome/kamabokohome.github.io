@@ -1,9 +1,9 @@
-baseURL = "https://kamabokohome.github.io"
-copyright = "Kamaboko Home 2024"
-languageCode = "en-US"
-defaultContentLanguage = "en"
-theme = "enchanted-lowkey"
-title = "Kamaboko Home"
+baseURL = 'https://kamabokohome.github.io'
+copyright = 'Kamabokohome 2024'
+languageCode = 'en-US'
+defaultContentLanguage = 'en'
+theme = 'enchanted-lowkey'
+title = 'Kamaboko Home'
 enableRobotsTXT = true
 summaryLength = 15
 ignoreLogs = ['warning-goldmark-raw-html']
@@ -13,16 +13,13 @@ pagerSize = 10
 
 [markup]
   [markup.highlight]
-    anchorLineNos = false
-    codeFences = true
-    guessSyntax = false
-    hl_Lines = ''
-    hl_inline = false
-    lineAnchors = ''
-    lineNoStart = 1
-    lineNos = false
-    lineNumbersInTable = false
-    noClasses = true
-    noHl = false
-    style = "dracula"
-    tabWidth = 5
+  anchorLineNos = false
+  codeFences = true
+  guessSyntax = false
+  lineAnchors = ''
+  lineNoStart = 1
+  lineNos = false
+  lineNumbersInTable = false
+  noClasses = true
+  style = 'dracula'
+  tabWidth = 5
