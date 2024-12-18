@@ -17,9 +17,9 @@
     weight = 3
 
 [[main]]
-    identifier = "none"
-    name = "TBD"
-    url = "/"
+    identifier = "contact"
+    name = "Contact"
+    url = "/contact"
     weight = 4
 
 # [[main]]

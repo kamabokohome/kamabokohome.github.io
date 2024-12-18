@@ -7,49 +7,14 @@
     <generator>Hugo</generator>
     <language>en-US</language>
     <copyright>Kamaboko Home 2024</copyright>
-    <lastBuildDate>Fri, 13 Dec 2024 09:16:45 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 18 Dec 2024 14:37:04 +0100</lastBuildDate>
     <atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>又一个测试文档</title>
-      <link>http://localhost:1313/posts/a-new-post/</link>
-      <pubDate>Fri, 13 Dec 2024 09:16:45 +0000</pubDate>
-      <guid>http://localhost:1313/posts/a-new-post/</guid>
-      <description>&lt;p&gt;This Markdown cheat sheet &lt;strong&gt;provides&lt;/strong&gt; a quick overview of all the Markdown syntax elements. It can’t cover every edge case, so if you need more information about any of these elements, refer to the reference guides for basic &lt;em&gt;syntax&lt;/em&gt; and extended syntax.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Yaho！</title>
-      <link>http://localhost:1313/posts/a-new-post-copy-3/</link>
-      <pubDate>Tue, 27 Aug 2024 09:16:45 +0000</pubDate>
-      <guid>http://localhost:1313/posts/a-new-post-copy-3/</guid>
-      <description>&lt;p&gt;This Markdown cheat sheet &lt;strong&gt;provides&lt;/strong&gt; a quick overview of all the Markdown syntax elements. It can’t cover every edge case, so if you need more information about any of these elements, refer to the reference guides for basic &lt;em&gt;syntax&lt;/em&gt; and extended syntax.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>如果这个标题真的超级长会发生什么呢？还不够……如果到第二行的话日期还能正确显示吗？看来是可以的！很好很好！</title>
-      <link>http://localhost:1313/posts/a-new-post-copy-4/</link>
-      <pubDate>Tue, 27 Aug 2024 09:16:45 +0000</pubDate>
-      <guid>http://localhost:1313/posts/a-new-post-copy-4/</guid>
-      <description>&lt;p&gt;This Markdown cheat sheet &lt;strong&gt;provides&lt;/strong&gt; a quick overview of all the Markdown syntax elements. It can’t cover every edge case, so if you need more information about any of these elements, refer to the reference guides for basic &lt;em&gt;syntax&lt;/em&gt; and extended syntax.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>这是第几个测试文档啦</title>
-      <link>http://localhost:1313/posts/a-new-post-copy-2/</link>
-      <pubDate>Tue, 27 Aug 2024 09:16:45 +0000</pubDate>
-      <guid>http://localhost:1313/posts/a-new-post-copy-2/</guid>
-      <description>&lt;p&gt;This Markdown cheat sheet &lt;strong&gt;provides&lt;/strong&gt; a quick overview of all the Markdown syntax elements. It can’t cover every edge case, so if you need more information about any of these elements, refer to the reference guides for basic &lt;em&gt;syntax&lt;/em&gt; and extended syntax.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>短标题</title>
-      <link>http://localhost:1313/posts/a-new-post-copy/</link>
-      <pubDate>Sun, 27 Aug 2023 09:16:45 +0000</pubDate>
-      <guid>http://localhost:1313/posts/a-new-post-copy/</guid>
-      <description>&lt;p&gt;This Markdown cheat sheet &lt;strong&gt;provides&lt;/strong&gt; a quick overview of all the Markdown syntax elements. It can’t cover every edge case, so if you need more information about any of these elements, refer to the reference guides for basic &lt;em&gt;syntax&lt;/em&gt; and extended syntax.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Markdown Cheat Sheet</title>
-      <link>http://localhost:1313/posts/markdown-cheat-sheet/</link>
-      <pubDate>Sat, 27 Aug 2022 09:16:45 +0000</pubDate>
-      <guid>http://localhost:1313/posts/markdown-cheat-sheet/</guid>
-      <description>&lt;p&gt;This Markdown cheat sheet &lt;strong&gt;provides&lt;/strong&gt; a quick overview of all the Markdown syntax elements. It can’t cover every edge case, so if you need more information about any of these elements, refer to the reference guides for basic &lt;em&gt;syntax&lt;/em&gt; and extended syntax.&lt;/p&gt;</description>
+      <title>测试测试</title>
+      <link>http://localhost:1313/posts/%E6%B5%8B%E8%AF%95%E6%B5%8B%E8%AF%95/</link>
+      <pubDate>Wed, 18 Dec 2024 14:37:04 +0100</pubDate>
+      <guid>http://localhost:1313/posts/%E6%B5%8B%E8%AF%95%E6%B5%8B%E8%AF%95/</guid>
+      <description>&lt;p&gt;正在测试发布一篇新文章的流程。不知道大概要写多少字，先随意地水一下好啦！&lt;/p&gt;&#xA;&lt;p&gt;从笔记本里粘贴一些东西过来：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;鸟没有牙齿，用舌头来处理食物，所以鸟的舌头千奇百怪。比如绿绣眼和棕耳鹎的舌头像刷子一样，蜂鸟的舌头像吸管，白氏地鸫和鹭鸶的舌头两侧有大倒勾，企鹅的舌头上全是刺。（[[和路边的野鸟做朋友]]）&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;鸟类吃下去的食物首先到达「嗦囊」，然后进入第一个胃「腺胃」，让食物和消化液混合。然后，食物进入「肌胃」，和沙子、小石头、贝壳之类的东西一起被磨碎。「肌胃」也叫「砂囊」或者「鸡胗」。有些东西砂囊也无法消化，会被吐出来，叫做「食茧」，可以用来调查鸟类吃了什么东西。（[[和路边的野鸟做朋友]]）&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;伯劳会把抓到的猎物（包括昆虫、青蛙、泥鳅、小鸟、老鼠等等）串插在细树枝的尖端或者放在其它东西的缝隙间。可能只是为了存放食物，也可能是为了宣示领土。（[[和路边的野鸟做朋友]]）&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;鸟群突然高高起飞、四处逃窜，或许是老鹰或者游隼突然发动了攻击。老鹰和游隼的眼睛是长在前面的，这样能更立体地定位猎物的位置。游隼的瞬间时速可以到达三百公里。它们喜欢找到猎物之后，飞到天上一口气骤降到猎物上方。不过，虽然游隼也很擅长捕猎，它们的近亲其实是鹦鹉和麻雀，而不是鹰、雕、鹫。（[[和路边的野鸟做朋友]]）&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;有一些昆虫会住在鸟巢里，因为鸟巢没有风吹雨打，幼鸟吃剩下的食物昆虫也可以吃。不过这些昆虫也随时有被吃掉的风险。有些蛾幼虫会在雏鸟羽毛长长的时候掉落的角蛋白。（[[和路边的野鸟做朋友]]）&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;乌鸦喜欢脂肪很多、很有营养的蜡烛，它们会叼走京都神社中的蜡烛，有引发野火的风险。澳洲的黑鸢会主动纵火，在自然火灾发生后，它们从火灾现场带走着火的树枝，丢到别的地方，用来狩猎跑出来的小动物。（[[和路边的野鸟做朋友]]）&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
     </item>
   </channel>
 </rss>

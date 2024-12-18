@@ -4,23 +4,17 @@ Disallow: /
 
 Disallow: /posts/
 
-Disallow: /posts/a-new-post/
+Disallow: /posts/%E6%B5%8B%E8%AF%95%E6%B5%8B%E8%AF%95/
 
 Disallow: /posts/a-new-post-copy-3/
 
 Disallow: /posts/a-new-post-copy-4/
 
-Disallow: /posts/a-new-post-copy-2/
+Disallow: /collection/
 
-Disallow: /posts/a-new-post-copy/
+Disallow: /contact/
 
 Disallow: /categories/
-
-Disallow: /categories/hello/
-
-Disallow: /posts/markdown-cheat-sheet/
-
-Disallow: /collection/
 
 Disallow: /collection/empa-office/
 
