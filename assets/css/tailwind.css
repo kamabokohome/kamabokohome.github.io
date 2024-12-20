@@ -238,7 +238,7 @@
   
   /* Content overrides */
   #content {
-    @apply text-base leading-normal;
+    @apply text-base leading-relaxed;
   }
 
   #content a {
