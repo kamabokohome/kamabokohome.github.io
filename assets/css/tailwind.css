@@ -242,7 +242,7 @@
   }
 
   #content a {
-    @apply underline text-gray-900 hover:text-gray-700 dark:text-gray-100 dark:hover:text-gray-50;
+    @apply underline text-gray-700 hover:text-gray-600 dark:text-gray-100 dark:hover:text-gray-50;
   }
   
   #content .date {
