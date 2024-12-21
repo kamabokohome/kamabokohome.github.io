@@ -4,7 +4,7 @@ languageCode = 'en-US'
 defaultContentLanguage = 'en'
 theme = 'enchanted-lowkey'
 title = 'Kamaboko Home'
-enableRobotsTXT = true
+enableRobotsTXT = false
 summaryLength = 15
 ignoreLogs = ['warning-goldmark-raw-html']
 
