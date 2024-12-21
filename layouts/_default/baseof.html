@@ -2,6 +2,7 @@
 <html lang="{{ .Site.LanguageCode | default `en` }}" class="scroll-smooth dark">
   <head>
     {{- partial "head/index" . -}}
+    <link rel="canonical" href="{{ .Permalink }}">
   </head>
 
   <body class="max-w-screen-md mx-auto px-2.5">
