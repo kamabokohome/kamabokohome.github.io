@@ -1,5 +1,5 @@
 copyright = 'Kamabokohome 2024'
-baseURL = 'https://kamabokohome.github.io'
+baseURL = 'https://kamabokohome.com'
 languageCode = 'en-US'
 defaultContentLanguage = 'en'
 theme = 'enchanted-lowkey'
