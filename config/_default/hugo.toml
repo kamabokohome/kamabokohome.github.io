@@ -7,6 +7,10 @@ title = 'Kamaboko Home'
 enableRobotsTXT = false
 summaryLength = 15
 ignoreLogs = ['warning-goldmark-raw-html']
+removePathAccents = true
+
+[permalinks]
+posts = '/posts/:slug/'
 
 [pagination]
 pagerSize = 10
