@@ -14,6 +14,10 @@ posts = "/:year/:month/:day/"
 [pagination]
 pagerSize = 10
 
+[taxonomies]
+  category = ""
+  tag = ""
+
 [sitemap]
   exclude = ["taxonomyTerm"]
 
