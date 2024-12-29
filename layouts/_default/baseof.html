@@ -18,13 +18,11 @@
 
     {{- partial "footer/index" . -}}
     
-    <!-- 在页面底部插入 JavaScript -->
     <script>
       document.addEventListener("DOMContentLoaded", function() {
-        // 为每个段落中的中文和英文字符之间添加空格
         document.querySelectorAll('p').forEach(function (p) {
-            p.innerHTML = p.innerHTML.replace(/([\u4e00-\u9fa5])([\w\d])/g, '$1 $2');  // 在中文和英文字符之间插入空格
-            p.innerHTML = p.innerHTML.replace(/([\w\d])([\u4e00-\u9fa5])/g, '$1 $2');  // 在英文和中文字符之间插入空格
+            p.innerHTML = p.innerHTML.replace(/([\u4e00-\u9fa5])([\w\d])/g, '$1 $2');
+            p.innerHTML = p.innerHTML.replace(/([\w\d])([\u4e00-\u9fa5])/g, '$1 $2');
         });
       });
     </script>
