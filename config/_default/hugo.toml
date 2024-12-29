@@ -14,13 +14,6 @@ posts = "/:year/:month/:day/"
 [pagination]
 pagerSize = 10
 
-[taxonomies]
-  category = ""
-  tag = ""
-
-[sitemap]
-  exclude = ["taxonomyTerm"]
-
 [markup]
   [markup.highlight]
   anchorLineNos = false
