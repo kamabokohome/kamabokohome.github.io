@@ -10,7 +10,8 @@
     
         <img src="{{ "/img/" | relURL }}{{ $banner }}" class="mb-5">
 
-        <div class="flex justify-center items-center text-xs font-semibold text-gray-500">
+        <div class="flex justify-center items-center text-xs font-semibold text-gray-500" 
+                style="font-size: 0.7rem; padding-bottom: 0.5rem;">
             © {{ replace .Site.Copyright "{year}" now.Year }} 
           </div>     
     
