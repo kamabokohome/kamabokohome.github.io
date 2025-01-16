@@ -1,5 +1,5 @@
 ---
-title: "Emotion by Default"
+title: "Emotion by default"
 date: 2025-01-16T16:49:42+01:00
 draft: false
 description: ''
