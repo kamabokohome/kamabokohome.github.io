@@ -5,6 +5,8 @@ draft: false
 description: '收集了家附近大树下的长椅在四季的样子。'
 banner: "green"
 ---
+{{< img src="250214.jpg" caption="2025-02-14 11:45" caption-position="center" >}}
+
 {{< img src="241231.jpg" caption="2024-12-31 14:06" caption-position="center" >}}
 
 {{< img src="241228.jpg" caption="2024-12-28 17:30" caption-position="center" >}}
