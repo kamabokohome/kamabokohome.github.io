@@ -1,7 +1,7 @@
 {{ define "main" }}
 
 {{ $pages := .Pages }}
-{{ $paginator := .Paginate $pages }}
+{{/* {{ $paginator := .Paginate $pages }} */}}
 
 <!--
 <div class="flex flex-col">
@@ -20,13 +20,40 @@
 {{ end }}
 
 <section class="flex flex-col" style="padding-bottom: 1.2rem; padding-top: 0.5rem; gap: 0.8rem;">
-  {{ range $index, $pages := $paginator.Pages }}
+  {{ range $index, $pages := $pages }}
     {{ partial "list/default" . }}
   {{ end }}
 </section>
 
+{{/*
 {{ if gt $paginator.TotalPages 1 }}
   {{ partial "list/pagination" . }}
 {{ end }}
+*/}}
+
+<div class="flex justify-center" style="margin-top: 2rem;">
+  <a href="#" onclick="scrollToTop()" class="pagination-button text-xs font-semibold" style="color: #9CA3AF; text-decoration: none; cursor: pointer;">
+    Top!
+  </a>
+</div>
+
+<script>
+  const backToTopBtn = document.getElementById('backToTop');
+  backToTopBtn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  // 页面滚动时显示或隐藏按钮
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 200) {
+      backToTopBtn.style.display = 'block';
+    } else {
+      backToTopBtn.style.display = 'none';
+    }
+  });
+
+  // 初始隐藏按钮
+  backToTopBtn.style.display = 'none';
+</script>
 
 {{ end }}
