@@ -381,7 +381,8 @@
   }
 
   .header {
-    @apply flex flex-col items-center justify-between pt-12 pb-6 sm:flex-row sm:items-center sm:pb-4;
+    @apply fixed top-0 left-1/2 transform -translate-x-1/2 z-50 bg-white dark:bg-neutral-800 backdrop-blur-md pt-2 pb-2 
+    flex flex-col items-center justify-between sm:flex-row sm:items-center sm:pb-2 max-w-screen-md w-full;
   }
 
   .header .toggle-theme {
