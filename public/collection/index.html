@@ -2297,14 +2297,17 @@ z"/>
 
 <section class="flex flex-col" style="padding-bottom: 1.2rem; padding-top: 0.5rem; gap: 0.8rem;">
   
+  
+    
+
     <article class="flex flex-col">
   
   <div class="flex flex-col">
   
-    <div class="meta">
-      
-      
-    </div>
+<div class="meta">
+  
+</div>
+
 
   <h5 style="margin-top: -0.25rem;">
     <a href="http://localhost:1313/collection/empa-office/">Empa office</a>
@@ -2325,14 +2328,16 @@ z"/>
 </article>
 
   
+    
+
     <article class="flex flex-col">
   
   <div class="flex flex-col">
   
-    <div class="meta">
-      
-      
-    </div>
+<div class="meta">
+  
+</div>
+
 
   <h5 style="margin-top: -0.25rem;">
     <a href="http://localhost:1313/collection/bench/">四季长椅</a>
@@ -2357,6 +2362,7 @@ z"/>
 
 
 
+
 <div class="flex justify-center" style="margin-top: 2rem;">
   <a href="#" onclick="scrollToTop()" class="pagination-button text-xs font-semibold" style="color: #9CA3AF; text-decoration: none; cursor: pointer;">
     Top!
@@ -2365,21 +2371,27 @@ z"/>
 
 <script>
   const backToTopBtn = document.getElementById('backToTop');
-  backToTopBtn.addEventListener('click', () => {
+  if (backToTopBtn) {
+    backToTopBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 200) {
+        backToTopBtn.style.display = 'block';
+      } else {
+        backToTopBtn.style.display = 'none';
+      }
+    });
+
+    
+    backToTopBtn.style.display = 'none';
+  }
+
+  function scrollToTop() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
-
-  
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 200) {
-      backToTopBtn.style.display = 'block';
-    } else {
-      backToTopBtn.style.display = 'none';
-    }
-  });
-
-  
-  backToTopBtn.style.display = 'none';
+  }
 </script>
 
 
