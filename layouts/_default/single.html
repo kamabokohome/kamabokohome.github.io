@@ -3,14 +3,29 @@
 <article class="flex flex-col gap-5">
   <header class="flex flex-col">
     
-    <div class="meta">
-      {{/* Check if PublishDate exists */}}
-      {{ if .PublishDate }}
-        <time datetime="{{ .PublishDate }}" title='{{ .PublishDate.Format "Mon, Jan 2, 2006" }}'>
-          {{ .PublishDate.Format "Jan 2, 2006" }}
-        </time>
+<div class="meta">
+  {{ if .PublishDate }}
+    {{ $now := now }}
+    {{ $today := $now.Format "2006-01-02" | time }}
+    {{ $postDate := .PublishDate.Format "2006-01-02" | time }}
+    {{ $days := div (sub $today.Unix $postDate.Unix) 86400 }}
+
+    <time datetime="{{ .PublishDate }}" title='{{ .PublishDate.Format "01-02 15:04" }}'>
+      {{ if lt $days 7 }}
+        {{ if eq $days 0 }}
+          {{ .PublishDate.Format "2006-01-02 15:04" }} 🍥
+        {{ else if eq $days 1 }}
+          {{ .PublishDate.Format "2006-01-02 15:04" }} 🍥
+        {{ else }}
+          {{ .PublishDate.Format "2006-01-02 15:04" }} 🍢
+        {{ end }}
+      {{ else }}
+        {{ .PublishDate.Format "2006-01-02 15:04" }}
       {{ end }}
-    </div>
+    </time>
+  {{ end }}
+</div>
+
     
     <h5 class="title-large">{{ .Title }}</h5>
   </header>

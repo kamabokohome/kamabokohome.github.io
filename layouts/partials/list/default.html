@@ -9,21 +9,22 @@
     {{ $postDate := .PublishDate.Format "2006-01-02" | time }}
     {{ $days := div (sub $today.Unix $postDate.Unix) 86400 }}
 
-    <time datetime="{{ .PublishDate }}" title='{{ .PublishDate.Format "Mon, Jan 2, 2006" }}'>
+    <time datetime="{{ .PublishDate }}" title='{{ .PublishDate.Format "2006-01-02 15:04" }}'>
       {{ if lt $days 7 }}
         {{ if eq $days 0 }}
           Today 🍥
         {{ else if eq $days 1 }}
-          Yesterday 🍢
+          Yesterday 🍥
         {{ else }}
           {{ $days }} days ago 🍢
         {{ end }}
       {{ else }}
-        {{ .PublishDate.Format "Jan 2, 2006" }}
+        {{ .PublishDate.Format "01-02" }}
       {{ end }}
     </time>
   {{ end }}
 </div>
+
 
   <h5 style="margin-top: -0.25rem;">
     <a href="{{ .Permalink }}">{{ .Title }}</a>
