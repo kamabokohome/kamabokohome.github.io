@@ -5,7 +5,10 @@
 <div class="meta">
   {{ if .PublishDate }}
     {{ $now := now }}
-    {{ $days := div (sub $now.Unix .PublishDate.Unix) 86400 }}
+    {{ $today := $now.Format "2006-01-02" | time }}
+    {{ $postDate := .PublishDate.Format "2006-01-02" | time }}
+    {{ $days := div (sub $today.Unix $postDate.Unix) 86400 }}
+
     <time datetime="{{ .PublishDate }}" title='{{ .PublishDate.Format "Mon, Jan 2, 2006" }}'>
       {{ if lt $days 7 }}
         {{ if eq $days 0 }}
@@ -21,7 +24,6 @@
     </time>
   {{ end }}
 </div>
-
 
   <h5 style="margin-top: -0.25rem;">
     <a href="{{ .Permalink }}">{{ .Title }}</a>
