@@ -19,7 +19,7 @@
   </div>
 {{ end }}
 
-<section class="flex flex-col" style="padding-bottom: 1.2rem; padding-top: 0.5rem; gap: 0.8rem;">
+<section class="flex flex-col" style="padding-bottom: 1.2rem; padding-top: 0.5rem; gap: 0.6rem;">
   {{ $prevYear := 0 }}
   {{ range $index, $page := $pages }}
     {{ if $page.PublishDate }}
@@ -27,7 +27,7 @@
 
       {{ if ne $year $prevYear }}
       <div class="year-separator flex justify-center items-center text-xs font-semibold text-gray-400 dark:text-gray-400 my-2"
-      style="margin-top:1.2rem; margin-bottom:1rem;">
+      style="margin-top:1rem; margin-bottom:1rem;">
                 ～ {{ $year }} ～
         </div>
         {{ $prevYear = $year }}
@@ -47,7 +47,7 @@
 
 <div class="flex justify-center" style="margin-top: 2rem;">
   <a href="#" onclick="scrollToTop()" class="pagination-button text-xs font-semibold" style="color: #9CA3AF; text-decoration: none; cursor: pointer;">
-    Top!
+    T🍥P 
   </a>
 </div>
 

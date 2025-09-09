@@ -10,17 +10,7 @@
     {{ $days := div (sub $today.Unix $postDate.Unix) 86400 }}
 
     <time datetime="{{ .PublishDate }}" title='{{ .PublishDate.Format "2006-01-02 15:04" }}'>
-      {{ if lt $days 7 }}
-        {{ if eq $days 0 }}
-          Today 🍥
-        {{ else if eq $days 1 }}
-          Yesterday 🍥
-        {{ else }}
-          {{ $days }} days ago 🍢
-        {{ end }}
-      {{ else }}
-        {{ .PublishDate.Format "01-02" }}
-      {{ end }}
+      {{ .PublishDate.Format "01-02" }}
     </time>
   {{ end }}
 </div>
