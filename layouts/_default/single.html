@@ -11,17 +11,7 @@
     {{ $days := div (sub $today.Unix $postDate.Unix) 86400 }}
 
     <time datetime="{{ .PublishDate }}" title='{{ .PublishDate.Format "01-02 15:04" }}'>
-      {{ if lt $days 7 }}
-        {{ if eq $days 0 }}
-          {{ .PublishDate.Format "2006-01-02 15:04" }} 🍥
-        {{ else if eq $days 1 }}
-          {{ .PublishDate.Format "2006-01-02 15:04" }} 🍥
-        {{ else }}
-          {{ .PublishDate.Format "2006-01-02 15:04" }} 🍢
-        {{ end }}
-      {{ else }}
-        {{ .PublishDate.Format "2006-01-02 15:04" }}
-      {{ end }}
+      {{ .PublishDate.Format "2006-01-02 15:04" }}
     </time>
   {{ end }}
 </div>
@@ -81,7 +71,7 @@
 <!-- Back to Top Button -->
 <div class="flex justify-center mx-auto">
   <a href="#" onclick="scrollToTop()" class="text-xs font-semibold" style="color: #9CA3AF; text-decoration: none;">
-    Top!
+    T🍥P
   </a>
 </div>
 
