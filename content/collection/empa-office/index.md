@@ -5,6 +5,8 @@ draft: false
 description: '收集了办公室窗外的样子。'
 banner: "brown"
 ---
+{{< img src="IMG_0060.jpg" caption="2025-09-09 17:30" caption-position="center" >}}
+
 {{< img src="IMG_0059.jpg" caption="2025-09-04 19:13" caption-position="center" >}}
 
 {{< img src="IMG_0058.jpg" caption="2025-09-01 18:38" caption-position="center" >}}
