@@ -8,8 +8,10 @@ module.exports = {
   darkMode: 'class',
   content: [
     `${baseDir}/themes/**/layouts/**/*.html`,
+      `${baseDir}/themes/**/layouts/partials/**/*.html`, 
     `${baseDir}/content/**/layouts/**/*.html`,
     `${baseDir}/layouts/**/*.html`,
+    `${baseDir}/layouts/partials/**/*.html`,  
     `${baseDir}/content/**/*.html`,
     `${baseDir}/content/**/*.md`,
     `${baseDir}/public/**/*.html`,

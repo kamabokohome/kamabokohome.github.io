@@ -1,8 +1,19 @@
-<header class="flex flex-col items-center gap-8 sm:flex-row sm:gap-10">
-  {{ partial "header/avatar" . }}
-  
-  <div class="flex flex-col gap-3">
-    {{ partial "header/title" . }} 
+<header class="flex flex-col w-full gap-0">
+
+  <!-- 图片标题，点击跳转主页 -->
+  <div class="w-full flex justify-center">
+    <a href="{{ .Site.BaseURL }}">
+      <img
+        src="{{ "img/title.png" | relURL }}"
+        alt="{{ .Site.Title }}"
+        class="w-full max-w-none object-contain border border-blue-500"
+      />
+    </a>
+  </div>
+
+  <!-- 导航 -->
+  <div class="w-full">
     {{ partial "header/nav" . }}
   </div>
+
 </header>

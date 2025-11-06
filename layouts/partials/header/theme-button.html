@@ -1,7 +1,18 @@
-<button class="toggle-theme" aria-label="Toggle Theme" title="電源" onclick="toggleTheme()">
-  <span class="theme-icon light"> {{ partial "utils/icon" "moon" }} </span>
-  <span class="theme-icon dark"> {{ partial "utils/icon" "sun" }} </span>
+<button 
+  class="toggle-theme flex items-center justify-center" 
+  aria-label="Toggle Theme" 
+  title="電源" 
+  onclick="toggleTheme()"
+  style="width:40px !important; height:40px !important; padding:4px !important;"
+>
+  <span class="theme-icon light" style="width:40px !important; height:40px !important;">
+    {{ partial "utils/icon" "moon" }}
+  </span>
+  <span class="theme-icon dark" style="width:40px !important; height:40px !important;">
+    {{ partial "utils/icon" "sun" }}
+  </span>
 </button>
+
 
 <script>
   document.addEventListener('DOMContentLoaded', function () {
