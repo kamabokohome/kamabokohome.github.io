@@ -1,15 +1,13 @@
 <header class="flex flex-col w-full gap-3">
 
-  <!-- 图片标题，点击跳转主页 -->
-  <div class="w-full flex justify-center">
-    <a href="{{ .Site.BaseURL }}">
-      <img
-        src="{{ "img/title.png" | relURL }}"
-        alt="{{ .Site.Title }}"
-        class="w-full max-w-none object-contain border border-blue-500"
-      />
-    </a>
-  </div>
+  <header>
+    <div class="w-full flex justify-center">
+      <a href="{{ .Site.BaseURL }}">
+        <img src="{{ "img/title_day.png" | relURL }}" class="title-img-day" style="display:block;">
+        <img src="{{ "img/title_night.png" | relURL }}" class="title-img-night" style="display:none;">
+      </a>
+    </div>
+  </header>
 
   <!-- 导航 -->
   <div class="w-full">
