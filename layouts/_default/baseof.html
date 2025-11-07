@@ -6,26 +6,57 @@
   </head>
 
   <body class="max-w-screen-md mx-auto px-2.5">
+
+    <!-- Header + Theme Button -->
     <div class="flex flex-col items-center gap-0 px-1.5 w-full mb-3">
       {{ partial "header/index" . }}
       {{ partial "header/theme-button" . }}
     </div>
-  </body>
 
+    <!-- Main content -->
     <main id="content" class="px-2.5">
       {{- block "main" . -}}
       {{- end }}
     </main>
 
+    <!-- Footer -->
     {{- partial "footer/index" . -}}
-    
+
+    <!-- 页面文字间隔 JS -->
     <script>
       document.addEventListener("DOMContentLoaded", function() {
         document.querySelectorAll('p').forEach(function (p) {
-            p.innerHTML = p.innerHTML.replace(/([\u4e00-\u9fa5])([\w\d])/g, '$1 $2');
-            p.innerHTML = p.innerHTML.replace(/([\w\d])([\u4e00-\u9fa5])/g, '$1 $2');
+          p.innerHTML = p.innerHTML.replace(/([\u4e00-\u9fa5])([\w\d])/g, '$1 $2');
+          p.innerHTML = p.innerHTML.replace(/([\w\d])([\u4e00-\u9fa5])/g, '$1 $2');
         });
       });
     </script>
+
+    <!-- 主题切换 + header 图片切换 JS -->
+    <script>
+      // 扩展原 setTheme 函数，同时切换 header 图片
+      const originalSetTheme = setTheme;
+      setTheme = function(theme) {
+        originalSetTheme(theme);
+
+        const dayImg = document.querySelector('.title-img-day');
+        const nightImg = document.querySelector('.title-img-night');
+
+        if (theme === 'light') {
+          dayImg.style.display = 'block';
+          nightImg.style.display = 'none';
+        } else {
+          dayImg.style.display = 'none';
+          nightImg.style.display = 'block';
+        }
+      };
+
+      // 页面加载时初始化主题与 header 图片
+      document.addEventListener("DOMContentLoaded", function() {
+        const theme = localStorage.getItem('theme') || 'light';
+        setTheme(theme);
+      });
+    </script>
+
   </body>
 </html>
