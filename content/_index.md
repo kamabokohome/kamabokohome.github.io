@@ -3,10 +3,17 @@ title: ""
 draft: false
 banner: "pink"
 ---
+<br>
 
 {{< img
   src="鸽子.jpg"
   >}}
+
+<div style="text-align:center;">
+✧ <br><br>
+</div>
+
+
 
 <div style="border:1px solid #e5e7eb; border-radius:12px; padding:16px;">
   欢迎来到鱼糕的树屋！<br><br>
