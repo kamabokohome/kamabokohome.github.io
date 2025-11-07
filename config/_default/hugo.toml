@@ -26,3 +26,6 @@ pagerSize = 10
   noClasses = true
   style = 'dracula'
   tabWidth = 5
+
+  [markup.goldmark.renderer]
+    unsafe = true
