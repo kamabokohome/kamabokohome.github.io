@@ -1028,9 +1028,8 @@ nav a.active:is(.dark *) {
 }
 /* Content overrides */
 #content {
-  font-size: 1rem;
-  line-height: 1.5rem;
-  line-height: 1.625;
+  font-size: 0.95rem;
+    line-height: 1.72;
 }
 #content a {
   --tw-text-opacity: 1;
@@ -1057,8 +1056,8 @@ nav a.active:is(.dark *) {
   color: rgb(156 163 175 / var(--tw-text-opacity, 1));
 }
 #content h5 > a {
-  font-size: 1.125rem;
-  line-height: 1.75rem;
+  font-size: 1rem;
+  line-height: 1.5rem;
   font-weight: 600;
   --tw-text-opacity: 1;
   color: rgb(17 24 39 / var(--tw-text-opacity, 1));

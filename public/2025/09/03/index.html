@@ -43,19 +43,19 @@
   </head>
 
   <body class="max-w-screen-md mx-auto px-2.5">
+
+    
     <div class="flex flex-col items-center gap-0 px-1.5 w-full mb-3">
       <header class="flex flex-col w-full gap-3">
 
-  
-  <div class="w-full flex justify-center">
-    <a href="http://localhost:1313/">
-      <img
-        src="/img/title.png"
-        alt="Kamaboko Home"
-        class="w-full max-w-none object-contain border border-blue-500"
-      />
-    </a>
-  </div>
+  <header>
+    <div class="w-full flex justify-center">
+      <a href="http://localhost:1313/">
+        <img src="/img/title_day.png" class="title-img-day" style="display:block;">
+        <img src="/img/title_night.png" class="title-img-night" style="display:none;">
+      </a>
+    </div>
+  </header>
 
   
   <div class="w-full">
@@ -2299,8 +2299,8 @@ z"/>
   }
 </script>
     </div>
-  </body>
 
+    
     <main id="content" class="px-2.5">
 
 <article class="flex flex-col gap-5">
@@ -2400,7 +2400,9 @@ z"/>
 </article>
 
 
-    </main><div style="padding-top: 1rem !important;">
+    </main>
+
+    <div style="padding-top: 1rem !important;">
     <footer class="flex-col items-center" style="padding-bottom: 0.8rem;">
         
     
@@ -2418,13 +2420,41 @@ z"/>
     </footer>
 </div>
 
+    
     <script>
       document.addEventListener("DOMContentLoaded", function() {
         document.querySelectorAll('p').forEach(function (p) {
-            p.innerHTML = p.innerHTML.replace(/([\u4e00-\u9fa5])([\w\d])/g, '$1 $2');
-            p.innerHTML = p.innerHTML.replace(/([\w\d])([\u4e00-\u9fa5])/g, '$1 $2');
+          p.innerHTML = p.innerHTML.replace(/([\u4e00-\u9fa5])([\w\d])/g, '$1 $2');
+          p.innerHTML = p.innerHTML.replace(/([\w\d])([\u4e00-\u9fa5])/g, '$1 $2');
         });
       });
     </script>
+
+    
+    <script>
+      
+      const originalSetTheme = setTheme;
+      setTheme = function(theme) {
+        originalSetTheme(theme);
+
+        const dayImg = document.querySelector('.title-img-day');
+        const nightImg = document.querySelector('.title-img-night');
+
+        if (theme === 'light') {
+          dayImg.style.display = 'block';
+          nightImg.style.display = 'none';
+        } else {
+          dayImg.style.display = 'none';
+          nightImg.style.display = 'block';
+        }
+      };
+
+      
+      document.addEventListener("DOMContentLoaded", function() {
+        const theme = localStorage.getItem('theme') || 'light';
+        setTheme(theme);
+      });
+    </script>
+
   </body>
 </html>
