@@ -3,9 +3,7 @@ title: ""
 draft: false
 banner: "pink"
 ---
-<div style="text-align:center;">
-✧ <br><br>
-</div>
+
 
 {{< img
   src="鸽子.jpg"
@@ -15,7 +13,7 @@ banner: "pink"
 ✧ <br><br>
 </div>
 
-<div style="border:1px solid #e5e7eb; border-radius:12px; padding:16px;">
+<div class="treehouse">
   欢迎来到鱼糕的树屋！<br>
   这个树屋建造于 2024 年末，是一个非常私人的领域。<br>
   <br>
@@ -28,7 +26,7 @@ banner: "pink"
   <a href="https://kamabokohome.com/corner/">Corner</a> 栏是喜欢的、想推荐给所有人的有趣的东西的集合！<br>
   可以的话，请务必尝试看看。<br>
   <br>
-  找到电源开关，就可以切换白天与黑夜模式喔。<br>
+  找到电源开关之后，就可以切换白天与黑夜模式喔。<br>
   我是黑夜模式派，手机屏幕常年都黑黑的。<br>
   （但电脑却总是白天模式？）<br>
   <br>
@@ -38,4 +36,16 @@ banner: "pink"
   希望每位来客都能在树屋度过愉快的时间。
 </div>
 
+<style>
+/* 白天模式边框 */
+.treehouse {
+  border: 1px solid #e5e7eb;  /* 白天边框 */
+  border-radius: 12px;
+  padding: 16px;
+}
 
+/* 夜间模式边框，仅作用于 .treehouse */
+html.dark .treehouse {
+  border-color: #6b7280;       /* 夜间边框 */
+}
+</style>
