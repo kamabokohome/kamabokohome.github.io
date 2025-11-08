@@ -238,8 +238,8 @@
   
   /* Content overrides */
   #content {
-    @apply text-[0.95rem];
-    line-height: 1.72;
+    @apply text-[0.99rem];
+    line-height: 1.8;
   }
 
   #content a {

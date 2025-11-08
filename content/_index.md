@@ -3,7 +3,9 @@ title: ""
 draft: false
 banner: "pink"
 ---
-<br>
+<div style="text-align:center;">
+✧ <br><br>
+</div>
 
 {{< img
   src="鸽子.jpg"
