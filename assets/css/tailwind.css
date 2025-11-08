@@ -238,7 +238,7 @@
   
   /* Content overrides */
   #content {
-    @apply text-[0.95rem];
+    @apply text-[1rem];
     line-height: 1.72;
   }
 
