@@ -4,12 +4,12 @@ banner: "brown"
 
 <details>
 <summary style="display:flex; align-items:center; width:100%;">
-  <div style="display:flex; flex-direction:column; align-items:center; flex:1; margin-left:0rem;">
+  <div style="display:flex; flex-direction:row; align-items:center; flex:1; justify-content:space-between;">
+    <span class="font-semibold" style="margin-left:0.25rem;">
+    牛油果盖饭
+    </span>
     <span style="color:#9CA3AF; font-size:0.75rem;">
     2025-11-08
-    </span>
-    <span class="font-semibold">
-    牛油果盖饭
     </span>
   </div>
 </summary>
@@ -26,12 +26,12 @@ banner: "brown"
 
 <details>
 <summary style="display:flex; align-items:center; width:100%;">
-  <div style="display:flex; flex-direction:column; align-items:center; flex:1; margin-left:0rem;">
+  <div style="display:flex; flex-direction:row; align-items:center; flex:1; justify-content:space-between;">
+    <span class="font-semibold" style="margin-left:0.25rem;">
+    九井棋
+    </span>
     <span style="color:#9CA3AF; font-size:0.75rem;">
     2025-11-08
-    </span>
-    <span class="font-semibold">
-    九井棋（Ultimate tic-tac-toe）
     </span>
   </div>
 </summary>
@@ -44,12 +44,12 @@ banner: "brown"
 
 <details>
 <summary style="display:flex; align-items:center; width:100%;">
-  <div style="display:flex; flex-direction:column; align-items:center; flex:1; margin-left:0rem;">
+  <div style="display:flex; flex-direction:row; align-items:center; flex:1; justify-content:space-between;">
+    <span class="font-semibold" style="margin-left:0.25rem;">
+    五年日记
+    </span>
     <span style="color:#9CA3AF; font-size:0.75rem;">
     2025-11-08
-    </span>
-    <span class="font-semibold">
-    五年日记
     </span>
   </div>
 </summary>
