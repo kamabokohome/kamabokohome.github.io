@@ -1028,8 +1028,8 @@ nav a.active:is(.dark *) {
 }
 /* Content overrides */
 #content {
-  font-size: 0.95rem;
-    line-height: 1.72;
+  font-size: 0.99rem;
+    line-height: 1.8;
 }
 #content a {
   --tw-text-opacity: 1;
