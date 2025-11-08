@@ -3,6 +3,19 @@ banner: "brown"
 ---
 
 <details>
+  <summary>2025-11-08：牛油果盖饭 </summary>
+
+  <div style="padding-left: 3rem; padding-right: 1rem; margin-top: 1rem; margin-bottom: 1rem;">
+    从「喫茶あやてる」学来的生田店长的快手招牌之——<strong>牛油果盖饭</strong>！制作方法很简单，味道也超出了想象。明明以前都不怎么吃，但从那以后就爱上了牛油果的味道，并把牛油果盖饭加入了自己的常规菜单。暂时找不到视频链接了，姑且凭借记忆记录一下步骤！<br>
+    1. 煮饭！煮好饭之后，往米饭中放一小块黄油，搅拌均匀。<br>
+    2. 切牛油果。在煮饭的同时进行，切成适当的小块。<br>
+    3. 把海苔片撕成小碎片。然后和牛油果一起放进碗里。加入适量酱油和芥末，搅拌均匀。<br>
+    4. 把调味后的牛油果和海苔盖在黄油拌饭上，最后撒上少许芝麻。完成！<br>
+    趁机附赠另一个自己意外摸索出的牛油果料理——牛油果鸡蛋沙拉！（后来发现这其实是个挺常见的组合）把牛油果和水煮蛋都切成适当的块状，倒上一点橄榄油，再撒上黑胡椒和盐并搅拌均匀即可。简单又好吃哦！
+  </div>
+</details>
+
+<details>
   <summary>2025-11-08：九井棋 </summary>
 
   <div style="padding-left: 3rem; padding-right: 1rem; margin-top: 1rem; margin-bottom: 1rem;">
