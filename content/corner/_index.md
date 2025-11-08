@@ -3,7 +3,7 @@ banner: "brown"
 ---
 
 <details>
-  <summary>2025-11-08：九井棋（Ultimate tic-tac-toe）</summary>
+  <summary>2025-11-08：九井棋 </summary>
 
   <div style="padding-left: 3rem; padding-right: 1rem; margin-top: 1rem; margin-bottom: 1rem;">
     大家知道<strong>九井棋（Ultimate tic-tac-toe）</strong>吗？是前不久学院 retreat 的时候从其他人那里学到的！原本简简单单的井字棋，九个棋盘一起下的时候，规则还是很简单，玩法却丰富了一百倍。想到九井棋的人好厉害啊。<br>
