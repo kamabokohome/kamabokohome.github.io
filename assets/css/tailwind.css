@@ -401,7 +401,7 @@
 summary {
   cursor: pointer;
   font-weight: 700;
-  padding: 8px 12px;
+  padding: 4px 12px;
   border: 1px solid #e5e7eb;  /* 白天模式边框 */
   border-radius: 12px;
   list-style: none;
@@ -422,11 +422,8 @@ details[open] summary::before {
   transform: rotate(90deg);
 }
 
-/* 夜间模式 */
 html.dark summary {
   border: 1px solid #6b7280;  /* 夜间模式边框 */
 }
-
-
 
 }
