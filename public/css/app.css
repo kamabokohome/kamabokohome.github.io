@@ -1056,8 +1056,7 @@ nav a.active:is(.dark *) {
   color: rgb(156 163 175 / var(--tw-text-opacity, 1));
 }
 #content h5 > a {
-  font-size: 1rem;
-  line-height: 1.5rem;
+  font-size: 0.99rem;
   font-weight: 600;
   --tw-text-opacity: 1;
   color: rgb(17 24 39 / var(--tw-text-opacity, 1));
@@ -1365,6 +1364,31 @@ nav a.active:is(.dark *) {
 .title-small:is(.dark *) {
   --tw-text-opacity: 1;
   color: rgb(243 244 246 / var(--tw-text-opacity, 1));
+}
+summary {
+  cursor: pointer;
+  font-weight: 700;
+  padding: 8px 12px;
+  border: 1px solid #e5e7eb;  /* 白天模式边框 */
+  border-radius: 12px;
+  list-style: none;
+  position: relative;
+  margin-bottom: 0.75rem;
+}
+summary::before {
+  content: "🪄";
+  display: inline-block;
+  margin-right: 8px;
+  font-size: 0.99rem;
+  vertical-align: middle;
+  transition: transform 0.2s;
+}
+details[open] summary::before {
+  transform: rotate(90deg);
+}
+/* 夜间模式 */
+html.dark summary {
+  border: 1px solid #6b7280;  /* 夜间模式边框 */
 }
 @media (min-width: 640px) {
 
