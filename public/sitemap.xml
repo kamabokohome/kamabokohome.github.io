@@ -8,6 +8,9 @@
     <loc>http://localhost:1313/posts/</loc>
     <lastmod>2025-11-15T00:31:30+01:00</lastmod>
   </url><url>
+    <loc>http://localhost:1313/2025/11/15/</loc>
+    <lastmod>2025-11-15T00:31:30+01:00</lastmod>
+  </url><url>
     <loc>http://localhost:1313/2025/11/11/</loc>
     <lastmod>2025-11-11T00:11:18+01:00</lastmod>
   </url><url>
@@ -53,11 +56,11 @@
     <loc>http://localhost:1313/2024/12/18/</loc>
     <lastmod>2024-12-18T23:01:04+01:00</lastmod>
   </url><url>
+    <loc>http://localhost:1313/categories/</loc>
+  </url><url>
     <loc>http://localhost:1313/collection/</loc>
   </url><url>
     <loc>http://localhost:1313/corner/</loc>
-  </url><url>
-    <loc>http://localhost:1313/categories/</loc>
   </url><url>
     <loc>http://localhost:1313/collection/empa-office/</loc>
   </url><url>

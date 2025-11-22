@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Kamaboko Home | 鱼糕的树屋</title>
+    <title>Posts on Kamaboko Home | 鱼糕的树屋</title>
     <link>http://localhost:1313/posts/</link>
-    <description>Recent content on Kamaboko Home | 鱼糕的树屋</description>
+    <description>Recent content in Posts on Kamaboko Home | 鱼糕的树屋</description>
     <generator>Hugo</generator>
     <language>en-US</language>
     <copyright>Kamaboko Home</copyright>
