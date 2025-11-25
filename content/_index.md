@@ -36,6 +36,8 @@ banner: "pink"
   希望每位来客都能在树屋度过愉快的时间。
 </div>
 
+<div style="height: 0.5rem;"></div>
+
 <style>
 /* 白天模式边框 */
 .treehouse {
