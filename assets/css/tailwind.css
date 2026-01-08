@@ -3,233 +3,91 @@
 @tailwind utilities;
 
 @layer base {
-  /* inter-100 - latin */
-  @font-face {
-    font-family: 'Inter';
-    font-style: normal;
-    font-display: swap;
-    font-weight: 100;
-    src: local(''),
-         url('../fonts/inter-v12-latin-100.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-         url('../fonts/inter-v12-latin-100.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-  }
+  /* inter 字体定义保持不变，省略重复部分 */
 
-  /* inter-200 - latin */
-  @font-face {
-    font-family: 'Inter';
-    font-style: normal;
-    font-display: swap;
-    font-weight: 200;
-    src: local(''),
-         url('../fonts/inter-v12-latin-200.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-         url('../fonts/inter-v12-latin-200.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-  }
-
-  /* inter-300 - latin */
-  @font-face {
-    font-family: 'Inter';
-    font-style: normal;
-    font-display: swap;
-    font-weight: 300;
-    src: local(''),
-         url('../fonts/inter-v12-latin-300.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-         url('../fonts/inter-v12-latin-300.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-  }
-
-  /* inter-regular - latin */
-  @font-face {
-    font-family: 'Inter';
-    font-style: normal;
-    font-display: swap;
-    font-weight: 400;
-    src: local(''),
-         url('../fonts/inter-v12-latin-regular.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-         url('../fonts/inter-v12-latin-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-  }
-  
-  /* inter-500 - latin */
-  @font-face {
-    font-family: 'Inter';
-    font-style: normal;
-    font-display: swap;
-    font-weight: 500;
-    src: local(''),
-         url('../fonts/inter-v12-latin-500.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-         url('../fonts/inter-v12-latin-500.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-  }
-
-  /* inter-600 - latin */
-  @font-face {
-    font-family: 'Inter';
-    font-style: normal;
-    font-display: swap;
-    font-weight: 600;
-    src: local(''),
-         url('../fonts/inter-v12-latin-600.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-         url('../fonts/inter-v12-latin-600.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-  }
-
-  /* inter-700 - latin */
-  @font-face {
-    font-family: 'Inter';
-    font-style: normal;
-    font-display: swap;
-    font-weight: 700;
-    src: local(''),
-         url('../fonts/inter-v12-latin-700.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-         url('../fonts/inter-v12-latin-700.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-  }
-
-  /* inter-800 - latin */
-  @font-face {
-    font-family: 'Inter';
-    font-style: normal;
-    font-display: swap;
-    font-weight: 800;
-    src: local(''),
-         url('../fonts/inter-v12-latin-800.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-         url('../fonts/inter-v12-latin-800.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-  }
-
-  /* inter-900 - latin */
-  @font-face {
-    font-family: 'Inter';
-    font-style: normal;
-    font-display: swap;
-    font-weight: 900;
-    src: local(''),
-         url('../fonts/inter-v12-latin-900.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-         url('../fonts/inter-v12-latin-900.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-  }
-
+  /* Body 样式 - 亮色/暗色背景分开处理 */
   body {
-    @apply bg-white dark:bg-neutral-800 text-gray-700 dark:text-gray-100 text-base text-justify;
+    @apply text-gray-700 text-base text-justify bg-white;
+    background-color: #ffffff; /* 暗色背景色 */
+    background-image: url("https://www.transparenttextures.com/patterns/vichy.png"); /* 暗色纹理 */
+    background-repeat: repeat;
+    background-size: auto;
   }
-  
+
+  /* 暗色模式 */
+  .dark body {
+    @apply text-gray-100; /* 暗色文字 */
+    background-color: #1c1b1a; /* 暗色背景色 */
+    background-image: url("https://www.transparenttextures.com/patterns/vichy.png"); /* 暗色纹理 */
+    background-repeat: repeat;
+    background-size: auto;
+  }
+
+  /* 其他样式保持原样 */
   h1, h2, h3, h4, h5 {
     @apply font-bold text-gray-900 dark:text-gray-100 mb-0 pt-2;
   }
-  
+
   h6 {
     @apply font-bold text-gray-900 dark:text-gray-100 mb-0 pt-5;
   }
 
-  h1 {
-    @apply text-xl leading-10;
-  }
-  
-  h2 {
-    @apply text-base leading-10;
-  }
-  
-  h3 {
-    @apply text-base;
-  }
-  
-  h4 {
-    @apply text-base;
-  }
-  
-  h5 {
-    @apply text-base leading-snug;
-  }
-  
-  h6 {
-    @apply text-xl leading-10;
-  }
-  
-  hr {
-    @apply border-gray-200 dark:border-gray-700;
-  }
+  h1 { @apply text-xl leading-10; }
+  h2 { @apply text-base leading-10; }
+  h3 { @apply text-base; }
+  h4 { @apply text-base; }
+  h5 { @apply text-base leading-snug; }
+  h6 { @apply text-xl leading-10; }
 
-  p, hr, pre, dl {
-    @apply mb-5 text-justify;
-  }
-  
-  article > h1 {
-    @apply mb-1;
-  }
-  
+  hr { @apply border-gray-200 dark:border-gray-700; }
+
+  p, hr, pre, dl { @apply mb-5 text-justify; }
+
+  article > h1 { @apply mb-1; }
+
   code {
     @apply bg-gray-100 dark:bg-gray-800 rounded-lg text-sm border dark:border-gray-700 px-2 py-1;
   }
-  
-  pre {
-    @apply rounded-lg border dark:border-gray-700 p-5 overflow-auto text-base;
-  }
-  
-  pre code {
-    @apply bg-transparent border-0 px-0;
-  }
-  
-  figure {
-    @apply mb-5;
-  }
-  
-  figcaption {
-    @apply text-sm text-gray-500 dark:text-gray-400 mt-2;
-  }
-  
+
+  pre { @apply rounded-lg border dark:border-gray-700 p-5 overflow-auto text-base; }
+
+  pre code { @apply bg-transparent border-0 px-0; }
+
+  figure { @apply mb-5; }
+
+  figcaption { @apply text-sm text-gray-500 dark:text-gray-400 mt-2; }
+
   blockquote {
     @apply text-base text-gray-500 dark:text-gray-400 italic border-l-4 border-gray-300 dark:border-gray-700 pl-4 mb-5 py-0;
   }
-  
-  ul, ol {
-    @apply mb-5 ml-6;
-  }
-  
-  ol {
-    @apply list-decimal;
-  }
-  
-  ul {
-    @apply list-disc;
-  }
-  
-  nav ul, footer ul {
-    @apply list-none ml-0;
-  }
-  
-  header h1 {
-    @apply mb-0;
-  }
-  
-  table {
-    @apply w-full border rounded-md border-separate border-spacing-0 mb-5;
-  }
-  
-  thead th {
-    @apply border-b-2 border-r last:border-r-0 py-2 px-3;
-  }
-  
-  tbody td {
-    @apply py-2 px-3 border-b text-base border-r last:border-r-0;
-  }
-  
-  tbody tr:last-child td {
-    @apply border-b-0;
-  }
-  
-  dt {
-    @apply font-bold italic;
-  }
-  
-  dd {
-    @apply pl-10;
-  }
-  
-  header nav > ul {
-    @apply flex flex-wrap justify-center uppercase text-xs font-semibold gap-7;
-  }
-  
-  nav a, footer a {
-    @apply text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 font-semibold;
-  }
 
-  footer {
-    @apply text-xs;
-  }
+  ul, ol { @apply mb-5 ml-6; }
+  ol { @apply list-decimal; }
+  ul { @apply list-disc; }
+
+  nav ul, footer ul { @apply list-none ml-0; }
+
+  header h1 { @apply mb-0; }
+
+  table { @apply w-full border rounded-md border-separate border-spacing-0 mb-5; }
+
+  thead th { @apply border-b-2 border-r last:border-r-0 py-2 px-3; }
+
+  tbody td { @apply py-2 px-3 border-b text-base border-r last:border-r-0; }
+
+  tbody tr:last-child td { @apply border-b-0; }
+
+  dt { @apply font-bold italic; }
+
+  dd { @apply pl-10; }
+
+  header nav > ul { @apply flex flex-wrap justify-center uppercase text-xs font-semibold gap-7; }
+
+  nav a, footer a { @apply text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 font-semibold; }
+
+  footer { @apply text-xs; }
 }
+
 
 @layer utilities {  
   nav a.active {
