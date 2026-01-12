@@ -41,7 +41,7 @@ banner: "pink"
 <style>
 /* 白天模式边框 */
 .treehouse {
-  border: 1px solid #e5e7eb;  /* 白天边框 */
+  border: 1px solid #d1d5db;  /* 白天边框 */
   border-radius: 12px;
   padding: 16px;
 }
