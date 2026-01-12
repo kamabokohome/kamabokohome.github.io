@@ -3,33 +3,29 @@
 @tailwind utilities;
 
 @layer base {
-  /* inter 字体定义保持不变，省略重复部分 */
 
-  /* Body 样式 - 亮色/暗色背景分开处理 */
   body {
     @apply text-gray-700 text-base text-justify bg-white;
     background-color: #fffef7;
-    background-image: url("https://www.transparenttextures.com/patterns/noise-pattern-with-subtle-cross-lines.png");
-    background-repeat: repeat;
+background-image: url("https://www.transparenttextures.com/patterns/grilled-noise.png");    background-repeat: repeat;
     background-size: auto;
   }
 
   /* 暗色模式 */
   .dark body {
-    @apply text-gray-100; /* 暗色文字 */
+    @apply text-gray-200;
     background-color: #000f01;
     background-image: url("https://www.transparenttextures.com/patterns/wave-grid.png");
     background-repeat: repeat;
     background-size: auto;
   }
-
-  /* 其他样式保持原样 */
+  
   h1, h2, h3, h4, h5 {
-    @apply font-bold text-gray-900 dark:text-gray-100 mb-0 pt-2;
+    @apply font-bold text-gray-700 dark:text-gray-200 mb-0 pt-2;
   }
 
   h6 {
-    @apply font-bold text-gray-900 dark:text-gray-100 mb-0 pt-5;
+    @apply font-bold text-gray-700 dark:text-gray-200 mb-0 pt-5;
   }
 
   h1 { @apply text-xl leading-10; }
@@ -46,7 +42,7 @@
   article > h1 { @apply mb-1; }
 
   code {
-    @apply bg-gray-100 dark:bg-gray-800 rounded-lg text-sm border dark:border-gray-700 px-2 py-1;
+    @apply bg-gray-200 dark:bg-gray-700 rounded-lg text-sm border dark:border-gray-700 px-2 py-1;
   }
 
   pre { @apply rounded-lg border dark:border-gray-700 p-5 overflow-auto text-base; }
@@ -55,10 +51,10 @@
 
   figure { @apply mb-5; }
 
-  figcaption { @apply text-sm text-gray-500 dark:text-gray-400 mt-2; }
+  figcaption { @apply text-sm text-gray-400 dark:text-gray-400 mt-2; }
 
   blockquote {
-    @apply text-base text-gray-500 dark:text-gray-400 italic border-l-4 border-gray-300 dark:border-gray-700 pl-4 mb-5 py-0;
+    @apply text-base text-gray-400 dark:text-gray-400 italic border-l-4 border-gray-300 dark:border-gray-500 pl-4 mb-5 py-0;
   }
 
   ul, ol { @apply mb-5 ml-6; }
@@ -83,7 +79,7 @@
 
   header nav > ul { @apply flex flex-wrap justify-center uppercase text-xs font-semibold gap-7; }
 
-  nav a, footer a { @apply text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 font-semibold; }
+  nav a, footer a { @apply text-gray-400 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 font-semibold; }
 
   footer { @apply text-xs; }
 }
@@ -91,17 +87,17 @@
 
 @layer utilities {  
   nav a.active {
-    @apply text-gray-900 dark:text-gray-100;
+    @apply text-gray-700 dark:text-gray-200;
   }
   
   /* Content overrides */
   #content {
     @apply text-[0.99rem];
-    line-height: 1.8;
+    line-height: 1.85;
   }
 
   #content a {
-    @apply underline text-gray-700 hover:text-gray-600 dark:text-gray-100 dark:hover:text-gray-50;
+    @apply underline text-gray-700 hover:text-gray-400 dark:text-gray-200 dark:hover:text-gray-400;
   }
   
   #content .date {
@@ -109,7 +105,7 @@
   }
   
   #content h5 > a {
-    @apply no-underline text-[0.99rem] font-semibold hover:underline text-gray-900 dark:text-gray-100 hover:text-gray-900 dark:hover:text-gray-100;
+    @apply no-underline text-[0.99rem] font-semibold hover:underline text-gray-700 dark:text-gray-200 hover:text-gray-700 dark:hover:text-gray-200;
   }
   
   #content .meta {
@@ -128,10 +124,16 @@
     @apply no-underline inline-flex gap-2 text-sm font-semibold items-center text-emerald-700 hover:text-emerald-600 dark:text-emerald-300 dark:hover:text-emerald-200;  
   }
   
+  #content hr {
+  @apply border-t border-gray-300 dark:border-gray-500; 
+  margin-top: 2rem; 
+  margin-bottom: 2rem; 
+}
+
   #content .footnotes {
     @apply text-sm;
   }
-  
+
   #content .footnotes p {
     @apply inline-block mb-0;
   }
@@ -143,7 +145,7 @@
   #content .footnotes li {
     @apply mb-3;
   }
-  
+
   #content .alert-box {
     @apply px-4 pt-4 pb-1 mb-5 border-t-4;
   }
@@ -260,7 +262,7 @@ summary {
   cursor: pointer;
   font-weight: 700;
   padding: 6px 12px;
-  border: 1px solid #e5e7eb;  /* 白天模式边框 */
+  border: 1px solid #d1d5db;  /* 白天模式边框 */
   border-radius: 12px;
   list-style: none;
   position: relative;
