@@ -1,15 +1,18 @@
+{{ $moonIcon := resources.Get "icons/moon.svg" }}
+{{ $sunIcon := resources.Get "icons/sun.svg" }}
+
 <button 
   class="toggle-theme flex items-center justify-center" 
   aria-label="Toggle Theme" 
   title="電源" 
   onclick="toggleTheme()"
-  style="width:32px !important; height:32px !important; padding:4px !important;"
+  style="width:25px !important; height:25px !important; padding:2px !important;"
 >
-  <span class="theme-icon light" style="width:30px !important; height:30px !important;">
-    {{ partial "utils/icon" "moon" }}
+  <span class="theme-icon light" style="width:23px !important; height:23px !important; display:inline-block;">
+    <img src="{{ $moonIcon.RelPermalink }}" alt="" aria-hidden="true" style="width:100%; height:100%; display:block;" />
   </span>
-  <span class="theme-icon dark" style="width:30px !important; height:30px !important;">
-    {{ partial "utils/icon" "sun" }}
+  <span class="theme-icon dark" style="width:23px !important; height:23px !important; display:inline-block;">
+    <img src="{{ $sunIcon.RelPermalink }}" alt="" aria-hidden="true" style="width:100%; height:100%; display:block;" />
   </span>
 </button>
 

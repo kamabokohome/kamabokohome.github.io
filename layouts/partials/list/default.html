@@ -17,7 +17,7 @@
 
 
   <h5 style="margin-top: -0.25rem;">
-    <a href="{{ .Permalink }}">{{ .Title }}</a>
+    <a href="{{ .RelPermalink }}">{{ .Title }}</a>
   </h5>
 
   </div>
@@ -30,7 +30,7 @@
   
   
     <!-- "Read More" and Arrow together at the end of the summary 
-    <a class="read-more inline-flex items-center mt-2" href="{{ .Permalink }}">
+    <a class="read-more inline-flex items-center mt-2" href="{{ .RelPermalink }}">
       {{ i18n "readMore" }}
       <span class="w-4 h-4 stroke-2 inline-block ml-2">
         {{ partial "utils/icon" "arrow-right" }}

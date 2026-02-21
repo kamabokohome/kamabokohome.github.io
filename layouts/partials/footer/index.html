@@ -1,14 +1,35 @@
 <div style="padding-top: 1.5rem !important;">
     <footer class="flex-col items-center" style="padding-bottom: 1.5rem;">
         {{ $color := .Params.banner }}
-    
         {{ if not $color }}
             {{ $color = "green" }}
         {{ end }}
-    
-        {{ $banner := printf "banner_%s.png" $color }}
-    
-        <img src="{{ "/img/" | relURL }}{{ $banner }}" class="mb-5">
+
+        {{ $defaultBanner := printf "banner_%s.png" $color }}
+        {{ $bannerFiles := slice }}
+        {{ range (readDir "static/img") }}
+            {{ if and (not .IsDir) (hasPrefix .Name "banner_") (hasSuffix .Name ".png") }}
+                {{ $bannerFiles = $bannerFiles | append .Name }}
+            {{ end }}
+        {{ end }}
+
+        <img id="footer-banner" data-base="{{ "/img/" | relURL }}" data-banners="{{ delimit $bannerFiles "," }}" class="mb-5" alt="Footer banner">
+        <noscript>
+          <img src="{{ "/img/" | relURL }}{{ $defaultBanner }}" class="mb-5" alt="Footer banner">
+        </noscript>
+        <script>
+          (function () {
+            const bannerEl = document.getElementById("footer-banner");
+            if (!bannerEl) return;
+            const basePath = bannerEl.dataset.base || "{{ "/img/" | relURL }}";
+            const bannerFiles = (bannerEl.dataset.banners || "").split(",").filter(Boolean);
+            if (bannerFiles.length === 0) return;
+
+            const randomIndex = Math.floor(Math.random() * bannerFiles.length);
+            const randomBanner = bannerFiles[randomIndex];
+            bannerEl.src = basePath + randomBanner;
+          })();
+        </script>
 
         <div class="flex justify-center items-center text-xs font-semibold text-gray-500" 
                 style="font-size: 0.7rem; padding-bottom: 0.5rem;">

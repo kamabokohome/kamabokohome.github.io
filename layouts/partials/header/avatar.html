@@ -2,9 +2,8 @@
 
 <div class="flex justify-center items-center">
   <div class="w-20 h-20 rounded-full overflow-hidden">
-    <a href="{{ .Site.BaseURL }}">
+    <a href="{{ "/" | relURL }}">
       <img src="{{ $avatar.RelPermalink }}" alt="{{ .Site.Title }}" width="90" height="90" />
     </a>
   </div>
 </div>
-

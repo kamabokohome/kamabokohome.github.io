@@ -1,5 +1,3 @@
-{{ $favicon := resources.GetMatch .Site.Params.favicon }}
-
 <meta charset="UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -16,11 +14,11 @@
   content="{{ if .IsPage }}{{ or .Params.description .Summary }}{{ else if .IsHome }}{{ .Site.Params.description }}{{ else if .IsNode }}{{ or .Params.description .Summary }}{{ end }}"
 />
 <link rel="canonical" href="{{ .Permalink }}" />
-<link rel="robots" href="/robots.txt" />
+<meta name="robots" content="index,follow" />
 
-<link rel="icon" href="{{ .Site.BaseURL }}img/favicon.ico" />
-<link rel="icon" type="image/png" href="{{ .Site.BaseURL }}img/favicon.png" />
-<link rel="apple-touch-icon" href="{{ .Site.BaseURL }}img/favicon.png" />
+<link rel="icon" href="{{ "img/favicon.ico" | relURL }}" />
+<link rel="icon" type="image/png" href="{{ "img/favicon.png" | relURL }}" />
+<link rel="apple-touch-icon" href="{{ "img/favicon.png" | relURL }}" />
 
 {{ if .Site.Config.Services.GoogleAnalytics.ID }}
 <!-- Google Analytics -->

@@ -1,17 +1,8 @@
 <header class="flex flex-col w-full gap-3">
-
-  <header>
-    <div class="w-full flex justify-center">
-      <a href="{{ .Site.BaseURL }}">
-        <img src="{{ "img/title_day.png" | relURL }}" class="title-img-day" style="display:block;">
-        <img src="{{ "img/title_night.png" | relURL }}" class="title-img-night" style="display:none;">
-      </a>
-    </div>
-  </header>
-
-  <!-- 导航 -->
-  <div class="w-full">
-    {{ partial "header/nav" . }}
+  <div class="w-full flex justify-center">
+    <a href="{{ "/" | relURL }}">
+      <img src="{{ "img/title_day.png" | relURL }}" class="title-img-day" style="display:block;">
+      <img src="{{ "img/title_night.png" | relURL }}" class="title-img-night" style="display:none;">
+    </a>
   </div>
-
 </header>
