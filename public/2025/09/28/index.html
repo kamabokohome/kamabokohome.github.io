@@ -44,7 +44,7 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <script type="text/x-mathjax-config">MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });</script>
 
-<link rel="stylesheet" href="/css/app.min.3926b13ad464638a57eaa9d280dbeae07b2739bff279df21abc63a7a6abb5735.css" integrity="sha256-OSaxOtRkY4pX6qnSgNvq4HsnOb/yed8hq8Y6emq7VzU=" /><style>
+<link rel="stylesheet" href="/css/app.min.6365d9cd4bde185dde80c4b72f76597537280069443b09bb8c564879d4c3bcc0.css" integrity="sha256-Y2XZzUveGF3egMS3L3ZZdTcoAGlEOwm7jFZIedTDvMA=" /><style>
       html {
         scrollbar-gutter: stable;
       }
@@ -489,7 +489,8 @@
     const dayBack = title ? title.querySelector(".title-back-day-src") : null;
     const nightBack = title ? title.querySelector(".title-back-night-src") : null;
     if (!title || !waterLayer || !dayFront || !nightFront || !dayBack || !nightBack) return;
-    const hasRipples = !!(window.jQuery && window.jQuery.fn && window.jQuery.fn.ripples);
+    const TITLE_RIPPLE_ENABLED = false;
+    const hasRipples = TITLE_RIPPLE_ENABLED && !!(window.jQuery && window.jQuery.fn && window.jQuery.fn.ripples);
     const LIGHT_PERTURBANCE = 0.052;
     const DARK_PERTURBANCE = 0.044;
     const $water = hasRipples ? window.jQuery(waterLayer) : null;

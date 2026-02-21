@@ -1,6 +1,6 @@
 <header class="flex flex-col w-full gap-3">
   <div class="w-full flex justify-center">
-    <div class="title-interactive" aria-label="Site title image">
+    <a href="{{ "/" | relURL }}" class="title-interactive" aria-label="Site title image">
       <div class="title-water-layer" aria-hidden="true"></div>
       <img
         src="{{ "img/day_back.png" | relURL }}"
@@ -28,7 +28,7 @@
         style="display:none;"
         onerror="this.onerror=null;this.src='{{ "img/title_night1.png" | relURL }}';"
       >
-    </div>
+    </a>
   </div>
 </header>
 
@@ -274,6 +274,8 @@
       if (root.classList.contains("dark")) return;
       const titleArea = document.querySelector(".title-interactive");
       if (titleArea && titleArea.contains(event.target)) return;
+      const homeRippleArea = document.querySelector(".home-ripple-image");
+      if (homeRippleArea && homeRippleArea.contains(event.target)) return;
 
       const ripple = document.createElement("div");
       ripple.className = "global-ripple";
@@ -302,6 +304,8 @@
       if (!root.classList.contains("dark")) return;
       const titleArea = document.querySelector(".title-interactive");
       if (titleArea && titleArea.contains(event.target)) return;
+      const homeRippleArea = document.querySelector(".home-ripple-image");
+      if (homeRippleArea && homeRippleArea.contains(event.target)) return;
 
       const meteor = document.createElement("span");
       meteor.className = "global-meteor";
@@ -353,7 +357,8 @@
     const dayBack = title ? title.querySelector(".title-back-day-src") : null;
     const nightBack = title ? title.querySelector(".title-back-night-src") : null;
     if (!title || !waterLayer || !dayFront || !nightFront || !dayBack || !nightBack) return;
-    const hasRipples = !!(window.jQuery && window.jQuery.fn && window.jQuery.fn.ripples);
+    const TITLE_RIPPLE_ENABLED = false;
+    const hasRipples = TITLE_RIPPLE_ENABLED && !!(window.jQuery && window.jQuery.fn && window.jQuery.fn.ripples);
     const LIGHT_PERTURBANCE = 0.052;
     const DARK_PERTURBANCE = 0.044;
     const $water = hasRipples ? window.jQuery(waterLayer) : null;

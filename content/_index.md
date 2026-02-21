@@ -5,9 +5,11 @@ banner: "pink"
 ---
 
 
-{{< img
-  src="鸽子.jpg"
-  >}}
+{{< img-ripple
+  back="鸽子_back.jpg"
+  front="鸽子_front.png"
+  alt="鸽子"
+>}}
 
 <div style="text-align:center;">
 ✧ <br><br>
