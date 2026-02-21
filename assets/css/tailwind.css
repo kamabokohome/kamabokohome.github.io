@@ -4,11 +4,37 @@
 
 @layer base {
   :root {
-    --sun-halo-center-y: calc(100% - 72px);
+    --sun-halo-center-y: calc(100% - 36px);
+    --light-grad-color-1: rgba(106, 182, 236, 0.4);
+    --light-grad-color-2: rgba(134, 198, 241, 0.29);
+    --light-grad-color-3: rgba(177, 220, 248, 0.19);
+    --light-grad-color-4: rgba(219, 240, 255, 0.11);
+    --light-grad-stop-2: 130px;
+    --light-grad-stop-3: 270px;
+    --light-grad-stop-4: 430px;
+    --light-grad-stop-5: 560px;
+    --dark-grad-stop-2: 340px;
+    --dark-grad-stop-3: 680px;
+    --dark-grad-stop-4: 1440px;
   }
 
   body {
-    @apply text-gray-700 text-base text-justify bg-white;
+    @apply text-gray-700 text-base text-justify;
+    background: transparent;
+    min-height: 100vh;
+    min-height: 100svh;
+    min-height: 100dvh;
+  }
+
+  html,
+  body {
+    min-height: 100%;
+  }
+
+  html {
+    min-height: 100vh;
+    min-height: 100svh;
+    min-height: 100dvh;
     background-color: #ffffff;
     background-image:
       radial-gradient(
@@ -54,21 +80,39 @@
       ),
       linear-gradient(
         0deg,
-        rgba(197, 88, 62, 0.34) 0px,
-        rgba(226, 120, 86, 0.22) 280px,
-        rgba(245, 162, 122, 0.13) 560px,
-        rgba(255, 209, 173, 0.06) 840px,
-        rgba(255, 255, 255, 0) 1240px
+        var(--light-grad-color-1) 0px,
+        var(--light-grad-color-2) var(--light-grad-stop-2),
+        var(--light-grad-color-3) var(--light-grad-stop-3),
+        var(--light-grad-color-4) var(--light-grad-stop-4),
+        rgba(255, 255, 255, 0) var(--light-grad-stop-5)
       ),
       repeating-linear-gradient(
         90deg,
-        rgba(143, 102, 62, 0.045) 0px,
-        rgba(143, 102, 62, 0.045) 1px,
+        rgba(171, 201, 229, 0.12) 0px,
+        rgba(171, 201, 229, 0.12) 1px,
         rgba(255, 255, 255, 0) 1px,
-        rgba(255, 255, 255, 0) 7px
+        rgba(255, 255, 255, 0) 8px
       );
     background-repeat: no-repeat;
     background-size: 100% 100%;
+  }
+
+  /* 顶部安全区兜底，避免移动端地址栏/刘海区域出现白条 */
+  html::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: env(safe-area-inset-top, 0px);
+    pointer-events: none;
+    z-index: 45;
+    background: linear-gradient(
+      180deg,
+      rgba(230, 242, 251, 0.92) 0%,
+      rgba(230, 242, 251, 0.58) 58%,
+      rgba(230, 242, 251, 0) 100%
+    );
   }
 
   /* Corner 页面：由 html 统一绘制全屏背景，避免两侧与中间分层重绘不同步 */
@@ -118,18 +162,18 @@
       ),
       linear-gradient(
         0deg,
-        rgba(197, 88, 62, 0.34) 0px,
-        rgba(226, 120, 86, 0.22) 280px,
-        rgba(245, 162, 122, 0.13) 560px,
-        rgba(255, 209, 173, 0.06) 840px,
-        rgba(255, 255, 255, 0) 1240px
+        var(--light-grad-color-1) 0px,
+        var(--light-grad-color-2) var(--light-grad-stop-2),
+        var(--light-grad-color-3) var(--light-grad-stop-3),
+        var(--light-grad-color-4) var(--light-grad-stop-4),
+        rgba(255, 255, 255, 0) var(--light-grad-stop-5)
       ),
       repeating-linear-gradient(
         90deg,
-        rgba(143, 102, 62, 0.045) 0px,
-        rgba(143, 102, 62, 0.045) 1px,
+        rgba(171, 201, 229, 0.12) 0px,
+        rgba(171, 201, 229, 0.12) 1px,
         rgba(255, 255, 255, 0) 1px,
-        rgba(255, 255, 255, 0) 7px
+        rgba(255, 255, 255, 0) 8px
       );
     background-repeat: no-repeat;
     background-size: 100% 100%;
@@ -142,14 +186,18 @@
   /* 暗色模式 */
   .dark body {
     @apply text-gray-200;
+    background: transparent;
+  }
+
+  html.dark {
     background-color: #35373b;
     background-image:
       linear-gradient(
         0deg,
         rgba(118, 102, 148, 0.34) 0px,
-        rgba(108, 104, 124, 0.19) 340px,
-        rgba(95, 97, 106, 0.1) 680px,
-        rgba(47, 47, 47, 0) 1440px
+        rgba(108, 104, 124, 0.19) var(--dark-grad-stop-2),
+        rgba(95, 97, 106, 0.1) var(--dark-grad-stop-3),
+        rgba(47, 47, 47, 0) var(--dark-grad-stop-4)
       ),
       repeating-linear-gradient(
         90deg,
@@ -160,15 +208,24 @@
       ),
       linear-gradient(
         180deg,
-        rgba(186, 178, 220, 0) 0%,
-        rgba(186, 178, 220, 0) 62%,
-        rgba(186, 178, 220, 0.034) 82%,
-        rgba(186, 178, 220, 0.09) 100%
+        rgba(196, 150, 238, 0) 0%,
+        rgba(196, 150, 238, 0) 62%,
+        rgba(196, 150, 238, 0.05) 82%,
+        rgba(196, 150, 238, 0.13) 100%
       ),
       url('/img/constellations-virgo-leo-libra.svg');
     background-repeat: no-repeat, repeat, no-repeat, no-repeat;
     background-size: 100% 100%, auto, 100% 100%, 100% auto;
     background-position: center top, top left, center top, center bottom;
+  }
+
+  html.dark::before {
+    background: linear-gradient(
+      180deg,
+      rgba(53, 55, 59, 0.98) 0%,
+      rgba(53, 55, 59, 0.7) 58%,
+      rgba(53, 55, 59, 0) 100%
+    );
   }
 
   html.dark.page-corner {
@@ -177,9 +234,9 @@
       linear-gradient(
         0deg,
         rgba(118, 102, 148, 0.34) 0px,
-        rgba(108, 104, 124, 0.19) 340px,
-        rgba(95, 97, 106, 0.1) 680px,
-        rgba(47, 47, 47, 0) 1440px
+        rgba(108, 104, 124, 0.19) var(--dark-grad-stop-2),
+        rgba(95, 97, 106, 0.1) var(--dark-grad-stop-3),
+        rgba(47, 47, 47, 0) var(--dark-grad-stop-4)
       ),
       repeating-linear-gradient(
         90deg,
@@ -190,10 +247,10 @@
       ),
       linear-gradient(
         180deg,
-        rgba(186, 178, 220, 0) 0%,
-        rgba(186, 178, 220, 0) 62%,
-        rgba(186, 178, 220, 0.034) 82%,
-        rgba(186, 178, 220, 0.09) 100%
+        rgba(196, 150, 238, 0) 0%,
+        rgba(196, 150, 238, 0) 62%,
+        rgba(196, 150, 238, 0.05) 82%,
+        rgba(196, 150, 238, 0.13) 100%
       ),
       url('/img/constellations-virgo-leo-libra.svg');
     background-repeat: no-repeat, repeat, no-repeat, no-repeat;
@@ -208,13 +265,23 @@
 
   /* 移动端避免星空背景被整体缩小导致“压扁/变小”观感 */
   @media (max-width: 768px) {
-    .dark body {
-      background-size: 100% 100%, auto, 100% 100%, 1400px auto;
+    :root {
+      --light-grad-stop-2: 90px;
+      --light-grad-stop-3: 190px;
+      --light-grad-stop-4: 310px;
+      --light-grad-stop-5: 420px;
+      --dark-grad-stop-2: 250px;
+      --dark-grad-stop-3: 500px;
+      --dark-grad-stop-4: 980px;
+    }
+
+    html.dark {
+      background-size: 100% 100%, auto, 100% 100%, 1020px auto;
       background-position: center top, top left, center top, center bottom;
     }
 
     html.dark.page-corner {
-      background-size: 100% 100%, auto, 100% 100%, 1400px auto;
+      background-size: 100% 100%, auto, 100% 100%, 1020px auto;
       background-position: center top, top left, center top, center bottom;
     }
   }
@@ -276,7 +343,7 @@
 
   dd { @apply pl-10; }
 
-  header nav > ul { @apply flex flex-wrap justify-center uppercase text-xs font-semibold gap-7; }
+  header nav > ul { @apply flex flex-wrap justify-center text-xs font-semibold gap-7; }
 
   nav a, footer a { @apply text-gray-400 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 font-semibold; }
 

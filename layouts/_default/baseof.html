@@ -23,6 +23,7 @@
         right: 0;
         top: 0;
         height: 0;
+        display: none;
         pointer-events: none;
         background-color: transparent;
         backdrop-filter: none;
@@ -34,6 +35,7 @@
 
       .site-sticky-bar.is-stuck .site-sticky-bg {
         height: var(--sticky-bg-height, 0px);
+        display: block;
         background-color: rgba(255, 255, 255, 0.68);
         backdrop-filter: blur(11px);
         -webkit-backdrop-filter: blur(11px);
@@ -43,6 +45,10 @@
       html.dark .site-sticky-bar.is-stuck .site-sticky-bg {
         background-color: rgba(47, 47, 47, 0.68);
         box-shadow: 0 5px 14px rgba(0, 0, 0, 0.3);
+      }
+
+      html.page-short .site-sticky-bg {
+        display: none !important;
       }
 
       .site-sticky-inner {
@@ -66,7 +72,7 @@
         margin: 0;
         padding: 0;
         align-items: center;
-        gap: 2.6rem;
+        gap: 2.9rem;
       }
 
       .site-sticky-nav .nav-theme-item {
@@ -76,7 +82,7 @@
 
       @media (max-width: 640px) {
         .site-sticky-nav nav ul {
-          gap: 1.2rem;
+          gap: 1.35rem;
         }
       }
     </style>
@@ -90,6 +96,7 @@
     </div>
 
     <!-- Sticky Nav -->
+    <div class="site-sticky-sentinel" aria-hidden="true"></div>
     <header class="site-sticky-bar">
       <div class="site-sticky-bg" aria-hidden="true"></div>
       <div class="site-sticky-inner">
@@ -112,17 +119,58 @@
     <script>
       document.addEventListener("DOMContentLoaded", function() {
         const stickyBar = document.querySelector(".site-sticky-bar");
-        if (!stickyBar) return;
+        const stickySentinel = document.querySelector(".site-sticky-sentinel");
+        const root = document.documentElement;
+        if (!stickyBar || !stickySentinel) return;
 
         const updateStickyState = function() {
           stickyBar.style.setProperty("--sticky-bg-height", Math.ceil(stickyBar.offsetHeight) + "px");
-          const isStuck = stickyBar.getBoundingClientRect().top <= 0;
+          const viewportHeight = window.innerHeight || root.clientHeight || 0;
+          const pageHeight = Math.max(
+            root.scrollHeight,
+            root.offsetHeight,
+            document.body ? document.body.scrollHeight : 0,
+            document.body ? document.body.offsetHeight : 0
+          );
+          const isShortPage = root.classList.contains("page-short") || pageHeight <= viewportHeight * 1.22;
+          const canScroll = (root.scrollHeight - window.innerHeight) > 2;
+          const reachedTop = stickySentinel.getBoundingClientRect().top <= 0;
+          const isStuck = !isShortPage && canScroll && reachedTop;
           stickyBar.classList.toggle("is-stuck", isStuck);
         };
 
         updateStickyState();
         window.addEventListener("scroll", updateStickyState, { passive: true });
         window.addEventListener("resize", updateStickyState);
+        window.addEventListener("load", updateStickyState);
+        const observer = new MutationObserver(updateStickyState);
+        observer.observe(root, { attributes: true, attributeFilter: ["class"] });
+      });
+    </script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        const root = document.documentElement;
+        const body = document.body;
+
+        const updateShortPageState = function() {
+          const viewportHeight = window.innerHeight || root.clientHeight || 0;
+          const pageHeight = Math.max(
+            root.scrollHeight,
+            root.offsetHeight,
+            body ? body.scrollHeight : 0,
+            body ? body.offsetHeight : 0
+          );
+          const isShort = pageHeight <= viewportHeight * 1.22;
+          root.classList.toggle("page-short", isShort);
+        };
+
+        updateShortPageState();
+        window.requestAnimationFrame(updateShortPageState);
+        window.setTimeout(updateShortPageState, 120);
+        window.addEventListener("load", updateShortPageState);
+        window.addEventListener("resize", updateShortPageState);
+        document.addEventListener("toggle", updateShortPageState, true);
       });
     </script>
 
@@ -142,8 +190,9 @@
       setTheme = function(theme) {
         originalSetTheme(theme);
 
-        const dayImg = document.querySelector('.title-img-day');
-        const nightImg = document.querySelector('.title-img-night');
+        const dayImg = document.querySelector('.title-front-day');
+        const nightImg = document.querySelector('.title-front-night');
+        if (!dayImg || !nightImg) return;
 
         if (theme === 'light') {
           dayImg.style.display = 'block';
@@ -151,6 +200,10 @@
         } else {
           dayImg.style.display = 'none';
           nightImg.style.display = 'block';
+        }
+
+        if (typeof window.setTitleRippleImage === 'function') {
+          window.setTitleRippleImage();
         }
       };
 
