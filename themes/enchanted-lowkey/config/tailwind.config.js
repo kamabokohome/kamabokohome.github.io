@@ -6,6 +6,7 @@ const baseDir = path.join(__dirname, '..');
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: 'class',
+  safelist: ['page-corner'],
   content: [
     `${baseDir}/themes/**/layouts/**/*.html`,
       `${baseDir}/themes/**/layouts/partials/**/*.html`, 
@@ -26,4 +27,3 @@ module.exports = {
   plugins: [],
   variants: ['group-hover'],
 }
-

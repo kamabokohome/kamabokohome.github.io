@@ -17,13 +17,13 @@ banner: "pink"
   欢迎来到鱼糕的树屋！<br>
   这个树屋建造于 2024 年末，是一个非常私人的领域。<br>
   <br>
-  <a href="https://kamabokohome.com/posts/">Posts</a> 栏包括了各种不定期投稿。<br>
+  <a href="/posts/">Posts</a> 栏包括了各种不定期投稿。<br>
   尝试将各种思绪组织成语言，然后记录下来。<br>
   <br>
-  <a href="https://kamabokohome.com/collection/">Collection</a> 栏是日常生活的图鉴。<br>
+  <a href="/collection/">Collection</a> 栏是日常生活的图鉴。<br>
   没有收藏度的目标，也换不到任何称号。只是于某时某地感受到时间流逝的见证。<br>
   <br>
-  <a href="https://kamabokohome.com/corner/">Corner</a> 栏是喜欢的、想推荐给所有人的有趣的东西的集合！<br>
+  <a href="/corner/">Corner</a> 栏是喜欢的、想推荐给所有人的有趣的东西的集合！<br>
   可以的话，请务必尝试看看。<br>
   <br>
   找到电源开关之后，就可以切换白天与黑夜模式喔。<br>
