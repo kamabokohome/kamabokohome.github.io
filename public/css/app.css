@@ -501,10 +501,10 @@ video {
 }
   :root {
     --sun-halo-center-y: calc(100% - 36px);
-    --light-grad-color-1: rgba(106, 182, 236, 0.4);
-    --light-grad-color-2: rgba(134, 198, 241, 0.29);
-    --light-grad-color-3: rgba(177, 220, 248, 0.19);
-    --light-grad-color-4: rgba(219, 240, 255, 0.11);
+    --light-grad-color-1: rgba(204, 210, 218, 0.42);
+    --light-grad-color-2: rgba(217, 222, 229, 0.3);
+    --light-grad-color-3: rgba(231, 235, 240, 0.2);
+    --light-grad-color-4: rgba(245, 247, 250, 0.12);
     --light-grad-stop-2: 130px;
     --light-grad-stop-3: 270px;
     --light-grad-stop-4: 430px;
@@ -537,55 +537,6 @@ video {
     min-height: 100dvh;
     background-color: #ffffff;
     background-image:
-      radial-gradient(
-        circle 64px at 50% var(--sun-halo-center-y),
-        rgba(255, 255, 255, 0.72) 0px,
-        rgba(255, 253, 248, 0.62) 6px,
-        rgba(255, 244, 226, 0.34) 17px,
-        rgba(255, 255, 255, 0) 32px
-      ),
-      radial-gradient(
-        ellipse 28px 9px at calc(50% - 64px) var(--sun-halo-center-y),
-        rgba(255, 253, 248, 0.46) 0%,
-        rgba(255, 244, 226, 0.26) 30%,
-        rgba(255, 244, 226, 0.07) 58%,
-        rgba(255, 255, 255, 0) 84%
-      ),
-      radial-gradient(
-        ellipse 28px 9px at calc(50% + 64px) var(--sun-halo-center-y),
-        rgba(255, 253, 248, 0.46) 0%,
-        rgba(255, 244, 226, 0.26) 30%,
-        rgba(255, 244, 226, 0.07) 58%,
-        rgba(255, 255, 255, 0) 84%
-      ),
-      radial-gradient(
-        circle 72px at 50% var(--sun-halo-center-y),
-        rgba(255, 255, 255, 0) 0px,
-        rgba(255, 255, 255, 0) 59px,
-        rgba(255, 253, 248, 0.18) 61px,
-        rgba(255, 244, 226, 0.12) 65px,
-        rgba(255, 255, 255, 0) 68px
-      ),
-      radial-gradient(
-        circle 72px at 50% var(--sun-halo-center-y),
-        rgba(255, 255, 255, 0) 0px,
-        rgba(255, 255, 255, 0) 60px,
-        rgba(255, 130, 98, 0.16) 60.5px,
-        rgba(255, 255, 255, 0) 61.5px
-      ),
-      radial-gradient(
-        ellipse 220px 3px at 50% var(--sun-halo-center-y),
-        rgba(255, 255, 255, 0.06) 0%,
-        rgba(255, 255, 255, 0) 72%
-      ),
-      linear-gradient(
-        0deg,
-        var(--light-grad-color-1) 0px,
-        var(--light-grad-color-2) var(--light-grad-stop-2),
-        var(--light-grad-color-3) var(--light-grad-stop-3),
-        var(--light-grad-color-4) var(--light-grad-stop-4),
-        rgba(255, 255, 255, 0) var(--light-grad-stop-5)
-      ),
       repeating-linear-gradient(
         90deg,
         rgba(171, 201, 229, 0.12) 0px,
@@ -619,55 +570,6 @@ video {
   html.page-corner {
     background-color: #ffffff;
     background-image:
-      radial-gradient(
-        circle 64px at 50% var(--sun-halo-center-y),
-        rgba(255, 255, 255, 0.72) 0px,
-        rgba(255, 253, 248, 0.62) 6px,
-        rgba(255, 244, 226, 0.34) 17px,
-        rgba(255, 255, 255, 0) 32px
-      ),
-      radial-gradient(
-        ellipse 28px 9px at calc(50% - 64px) var(--sun-halo-center-y),
-        rgba(255, 253, 248, 0.46) 0%,
-        rgba(255, 244, 226, 0.26) 30%,
-        rgba(255, 244, 226, 0.07) 58%,
-        rgba(255, 255, 255, 0) 84%
-      ),
-      radial-gradient(
-        ellipse 28px 9px at calc(50% + 64px) var(--sun-halo-center-y),
-        rgba(255, 253, 248, 0.46) 0%,
-        rgba(255, 244, 226, 0.26) 30%,
-        rgba(255, 244, 226, 0.07) 58%,
-        rgba(255, 255, 255, 0) 84%
-      ),
-      radial-gradient(
-        circle 72px at 50% var(--sun-halo-center-y),
-        rgba(255, 255, 255, 0) 0px,
-        rgba(255, 255, 255, 0) 59px,
-        rgba(255, 253, 248, 0.18) 61px,
-        rgba(255, 244, 226, 0.12) 65px,
-        rgba(255, 255, 255, 0) 68px
-      ),
-      radial-gradient(
-        circle 72px at 50% var(--sun-halo-center-y),
-        rgba(255, 255, 255, 0) 0px,
-        rgba(255, 255, 255, 0) 60px,
-        rgba(255, 130, 98, 0.16) 60.5px,
-        rgba(255, 255, 255, 0) 61.5px
-      ),
-      radial-gradient(
-        ellipse 220px 3px at 50% var(--sun-halo-center-y),
-        rgba(255, 255, 255, 0.06) 0%,
-        rgba(255, 255, 255, 0) 72%
-      ),
-      linear-gradient(
-        0deg,
-        var(--light-grad-color-1) 0px,
-        var(--light-grad-color-2) var(--light-grad-stop-2),
-        var(--light-grad-color-3) var(--light-grad-stop-3),
-        var(--light-grad-color-4) var(--light-grad-stop-4),
-        rgba(255, 255, 255, 0) var(--light-grad-stop-5)
-      ),
       repeating-linear-gradient(
         90deg,
         rgba(171, 201, 229, 0.12) 0px,

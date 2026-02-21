@@ -1,0 +1,121 @@
+{{ $back := .Page.Resources.GetMatch (printf "%s" (.Get "back" | safeURL )) }}
+{{ $front := .Page.Resources.GetMatch (printf "%s" (.Get "front" | safeURL )) }}
+{{ $alt := .Get "alt" }}
+
+{{ if and $back $front }}
+<figure class="mb-5">
+  <div class="home-ripple-image" data-back-src="{{ $back.RelPermalink }}">
+    <div class="home-ripple-water" aria-hidden="true"></div>
+    <img
+      class="home-ripple-front"
+      src="{{ $front.RelPermalink }}"
+      alt="{{ $alt }}"
+      width="{{ $front.Width }}"
+      height="{{ $front.Height }}"
+      loading="lazy"
+    />
+  </div>
+</figure>
+
+<style>
+  .home-ripple-image {
+    position: relative;
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    line-height: 0;
+    overflow: hidden;
+  }
+
+  .home-ripple-image .home-ripple-water {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+  }
+
+  .home-ripple-image .home-ripple-front {
+    position: relative;
+    z-index: 2;
+    display: block;
+    width: 100%;
+    height: auto;
+    pointer-events: none;
+  }
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    if (!(window.jQuery && window.jQuery.fn && window.jQuery.fn.ripples)) return;
+    const blocks = document.querySelectorAll(".home-ripple-image");
+    blocks.forEach(function (block) {
+      if (block.dataset.rippleInit === "1") return;
+      block.dataset.rippleInit = "1";
+      const water = block.querySelector(".home-ripple-water");
+      const src = block.getAttribute("data-back-src");
+      if (!water || !src) return;
+      const $water = window.jQuery(water);
+
+      try {
+        $water.ripples({
+          imageUrl: src,
+          resolution: 256,
+          dropRadius: 22,
+          perturbance: 0.04,
+          interactive: false,
+          crossOrigin: ""
+        });
+        const rect = block.getBoundingClientRect();
+        if (rect.width > 0 && rect.height > 0) {
+          $water.ripples("drop", rect.width * 0.5, rect.height * 0.55, 22, 0.1);
+        }
+      } catch (_) {
+        water.style.backgroundImage = "url('" + src + "')";
+        return;
+      }
+
+      let lastMoveAt = 0;
+      const dropAtPointer = function (event, radius, strength) {
+        if (!$water.data("ripples")) return;
+        const rect = block.getBoundingClientRect();
+        if (rect.width <= 0 || rect.height <= 0) return;
+        const x = event.clientX - rect.left;
+        const y = event.clientY - rect.top;
+        if (x < 0 || y < 0 || x > rect.width || y > rect.height) return;
+        try {
+          $water.ripples("drop", x, y, radius, strength);
+        } catch (_) {}
+      };
+
+      block.addEventListener("pointermove", function (event) {
+        const now = Date.now();
+        if (now - lastMoveAt < 45) return;
+        lastMoveAt = now;
+        dropAtPointer(event, 12, 0.03);
+      }, { passive: true });
+
+      block.addEventListener("pointerdown", function (event) {
+        if (event.button !== 0) return;
+        dropAtPointer(event, 22, 0.12);
+      }, { passive: true });
+
+    });
+  });
+</script>
+{{ else }}
+<figure class="mb-5">
+  {{ if $front }}
+  <img
+    src="{{ $front.RelPermalink }}"
+    alt="{{ $alt }}"
+    width="{{ $front.Width }}"
+    height="{{ $front.Height }}"
+    loading="lazy"
+  />
+  {{ else }}
+  <p>Image not found.</p>
+  {{ end }}
+</figure>
+{{ end }}
