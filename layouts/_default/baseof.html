@@ -2,16 +2,102 @@
 <html lang="{{ .Site.LanguageCode | default `en` }}" class="scroll-smooth dark">
   <head>
     {{- partial "head/index" . -}}
-    <link rel="canonical" href="{{ .Permalink }}">
+    <style>
+      html {
+        scrollbar-gutter: stable;
+      }
+
+      .site-sticky-bar {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        margin-bottom: 0.55rem;
+        padding: 0.18rem 0;
+        background-color: transparent;
+        border-bottom: none;
+      }
+
+      .site-sticky-bg {
+        position: fixed;
+        left: 0;
+        right: 0;
+        top: 0;
+        height: 0;
+        pointer-events: none;
+        background-color: transparent;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        box-shadow: none;
+        transition: background-color 0.2s ease, backdrop-filter 0.2s ease, box-shadow 0.2s ease, height 0.2s ease;
+        z-index: 40;
+      }
+
+      .site-sticky-bar.is-stuck .site-sticky-bg {
+        height: var(--sticky-bg-height, 0px);
+        background-color: rgba(255, 255, 255, 0.68);
+        backdrop-filter: blur(11px);
+        -webkit-backdrop-filter: blur(11px);
+        box-shadow: 0 5px 14px rgba(0, 0, 0, 0.1);
+      }
+
+      html.dark .site-sticky-bar.is-stuck .site-sticky-bg {
+        background-color: rgba(0, 15, 1, 0.68);
+        box-shadow: 0 5px 14px rgba(0, 0, 0, 0.3);
+      }
+
+      .site-sticky-inner {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 2.1rem;
+        max-width: 768px;
+        margin: 0 auto;
+        padding: 0 0.625rem;
+        z-index: 51;
+      }
+
+      .site-sticky-nav {
+        display: flex;
+        align-items: center;
+      }
+
+      .site-sticky-nav nav ul {
+        margin: 0;
+        padding: 0;
+        align-items: center;
+        gap: 2.6rem;
+      }
+
+      .site-sticky-nav .nav-theme-item {
+        display: inline-flex;
+        align-items: center;
+      }
+
+      @media (max-width: 640px) {
+        .site-sticky-nav nav ul {
+          gap: 1.2rem;
+        }
+      }
+    </style>
   </head>
 
   <body class="max-w-screen-md mx-auto px-2.5">
 
-    <!-- Header + Theme Button -->
-    <div class="flex flex-col items-center gap-2 px-1.5 w-full" style="margin-bottom: 20px;">
+    <!-- Header Title -->
+    <div class="flex flex-col items-center px-1.5 w-full" style="margin-bottom: 6px;">
       {{ partial "header/index" . }}
-      {{ partial "header/theme-button" . }}
     </div>
+
+    <!-- Sticky Nav -->
+    <header class="site-sticky-bar">
+      <div class="site-sticky-bg" aria-hidden="true"></div>
+      <div class="site-sticky-inner">
+        <div class="site-sticky-nav">
+          {{ partial "header/nav" . }}
+        </div>
+      </div>
+    </header>
 
     <!-- Main content -->
     <main id="content" class="px-2.5">
@@ -23,6 +109,23 @@
     {{- partial "footer/index" . -}}
 
     <!-- 页面文字间隔 JS -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        const stickyBar = document.querySelector(".site-sticky-bar");
+        if (!stickyBar) return;
+
+        const updateStickyState = function() {
+          stickyBar.style.setProperty("--sticky-bg-height", Math.ceil(stickyBar.offsetHeight) + "px");
+          const isStuck = stickyBar.getBoundingClientRect().top <= 0;
+          stickyBar.classList.toggle("is-stuck", isStuck);
+        };
+
+        updateStickyState();
+        window.addEventListener("scroll", updateStickyState, { passive: true });
+        window.addEventListener("resize", updateStickyState);
+      });
+    </script>
+
     <script>
       document.addEventListener("DOMContentLoaded", function() {
         document.querySelectorAll('p').forEach(function (p) {

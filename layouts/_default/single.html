@@ -46,7 +46,7 @@
   <div class="flex justify-start w-1/2">
     {{ $prev := .Prev }}
     {{ if and $prev (eq $prev.Section .Section) }}
-      <a href="{{ $prev.Permalink }}" class="pagination-button" title="前一篇">
+      <a href="{{ $prev.RelPermalink }}" class="pagination-button" title="前一篇">
         {{ $prevArrow := resources.Get "icons/arrow-left.png" }}
         <img src="{{ $prevArrow.RelPermalink }}" alt="Previous" style="width:32px; height:32px;" />
       </a>
@@ -79,7 +79,7 @@
   <div class="flex justify-end w-1/2">
     {{ $next := .Next }}
     {{ if and $next (eq $next.Section .Section) }}
-      <a href="{{ $next.Permalink }}" class="pagination-button" title="后一篇">
+      <a href="{{ $next.RelPermalink }}" class="pagination-button" title="后一篇">
         {{ $nextArrow := resources.Get "icons/arrow-right.png" }}
         <img src="{{ $nextArrow.RelPermalink }}" alt="Next" style="width:32px; height:32px;" />
       </a>
