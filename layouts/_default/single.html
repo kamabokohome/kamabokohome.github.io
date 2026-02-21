@@ -1,6 +1,6 @@
 {{ define "main" }}
 
-<article class="flex flex-col gap-5">
+<article class="flex flex-col gap-5" style="flex: 1 1 auto;">
   <header class="flex flex-col">
     
 <div class="meta">
@@ -41,7 +41,7 @@
   -->
 
 <!-- Previous and Next Post Buttons -->
-<div class="flex items-center justify-between font-semibold w-full mt-4">
+<div class="flex items-center justify-between font-semibold w-full mt-4" style="margin-top: auto; padding-top: 1rem;">
   <!-- Previous post (left side). -->
   <div class="flex justify-start w-1/2">
     {{ $prev := .Prev }}

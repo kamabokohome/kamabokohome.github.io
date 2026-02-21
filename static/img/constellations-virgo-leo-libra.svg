@@ -1,0 +1,173 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2400 1000" preserveAspectRatio="xMidYMax meet">
+  <defs>
+    <filter id="halo-field" x="-50%" y="-50%" width="200%" height="200%" color-interpolation-filters="sRGB">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="0.32" result="blur"/>
+      <feColorMatrix in="blur" type="matrix" values="
+        1 0 0 0 0
+        0 1 0 0 0
+        0 0 1 0 0
+        0 0 0 0.36 0" result="halo"/>
+      <feMerge>
+        <feMergeNode in="halo"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="halo-constellation" x="-50%" y="-50%" width="200%" height="200%" color-interpolation-filters="sRGB">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="0.56" result="blur"/>
+      <feColorMatrix in="blur" type="matrix" values="
+        1 0 0 0 0
+        0 1 0 0 0
+        0 0 1 0 0
+        0 0 0 0.48 0" result="halo"/>
+      <feMerge>
+        <feMergeNode in="halo"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <linearGradient id="flare-h" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ffd27a" stop-opacity="0"/>
+      <stop offset="38%" stop-color="#ffcf73" stop-opacity="0.2"/>
+      <stop offset="50%" stop-color="#ffbe56" stop-opacity="0.94"/>
+      <stop offset="62%" stop-color="#ffcf73" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#ffd27a" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="flare-v" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffd27a" stop-opacity="0"/>
+      <stop offset="38%" stop-color="#ffcf73" stop-opacity="0.2"/>
+      <stop offset="50%" stop-color="#ffbe56" stop-opacity="0.94"/>
+      <stop offset="62%" stop-color="#ffcf73" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#ffd27a" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="flare-core" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" stop-color="#fff9e8" stop-opacity="1"/>
+      <stop offset="28%" stop-color="#ffd983" stop-opacity="0.99"/>
+      <stop offset="60%" stop-color="#ffbe56" stop-opacity="0.94"/>
+      <stop offset="100%" stop-color="#ffb14a" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="flare-soft" x="-80%" y="-80%" width="260%" height="260%" color-interpolation-filters="sRGB">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="0.5" result="soft"/>
+      <feMerge>
+        <feMergeNode in="soft"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <g id="flare-shape">
+      <rect x="-46" y="-1.7" width="92" height="3.4" fill="url(#flare-h)"/>
+      <rect x="-1.7" y="-46" width="3.4" height="92" fill="url(#flare-v)"/>
+      <rect x="-34" y="-1.25" width="68" height="2.5" fill="url(#flare-h)" transform="rotate(45)"/>
+      <rect x="-34" y="-1.25" width="68" height="2.5" fill="url(#flare-h)" transform="rotate(-45)"/>
+      <path d="M0 -12 L4.8 0 L0 12 L-4.8 0 Z" fill="url(#flare-core)"/>
+      <circle cx="0" cy="0" r="1.65" fill="#fff7e8" opacity="0.98"/>
+    </g>
+    <g id="flare-shape-wide">
+      <rect x="-54" y="-1.9" width="108" height="3.8" fill="url(#flare-h)"/>
+      <rect x="-1.55" y="-38" width="3.1" height="76" fill="url(#flare-v)"/>
+      <rect x="-30" y="-1.05" width="60" height="2.1" fill="url(#flare-h)" transform="rotate(45)"/>
+      <rect x="-30" y="-1.05" width="60" height="2.1" fill="url(#flare-h)" transform="rotate(-45)"/>
+      <path d="M0 -10.5 L4.2 0 L0 10.5 L-4.2 0 Z" fill="url(#flare-core)"/>
+      <circle cx="0" cy="0" r="1.55" fill="#fff7ea" opacity="0.98"/>
+    </g>
+    <g id="flare-shape-eight">
+      <use href="#flare-shape"/>
+      <rect x="-26" y="-0.9" width="52" height="1.8" fill="url(#flare-h)" transform="rotate(22.5)"/>
+      <rect x="-26" y="-0.9" width="52" height="1.8" fill="url(#flare-h)" transform="rotate(-22.5)"/>
+      <rect x="-26" y="-0.9" width="52" height="1.8" fill="url(#flare-h)" transform="rotate(67.5)"/>
+      <rect x="-26" y="-0.9" width="52" height="1.8" fill="url(#flare-h)" transform="rotate(-67.5)"/>
+    </g>
+  </defs>
+
+  <!-- sparse, irregular field stars -->
+  <g filter="url(#halo-field)">
+    <g fill="#edf4ff" opacity="0.84">
+      <circle cx="26" cy="598" r="1.12"/>
+      <circle cx="104" cy="468" r="1.0"/>
+      <circle cx="236" cy="724" r="1.14"/>
+      <circle cx="402" cy="556" r="1.04"/>
+      <circle cx="618" cy="752" r="1.16"/>
+      <circle cx="828" cy="614" r="1.08"/>
+      <circle cx="980" cy="430" r="0.98"/>
+      <circle cx="1368" cy="686" r="1.12"/>
+      <circle cx="1644" cy="734" r="1.14"/>
+      <circle cx="1986" cy="572" r="1.06"/>
+    </g>
+
+    <g fill="#ffe8d0" opacity="0.82">
+      <circle cx="72" cy="742" r="1.1"/>
+      <circle cx="356" cy="642" r="1.08"/>
+      <circle cx="742" cy="528" r="1.02"/>
+      <circle cx="1216" cy="702" r="1.12"/>
+      <circle cx="1718" cy="620" r="1.06"/>
+      <circle cx="2248" cy="748" r="1.12"/>
+    </g>
+
+    <!-- extra tiny sparse stars on right half -->
+    <g fill="#f7fbff" opacity="0.86">
+      <circle cx="1462" cy="452" r="1.0"/>
+      <circle cx="1836" cy="506" r="1.02"/>
+      <circle cx="2124" cy="664" r="1.08"/>
+      <circle cx="2368" cy="592" r="1.04"/>
+    </g>
+  </g>
+
+  <!-- Shift constellations slightly right and up -->
+  <g transform="translate(56 -24)">
+  <!-- Leo (left, stretched) -->
+  <g filter="url(#halo-constellation)">
+    <circle cx="170" cy="872" r="2.5" fill="#f8e6cf"/>
+    <circle cx="246" cy="818" r="2.0" fill="#dbe8ff"/>
+    <circle cx="312" cy="742" r="2.3" fill="#f5e3c9"/>
+    <circle cx="372" cy="690" r="2.0" fill="#d5e4ff"/>
+    <circle cx="440" cy="732" r="1.8" fill="#d8e6ff"/>
+    <circle cx="482" cy="882" r="2.1" fill="#d5e4ff"/>
+    <circle cx="548" cy="826" r="2.2" fill="#dbe8ff"/>
+    <circle cx="622" cy="756" r="2.3" fill="#f2e0c5"/>
+  </g>
+
+  <!-- Virgo (center) -->
+  <g filter="url(#halo-constellation)">
+    <circle cx="1020" cy="690" r="2.2" fill="#d5e4ff"/>
+    <circle cx="1110" cy="742" r="2.1" fill="#dbe8ff"/>
+    <circle cx="1200" cy="786" r="2.5" fill="#e4eeff"/>
+    <circle cx="1290" cy="846" r="2.3" fill="#d9e7ff"/>
+    <circle cx="1382" cy="916" r="3.1" fill="#ffd7bf"/>
+    <circle cx="1328" cy="764" r="2.1" fill="#d5e4ff"/>
+    <circle cx="1454" cy="944" r="1.9" fill="#d8e6ff"/>
+  </g>
+
+  <!-- Libra (right, stretched) -->
+  <g filter="url(#halo-constellation)">
+    <circle cx="1790" cy="872" r="2.4" fill="#f3e2c7"/>
+    <circle cx="1886" cy="914" r="2.0" fill="#dbe8ff"/>
+    <circle cx="1988" cy="804" r="2.8" fill="#cfe0ff"/>
+    <circle cx="2102" cy="868" r="2.2" fill="#d8e6ff"/>
+  </g>
+
+  <!-- subtle star flares on all constellation stars -->
+  <g filter="url(#flare-soft)" opacity="0.84">
+    <!-- Leo -->
+    <use href="#flare-shape-wide" transform="translate(170 872) scale(0.34)"/>
+    <use href="#flare-shape" transform="translate(246 818) scale(0.28)"/>
+    <use href="#flare-shape-eight" transform="translate(312 742) scale(0.32)"/>
+    <use href="#flare-shape" transform="translate(372 690) scale(0.28)"/>
+    <use href="#flare-shape-wide" transform="translate(440 732) scale(0.26)"/>
+    <use href="#flare-shape" transform="translate(482 882) scale(0.29)"/>
+    <use href="#flare-shape-eight" transform="translate(548 826) scale(0.3)"/>
+    <use href="#flare-shape-wide" transform="translate(622 756) scale(0.32)"/>
+
+    <!-- Virgo -->
+    <use href="#flare-shape" transform="translate(1020 690) scale(0.3)"/>
+    <use href="#flare-shape-wide" transform="translate(1110 742) scale(0.29)"/>
+    <use href="#flare-shape-eight" transform="translate(1200 786) scale(0.34)"/>
+    <use href="#flare-shape" transform="translate(1290 846) scale(0.32)"/>
+    <use href="#flare-shape-eight" transform="translate(1382 916) scale(0.46)"/>
+    <use href="#flare-shape-wide" transform="translate(1328 764) scale(0.29)"/>
+    <use href="#flare-shape" transform="translate(1454 944) scale(0.27)"/>
+
+    <!-- Libra -->
+    <use href="#flare-shape-wide" transform="translate(1790 872) scale(0.33)"/>
+    <use href="#flare-shape" transform="translate(1886 914) scale(0.28)"/>
+    <use href="#flare-shape-eight" transform="translate(1988 804) scale(0.38)"/>
+    <use href="#flare-shape-wide" transform="translate(2102 868) scale(0.31)"/>
+  </g>
+  </g>
+</svg>
