@@ -118,7 +118,7 @@
   <body class="max-w-screen-md mx-auto px-2.5" style="min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column;">
 
     
-    <div class="flex flex-col items-center px-1.5 w-full" style="margin-bottom: 6px;">
+    <div class="flex flex-col items-center px-1.5 w-full" style="margin-bottom: 2px;">
       <header class="flex flex-col w-full gap-3">
   <div class="w-full flex justify-center">
     <a href="/" class="title-interactive" aria-label="Site title image">
@@ -229,19 +229,32 @@
         rgba(255, 255, 255, 0) 0%,
         rgba(255, 255, 255, 0) 56%,
         rgba(209, 232, 255, 0.09) 78%,
-        rgba(255, 220, 241, 0.13) 100%
+        rgba(255, 220, 241, 0.11) 100%
       ),
       conic-gradient(
         from 24deg,
-        rgba(255, 198, 234, 0.14) 0deg,
-        rgba(196, 224, 255, 0.14) 94deg,
-        rgba(205, 255, 238, 0.11) 182deg,
-        rgba(255, 241, 196, 0.12) 274deg,
-        rgba(255, 198, 234, 0.14) 360deg
+        rgba(255, 198, 234, 0.11) 0deg,
+        rgba(196, 224, 255, 0.11) 94deg,
+        rgba(205, 255, 238, 0.09) 182deg,
+        rgba(255, 241, 196, 0.09) 274deg,
+        rgba(255, 198, 234, 0.11) 360deg
       ),
-      radial-gradient(circle at 28% 26%, rgba(255, 255, 255, 0.23) 0%, rgba(255, 255, 255, 0) 34%),
+      radial-gradient(circle at 28% 26%, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0) 34%),
       radial-gradient(circle at 72% 74%, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 32%),
       radial-gradient(circle at center, rgba(255, 255, 255, 0.01) 0%, rgba(255, 255, 255, 0) 68%);
+    backdrop-filter: blur(0.35px) saturate(108%);
+    -webkit-backdrop-filter: blur(0.35px) saturate(108%);
+    box-shadow:
+      inset 0 0 0 var(--bubble-line) rgba(255, 255, 255, 0.82),
+      inset 0 0 0 calc(var(--bubble-line) + 0.1px) rgba(172, 214, 255, 0.17),
+      inset calc(var(--bubble-size) * 0.17) calc(var(--bubble-size) * -0.13) calc(var(--bubble-size) * 0.14) rgba(186, 229, 255, 0.14),
+      inset calc(var(--bubble-size) * -0.16) calc(var(--bubble-size) * 0.15) calc(var(--bubble-size) * 0.15) rgba(255, 196, 231, 0.13),
+      0 0 calc(var(--bubble-size) * 0.14) rgba(255, 255, 255, 0.12),
+      0 0 calc(var(--bubble-size) * 0.28) rgba(186, 229, 255, 0.11);
+    animation: bubble-shell-fade 1.2s ease-out forwards;
+  }
+
+  html.dark .global-ripple .bubble-shell {
     backdrop-filter: blur(1.2px) saturate(132%);
     -webkit-backdrop-filter: blur(1.2px) saturate(132%);
     box-shadow:
@@ -250,7 +263,6 @@
       inset calc(var(--bubble-size) * 0.17) calc(var(--bubble-size) * -0.13) calc(var(--bubble-size) * 0.14) rgba(186, 229, 255, 0.18),
       inset calc(var(--bubble-size) * -0.16) calc(var(--bubble-size) * 0.15) calc(var(--bubble-size) * 0.15) rgba(255, 196, 231, 0.17),
       0 0 calc(var(--bubble-size) * 0.22) rgba(255, 255, 255, 0.16);
-    animation: bubble-shell-fade 1.2s ease-out forwards;
   }
 
   .global-ripple .bubble-highlight {
@@ -258,8 +270,8 @@
     height: calc(var(--bubble-size) * 0.06);
     border-radius: 9999px;
     transform: translate(calc(-50% - var(--bubble-size) * 0.18), calc(-50% - var(--bubble-size) * 0.18)) rotate(-38deg);
-    background: rgba(255, 255, 255, 0.84);
-    filter: blur(0.2px);
+    background: rgba(255, 255, 255, 0.82);
+    box-shadow: 0 0 1px rgba(255, 255, 255, 0.22);
     animation: bubble-mark-fade 1.2s ease-out forwards;
   }
 
@@ -269,7 +281,7 @@
     border-radius: 9999px;
     transform: translate(calc(-50% + var(--bubble-size) * 0.2), calc(-50% + var(--bubble-size) * 0.2)) rotate(142deg);
     background: rgba(255, 255, 255, 0.6);
-    filter: blur(0.2px);
+    box-shadow: 0 0 1px rgba(255, 255, 255, 0.15);
     animation: bubble-mark-fade 1.2s ease-out forwards;
   }
 
@@ -279,7 +291,22 @@
     border-radius: 9999px;
     transform: translate(calc(-50% - var(--bubble-size) * 0.28), calc(-50% - var(--bubble-size) * 0.1));
     background: rgba(255, 255, 255, 0.72);
+    box-shadow: 0 0 1px rgba(255, 255, 255, 0.2);
     animation: bubble-mark-fade 1.2s ease-out forwards;
+  }
+
+  html.dark .global-ripple .bubble-highlight {
+    background: rgba(255, 255, 255, 0.84);
+    filter: blur(0.2px);
+  }
+
+  html.dark .global-ripple .bubble-highlight-2 {
+    background: rgba(255, 255, 255, 0.6);
+    filter: blur(0.2px);
+  }
+
+  html.dark .global-ripple .bubble-dot {
+    background: rgba(255, 255, 255, 0.72);
   }
 
   .global-meteor {
