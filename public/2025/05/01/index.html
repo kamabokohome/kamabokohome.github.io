@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-US" class="scroll-smooth dark">
-  <head><meta charset="UTF-8" />
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#e6f2fb" />
@@ -22,7 +22,7 @@
 在国内的时候做了全面的眼睛检查。姑且没有大问题，但近视加深了50度，被医生嘱咐要避免疲劳用眼。我盘点着近视加深的原因，觉得与自己总是宅在家里不出门、成天看着屏幕有关系。
 昏昏沉沉地先写到这里。希望五月往后，多多出门去。鼓起勇气，去面对此地真实运转着的世界吧。"
 />
-<link rel="canonical" href="https://kamabokohome.com/2025/05/01/" />
+<link rel="canonical" href="http://localhost:1313/2025/05/01/" />
 <meta name="robots" content="index,follow" />
 
 <link rel="icon" href="/img/favicon.ico" />
@@ -34,7 +34,7 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <script type="text/x-mathjax-config">MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });</script>
 
-<link rel="stylesheet" href="/css/app.min.6365d9cd4bde185dde80c4b72f76597537280069443b09bb8c564879d4c3bcc0.css" integrity="sha256-Y2XZzUveGF3egMS3L3ZZdTcoAGlEOwm7jFZIedTDvMA=" /><style>
+<link rel="stylesheet" href="/css/app.css" /><style>
       html {
         scrollbar-gutter: stable;
       }
@@ -123,10 +123,10 @@
   <body class="max-w-screen-md mx-auto px-2.5" style="min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column;">
 
     
-    <div class="flex flex-col items-center px-1.5 w-full" style="margin-bottom: 6px;">
+    <div class="flex flex-col items-center px-1.5 w-full" style="margin-bottom: 2px;">
       <header class="flex flex-col w-full gap-3">
   <div class="w-full flex justify-center">
-    <div class="title-interactive" aria-label="Site title image">
+    <a href="/" class="title-interactive" aria-label="Site title image">
       <div class="title-water-layer" aria-hidden="true"></div>
       <img
         src="/img/day_back.png"
@@ -154,7 +154,7 @@
         style="display:none;"
         onerror="this.onerror=null;this.src='\/img\/title_night1.png';"
       >
-    </div>
+    </a>
   </div>
 </header>
 
@@ -233,20 +233,30 @@
         circle at center,
         rgba(255, 255, 255, 0) 0%,
         rgba(255, 255, 255, 0) 56%,
-        rgba(209, 232, 255, 0.09) 78%,
-        rgba(255, 220, 241, 0.13) 100%
+        rgba(209, 232, 255, 0.06) 78%,
+        rgba(255, 220, 241, 0.08) 100%
       ),
       conic-gradient(
         from 24deg,
-        rgba(255, 198, 234, 0.14) 0deg,
-        rgba(196, 224, 255, 0.14) 94deg,
-        rgba(205, 255, 238, 0.11) 182deg,
-        rgba(255, 241, 196, 0.12) 274deg,
-        rgba(255, 198, 234, 0.14) 360deg
+        rgba(255, 198, 234, 0.08) 0deg,
+        rgba(196, 224, 255, 0.08) 94deg,
+        rgba(205, 255, 238, 0.07) 182deg,
+        rgba(255, 241, 196, 0.07) 274deg,
+        rgba(255, 198, 234, 0.08) 360deg
       ),
-      radial-gradient(circle at 28% 26%, rgba(255, 255, 255, 0.23) 0%, rgba(255, 255, 255, 0) 34%),
-      radial-gradient(circle at 72% 74%, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 32%),
+      radial-gradient(circle at 28% 26%, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0) 34%),
+      radial-gradient(circle at 72% 74%, rgba(255, 255, 255, 0.07) 0%, rgba(255, 255, 255, 0) 32%),
       radial-gradient(circle at center, rgba(255, 255, 255, 0.01) 0%, rgba(255, 255, 255, 0) 68%);
+    box-shadow:
+      inset 0 0 0 var(--bubble-line) rgba(255, 255, 255, 0.72),
+      inset 0 0 0 calc(var(--bubble-line) + 0.1px) rgba(172, 214, 255, 0.12),
+      inset calc(var(--bubble-size) * 0.17) calc(var(--bubble-size) * -0.13) calc(var(--bubble-size) * 0.14) rgba(186, 229, 255, 0.1),
+      inset calc(var(--bubble-size) * -0.16) calc(var(--bubble-size) * 0.15) calc(var(--bubble-size) * 0.15) rgba(255, 196, 231, 0.09),
+      0 0 calc(var(--bubble-size) * 0.22) rgba(255, 255, 255, 0.08);
+    animation: bubble-shell-fade 1.2s ease-out forwards;
+  }
+
+  html.dark .global-ripple .bubble-shell {
     backdrop-filter: blur(1.2px) saturate(132%);
     -webkit-backdrop-filter: blur(1.2px) saturate(132%);
     box-shadow:
@@ -255,7 +265,6 @@
       inset calc(var(--bubble-size) * 0.17) calc(var(--bubble-size) * -0.13) calc(var(--bubble-size) * 0.14) rgba(186, 229, 255, 0.18),
       inset calc(var(--bubble-size) * -0.16) calc(var(--bubble-size) * 0.15) calc(var(--bubble-size) * 0.15) rgba(255, 196, 231, 0.17),
       0 0 calc(var(--bubble-size) * 0.22) rgba(255, 255, 255, 0.16);
-    animation: bubble-shell-fade 1.2s ease-out forwards;
   }
 
   .global-ripple .bubble-highlight {
@@ -263,8 +272,7 @@
     height: calc(var(--bubble-size) * 0.06);
     border-radius: 9999px;
     transform: translate(calc(-50% - var(--bubble-size) * 0.18), calc(-50% - var(--bubble-size) * 0.18)) rotate(-38deg);
-    background: rgba(255, 255, 255, 0.84);
-    filter: blur(0.2px);
+    background: rgba(255, 255, 255, 0.68);
     animation: bubble-mark-fade 1.2s ease-out forwards;
   }
 
@@ -273,8 +281,7 @@
     height: calc(var(--bubble-size) * 0.05);
     border-radius: 9999px;
     transform: translate(calc(-50% + var(--bubble-size) * 0.2), calc(-50% + var(--bubble-size) * 0.2)) rotate(142deg);
-    background: rgba(255, 255, 255, 0.6);
-    filter: blur(0.2px);
+    background: rgba(255, 255, 255, 0.44);
     animation: bubble-mark-fade 1.2s ease-out forwards;
   }
 
@@ -283,8 +290,22 @@
     height: calc(var(--bubble-size) * 0.045);
     border-radius: 9999px;
     transform: translate(calc(-50% - var(--bubble-size) * 0.28), calc(-50% - var(--bubble-size) * 0.1));
-    background: rgba(255, 255, 255, 0.72);
+    background: rgba(255, 255, 255, 0.56);
     animation: bubble-mark-fade 1.2s ease-out forwards;
+  }
+
+  html.dark .global-ripple .bubble-highlight {
+    background: rgba(255, 255, 255, 0.84);
+    filter: blur(0.2px);
+  }
+
+  html.dark .global-ripple .bubble-highlight-2 {
+    background: rgba(255, 255, 255, 0.6);
+    filter: blur(0.2px);
+  }
+
+  html.dark .global-ripple .bubble-dot {
+    background: rgba(255, 255, 255, 0.72);
   }
 
   .global-meteor {
@@ -400,6 +421,8 @@
       if (root.classList.contains("dark")) return;
       const titleArea = document.querySelector(".title-interactive");
       if (titleArea && titleArea.contains(event.target)) return;
+      const homeRippleArea = document.querySelector(".home-ripple-image");
+      if (homeRippleArea && homeRippleArea.contains(event.target)) return;
 
       const ripple = document.createElement("div");
       ripple.className = "global-ripple";
@@ -428,6 +451,8 @@
       if (!root.classList.contains("dark")) return;
       const titleArea = document.querySelector(".title-interactive");
       if (titleArea && titleArea.contains(event.target)) return;
+      const homeRippleArea = document.querySelector(".home-ripple-image");
+      if (homeRippleArea && homeRippleArea.contains(event.target)) return;
 
       const meteor = document.createElement("span");
       meteor.className = "global-meteor";
