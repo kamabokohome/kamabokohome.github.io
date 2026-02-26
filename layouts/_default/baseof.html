@@ -163,7 +163,7 @@
         align-items: center;
       }
 
-      @media (max-width: 640px) {
+      @media (max-width: 639px) {
         .site-sticky-inner {
           padding-left: 0.25rem;
           padding-right: 0.25rem;
@@ -179,7 +179,7 @@
         }
 
         .site-sticky-nav nav ul {
-          width: min(100%, 22rem);
+          width: min(100%, 20.5rem);
           margin: 0 auto;
           justify-content: space-between;
           gap: 0;
@@ -187,7 +187,7 @@
         }
       }
 
-      @media (min-width: 1024px) {
+      @media (min-width: 640px) {
         .site-kamaboko-corner {
           width: clamp(31px, 4.6vw, 54px);
         }
@@ -792,7 +792,7 @@
           if (!src) return;
 
           const width = window.innerWidth || document.documentElement.clientWidth || 0;
-          const count = width >= 1024 ? 48 : 36;
+          const count = width >= 640 ? 48 : 36;
 
           for (let i = 0; i < count; i += 1) {
             const piece = document.createElement("img");
