@@ -3,7 +3,11 @@
 {{ $alt := .Get "alt" }}
 
 {{ if and $back $front }}
-<figure class="mb-5">
+<figure class="mb-5 home-ripple-stage" style="--home-ripple-back-image: url('{{ $back.RelPermalink }}');">
+  <div class="home-ripple-bleed" aria-hidden="true">
+    <div class="home-ripple-bleed-side home-ripple-bleed-side-left"></div>
+    <div class="home-ripple-bleed-side home-ripple-bleed-side-right"></div>
+  </div>
   <div class="home-ripple-image" data-back-src="{{ $back.RelPermalink }}">
     <div class="home-ripple-water" aria-hidden="true"></div>
     <img
@@ -18,6 +22,80 @@
 </figure>
 
 <style>
+  .home-ripple-stage {
+    position: relative;
+    isolation: isolate;
+    --home-ripple-core-width: 0px;
+    --home-ripple-side-width: 0px;
+    --home-ripple-side-overlap: 8px;
+    --home-ripple-bleed-blur: 46px;
+    --home-ripple-bleed-saturate: 128%;
+    --home-ripple-bleed-contrast: 112%;
+    --home-ripple-bleed-brightness: 92%;
+    --home-ripple-bleed-opacity: 0.8;
+    --home-ripple-bleed-scale: 1.16;
+    --home-ripple-bleed-zoom: 14;
+  }
+
+  body.is-home #content > section > .home-ripple-stage:first-child {
+    margin-top: calc(-1 * var(--site-sticky-bar-height, 0px));
+  }
+
+  .home-ripple-bleed {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 100vw;
+    transform: translateX(-50%);
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 0;
+    display: none;
+  }
+
+  .home-ripple-bleed-side {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: calc(var(--home-ripple-side-width) + var(--home-ripple-side-overlap));
+    overflow: hidden;
+  }
+
+  .home-ripple-bleed-side::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: var(--home-ripple-back-image);
+    background-repeat: no-repeat;
+    background-size: calc(max(var(--home-ripple-core-width), 1px) * var(--home-ripple-bleed-zoom)) 100%;
+    filter:
+      blur(var(--home-ripple-bleed-blur))
+      saturate(var(--home-ripple-bleed-saturate))
+      contrast(var(--home-ripple-bleed-contrast))
+      brightness(var(--home-ripple-bleed-brightness));
+    opacity: var(--home-ripple-bleed-opacity);
+    transform: scale(var(--home-ripple-bleed-scale));
+  }
+
+  .home-ripple-bleed-side-left {
+    right: calc(50% + (var(--home-ripple-core-width) / 2) - var(--home-ripple-side-overlap));
+  }
+
+  .home-ripple-bleed-side-left::before {
+    background-position: left center;
+    transform-origin: right center;
+  }
+
+  .home-ripple-bleed-side-right {
+    left: calc(50% + (var(--home-ripple-core-width) / 2) - var(--home-ripple-side-overlap));
+  }
+
+  .home-ripple-bleed-side-right::before {
+    background-position: right center;
+    transform-origin: left center;
+  }
+
   .home-ripple-image {
     position: relative;
     display: block;
@@ -25,6 +103,7 @@
     max-width: 100%;
     line-height: 0;
     overflow: hidden;
+    z-index: 1;
   }
 
   .home-ripple-image .home-ripple-water {
@@ -44,18 +123,53 @@
     height: auto;
     pointer-events: none;
   }
+
+  @media (min-width: 1024px) {
+    .home-ripple-bleed {
+      display: block;
+    }
+  }
+
+  @media (max-width: 1023px) {
+    body.is-home #content > section > .home-ripple-stage:first-child {
+      margin-top: 0;
+    }
+
+    .home-ripple-stage {
+      --home-ripple-side-overlap: 0px;
+    }
+  }
 </style>
 
 <script>
   document.addEventListener("DOMContentLoaded", function () {
-    if (!(window.jQuery && window.jQuery.fn && window.jQuery.fn.ripples)) return;
+    const hasRipples = !!(window.jQuery && window.jQuery.fn && window.jQuery.fn.ripples);
     const blocks = document.querySelectorAll(".home-ripple-image");
     blocks.forEach(function (block) {
       if (block.dataset.rippleInit === "1") return;
       block.dataset.rippleInit = "1";
+      const stage = block.closest(".home-ripple-stage");
       const water = block.querySelector(".home-ripple-water");
+      const front = block.querySelector(".home-ripple-front");
       const src = block.getAttribute("data-back-src");
       if (!water || !src) return;
+
+      const syncBleedMetrics = function () {
+        if (!stage) return;
+        const rect = block.getBoundingClientRect();
+        const sideWidth = Math.max(0, ((window.innerWidth || document.documentElement.clientWidth || 0) - rect.width) / 2);
+        stage.style.setProperty("--home-ripple-core-width", Math.max(0, rect.width) + "px");
+        stage.style.setProperty("--home-ripple-side-width", sideWidth + "px");
+      };
+
+      syncBleedMetrics();
+      window.addEventListener("resize", syncBleedMetrics, { passive: true });
+      if (front && !front.complete) {
+        front.addEventListener("load", syncBleedMetrics, { once: true });
+      }
+
+      water.style.backgroundImage = "url('" + src + "')";
+      if (!hasRipples) return;
       const $water = window.jQuery(water);
 
       try {
@@ -72,7 +186,6 @@
           $water.ripples("drop", rect.width * 0.5, rect.height * 0.55, 22, 0.1);
         }
       } catch (_) {
-        water.style.backgroundImage = "url('" + src + "')";
         return;
       }
 

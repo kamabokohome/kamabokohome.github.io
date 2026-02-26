@@ -35,7 +35,7 @@
     min-height: 100vh;
     min-height: 100svh;
     min-height: 100dvh;
-    background-color: #ffffff;
+    background-color: #fdfaf3;
     background-image:
       repeating-linear-gradient(
         90deg,
@@ -60,15 +60,15 @@
     z-index: 45;
     background: linear-gradient(
       180deg,
-      rgba(230, 242, 251, 0.92) 0%,
-      rgba(230, 242, 251, 0.58) 58%,
-      rgba(230, 242, 251, 0) 100%
+      rgba(248, 242, 227, 0.92) 0%,
+      rgba(248, 242, 227, 0.58) 58%,
+      rgba(248, 242, 227, 0) 100%
     );
   }
 
   /* Corner 页面：由 html 统一绘制全屏背景，避免两侧与中间分层重绘不同步 */
   html.page-corner {
-    background-color: #ffffff;
+    background-color: #fdfaf3;
     background-image:
       repeating-linear-gradient(
         90deg,
