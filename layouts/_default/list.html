@@ -286,64 +286,62 @@
       if (replyInput) replyInput.disabled = true;
       setSubmitting(true);
       setStatus('请先在站点配置中填写邮件表单地址。', 'error');
-      return;
-    }
-
-    if (!form) return;
-    form.addEventListener('submit', async (event) => {
-      const content = contentInput ? normalizeMessage(contentInput.value) : '';
-      const signature = signatureInput ? (normalizeNickname(signatureInput.value) || '香甜的年轮蛋糕') : '香甜的年轮蛋糕';
-      const replyAddress = replyInput ? replyInput.value.trim().slice(0, 120) : '';
-      if (!content) {
-        event.preventDefault();
-        setStatus('请填写留言内容。', 'error');
-        return;
-      }
-
-      if (nextInput) {
-        const base = `${window.location.origin}${window.location.pathname}`;
-        const nextURL = `${base}?sent=1&t=${Date.now()}`;
-        nextInput.value = nextURL;
-      }
-
-      event.preventDefault();
-      if (contentInput) contentInput.value = content;
-      if (signatureInput) signatureInput.value = signature;
-      if (replyInput) replyInput.value = replyAddress;
-      setSubmitting(true);
-      setStatus('正在发送，请稍候...', 'normal');
-
-      try {
-        const ajaxAction = formAction.includes('/ajax/')
-          ? formAction
-          : formAction.replace('://formsubmit.co/', '://formsubmit.co/ajax/');
-        const payload = new FormData(form);
-        const response = await fetch(ajaxAction, {
-          method: 'POST',
-          headers: {
-            Accept: 'application/json'
-          },
-          body: payload
-        });
-        const result = await response.json().catch(() => ({}));
-
-        if (!response.ok) {
-          const errorText = (result && typeof result.message === 'string' && result.message.trim())
-            ? result.message.trim()
-            : `发送失败（${response.status}）`;
-          setStatus(errorText, 'error');
+    } else if (form) {
+      form.addEventListener('submit', async (event) => {
+        const content = contentInput ? normalizeMessage(contentInput.value) : '';
+        const signature = signatureInput ? (normalizeNickname(signatureInput.value) || '香甜的年轮蛋糕') : '香甜的年轮蛋糕';
+        const replyAddress = replyInput ? replyInput.value.trim().slice(0, 120) : '';
+        if (!content) {
+          event.preventDefault();
+          setStatus('请填写留言内容。', 'error');
           return;
         }
 
-        const sentAtText = new Date().toLocaleString();
-        setStatus(`信件已经寄出了！（${sentAtText}）`, 'success');
-        if (contentInput) contentInput.value = '';
-      } catch (error) {
-        setStatus('发送失败，请检查网络后重试。', 'error');
-      } finally {
-        setSubmitting(false);
-      }
-    });
+        if (nextInput) {
+          const base = `${window.location.origin}${window.location.pathname}`;
+          const nextURL = `${base}?sent=1&t=${Date.now()}`;
+          nextInput.value = nextURL;
+        }
+
+        event.preventDefault();
+        if (contentInput) contentInput.value = content;
+        if (signatureInput) signatureInput.value = signature;
+        if (replyInput) replyInput.value = replyAddress;
+        setSubmitting(true);
+        setStatus('正在发送，请稍候...', 'normal');
+
+        try {
+          const ajaxAction = formAction.includes('/ajax/')
+            ? formAction
+            : formAction.replace('://formsubmit.co/', '://formsubmit.co/ajax/');
+          const payload = new FormData(form);
+          const response = await fetch(ajaxAction, {
+            method: 'POST',
+            headers: {
+              Accept: 'application/json'
+            },
+            body: payload
+          });
+          const result = await response.json().catch(() => ({}));
+
+          if (!response.ok) {
+            const errorText = (result && typeof result.message === 'string' && result.message.trim())
+              ? result.message.trim()
+              : `发送失败（${response.status}）`;
+            setStatus(errorText, 'error');
+            return;
+          }
+
+          const sentAtText = new Date().toLocaleString();
+          setStatus(`信件已经寄出了！（${sentAtText}）`, 'success');
+          if (contentInput) contentInput.value = '';
+        } catch (error) {
+          setStatus('发送失败，请检查网络后重试。', 'error');
+        } finally {
+          setSubmitting(false);
+        }
+      });
+    }
   }
 
 </script>
