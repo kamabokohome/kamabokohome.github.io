@@ -1,7 +1,5 @@
 ---
 title: ""
-draft: false
-banner: "pink"
 ---
 
 
@@ -28,12 +26,12 @@ banner: "pink"
   <a href="/corner/">Corner</a> 栏是喜欢的、想推荐给所有人的有趣的东西的集合！<br>
   可以的话，请务必尝试看看。<br>
   <br>
+  <a href="/posts/">Message</a> 是可以寄信给树屋的地方。<br>
+  如果有任何想说的话，都欢迎来信 ^ ^<br>
+  <br>
   找到电源开关之后，就可以切换白天与黑夜模式喔。<br>
   我是黑夜模式派，手机屏幕常年都黑黑的。<br>
   （但电脑却总是白天模式？）<br>
-  <br>
-  如果有想说的话，请致信邮箱^ ^<br>
-  📧 <a href="mailto:kamabokowo@gmail.com">kamabokowo@gmail.com</a><br>
   <br>
   希望每位来客都能在树屋度过愉快的时间。
 </div>

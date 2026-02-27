@@ -2,15 +2,54 @@
   <ul>
     {{- $currentPage := . -}}
     {{- $pagePath := trim $currentPage.RelPermalink "/" -}}
+    {{- $benchPage := site.GetPage "/collection/bench" -}}
+    {{- $officePage := site.GetPage "/collection/empa-office" -}}
+    {{- $postsScratch := newScratch -}}
+    {{- $postsScratch.Set "years" (slice) -}}
+    {{- with site.GetPage "/posts" -}}
+      {{- range sort .Pages "Date" "desc" -}}
+        {{- if .PublishDate -}}
+          {{- $year := .PublishDate.Year -}}
+          {{- $yearKey := printf "has-year-%d" $year -}}
+          {{- if not ($postsScratch.Get $yearKey) -}}
+            {{- $postsScratch.Set $yearKey true -}}
+            {{- $postsScratch.Add "years" (slice $year) -}}
+          {{- end -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+    {{- $postYears := $postsScratch.Get "years" -}}
     {{ range site.Menus.main }}
     {{- $menuPath := trim .URL "/" -}}
     {{- $isHomeActive := and $currentPage.IsHome (eq .Identifier "home") -}}
     {{- $isDirectActive := eq $menuPath $pagePath -}}
     {{- $isSectionActive := and (ne .Identifier "home") (eq .Identifier $currentPage.Section) -}}
-    <li>
+    <li class="nav-menu-item{{ if or (eq .Identifier "collection") (eq .Identifier "posts") }} nav-with-dropdown{{ end }}">
       <a href="{{ .URL | relLangURL }}" class="{{ if or $isHomeActive $isDirectActive $isSectionActive }}active{{ end }}">
         {{ .Name }}
       </a>
+      {{ if eq .Identifier "collection" }}
+        <ul class="nav-submenu" aria-label="Collection projects">
+          {{ with $benchPage }}
+            <li>
+              <a href="{{ .RelPermalink }}" class="{{ if eq (trim .RelPermalink "/") $pagePath }}active{{ end }}">{{ .Title }}</a>
+            </li>
+          {{ end }}
+          {{ with $officePage }}
+            <li>
+              <a href="{{ .RelPermalink }}" class="{{ if eq (trim .RelPermalink "/") $pagePath }}active{{ end }}">{{ .Title }}</a>
+            </li>
+          {{ end }}
+        </ul>
+      {{ else if and (eq .Identifier "posts") (gt (len $postYears) 0) }}
+        <ul class="nav-submenu" aria-label="Posts years">
+          {{ range $postYears }}
+            <li>
+              <a href="{{ (printf "/posts/#posts-year-%d" .) | relLangURL }}">{{ . }}</a>
+            </li>
+          {{ end }}
+        </ul>
+      {{ end }}
     </li>
     {{ end }}
     <li class="nav-theme-item">
