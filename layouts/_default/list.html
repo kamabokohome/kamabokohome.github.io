@@ -124,7 +124,7 @@
       </div>
       <div class="message-form-row">
         <label for="guestbook-reply">回信地址</label>
-        <input id="guestbook-reply" name="reply_address" type="text" maxlength="120" placeholder="不写也没关系，写了也不一定会收到回信的样子" />
+        <input id="guestbook-reply" name="email" type="email" inputmode="email" autocomplete="email" autocapitalize="off" spellcheck="false" maxlength="120" placeholder="说不定会有回信的样子" />
       </div>
       <p class="message-board-status" data-message-status aria-live="polite"></p>
       <div class="message-form-actions">
@@ -273,7 +273,7 @@
       const sentMs = sentMsRaw ? Number(sentMsRaw) : NaN;
       const sentDate = Number.isFinite(sentMs) && sentMs > 0 ? new Date(sentMs) : new Date();
       const sentAtText = formatLocalDateTime(sentDate);
-      setStatus(`信件已经寄出了！（${sentAtText}）`, 'success');
+      setStatus(`${sentAtText} 信件已经寄出了！`, 'success');
       url.searchParams.delete('sent');
       url.searchParams.delete('t');
       window.history.replaceState({}, '', url.toString());
@@ -335,7 +335,7 @@
           }
 
           const sentAtText = formatLocalDateTime(new Date());
-          setStatus(`信件已经寄出了！（${sentAtText}）`, 'success');
+          setStatus(`${sentAtText} 信件已经寄出了！`, 'success');
           if (contentInput) contentInput.value = '';
         } catch (error) {
           setStatus('发送失败，请检查网络后重试。', 'error');
