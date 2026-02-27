@@ -303,6 +303,18 @@
           gap: 0;
           font-size: 0.78rem;
         }
+
+        .site-sticky-nav nav li.nav-with-dropdown::after {
+          display: none;
+        }
+
+        .site-sticky-nav nav .nav-submenu,
+        .site-sticky-nav nav li.nav-with-dropdown:hover > .nav-submenu,
+        .site-sticky-nav nav li.nav-with-dropdown.is-open > .nav-submenu {
+          display: none !important;
+          opacity: 0 !important;
+          pointer-events: none !important;
+        }
       }
 
       @media (min-width: 640px) {
