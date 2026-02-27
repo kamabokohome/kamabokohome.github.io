@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Message on Kamaboko Home | 鱼糕的树屋</title>
+    <link>https://kamabokohome.com/message/</link>
+    <description>Recent content in Message on Kamaboko Home | 鱼糕的树屋</description>
+    <generator>Hugo</generator>
+    <language>en-US</language>
+    <copyright>Kamaboko Home</copyright>
+    <atom:link href="https://kamabokohome.com/message/index.xml" rel="self" type="application/rss+xml" />
+  </channel>
+</rss>

@@ -1,9 +1,8 @@
 ---
 title: "Empa office"
 date: null
-draft: false
 description: '收集了办公室窗外的样子。'
-banner: "brown"
+auto_gallery: true
 ---
 {{< img src="IMG_0078.jpg" caption="2026-01-22 17:36" caption-position="center" >}}
 

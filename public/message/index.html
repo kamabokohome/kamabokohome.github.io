@@ -1,0 +1,1759 @@
+<!DOCTYPE html>
+<html lang="en-US" class="scroll-smooth dark">
+  <head><meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#e6f2fb" />
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#35373b" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<title>
+  
+    Message | Kamaboko Home
+  
+</title>
+
+<meta
+  name="description"
+  content="
+山斑鸠筑巢非常不拘小节，只要蛋不会滚走就行了，有时还会把其它鸟的旧巢直接拿来用。
+——《和路边的野鸟做朋友》
+"
+/>
+<link rel="canonical" href="https://kamabokohome.com/message/" />
+<meta name="robots" content="index,follow" />
+
+<link rel="icon" href="/img/favicon.ico" />
+<link rel="icon" type="image/png" href="/img/favicon.png" />
+<link rel="apple-touch-icon" href="/img/favicon.png" />
+
+
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });</script>
+
+<link rel="stylesheet" href="/css/app.min.855eef6ee81642ed10ef0e1259f58cdbef35dcf35492e463186488b8f13ab1a1.css" integrity="sha256-hV7vbugWQu0Q7w4SWfWM2+813PNUkuRjGGSIuPE6saE=" /><style>
+      html {
+        scrollbar-gutter: stable;
+        --site-content-max-width: 50rem;
+        --site-sticky-bar-height: 0px;
+      }
+
+      .site-sticky-bar {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        margin-bottom: 1rem;
+        padding: 0.18rem 0;
+        background-color: transparent;
+        border-bottom: none;
+        --sticky-surface-bg: transparent;
+        --sticky-surface-blur: 0px;
+        --sticky-surface-shadow: none;
+        --sticky-submenu-extent: 0px;
+      }
+
+      body.is-home .site-sticky-bar {
+        margin-bottom: 0;
+      }
+
+      .site-sticky-bg {
+        position: fixed;
+        left: 0;
+        right: 0;
+        top: 0;
+        height: 0;
+        display: none;
+        pointer-events: none;
+        background-color: var(--sticky-surface-bg);
+        backdrop-filter: blur(var(--sticky-surface-blur));
+        -webkit-backdrop-filter: blur(var(--sticky-surface-blur));
+        box-shadow: var(--sticky-surface-shadow);
+        transition: background-color 0.2s ease, backdrop-filter 0.2s ease, box-shadow 0.2s ease, height 0.2s ease;
+        z-index: 40;
+      }
+
+      .site-sticky-bar.is-stuck,
+      .site-sticky-bar.is-submenu-open {
+        --sticky-surface-bg: rgba(249, 245, 236, 0.66);
+        --sticky-surface-blur: 11px;
+        --sticky-surface-shadow: 0 5px 14px rgba(0, 0, 0, 0.1);
+      }
+
+      .site-sticky-bar.is-stuck .site-sticky-bg {
+        height: var(--sticky-bg-height, 0px);
+        display: block;
+      }
+
+      .site-sticky-bar.is-submenu-open .site-sticky-bg {
+        height: calc(var(--sticky-bg-height, 0px) + var(--sticky-submenu-extent, 0px));
+        display: block;
+      }
+
+      html.dark .site-sticky-bar.is-stuck,
+      html.dark .site-sticky-bar.is-submenu-open {
+        --sticky-surface-bg: rgba(47, 47, 47, 0.68);
+        --sticky-surface-shadow: 0 5px 14px rgba(0, 0, 0, 0.3);
+      }
+
+      html.page-short .site-sticky-bar:not(.is-submenu-open) .site-sticky-bg {
+        display: none !important;
+      }
+
+      .site-sticky-inner {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 2.1rem;
+        max-width: var(--site-content-max-width);
+        margin: 0 auto;
+        padding: 0 0.625rem;
+        z-index: 51;
+      }
+
+      .site-sticky-side-titles {
+        position: fixed;
+        left: 0;
+        right: 0;
+        top: 0;
+        height: var(--sticky-bg-height, 0px);
+        display: none;
+        pointer-events: none;
+        z-index: 46;
+      }
+
+      .site-sticky-side-link {
+        pointer-events: auto;
+        cursor: pointer;
+      }
+
+      .site-sticky-side-title {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        height: max(12px, min(20px, calc(var(--sticky-bg-height, 0px) - 12px)));
+        width: auto;
+        opacity: 0.9;
+        user-select: none;
+        -webkit-user-drag: none;
+      }
+
+      html:not(.dark) .site-sticky-side-title {
+         
+        filter: grayscale(1) brightness(0.38) contrast(1.08);
+        opacity: 0.94;
+      }
+
+      html:not(.dark) .site-sticky-side-title-en {
+         
+        filter: grayscale(1) brightness(0.44) contrast(1.03);
+        opacity: 0.92;
+      }
+
+      .site-sticky-side-title-cn {
+        left: max(4px, env(safe-area-inset-left, 0px));
+      }
+
+      .site-sticky-side-title-en {
+        right: max(4px, env(safe-area-inset-right, 0px));
+      }
+
+      .site-kamaboko-corner {
+        position: fixed;
+        bottom: max(12px, calc(env(safe-area-inset-bottom, 0px) + 12px));
+        right: max(18px, calc(env(safe-area-inset-right, 0px) + 18px));
+        width: clamp(35px, 5.2vw, 60px);
+        height: auto;
+        pointer-events: auto;
+        cursor: pointer;
+        user-select: none;
+        -webkit-user-drag: none;
+        transform-origin: center center;
+        will-change: transform;
+        transition: transform 140ms ease;
+        z-index: 45;
+      }
+
+      @media (hover: hover) and (pointer: fine) {
+        .site-kamaboko-corner:hover {
+          animation: kamaboko-hover-spin 900ms linear infinite;
+        }
+      }
+
+      html:not(.dark) .site-kamaboko-corner {
+        filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.34)) drop-shadow(0 2px 6px rgba(0, 0, 0, 0.14));
+      }
+
+      .site-kamaboko-corner.is-pressing {
+        animation-play-state: paused !important;
+      }
+
+      .site-sticky-nav {
+        display: flex;
+        align-items: center;
+      }
+
+      .site-sticky-nav nav ul {
+        margin: 0;
+        padding: 0;
+        align-items: center;
+        gap: 3.8rem;
+        font-size: 0.82rem;
+      }
+
+      .site-sticky-nav nav li.nav-menu-item {
+        position: relative;
+      }
+
+      .site-sticky-nav nav li.nav-with-dropdown::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        top: 100%;
+        width: 160%;
+        height: 10px;
+      }
+
+      .site-sticky-nav nav a {
+        font-weight: 600;
+      }
+
+      .site-sticky-nav nav li.nav-menu-item > a {
+        position: relative;
+        display: inline-block;
+        padding: 0.26rem 0.46rem;
+        border-radius: 0.48rem;
+        transition: color 130ms ease;
+        z-index: 0;
+      }
+
+      .site-sticky-nav nav li.nav-menu-item > a::before {
+        content: "";
+        position: absolute;
+        inset: -0.06rem -0.1rem;
+        border-radius: 0.48rem;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 130ms ease;
+        z-index: -1;
+      }
+
+      .site-sticky-nav nav li.nav-menu-item > a:hover::before,
+      .site-sticky-nav nav li.nav-menu-item > a:focus-visible::before {
+        opacity: 1;
+      }
+
+      .site-sticky-nav nav li.nav-menu-item > a:hover::before,
+      .site-sticky-nav nav li.nav-menu-item > a:focus-visible::before {
+        background: rgba(177, 167, 147, 0.18);
+      }
+
+      html.dark .site-sticky-nav nav li.nav-menu-item > a:hover::before,
+      html.dark .site-sticky-nav nav li.nav-menu-item > a:focus-visible::before {
+        background: rgba(123, 135, 152, 0.25);
+      }
+
+      .site-sticky-nav nav .nav-submenu {
+        position: absolute;
+        left: 50%;
+        top: calc(100% - 1px);
+        transform: translateX(-50%);
+        margin: 0;
+        padding: 0.38rem 0.26rem 0.26rem;
+        min-width: 8.2rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.12rem;
+        border-radius: 0 0 0.54rem 0.54rem;
+        border: none;
+        background: transparent;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        box-shadow: none;
+        overflow: hidden;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 130ms ease;
+        z-index: 60;
+      }
+
+      .site-sticky-nav nav .nav-submenu a {
+        display: block;
+        font-size: 0.72rem;
+        line-height: 1.35;
+        text-align: center;
+        text-decoration: none;
+        padding: 0.36rem 0.56rem;
+        border-radius: 0.48rem;
+        white-space: nowrap;
+      }
+
+      .site-sticky-nav nav .nav-submenu a:hover,
+      .site-sticky-nav nav .nav-submenu a:focus-visible {
+        background: rgba(177, 167, 147, 0.18);
+      }
+
+      html.dark .site-sticky-nav nav .nav-submenu a:hover,
+      html.dark .site-sticky-nav nav .nav-submenu a:focus-visible {
+        background: rgba(123, 135, 152, 0.25);
+      }
+
+      .site-sticky-nav nav li.nav-with-dropdown:hover > .nav-submenu,
+      .site-sticky-nav nav li.nav-with-dropdown.is-open > .nav-submenu {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .site-sticky-nav .nav-theme-item {
+        display: inline-flex;
+        align-items: center;
+      }
+
+      @media (max-width: 639px) {
+        .site-sticky-inner {
+          padding-left: 0.25rem;
+          padding-right: 0.25rem;
+        }
+
+        .site-sticky-nav {
+          width: 100%;
+          justify-content: center;
+        }
+
+        .site-sticky-nav nav {
+          width: 100%;
+        }
+
+        .site-sticky-nav nav ul {
+          width: min(100%, 22rem);
+          margin: 0 auto;
+          justify-content: space-between;
+          gap: 0;
+          font-size: 0.78rem;
+        }
+      }
+
+      @media (min-width: 640px) {
+        .site-kamaboko-corner {
+          width: clamp(31px, 4.6vw, 54px);
+        }
+
+        body.is-home .site-sticky-bar:not(.is-stuck):not(.is-submenu-open) .site-sticky-nav nav a {
+          color: rgba(239, 239, 242, 0.86);
+        }
+
+        body.is-home .site-sticky-bar:not(.is-stuck):not(.is-submenu-open) .site-sticky-nav nav a:hover,
+        body.is-home .site-sticky-bar:not(.is-stuck):not(.is-submenu-open) .site-sticky-nav nav a.active {
+          color: rgba(246, 246, 248, 0.94);
+        }
+
+        body.is-home .site-sticky-bar.is-submenu-open .site-sticky-nav nav a {
+          color: rgb(156 163 175 / 1);
+        }
+
+        body.is-home .site-sticky-bar.is-submenu-open .site-sticky-nav nav a:hover,
+        body.is-home .site-sticky-bar.is-submenu-open .site-sticky-nav nav a.active {
+          color: rgb(55 65 81 / 1);
+        }
+
+        html.dark body.is-home .site-sticky-bar.is-submenu-open .site-sticky-nav nav a {
+          color: rgb(156 163 175 / 1);
+        }
+
+        html.dark body.is-home .site-sticky-bar.is-submenu-open .site-sticky-nav nav a:hover,
+        html.dark body.is-home .site-sticky-bar.is-submenu-open .site-sticky-nav nav a.active {
+          color: rgb(229 231 235 / 1);
+        }
+
+        body:not(.is-home) .site-sticky-bar:not(.is-stuck) .site-sticky-side-titles {
+          display: block;
+        }
+
+        .site-sticky-bar.is-stuck .site-sticky-side-titles,
+        .site-sticky-bar.is-submenu-open .site-sticky-side-titles {
+          display: block;
+        }
+
+        .site-sticky-side-title-cn {
+          left: max(18px, env(safe-area-inset-left, 0px));
+        }
+
+        .site-sticky-side-title-en {
+          right: max(18px, env(safe-area-inset-right, 0px));
+        }
+      }
+
+      #global-ripple-layer {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        overflow: hidden;
+        z-index: 64;
+      }
+
+      #kamaboko-rain-layer {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        overflow: hidden;
+        z-index: 63;
+      }
+
+      #kamaboko-center-layer {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        overflow: hidden;
+        z-index: 62;
+      }
+
+      #kamaboko-roll-layer {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        overflow: hidden;
+        z-index: 61;
+      }
+
+      .kamaboko-rain-piece {
+        position: absolute;
+        top: -18vh;
+        left: 0;
+        width: var(--kamaboko-rain-size, 28px);
+        height: auto;
+        opacity: var(--kamaboko-rain-opacity, 0.95);
+        transform-origin: center center;
+        will-change: transform, opacity;
+        animation: kamaboko-rain-fall var(--kamaboko-rain-duration, 2200ms) linear forwards;
+      }
+
+      html:not(.dark) .kamaboko-rain-piece {
+        filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.26));
+      }
+
+      .kamaboko-center-piece {
+        position: fixed;
+        left: 50%;
+        top: 50%;
+        width: var(--kamaboko-center-base-size, 120px);
+        opacity: 0.95;
+        transform-origin: center center;
+        will-change: transform;
+        animation: kamaboko-center-bloom-scale 4000ms linear forwards;
+      }
+
+      .kamaboko-center-piece-img {
+        display: block;
+        width: 100%;
+        height: auto;
+        transform-origin: center center;
+        will-change: transform;
+        animation: kamaboko-center-spin 4000ms linear forwards;
+      }
+
+      html:not(.dark) .kamaboko-center-piece-img {
+        filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.22));
+      }
+
+      .kamaboko-roll-piece {
+        position: fixed;
+        left: 0;
+        top: 50%;
+        width: var(--kamaboko-roll-size, 120px);
+        height: auto;
+        opacity: 0.95;
+        transform-origin: center center;
+        will-change: transform;
+        animation: kamaboko-roll-across var(--kamaboko-roll-duration, 2200ms) linear forwards;
+      }
+
+      html:not(.dark) .kamaboko-roll-piece {
+        filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.22));
+      }
+
+      @keyframes kamaboko-hover-spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      @keyframes kamaboko-center-bloom-scale {
+        0% {
+          transform:
+            translate3d(-50%, -50%, 0)
+            scale(var(--kamaboko-center-scale-min, 0.02));
+        }
+        50% {
+          transform:
+            translate3d(-50%, -50%, 0)
+            scale(var(--kamaboko-center-scale-max, 5));
+        }
+        100% {
+          transform:
+            translate3d(-50%, -50%, 0)
+            scale(var(--kamaboko-center-scale-min, 0.02));
+        }
+      }
+
+      @keyframes kamaboko-center-spin {
+        0% {
+          transform: rotate(var(--kamaboko-center-rot-start, 0deg));
+        }
+        100% {
+          transform: rotate(var(--kamaboko-center-rot-end, 4320deg));
+        }
+      }
+
+      @keyframes kamaboko-rain-fall {
+        0% {
+          transform:
+            translate3d(-50%, -8vh, 0)
+            rotate(var(--kamaboko-rain-rot-start, 0deg))
+            scale(var(--kamaboko-rain-scale, 1));
+        }
+        100% {
+          transform:
+            translate3d(calc(-50% + var(--kamaboko-rain-drift, 0px)), 130vh, 0)
+            rotate(var(--kamaboko-rain-rot-end, 4320deg))
+            scale(var(--kamaboko-rain-scale, 1));
+        }
+      }
+
+      @keyframes kamaboko-roll-across {
+        0% {
+          transform:
+            translate3d(var(--kamaboko-roll-start-x, -180px), -50%, 0)
+            rotate(var(--kamaboko-roll-rot-start, 0deg));
+        }
+        100% {
+          transform:
+            translate3d(var(--kamaboko-roll-end-x, calc(100vw + 180px)), -50%, 0)
+            rotate(var(--kamaboko-roll-rot-end, 1080deg));
+        }
+      }
+
+      .global-ripple {
+        position: absolute;
+        --bubble-size: 32px;
+        --bubble-line: 0.28px;
+        --bubble-sway-x: 1.2px;
+        --bubble-sway-y: 0.8px;
+        width: 1px;
+        height: 1px;
+        transform: translate(-50%, -50%);
+        pointer-events: none;
+      }
+
+      .global-ripple .bubble-drift {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 0;
+        height: 0;
+        transform: translate(-50%, -50%);
+        animation: bubble-drift 1.2s ease-out forwards;
+      }
+
+      .global-ripple .bubble-shell,
+      .global-ripple .bubble-highlight,
+      .global-ripple .bubble-highlight-2,
+      .global-ripple .bubble-dot {
+        position: absolute;
+        left: 0;
+        top: 0;
+        opacity: 0;
+      }
+
+      .global-ripple .bubble-shell {
+        width: var(--bubble-size);
+        height: var(--bubble-size);
+        border-radius: 9999px;
+        transform: translate(-50%, -50%) scale(0.84);
+        background:
+          radial-gradient(
+            circle at center,
+            rgba(255, 255, 255, 0) 0%,
+            rgba(255, 255, 255, 0) 56%,
+            rgba(209, 232, 255, 0.06) 78%,
+            rgba(255, 220, 241, 0.07) 100%
+          ),
+          conic-gradient(
+            from 24deg,
+            rgba(255, 198, 234, 0.07) 0deg,
+            rgba(196, 224, 255, 0.07) 94deg,
+            rgba(205, 255, 238, 0.06) 182deg,
+            rgba(255, 241, 196, 0.06) 274deg,
+            rgba(255, 198, 234, 0.07) 360deg
+          ),
+          radial-gradient(circle at 28% 26%, rgba(255, 255, 255, 0.28) 0%, rgba(255, 255, 255, 0) 34%),
+          radial-gradient(circle at 72% 74%, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0) 32%),
+          radial-gradient(circle at center, rgba(255, 255, 255, 0.005) 0%, rgba(255, 255, 255, 0) 68%);
+        backdrop-filter: blur(0.22px) saturate(112%);
+        -webkit-backdrop-filter: blur(0.22px) saturate(112%);
+        box-shadow:
+          inset 0 0 0 var(--bubble-line) rgba(255, 255, 255, 0.92),
+          inset 0 0 0 calc(var(--bubble-line) + 0.1px) rgba(172, 214, 255, 0.22),
+          inset calc(var(--bubble-size) * 0.17) calc(var(--bubble-size) * -0.13) calc(var(--bubble-size) * 0.14) rgba(186, 229, 255, 0.11),
+          inset calc(var(--bubble-size) * -0.16) calc(var(--bubble-size) * 0.15) calc(var(--bubble-size) * 0.15) rgba(255, 196, 231, 0.1),
+          0 0 calc(var(--bubble-size) * 0.16) rgba(255, 255, 255, 0.18),
+          0 0 calc(var(--bubble-size) * 0.3) rgba(186, 229, 255, 0.16);
+        animation: bubble-shell-fade 1.2s ease-out forwards;
+      }
+
+      html.dark .global-ripple .bubble-shell {
+        backdrop-filter: blur(1.2px) saturate(132%);
+        -webkit-backdrop-filter: blur(1.2px) saturate(132%);
+        box-shadow:
+          inset 0 0 0 var(--bubble-line) rgba(255, 255, 255, 0.88),
+          inset 0 0 0 calc(var(--bubble-line) + 0.1px) rgba(172, 214, 255, 0.2),
+          inset calc(var(--bubble-size) * 0.17) calc(var(--bubble-size) * -0.13) calc(var(--bubble-size) * 0.14) rgba(186, 229, 255, 0.18),
+          inset calc(var(--bubble-size) * -0.16) calc(var(--bubble-size) * 0.15) calc(var(--bubble-size) * 0.15) rgba(255, 196, 231, 0.17),
+          0 0 calc(var(--bubble-size) * 0.22) rgba(255, 255, 255, 0.16);
+      }
+
+      .global-ripple .bubble-highlight {
+        width: calc(var(--bubble-size) * 0.2);
+        height: calc(var(--bubble-size) * 0.06);
+        border-radius: 9999px;
+        transform: translate(calc(-50% - var(--bubble-size) * 0.18), calc(-50% - var(--bubble-size) * 0.18)) rotate(-38deg);
+        background: rgba(255, 255, 255, 0.9);
+        box-shadow: 0 0 1px rgba(255, 255, 255, 0.32);
+        animation: bubble-mark-fade 1.2s ease-out forwards;
+      }
+
+      .global-ripple .bubble-highlight-2 {
+        width: calc(var(--bubble-size) * 0.16);
+        height: calc(var(--bubble-size) * 0.05);
+        border-radius: 9999px;
+        transform: translate(calc(-50% + var(--bubble-size) * 0.2), calc(-50% + var(--bubble-size) * 0.2)) rotate(142deg);
+        background: rgba(255, 255, 255, 0.72);
+        box-shadow: 0 0 1px rgba(255, 255, 255, 0.22);
+        animation: bubble-mark-fade 1.2s ease-out forwards;
+      }
+
+      .global-ripple .bubble-dot {
+        width: calc(var(--bubble-size) * 0.045);
+        height: calc(var(--bubble-size) * 0.045);
+        border-radius: 9999px;
+        transform: translate(calc(-50% - var(--bubble-size) * 0.28), calc(-50% - var(--bubble-size) * 0.1));
+        background: rgba(255, 255, 255, 0.82);
+        box-shadow: 0 0 1px rgba(255, 255, 255, 0.3);
+        animation: bubble-mark-fade 1.2s ease-out forwards;
+      }
+
+      html.dark .global-ripple .bubble-highlight {
+        background: rgba(255, 255, 255, 0.84);
+        filter: blur(0.2px);
+      }
+
+      html.dark .global-ripple .bubble-highlight-2 {
+        background: rgba(255, 255, 255, 0.6);
+        filter: blur(0.2px);
+      }
+
+      html.dark .global-ripple .bubble-dot {
+        background: rgba(255, 255, 255, 0.72);
+      }
+
+      .global-meteor {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: var(--meteor-length, 86px);
+        height: 0.55px;
+        border-radius: 9999px;
+        pointer-events: none;
+        opacity: 0;
+        transform: translate(-50%, -50%) rotate(var(--meteor-angle, 169deg)) translateX(0);
+        transform-origin: left center;
+        background: linear-gradient(
+          90deg,
+          rgba(255, 255, 255, 0.03) 0%,
+          rgba(255, 255, 255, 0.18) 22%,
+          rgba(255, 255, 255, 0.92) 58%,
+          rgba(255, 255, 255, 0.12) 100%
+        );
+        box-shadow:
+          0 0 3px rgba(207, 226, 255, 0.44),
+          0 0 1px rgba(255, 255, 255, 0.8);
+        animation: meteor-pass var(--meteor-duration, 760ms) cubic-bezier(0.2, 0.65, 0.2, 1) forwards;
+      }
+
+      @keyframes bubble-shell-fade {
+        0% {
+          transform: translate(-50%, -50%) scale(0.86);
+          opacity: 0;
+        }
+        12% {
+          opacity: 0.96;
+        }
+        99% {
+          opacity: 0.96;
+        }
+        100% {
+          transform: translate(-50%, -50%) scale(1.03);
+          opacity: 0;
+        }
+      }
+
+      @keyframes bubble-drift {
+        0% {
+          transform: translate(-50%, -50%) translate(0, 0);
+        }
+        60% {
+          transform: translate(-50%, -50%) translate(calc(var(--bubble-sway-x) * 0.42), calc(var(--bubble-sway-y) * -0.32));
+        }
+        100% {
+          transform: translate(-50%, -50%) translate(calc(var(--bubble-sway-x) * 0.1), calc(var(--bubble-sway-y) * -0.08));
+        }
+      }
+
+      @keyframes bubble-mark-fade {
+        0% {
+          opacity: 0;
+        }
+        12% {
+          opacity: 0.94;
+        }
+        99% {
+          opacity: 0.94;
+        }
+        100% {
+          opacity: 0;
+        }
+      }
+
+      @keyframes meteor-pass {
+        0% {
+          opacity: 0;
+          transform: translate(-50%, -50%) rotate(var(--meteor-angle, 169deg)) translateX(calc(-1 * var(--meteor-pre, 72px)));
+        }
+        10% {
+          opacity: 0.96;
+        }
+        100% {
+          opacity: 0;
+          transform: translate(-50%, -50%) rotate(var(--meteor-angle, 169deg)) translateX(var(--meteor-post, 72px));
+        }
+      }
+    </style>
+  </head>
+
+  <body class="mx-auto px-2.5" style="max-width: var(--site-content-max-width); min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column;">
+
+    
+    <div class="site-sticky-sentinel" aria-hidden="true"></div>
+    <header class="site-sticky-bar">
+      <div class="site-sticky-bg" aria-hidden="true"></div>
+      <div class="site-sticky-side-titles">
+        <a class="site-sticky-side-link" href="/" aria-label="回到主页（中文标题）">
+          <img class="site-sticky-side-title site-sticky-side-title-cn" src="/img/title_cn.png" alt="" loading="lazy">
+        </a>
+        <a class="site-sticky-side-link" href="/" aria-label="Back to home (English title)">
+          <img class="site-sticky-side-title site-sticky-side-title-en" src="/img/title_en.png" alt="" loading="lazy">
+        </a>
+      </div>
+      <div class="site-sticky-inner">
+        <div class="site-sticky-nav">
+          <nav>
+  <ul><li class="nav-menu-item">
+      <a href="/" class="">
+        Home
+      </a>
+      
+    </li>
+    <li class="nav-menu-item nav-with-dropdown">
+      <a href="/posts" class="">
+        Posts
+      </a>
+      
+        <ul class="nav-submenu" aria-label="Posts years">
+          
+            <li>
+              <a href="/posts/#posts-year-2026">2026</a>
+            </li>
+          
+            <li>
+              <a href="/posts/#posts-year-2025">2025</a>
+            </li>
+          
+            <li>
+              <a href="/posts/#posts-year-2024">2024</a>
+            </li>
+          
+        </ul>
+      
+    </li>
+    <li class="nav-menu-item nav-with-dropdown">
+      <a href="/collection" class="">
+        Collection
+      </a>
+      
+        <ul class="nav-submenu" aria-label="Collection projects">
+          
+            <li>
+              <a href="/collection/bench/" class="">四季长椅</a>
+            </li>
+          
+          
+            <li>
+              <a href="/collection/empa-office/" class="">Empa office</a>
+            </li>
+          
+        </ul>
+      
+    </li>
+    <li class="nav-menu-item">
+      <a href="/corner" class="">
+        Corner
+      </a>
+      
+    </li>
+    <li class="nav-menu-item">
+      <a href="/message" class="active">
+        Message
+      </a>
+      
+    </li>
+    
+    <li class="nav-theme-item">
+      
+
+
+<button 
+  class="toggle-theme flex items-center justify-center" 
+  aria-label="Toggle Theme" 
+  title="電源" 
+  onclick="toggleTheme()"
+  style="width:25px !important; height:25px !important; padding:2px !important;"
+>
+  <span class="theme-icon light" style="width:23px !important; height:23px !important; display:inline-block;">
+    <img src="/icons/moon.svg" alt="" aria-hidden="true" style="width:100%; height:100%; display:block;" />
+  </span>
+  <span class="theme-icon dark" style="width:23px !important; height:23px !important; display:inline-block;">
+    <img src="/icons/sun.svg" alt="" aria-hidden="true" style="width:100%; height:100%; display:block;" />
+  </span>
+</button>
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const theme = localStorage.getItem('theme');
+
+    if (!theme || theme === 'light') {
+      setTheme('light');
+    } else {
+      setTheme(theme);
+    }
+  });
+
+  function setTheme(theme) {
+    const html = document.querySelector('html');
+    localStorage.setItem('theme', theme);
+
+    if (theme === 'light') {
+      if (html.classList.contains('dark')) {
+        document.querySelector('html').classList.remove('dark');
+      }
+
+      document.querySelector('.theme-icon.light').style.display = 'none';
+      document.querySelector('.theme-icon.dark').style.display = 'block';
+    } else {
+      if (!html.classList.contains('dark')) {
+        document.querySelector('html').classList.add('dark');
+      }
+
+      document.querySelector('.theme-icon.dark').style.display = 'none';
+      document.querySelector('.theme-icon.light').style.display = 'block';
+    }
+  }
+
+  function toggleTheme() {
+    const theme = localStorage.getItem('theme');
+
+    if (theme === 'light') {
+      setTheme('dark');
+    } else {
+      setTheme('light');
+    }
+  }
+</script>
+
+    </li>
+  </ul>
+</nav>
+
+        </div>
+      </div>
+    </header>
+    <img class="site-kamaboko-corner" src="/img/kamaboko.png" alt="kamaboko" role="button" tabindex="0" loading="lazy">
+
+    
+    <main id="content" class="px-2.5" style="flex: 1 1 auto; display: flex; flex-direction: column;">
+
+
+
+
+
+
+
+  <div class="content" style="padding-top: 0.5rem;">
+    <blockquote>
+<p>山斑鸠筑巢非常不拘小节，只要蛋不会滚走就行了，有时还会把其它鸟的旧巢直接拿来用。</p>
+<p>——《和路边的野鸟做朋友》</p>
+</blockquote>
+
+  </div>
+
+
+
+  
+  
+  
+    
+  
+  
+  
+    
+  
+  <section
+    class="message-board"
+    data-message-board
+    data-message-action="https://formsubmit.co/kamabokowo@gmail.com"
+  >
+    <form class="message-form" data-message-form autocomplete="off" method="POST" accept-charset="UTF-8" action="https://formsubmit.co/kamabokowo@gmail.com" onsubmit="var n=this.querySelector('[data-message-next]');if(n){n.value=window.location.origin+window.location.pathname+'?sent=1&t='+Date.now();}">
+      <input type="hidden" name="_subject" value="Kamaboko Home Message" />
+      <input type="hidden" name="_captcha" value="false" />
+      <input type="hidden" name="_next" value="" data-message-next />
+      <div class="message-form-row">
+        <label for="guestbook-content">信的内容</label>
+        <textarea id="guestbook-content" name="message" rows="6" maxlength="500" placeholder="似乎有什么想说的样子" required></textarea>
+      </div>
+      <div class="message-form-row">
+        <label for="guestbook-signature">落款</label>
+        <input id="guestbook-signature" name="signature" type="text" maxlength="24" placeholder="香甜的年轮蛋糕" />
+      </div>
+      <div class="message-form-row">
+        <label for="guestbook-reply">回信地址</label>
+        <input id="guestbook-reply" name="reply_address" type="text" maxlength="120" placeholder="不写也没关系，写了也不一定会收到回信的样子" />
+      </div>
+      <div class="message-form-actions">
+        <button class="message-submit-button" type="submit">寄出</button>
+      </div>
+      <p class="message-board-status" data-message-status aria-live="polite"></p>
+    </form>
+    <p class="message-board-note" data-message-note></p>
+  </section>
+
+
+
+
+
+<div class="flex justify-center" style="margin-top: auto; padding-top: 1rem;">
+  <a href="#" onclick="scrollToTop()" class="pagination-button text-xs font-semibold" style="color: #9CA3AF; text-decoration: none; cursor: pointer;">
+    T🍥P
+  </a>
+</div>
+
+<script>
+  const backToTopBtn = document.getElementById('backToTop');
+  if (backToTopBtn) {
+    backToTopBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 200) {
+        backToTopBtn.style.display = 'block';
+      } else {
+        backToTopBtn.style.display = 'none';
+      }
+    });
+
+    
+    backToTopBtn.style.display = 'none';
+  }
+
+  function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  const messageBoard = document.querySelector('[data-message-board]');
+  if (messageBoard) {
+    const form = messageBoard.querySelector('[data-message-form]');
+    const contentInput = messageBoard.querySelector('#guestbook-content');
+    const signatureInput = messageBoard.querySelector('#guestbook-signature');
+    const replyInput = messageBoard.querySelector('#guestbook-reply');
+    const note = messageBoard.querySelector('[data-message-note]');
+    const status = messageBoard.querySelector('[data-message-status]');
+    const submitButton = form ? form.querySelector('button[type="submit"]') : null;
+    const nextInput = form ? form.querySelector('[data-message-next]') : null;
+    const formAction = form ? (form.getAttribute('action') || '').trim() : '';
+    const hasAction = formAction.length > 0;
+
+    const normalizeNickname = (value) => value.trim().replace(/\s+/g, ' ').slice(0, 24);
+    const normalizeMessage = (value) => value.trim().slice(0, 500);
+
+    const setStatus = (text, tone = 'normal') => {
+      if (!status) return;
+      status.textContent = text || '';
+      status.dataset.tone = tone;
+      status.hidden = !text;
+    };
+
+    const setSubmitting = (isSubmitting) => {
+      if (!submitButton) return;
+      submitButton.disabled = isSubmitting;
+      submitButton.setAttribute('aria-busy', isSubmitting ? 'true' : 'false');
+    };
+
+    if (note) {
+      note.textContent = hasAction
+        ? '填写后会发送到站长邮箱。若未收到，请检查并激活 FormSubmit 确认邮件。'
+        : '当前未配置邮件发送地址。';
+    }
+
+    if (status) {
+      status.hidden = true;
+    }
+
+    const url = new URL(window.location.href);
+    const isSent = url.searchParams.get('sent') === '1';
+    if (isSent) {
+      const sentMsRaw = url.searchParams.get('t');
+      const sentMs = sentMsRaw ? Number(sentMsRaw) : NaN;
+      const sentDate = Number.isFinite(sentMs) && sentMs > 0 ? new Date(sentMs) : new Date();
+      const sentAtText = sentDate.toLocaleString();
+      setStatus(`信件已经寄出了！（${sentAtText}）`, 'success');
+      url.searchParams.delete('sent');
+      url.searchParams.delete('t');
+      window.history.replaceState({}, '', url.toString());
+    }
+
+    if (!hasAction) {
+      if (form) {
+        form.setAttribute('aria-disabled', 'true');
+      }
+      if (contentInput) contentInput.disabled = true;
+      if (signatureInput) signatureInput.disabled = true;
+      if (replyInput) replyInput.disabled = true;
+      setSubmitting(true);
+      setStatus('请先在站点配置中填写邮件表单地址。', 'error');
+      return;
+    }
+
+    if (!form) return;
+    form.addEventListener('submit', async (event) => {
+      const content = contentInput ? normalizeMessage(contentInput.value) : '';
+      const signature = signatureInput ? (normalizeNickname(signatureInput.value) || '香甜的年轮蛋糕') : '香甜的年轮蛋糕';
+      const replyAddress = replyInput ? replyInput.value.trim().slice(0, 120) : '';
+      if (!content) {
+        event.preventDefault();
+        setStatus('请填写留言内容。', 'error');
+        return;
+      }
+
+      if (nextInput) {
+        const base = `${window.location.origin}${window.location.pathname}`;
+        const nextURL = `${base}?sent=1&t=${Date.now()}`;
+        nextInput.value = nextURL;
+      }
+
+      event.preventDefault();
+      if (contentInput) contentInput.value = content;
+      if (signatureInput) signatureInput.value = signature;
+      if (replyInput) replyInput.value = replyAddress;
+      setSubmitting(true);
+      setStatus('正在发送，请稍候...', 'normal');
+
+      try {
+        const ajaxAction = formAction.includes('/ajax/')
+          ? formAction
+          : formAction.replace('://formsubmit.co/', '://formsubmit.co/ajax/');
+        const payload = new FormData(form);
+        const response = await fetch(ajaxAction, {
+          method: 'POST',
+          headers: {
+            Accept: 'application/json'
+          },
+          body: payload
+        });
+        const result = await response.json().catch(() => ({}));
+
+        if (!response.ok) {
+          const errorText = (result && typeof result.message === 'string' && result.message.trim())
+            ? result.message.trim()
+            : `发送失败（${response.status}）`;
+          setStatus(errorText, 'error');
+          return;
+        }
+
+        const sentAtText = new Date().toLocaleString();
+        setStatus(`信件已经寄出了！（${sentAtText}）`, 'success');
+        if (contentInput) contentInput.value = '';
+      } catch (error) {
+        setStatus('发送失败，请检查网络后重试。', 'error');
+      } finally {
+        setSubmitting(false);
+      }
+    });
+  }
+
+</script>
+
+
+    </main>
+
+    <div class="mt-auto" style="margin-top: auto; padding-top: 1.5rem !important;">
+    <footer class="flex-col items-center" style="padding-bottom: 1.5rem;">
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+                
+            
+        
+            
+                
+            
+        
+            
+                
+            
+        
+            
+                
+            
+        
+            
+                
+            
+        
+            
+                
+            
+        
+            
+                
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+        
+
+        <img id="footer-banner" data-base="/img/" data-banners="banner_blue.png,banner_brown.png,banner_green.png,banner_pink.png,banner_purple.png,banner_yellow.png,banner_yellow2.png" class="mb-5" alt="Footer banner">
+        <noscript>
+          
+            <img src="/img/banner_blue.png" class="mb-5" alt="Footer banner">
+          
+        </noscript>
+        <script>
+          (function () {
+            const bannerEl = document.getElementById("footer-banner");
+            if (!bannerEl) return;
+            const basePath = bannerEl.dataset.base || "\/img\/";
+            const bannerFiles = (bannerEl.dataset.banners || "").split(",").filter(Boolean);
+            if (bannerFiles.length === 0) return;
+
+            const randomIndex = Math.floor(Math.random() * bannerFiles.length);
+            const randomBanner = bannerFiles[randomIndex];
+            bannerEl.src = basePath + randomBanner;
+          })();
+        </script>
+
+        <div class="flex justify-center items-center text-xs font-semibold text-gray-500" 
+                style="font-size: 0.7rem; padding-bottom: 0.5rem;">
+            © Kamaboko Home 
+          </div>     
+    
+    </footer>
+</div>
+
+    
+<script src="/js/jquery-1.11.0.min.js"></script>
+    <script src="/js/jquery.ripples.min.js?v=20260221j"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+          return;
+        }
+
+        const root = document.documentElement;
+        let layer = null;
+        let dragBubbleTrailPointerId = null;
+        let lastDragBubbleAt = 0;
+
+        const createLayer = function () {
+          if (layer) return;
+          layer = document.createElement("div");
+          layer.id = "global-ripple-layer";
+          document.body.appendChild(layer);
+        };
+
+        const isFxExcludedTarget = function (event) {
+          const target = event.target instanceof Element ? event.target : null;
+          if (target && target.closest(".collection-banner-card")) return true;
+          if (target && target.closest(".collection-layout-btn")) return true;
+          if (target && target.closest(".collection-layout-switch")) return true;
+          if (target && target.closest("a[data-codex-zoom=\"1\"]")) return true;
+          if (target && target.closest(".collection-auto-link")) return true;
+          const titleArea = document.querySelector(".title-interactive");
+          if (titleArea && titleArea.contains(event.target)) return true;
+          const homeRippleArea = document.querySelector(".home-ripple-image");
+          if (homeRippleArea && homeRippleArea.contains(event.target)) return true;
+          const kamaboko = document.querySelector(".site-kamaboko-corner");
+          if (kamaboko && kamaboko.contains(event.target)) return true;
+          return false;
+        };
+
+        const spawnRipple = function (event) {
+          if (!layer) return;
+          if (root.classList.contains("dark")) return;
+          if (isFxExcludedTarget(event)) return;
+
+          const ripple = document.createElement("div");
+          ripple.className = "global-ripple";
+          const bubbleSize = 5 + Math.random() * 55;
+          const lineWidth = Math.max(0.1, Math.min(0.48, 0.1 + bubbleSize * 0.0062));
+          const swayXDir = Math.random() < 0.5 ? -1 : 1;
+          const swayYDir = Math.random() < 0.5 ? -1 : 1;
+          const swayX = (0.28 + Math.random() * 0.95) * swayXDir;
+          const swayY = (0.22 + Math.random() * 0.7) * swayYDir;
+          ripple.style.setProperty("--bubble-size", bubbleSize.toFixed(1) + "px");
+          ripple.style.setProperty("--bubble-line", lineWidth.toFixed(2) + "px");
+          ripple.style.setProperty("--bubble-sway-x", swayX.toFixed(2) + "px");
+          ripple.style.setProperty("--bubble-sway-y", swayY.toFixed(2) + "px");
+          ripple.style.left = event.clientX + "px";
+          ripple.style.top = event.clientY + "px";
+          ripple.innerHTML = "<span class=\"bubble-drift\"><span class=\"bubble-shell\"></span><span class=\"bubble-highlight\"></span><span class=\"bubble-highlight-2\"></span><span class=\"bubble-dot\"></span></span>";
+          layer.appendChild(ripple);
+
+          window.setTimeout(function () {
+            ripple.remove();
+          }, 1200);
+        };
+
+        const spawnMeteor = function (event) {
+          if (!layer) return;
+          if (!root.classList.contains("dark")) return;
+          if (isFxExcludedTarget(event)) return;
+
+          const meteor = document.createElement("span");
+          meteor.className = "global-meteor";
+          const sweep = 92 + Math.random() * 50;
+          const pre = sweep * 0.5;
+          const post = sweep * 0.5;
+          const length = 34 + Math.random() * 38;
+          const tilt = Math.random() * 45;
+          const angle = Math.random() < 0.5 ? tilt : 180 - tilt;
+          meteor.style.setProperty("--meteor-length", length.toFixed(1) + "px");
+          meteor.style.setProperty("--meteor-pre", pre.toFixed(1) + "px");
+          meteor.style.setProperty("--meteor-post", post.toFixed(1) + "px");
+          meteor.style.setProperty("--meteor-angle", angle.toFixed(1) + "deg");
+          meteor.style.left = (event.clientX + 14) + "px";
+          meteor.style.top = (event.clientY - 3) + "px";
+          layer.appendChild(meteor);
+
+          window.setTimeout(function () {
+            meteor.remove();
+          }, 840);
+        };
+
+        const dismissBubbleAtPointer = function (event) {
+          if (!layer || root.classList.contains("dark")) return false;
+          const ripples = layer.querySelectorAll(".global-ripple");
+          for (let i = ripples.length - 1; i >= 0; i -= 1) {
+            const ripple = ripples[i];
+            const x = parseFloat(ripple.style.left);
+            const y = parseFloat(ripple.style.top);
+            const size = parseFloat(ripple.style.getPropertyValue("--bubble-size") || "0");
+            if (!Number.isFinite(x) || !Number.isFinite(y) || !Number.isFinite(size) || size <= 0) continue;
+            const dx = event.clientX - x;
+            const dy = event.clientY - y;
+            const hitRadius = size * 0.42;
+            if ((dx * dx) + (dy * dy) <= (hitRadius * hitRadius)) {
+              ripple.remove();
+              return true;
+            }
+          }
+          return false;
+        };
+
+        const spawnClickFx = function (event) {
+          if (event.pointerType === "mouse" && event.button !== 0) return;
+          if (isFxExcludedTarget(event)) return;
+          if (!root.classList.contains("dark") && dismissBubbleAtPointer(event)) return;
+          if (!root.classList.contains("dark")) {
+            dragBubbleTrailPointerId = event.pointerId;
+            lastDragBubbleAt = 0;
+          }
+          if (root.classList.contains("dark")) {
+            spawnMeteor(event);
+          } else {
+            spawnRipple(event);
+          }
+        };
+
+        const spawnDragBubbleTrail = function (event) {
+          if (root.classList.contains("dark")) return;
+          if (dragBubbleTrailPointerId == null) return;
+          if (event.pointerId !== dragBubbleTrailPointerId) return;
+          if ((event.buttons & 1) === 0) return;
+          const now = Date.now();
+          if (now - lastDragBubbleAt < 118) return;
+          lastDragBubbleAt = now;
+          spawnRipple(event);
+        };
+
+        const stopDragBubbleTrail = function (event) {
+          if (dragBubbleTrailPointerId == null) return;
+          if (event && event.pointerId != null && event.pointerId !== dragBubbleTrailPointerId) return;
+          dragBubbleTrailPointerId = null;
+        };
+
+        const syncRippleMode = function () {
+          createLayer();
+        };
+
+        syncRippleMode();
+        document.addEventListener("pointerdown", spawnClickFx, { passive: true });
+        document.addEventListener("pointermove", spawnDragBubbleTrail, { passive: true });
+        document.addEventListener("pointerup", stopDragBubbleTrail, { passive: true });
+        document.addEventListener("pointercancel", stopDragBubbleTrail, { passive: true });
+        const observer = new MutationObserver(syncRippleMode);
+        observer.observe(root, { attributes: true, attributeFilter: ["class"] });
+      });
+    </script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const kamaboko = document.querySelector(".site-kamaboko-corner");
+        if (!kamaboko) return;
+
+        let rainLayer = null;
+        let centerLayer = null;
+        let rollLayer = null;
+
+        const ensureRainLayer = function () {
+          if (rainLayer && rainLayer.isConnected) return rainLayer;
+          rainLayer = document.createElement("div");
+          rainLayer.id = "kamaboko-rain-layer";
+          document.body.appendChild(rainLayer);
+          return rainLayer;
+        };
+
+        const ensureCenterLayer = function () {
+          if (centerLayer && centerLayer.isConnected) return centerLayer;
+          centerLayer = document.createElement("div");
+          centerLayer.id = "kamaboko-center-layer";
+          document.body.appendChild(centerLayer);
+          return centerLayer;
+        };
+
+        const ensureRollLayer = function () {
+          if (rollLayer && rollLayer.isConnected) return rollLayer;
+          rollLayer = document.createElement("div");
+          rollLayer.id = "kamaboko-roll-layer";
+          document.body.appendChild(rollLayer);
+          return rollLayer;
+        };
+
+        const setKamabokoPressing = function (pressing) {
+          kamaboko.classList.toggle("is-pressing", !!pressing);
+        };
+
+        const spawnKamabokoRain = function () {
+          const layer = ensureRainLayer();
+          const src = kamaboko.getAttribute("src");
+          if (!src) return;
+
+          const width = window.innerWidth || document.documentElement.clientWidth || 0;
+          const count = width >= 640 ? 48 : 36;
+
+          for (let i = 0; i < count; i += 1) {
+            const piece = document.createElement("img");
+            const delay = Math.random() * 260;
+            const duration = 700 + Math.random() * 5600;
+            const drift = (-170 + Math.random() * 340).toFixed(1) + "px";
+            const rotStart = (-90 + Math.random() * 180).toFixed(1) + "deg";
+            let rotEndValue = -10080 + Math.random() * 20160;
+            const sizeBias = 1 - Math.pow(Math.random(), 2.4);
+            let sizeValue = 64 + sizeBias * 216;
+            if (Math.random() < 0.12) {
+              sizeValue *= 1.8 + Math.random() * 1.1;
+              rotEndValue *= 1.8 + Math.random() * 1.1;
+            }
+            const rotEnd = rotEndValue.toFixed(1) + "deg";
+            const size = sizeValue.toFixed(1) + "px";
+            const opacity = "0.95";
+            const scale = (0.94 + Math.random() * 0.42).toFixed(2);
+            const x = (-6 + Math.random() * 112).toFixed(2) + "vw";
+
+            piece.className = "kamaboko-rain-piece";
+            piece.src = src;
+            piece.alt = "";
+            piece.setAttribute("aria-hidden", "true");
+            piece.style.left = x;
+            piece.style.setProperty("--kamaboko-rain-size", size);
+            piece.style.setProperty("--kamaboko-rain-duration", duration.toFixed(0) + "ms");
+            piece.style.setProperty("--kamaboko-rain-drift", drift);
+            piece.style.setProperty("--kamaboko-rain-rot-start", rotStart);
+            piece.style.setProperty("--kamaboko-rain-rot-end", rotEnd);
+            piece.style.setProperty("--kamaboko-rain-opacity", opacity);
+            piece.style.setProperty("--kamaboko-rain-scale", scale);
+
+            window.setTimeout(function () {
+              layer.appendChild(piece);
+              window.setTimeout(function () {
+                piece.remove();
+              }, duration + 120);
+            }, delay);
+          }
+        };
+
+        const spawnKamabokoCenterBloom = function () {
+          const layer = ensureCenterLayer();
+          const src = kamaboko.getAttribute("src");
+          if (!src) return;
+
+          const piece = document.createElement("div");
+          const pieceImg = document.createElement("img");
+          const buttonRect = kamaboko.getBoundingClientRect();
+          const initialWidth = Math.max(1, buttonRect.width * 2);
+          const viewportWidth = window.innerWidth || document.documentElement.clientWidth || 0;
+          const viewportHeight = window.innerHeight || document.documentElement.clientHeight || 0;
+          const ratio = (kamaboko.naturalWidth && kamaboko.naturalHeight)
+            ? (kamaboko.naturalWidth / kamaboko.naturalHeight)
+            : (buttonRect.width && buttonRect.height ? (buttonRect.width / buttonRect.height) : 1);
+          const safeViewport = Math.max(1, Math.min(viewportWidth, viewportHeight) * 0.9);
+          const safeWidthForRotation = safeViewport / Math.sqrt(1 + Math.pow(1 / Math.max(ratio, 0.001), 2));
+          const maxWidth = Math.max(initialWidth, safeWidthForRotation * 2);
+          const scaleMax = Math.max(1, maxWidth / initialWidth);
+          const scaleMin = 0.02;
+          const spinDir = Math.random() < 0.5 ? -1 : 1;
+          const rotStartValue = Math.random() * 360;
+          const rotEndValue = rotStartValue + (spinDir * (4320 + Math.random() * 2160));
+          const rotStart = rotStartValue.toFixed(1) + "deg";
+          const rotEnd = rotEndValue.toFixed(1) + "deg";
+
+          piece.className = "kamaboko-center-piece";
+          piece.setAttribute("aria-hidden", "true");
+          piece.style.setProperty("--kamaboko-center-base-size", initialWidth.toFixed(1) + "px");
+          piece.style.setProperty("--kamaboko-center-scale-min", scaleMin.toFixed(3));
+          piece.style.setProperty("--kamaboko-center-scale-max", scaleMax.toFixed(3));
+          piece.style.setProperty("--kamaboko-center-rot-start", rotStart);
+          piece.style.setProperty("--kamaboko-center-rot-end", rotEnd);
+
+          pieceImg.className = "kamaboko-center-piece-img";
+          pieceImg.src = src;
+          pieceImg.alt = "";
+          pieceImg.setAttribute("aria-hidden", "true");
+          piece.appendChild(pieceImg);
+
+          layer.appendChild(piece);
+          piece.addEventListener("animationend", function () {
+            piece.remove();
+          }, { once: true });
+        };
+
+        const spawnKamabokoRollLine = function () {
+          const layer = ensureRollLayer();
+          const src = kamaboko.getAttribute("src");
+          if (!src) return;
+
+          const buttonRect = kamaboko.getBoundingClientRect();
+          const pieceSize = Math.max(1, buttonRect.width * 5.0);
+          const count = 5;
+          const stagger = 560;
+          const duration = 3300;
+          const rotationDegrees = 1260;
+
+          for (let i = 0; i < count; i += 1) {
+            const piece = document.createElement("img");
+            const rotStartValue = Math.random() * 360;
+            
+            const rotEndValue = rotStartValue + rotationDegrees;
+            const startX = (-pieceSize - 28).toFixed(1) + "px";
+            const endX = "calc(100vw + " + (pieceSize + 28).toFixed(1) + "px)";
+
+            piece.className = "kamaboko-roll-piece";
+            piece.src = src;
+            piece.alt = "";
+            piece.setAttribute("aria-hidden", "true");
+            piece.style.setProperty("--kamaboko-roll-size", pieceSize.toFixed(1) + "px");
+            piece.style.setProperty("--kamaboko-roll-duration", duration + "ms");
+            piece.style.setProperty("--kamaboko-roll-start-x", startX);
+            piece.style.setProperty("--kamaboko-roll-end-x", endX);
+            piece.style.setProperty("--kamaboko-roll-rot-start", rotStartValue.toFixed(1) + "deg");
+            piece.style.setProperty("--kamaboko-roll-rot-end", rotEndValue.toFixed(1) + "deg");
+
+            window.setTimeout(function () {
+              layer.appendChild(piece);
+              piece.addEventListener("animationend", function () {
+                piece.remove();
+              }, { once: true });
+            }, i * stagger);
+          }
+        };
+
+        const handleKamabokoActivate = function (event) {
+          event.preventDefault();
+          event.stopPropagation();
+          const effects = [spawnKamabokoRain, spawnKamabokoCenterBloom, spawnKamabokoRollLine];
+          effects[Math.floor(Math.random() * effects.length)]();
+        };
+
+        kamaboko.addEventListener("pointerdown", function (event) {
+          event.stopPropagation();
+          if (event.pointerType === "mouse" && event.button !== 0) return;
+          setKamabokoPressing(true);
+        });
+
+        const releaseKamabokoPressing = function () {
+          setKamabokoPressing(false);
+        };
+
+        kamaboko.addEventListener("pointerup", releaseKamabokoPressing);
+        kamaboko.addEventListener("pointercancel", releaseKamabokoPressing);
+        kamaboko.addEventListener("pointerleave", function (event) {
+          if ((event.buttons & 1) === 0) releaseKamabokoPressing();
+        });
+        window.addEventListener("pointerup", releaseKamabokoPressing, { passive: true });
+        window.addEventListener("pointercancel", releaseKamabokoPressing, { passive: true });
+
+        kamaboko.addEventListener("click", handleKamabokoActivate);
+        kamaboko.addEventListener("keydown", function (event) {
+          if (event.key !== "Enter" && event.key !== " ") return;
+          handleKamabokoActivate(event);
+        });
+      });
+    </script>
+
+    
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        const stickyBar = document.querySelector(".site-sticky-bar");
+        const stickySentinel = document.querySelector(".site-sticky-sentinel");
+        const stickyNav = stickyBar ? stickyBar.querySelector(".site-sticky-nav") : null;
+        const root = document.documentElement;
+        if (!stickyBar || !stickySentinel) return;
+
+        const updateSubmenuState = function() {
+          if (!stickyNav) {
+            stickyBar.classList.remove("is-submenu-open");
+            stickyBar.style.setProperty("--sticky-submenu-extent", "0px");
+            return;
+          }
+          if (!window.matchMedia("(min-width: 640px)").matches) {
+            stickyBar.classList.remove("is-submenu-open");
+            stickyBar.style.setProperty("--sticky-submenu-extent", "0px");
+            return;
+          }
+          const dropdownItems = stickyNav.querySelectorAll("li.nav-with-dropdown");
+          let hasOpenDropdown = false;
+          let maxSubmenuBottom = 0;
+          const stickyBarRect = stickyBar.getBoundingClientRect();
+          for (let i = 0; i < dropdownItems.length; i += 1) {
+            const item = dropdownItems[i];
+            const submenu = item.querySelector(".nav-submenu");
+            if (!submenu) continue;
+            const hasHover = item.matches(":hover");
+            const hasFocusVisible = item.querySelector(":focus-visible") !== null;
+            const isOpen = hasHover || hasFocusVisible;
+            item.classList.toggle("is-open", isOpen);
+            if (isOpen) {
+              hasOpenDropdown = true;
+              const submenuRect = submenu.getBoundingClientRect();
+              if (submenuRect.bottom > maxSubmenuBottom) {
+                maxSubmenuBottom = submenuRect.bottom;
+              }
+            } else {
+              item.classList.remove("is-open");
+            }
+          }
+          const submenuExtent = hasOpenDropdown
+            ? Math.max(0, Math.ceil(maxSubmenuBottom - stickyBarRect.bottom))
+            : 0;
+          stickyBar.style.setProperty("--sticky-submenu-extent", submenuExtent + "px");
+          stickyBar.classList.toggle("is-submenu-open", hasOpenDropdown);
+        };
+
+        const queueSubmenuStateUpdate = function() {
+          window.requestAnimationFrame(updateSubmenuState);
+        };
+
+        const closeSubmenuState = function() {
+          if (!stickyNav) return;
+          const dropdownItems = stickyNav.querySelectorAll("li.nav-with-dropdown.is-open");
+          for (let i = 0; i < dropdownItems.length; i += 1) {
+            dropdownItems[i].classList.remove("is-open");
+          }
+          stickyBar.classList.remove("is-submenu-open");
+          stickyBar.style.setProperty("--sticky-submenu-extent", "0px");
+        };
+
+        const updateStickyState = function() {
+          const stickyBarHeight = Math.ceil(stickyBar.offsetHeight);
+          stickyBar.style.setProperty("--sticky-bg-height", stickyBarHeight + "px");
+          root.style.setProperty("--site-sticky-bar-height", stickyBarHeight + "px");
+          const viewportHeight = window.innerHeight || root.clientHeight || 0;
+          const pageHeight = Math.max(
+            root.scrollHeight,
+            root.offsetHeight,
+            document.body ? document.body.scrollHeight : 0,
+            document.body ? document.body.offsetHeight : 0
+          );
+          const isShortPage = root.classList.contains("page-short") || pageHeight <= viewportHeight * 1.22;
+          const canScroll = (root.scrollHeight - window.innerHeight) > 2;
+          const reachedTop = stickySentinel.getBoundingClientRect().top <= 0;
+          const hasScrolled = (window.scrollY || root.scrollTop || 0) > 0;
+          const isStuck = !isShortPage && canScroll && reachedTop && hasScrolled;
+          stickyBar.classList.toggle("is-stuck", isStuck);
+          updateSubmenuState();
+        };
+
+        updateStickyState();
+        window.addEventListener("scroll", updateStickyState, { passive: true });
+        window.addEventListener("resize", updateStickyState);
+        window.addEventListener("load", updateStickyState);
+        if (stickyNav) {
+          stickyNav.addEventListener("mouseover", queueSubmenuStateUpdate, { passive: true });
+          stickyNav.addEventListener("mouseout", queueSubmenuStateUpdate, { passive: true });
+          stickyNav.addEventListener("focusin", queueSubmenuStateUpdate);
+          stickyNav.addEventListener("focusout", queueSubmenuStateUpdate);
+          document.addEventListener("pointerdown", function(event) {
+            const target = event.target instanceof Element ? event.target : null;
+            if (target && stickyNav.contains(target)) return;
+            closeSubmenuState();
+          }, { passive: true });
+          window.addEventListener("blur", closeSubmenuState);
+          document.addEventListener("visibilitychange", function() {
+            if (document.hidden) closeSubmenuState();
+          });
+        }
+        const observer = new MutationObserver(updateStickyState);
+        observer.observe(root, { attributes: true, attributeFilter: ["class"] });
+      });
+    </script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        const root = document.documentElement;
+        const body = document.body;
+
+        const updateShortPageState = function() {
+          const viewportHeight = window.innerHeight || root.clientHeight || 0;
+          const pageHeight = Math.max(
+            root.scrollHeight,
+            root.offsetHeight,
+            body ? body.scrollHeight : 0,
+            body ? body.offsetHeight : 0
+          );
+          const isShort = pageHeight <= viewportHeight * 1.22;
+          root.classList.toggle("page-short", isShort);
+        };
+
+        updateShortPageState();
+        window.requestAnimationFrame(updateShortPageState);
+        window.setTimeout(updateShortPageState, 120);
+        window.addEventListener("load", updateShortPageState);
+        window.addEventListener("resize", updateShortPageState);
+        document.addEventListener("toggle", updateShortPageState, true);
+      });
+    </script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        document.querySelectorAll('p').forEach(function (p) {
+          p.innerHTML = p.innerHTML.replace(/([\u4e00-\u9fa5])([\w\d])/g, '$1 $2');
+          p.innerHTML = p.innerHTML.replace(/([\w\d])([\u4e00-\u9fa5])/g, '$1 $2');
+        });
+      });
+    </script>
+
+    
+    <script>
+      
+      const originalSetTheme = setTheme;
+      setTheme = function(theme) {
+        originalSetTheme(theme);
+
+        const dayImg = document.querySelector('.title-front-day');
+        const nightImg = document.querySelector('.title-front-night');
+        if (!dayImg || !nightImg) return;
+
+        if (theme === 'light') {
+          dayImg.style.display = 'block';
+          nightImg.style.display = 'none';
+        } else {
+          dayImg.style.display = 'none';
+          nightImg.style.display = 'block';
+        }
+
+        if (typeof window.setTitleRippleImage === 'function') {
+          window.setTitleRippleImage();
+        }
+      };
+
+      
+      document.addEventListener("DOMContentLoaded", function() {
+        const theme = localStorage.getItem('theme') || 'light';
+        setTheme(theme);
+      });
+    </script>
+
+  </body>
+</html>

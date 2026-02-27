@@ -21,3 +21,9 @@
     name = "Corner"
     url = "/corner"
     weight = 4
+
+[[main]]
+    identifier = "message"
+    name = "Message"
+    url = "/message"
+    weight = 5

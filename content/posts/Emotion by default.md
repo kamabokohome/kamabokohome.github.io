@@ -1,9 +1,7 @@
 ---
 title: "Emotion by default"
 date: 2025-01-16T16:49:42+01:00
-draft: false
 description: ''
-banner: brown
 ---
 有一个瞬间一直记忆深刻。那是初中的某个平平常常的课间，我坐在自己的位置上。周围的同学们在做什么已经记不清楚。片刻后，回过神来，我发现自己在微笑。
 

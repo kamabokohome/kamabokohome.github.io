@@ -31,3 +31,11 @@ enableEmoji = true
     # theme = "light"
     # lang = "zh-CN"
     # lazyLoading = true
+
+# Message Form (Email Delivery)
+# 推荐使用 FormSubmit:
+# actionURL = "https://formsubmit.co/your-email@example.com"
+# 首次提交后，FormSubmit 会给你的邮箱发送激活确认邮件。
+[messageForm]
+    actionURL = "https://formsubmit.co/kamabokowo@gmail.com"
+    subject = "Kamaboko Home Message"

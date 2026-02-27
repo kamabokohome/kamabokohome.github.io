@@ -1,9 +1,11 @@
 ---
 title: "四季长椅"
 date: null
-draft: false
 description: '收集了家附近大树下的长椅在四季的样子。'
-banner: "green"
+auto_gallery: true
+image_captions:
+  "241212.jpg": "2024-12-12 17:18"
+  "241124.JPG": "2024-11-24 17:57"
 ---
 {{< img src="260121.jpg" caption="2026-01-21 17:42" caption-position="center" >}}
 

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-US" class="scroll-smooth dark">
-  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="UTF-8" />
+  <head><meta charset="UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#e6f2fb" />
@@ -16,7 +16,7 @@
   name="description"
   content="收集了办公室窗外的样子。"
 />
-<link rel="canonical" href="http://localhost:1313/collection/empa-office/" />
+<link rel="canonical" href="https://kamabokohome.com/collection/empa-office/" />
 <meta name="robots" content="index,follow" />
 
 <link rel="icon" href="/img/favicon.ico" />
@@ -28,9 +28,11 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <script type="text/x-mathjax-config">MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });</script>
 
-<link rel="stylesheet" href="/css/app.css" /><style>
+<link rel="stylesheet" href="/css/app.min.855eef6ee81642ed10ef0e1259f58cdbef35dcf35492e463186488b8f13ab1a1.css" integrity="sha256-hV7vbugWQu0Q7w4SWfWM2+813PNUkuRjGGSIuPE6saE=" /><style>
       html {
         scrollbar-gutter: stable;
+        --site-content-max-width: 50rem;
+        --site-sticky-bar-height: 0px;
       }
 
       .site-sticky-bar {
@@ -41,6 +43,14 @@
         padding: 0.18rem 0;
         background-color: transparent;
         border-bottom: none;
+        --sticky-surface-bg: transparent;
+        --sticky-surface-blur: 0px;
+        --sticky-surface-shadow: none;
+        --sticky-submenu-extent: 0px;
+      }
+
+      body.is-home .site-sticky-bar {
+        margin-bottom: 0;
       }
 
       .site-sticky-bg {
@@ -51,29 +61,38 @@
         height: 0;
         display: none;
         pointer-events: none;
-        background-color: transparent;
-        backdrop-filter: none;
-        -webkit-backdrop-filter: none;
-        box-shadow: none;
+        background-color: var(--sticky-surface-bg);
+        backdrop-filter: blur(var(--sticky-surface-blur));
+        -webkit-backdrop-filter: blur(var(--sticky-surface-blur));
+        box-shadow: var(--sticky-surface-shadow);
         transition: background-color 0.2s ease, backdrop-filter 0.2s ease, box-shadow 0.2s ease, height 0.2s ease;
         z-index: 40;
+      }
+
+      .site-sticky-bar.is-stuck,
+      .site-sticky-bar.is-submenu-open {
+        --sticky-surface-bg: rgba(249, 245, 236, 0.66);
+        --sticky-surface-blur: 11px;
+        --sticky-surface-shadow: 0 5px 14px rgba(0, 0, 0, 0.1);
       }
 
       .site-sticky-bar.is-stuck .site-sticky-bg {
         height: var(--sticky-bg-height, 0px);
         display: block;
-        background-color: rgba(255, 255, 255, 0.68);
-        backdrop-filter: blur(11px);
-        -webkit-backdrop-filter: blur(11px);
-        box-shadow: 0 5px 14px rgba(0, 0, 0, 0.1);
       }
 
-      html.dark .site-sticky-bar.is-stuck .site-sticky-bg {
-        background-color: rgba(47, 47, 47, 0.68);
-        box-shadow: 0 5px 14px rgba(0, 0, 0, 0.3);
+      .site-sticky-bar.is-submenu-open .site-sticky-bg {
+        height: calc(var(--sticky-bg-height, 0px) + var(--sticky-submenu-extent, 0px));
+        display: block;
       }
 
-      html.page-short .site-sticky-bg {
+      html.dark .site-sticky-bar.is-stuck,
+      html.dark .site-sticky-bar.is-submenu-open {
+        --sticky-surface-bg: rgba(47, 47, 47, 0.68);
+        --sticky-surface-shadow: 0 5px 14px rgba(0, 0, 0, 0.3);
+      }
+
+      html.page-short .site-sticky-bar:not(.is-submenu-open) .site-sticky-bg {
         display: none !important;
       }
 
@@ -83,10 +102,87 @@
         justify-content: center;
         align-items: center;
         min-height: 2.1rem;
-        max-width: 768px;
+        max-width: var(--site-content-max-width);
         margin: 0 auto;
         padding: 0 0.625rem;
         z-index: 51;
+      }
+
+      .site-sticky-side-titles {
+        position: fixed;
+        left: 0;
+        right: 0;
+        top: 0;
+        height: var(--sticky-bg-height, 0px);
+        display: none;
+        pointer-events: none;
+        z-index: 46;
+      }
+
+      .site-sticky-side-link {
+        pointer-events: auto;
+        cursor: pointer;
+      }
+
+      .site-sticky-side-title {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        height: max(12px, min(20px, calc(var(--sticky-bg-height, 0px) - 12px)));
+        width: auto;
+        opacity: 0.9;
+        user-select: none;
+        -webkit-user-drag: none;
+      }
+
+      html:not(.dark) .site-sticky-side-title {
+         
+        filter: grayscale(1) brightness(0.38) contrast(1.08);
+        opacity: 0.94;
+      }
+
+      html:not(.dark) .site-sticky-side-title-en {
+         
+        filter: grayscale(1) brightness(0.44) contrast(1.03);
+        opacity: 0.92;
+      }
+
+      .site-sticky-side-title-cn {
+        left: max(4px, env(safe-area-inset-left, 0px));
+      }
+
+      .site-sticky-side-title-en {
+        right: max(4px, env(safe-area-inset-right, 0px));
+      }
+
+      .site-kamaboko-corner {
+        position: fixed;
+        bottom: max(12px, calc(env(safe-area-inset-bottom, 0px) + 12px));
+        right: max(18px, calc(env(safe-area-inset-right, 0px) + 18px));
+        width: clamp(35px, 5.2vw, 60px);
+        height: auto;
+        pointer-events: auto;
+        cursor: pointer;
+        user-select: none;
+        -webkit-user-drag: none;
+        transform-origin: center center;
+        will-change: transform;
+        transition: transform 140ms ease;
+        z-index: 45;
+      }
+
+      @media (hover: hover) and (pointer: fine) {
+        .site-kamaboko-corner:hover {
+          animation: kamaboko-hover-spin 900ms linear infinite;
+        }
+      }
+
+      html:not(.dark) .site-kamaboko-corner {
+        filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.34)) drop-shadow(0 2px 6px rgba(0, 0, 0, 0.14));
+      }
+
+      .site-kamaboko-corner.is-pressing {
+        animation-play-state: paused !important;
       }
 
       .site-sticky-nav {
@@ -98,7 +194,112 @@
         margin: 0;
         padding: 0;
         align-items: center;
-        gap: 2.9rem;
+        gap: 3.8rem;
+        font-size: 0.82rem;
+      }
+
+      .site-sticky-nav nav li.nav-menu-item {
+        position: relative;
+      }
+
+      .site-sticky-nav nav li.nav-with-dropdown::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        top: 100%;
+        width: 160%;
+        height: 10px;
+      }
+
+      .site-sticky-nav nav a {
+        font-weight: 600;
+      }
+
+      .site-sticky-nav nav li.nav-menu-item > a {
+        position: relative;
+        display: inline-block;
+        padding: 0.26rem 0.46rem;
+        border-radius: 0.48rem;
+        transition: color 130ms ease;
+        z-index: 0;
+      }
+
+      .site-sticky-nav nav li.nav-menu-item > a::before {
+        content: "";
+        position: absolute;
+        inset: -0.06rem -0.1rem;
+        border-radius: 0.48rem;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 130ms ease;
+        z-index: -1;
+      }
+
+      .site-sticky-nav nav li.nav-menu-item > a:hover::before,
+      .site-sticky-nav nav li.nav-menu-item > a:focus-visible::before {
+        opacity: 1;
+      }
+
+      .site-sticky-nav nav li.nav-menu-item > a:hover::before,
+      .site-sticky-nav nav li.nav-menu-item > a:focus-visible::before {
+        background: rgba(177, 167, 147, 0.18);
+      }
+
+      html.dark .site-sticky-nav nav li.nav-menu-item > a:hover::before,
+      html.dark .site-sticky-nav nav li.nav-menu-item > a:focus-visible::before {
+        background: rgba(123, 135, 152, 0.25);
+      }
+
+      .site-sticky-nav nav .nav-submenu {
+        position: absolute;
+        left: 50%;
+        top: calc(100% - 1px);
+        transform: translateX(-50%);
+        margin: 0;
+        padding: 0.38rem 0.26rem 0.26rem;
+        min-width: 8.2rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.12rem;
+        border-radius: 0 0 0.54rem 0.54rem;
+        border: none;
+        background: transparent;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        box-shadow: none;
+        overflow: hidden;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 130ms ease;
+        z-index: 60;
+      }
+
+      .site-sticky-nav nav .nav-submenu a {
+        display: block;
+        font-size: 0.72rem;
+        line-height: 1.35;
+        text-align: center;
+        text-decoration: none;
+        padding: 0.36rem 0.56rem;
+        border-radius: 0.48rem;
+        white-space: nowrap;
+      }
+
+      .site-sticky-nav nav .nav-submenu a:hover,
+      .site-sticky-nav nav .nav-submenu a:focus-visible {
+        background: rgba(177, 167, 147, 0.18);
+      }
+
+      html.dark .site-sticky-nav nav .nav-submenu a:hover,
+      html.dark .site-sticky-nav nav .nav-submenu a:focus-visible {
+        background: rgba(123, 135, 152, 0.25);
+      }
+
+      .site-sticky-nav nav li.nav-with-dropdown:hover > .nav-submenu,
+      .site-sticky-nav nav li.nav-with-dropdown.is-open > .nav-submenu {
+        opacity: 1;
+        pointer-events: auto;
       }
 
       .site-sticky-nav .nav-theme-item {
@@ -106,517 +307,514 @@
         align-items: center;
       }
 
-      @media (max-width: 640px) {
+      @media (max-width: 639px) {
+        .site-sticky-inner {
+          padding-left: 0.25rem;
+          padding-right: 0.25rem;
+        }
+
+        .site-sticky-nav {
+          width: 100%;
+          justify-content: center;
+        }
+
+        .site-sticky-nav nav {
+          width: 100%;
+        }
+
         .site-sticky-nav nav ul {
-          gap: 1.35rem;
+          width: min(100%, 22rem);
+          margin: 0 auto;
+          justify-content: space-between;
+          gap: 0;
+          font-size: 0.78rem;
+        }
+      }
+
+      @media (min-width: 640px) {
+        .site-kamaboko-corner {
+          width: clamp(31px, 4.6vw, 54px);
+        }
+
+        body.is-home .site-sticky-bar:not(.is-stuck):not(.is-submenu-open) .site-sticky-nav nav a {
+          color: rgba(239, 239, 242, 0.86);
+        }
+
+        body.is-home .site-sticky-bar:not(.is-stuck):not(.is-submenu-open) .site-sticky-nav nav a:hover,
+        body.is-home .site-sticky-bar:not(.is-stuck):not(.is-submenu-open) .site-sticky-nav nav a.active {
+          color: rgba(246, 246, 248, 0.94);
+        }
+
+        body.is-home .site-sticky-bar.is-submenu-open .site-sticky-nav nav a {
+          color: rgb(156 163 175 / 1);
+        }
+
+        body.is-home .site-sticky-bar.is-submenu-open .site-sticky-nav nav a:hover,
+        body.is-home .site-sticky-bar.is-submenu-open .site-sticky-nav nav a.active {
+          color: rgb(55 65 81 / 1);
+        }
+
+        html.dark body.is-home .site-sticky-bar.is-submenu-open .site-sticky-nav nav a {
+          color: rgb(156 163 175 / 1);
+        }
+
+        html.dark body.is-home .site-sticky-bar.is-submenu-open .site-sticky-nav nav a:hover,
+        html.dark body.is-home .site-sticky-bar.is-submenu-open .site-sticky-nav nav a.active {
+          color: rgb(229 231 235 / 1);
+        }
+
+        body:not(.is-home) .site-sticky-bar:not(.is-stuck) .site-sticky-side-titles {
+          display: block;
+        }
+
+        .site-sticky-bar.is-stuck .site-sticky-side-titles,
+        .site-sticky-bar.is-submenu-open .site-sticky-side-titles {
+          display: block;
+        }
+
+        .site-sticky-side-title-cn {
+          left: max(18px, env(safe-area-inset-left, 0px));
+        }
+
+        .site-sticky-side-title-en {
+          right: max(18px, env(safe-area-inset-right, 0px));
+        }
+      }
+
+      #global-ripple-layer {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        overflow: hidden;
+        z-index: 64;
+      }
+
+      #kamaboko-rain-layer {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        overflow: hidden;
+        z-index: 63;
+      }
+
+      #kamaboko-center-layer {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        overflow: hidden;
+        z-index: 62;
+      }
+
+      #kamaboko-roll-layer {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        overflow: hidden;
+        z-index: 61;
+      }
+
+      .kamaboko-rain-piece {
+        position: absolute;
+        top: -18vh;
+        left: 0;
+        width: var(--kamaboko-rain-size, 28px);
+        height: auto;
+        opacity: var(--kamaboko-rain-opacity, 0.95);
+        transform-origin: center center;
+        will-change: transform, opacity;
+        animation: kamaboko-rain-fall var(--kamaboko-rain-duration, 2200ms) linear forwards;
+      }
+
+      html:not(.dark) .kamaboko-rain-piece {
+        filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.26));
+      }
+
+      .kamaboko-center-piece {
+        position: fixed;
+        left: 50%;
+        top: 50%;
+        width: var(--kamaboko-center-base-size, 120px);
+        opacity: 0.95;
+        transform-origin: center center;
+        will-change: transform;
+        animation: kamaboko-center-bloom-scale 4000ms linear forwards;
+      }
+
+      .kamaboko-center-piece-img {
+        display: block;
+        width: 100%;
+        height: auto;
+        transform-origin: center center;
+        will-change: transform;
+        animation: kamaboko-center-spin 4000ms linear forwards;
+      }
+
+      html:not(.dark) .kamaboko-center-piece-img {
+        filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.22));
+      }
+
+      .kamaboko-roll-piece {
+        position: fixed;
+        left: 0;
+        top: 50%;
+        width: var(--kamaboko-roll-size, 120px);
+        height: auto;
+        opacity: 0.95;
+        transform-origin: center center;
+        will-change: transform;
+        animation: kamaboko-roll-across var(--kamaboko-roll-duration, 2200ms) linear forwards;
+      }
+
+      html:not(.dark) .kamaboko-roll-piece {
+        filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.22));
+      }
+
+      @keyframes kamaboko-hover-spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      @keyframes kamaboko-center-bloom-scale {
+        0% {
+          transform:
+            translate3d(-50%, -50%, 0)
+            scale(var(--kamaboko-center-scale-min, 0.02));
+        }
+        50% {
+          transform:
+            translate3d(-50%, -50%, 0)
+            scale(var(--kamaboko-center-scale-max, 5));
+        }
+        100% {
+          transform:
+            translate3d(-50%, -50%, 0)
+            scale(var(--kamaboko-center-scale-min, 0.02));
+        }
+      }
+
+      @keyframes kamaboko-center-spin {
+        0% {
+          transform: rotate(var(--kamaboko-center-rot-start, 0deg));
+        }
+        100% {
+          transform: rotate(var(--kamaboko-center-rot-end, 4320deg));
+        }
+      }
+
+      @keyframes kamaboko-rain-fall {
+        0% {
+          transform:
+            translate3d(-50%, -8vh, 0)
+            rotate(var(--kamaboko-rain-rot-start, 0deg))
+            scale(var(--kamaboko-rain-scale, 1));
+        }
+        100% {
+          transform:
+            translate3d(calc(-50% + var(--kamaboko-rain-drift, 0px)), 130vh, 0)
+            rotate(var(--kamaboko-rain-rot-end, 4320deg))
+            scale(var(--kamaboko-rain-scale, 1));
+        }
+      }
+
+      @keyframes kamaboko-roll-across {
+        0% {
+          transform:
+            translate3d(var(--kamaboko-roll-start-x, -180px), -50%, 0)
+            rotate(var(--kamaboko-roll-rot-start, 0deg));
+        }
+        100% {
+          transform:
+            translate3d(var(--kamaboko-roll-end-x, calc(100vw + 180px)), -50%, 0)
+            rotate(var(--kamaboko-roll-rot-end, 1080deg));
+        }
+      }
+
+      .global-ripple {
+        position: absolute;
+        --bubble-size: 32px;
+        --bubble-line: 0.28px;
+        --bubble-sway-x: 1.2px;
+        --bubble-sway-y: 0.8px;
+        width: 1px;
+        height: 1px;
+        transform: translate(-50%, -50%);
+        pointer-events: none;
+      }
+
+      .global-ripple .bubble-drift {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 0;
+        height: 0;
+        transform: translate(-50%, -50%);
+        animation: bubble-drift 1.2s ease-out forwards;
+      }
+
+      .global-ripple .bubble-shell,
+      .global-ripple .bubble-highlight,
+      .global-ripple .bubble-highlight-2,
+      .global-ripple .bubble-dot {
+        position: absolute;
+        left: 0;
+        top: 0;
+        opacity: 0;
+      }
+
+      .global-ripple .bubble-shell {
+        width: var(--bubble-size);
+        height: var(--bubble-size);
+        border-radius: 9999px;
+        transform: translate(-50%, -50%) scale(0.84);
+        background:
+          radial-gradient(
+            circle at center,
+            rgba(255, 255, 255, 0) 0%,
+            rgba(255, 255, 255, 0) 56%,
+            rgba(209, 232, 255, 0.06) 78%,
+            rgba(255, 220, 241, 0.07) 100%
+          ),
+          conic-gradient(
+            from 24deg,
+            rgba(255, 198, 234, 0.07) 0deg,
+            rgba(196, 224, 255, 0.07) 94deg,
+            rgba(205, 255, 238, 0.06) 182deg,
+            rgba(255, 241, 196, 0.06) 274deg,
+            rgba(255, 198, 234, 0.07) 360deg
+          ),
+          radial-gradient(circle at 28% 26%, rgba(255, 255, 255, 0.28) 0%, rgba(255, 255, 255, 0) 34%),
+          radial-gradient(circle at 72% 74%, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0) 32%),
+          radial-gradient(circle at center, rgba(255, 255, 255, 0.005) 0%, rgba(255, 255, 255, 0) 68%);
+        backdrop-filter: blur(0.22px) saturate(112%);
+        -webkit-backdrop-filter: blur(0.22px) saturate(112%);
+        box-shadow:
+          inset 0 0 0 var(--bubble-line) rgba(255, 255, 255, 0.92),
+          inset 0 0 0 calc(var(--bubble-line) + 0.1px) rgba(172, 214, 255, 0.22),
+          inset calc(var(--bubble-size) * 0.17) calc(var(--bubble-size) * -0.13) calc(var(--bubble-size) * 0.14) rgba(186, 229, 255, 0.11),
+          inset calc(var(--bubble-size) * -0.16) calc(var(--bubble-size) * 0.15) calc(var(--bubble-size) * 0.15) rgba(255, 196, 231, 0.1),
+          0 0 calc(var(--bubble-size) * 0.16) rgba(255, 255, 255, 0.18),
+          0 0 calc(var(--bubble-size) * 0.3) rgba(186, 229, 255, 0.16);
+        animation: bubble-shell-fade 1.2s ease-out forwards;
+      }
+
+      html.dark .global-ripple .bubble-shell {
+        backdrop-filter: blur(1.2px) saturate(132%);
+        -webkit-backdrop-filter: blur(1.2px) saturate(132%);
+        box-shadow:
+          inset 0 0 0 var(--bubble-line) rgba(255, 255, 255, 0.88),
+          inset 0 0 0 calc(var(--bubble-line) + 0.1px) rgba(172, 214, 255, 0.2),
+          inset calc(var(--bubble-size) * 0.17) calc(var(--bubble-size) * -0.13) calc(var(--bubble-size) * 0.14) rgba(186, 229, 255, 0.18),
+          inset calc(var(--bubble-size) * -0.16) calc(var(--bubble-size) * 0.15) calc(var(--bubble-size) * 0.15) rgba(255, 196, 231, 0.17),
+          0 0 calc(var(--bubble-size) * 0.22) rgba(255, 255, 255, 0.16);
+      }
+
+      .global-ripple .bubble-highlight {
+        width: calc(var(--bubble-size) * 0.2);
+        height: calc(var(--bubble-size) * 0.06);
+        border-radius: 9999px;
+        transform: translate(calc(-50% - var(--bubble-size) * 0.18), calc(-50% - var(--bubble-size) * 0.18)) rotate(-38deg);
+        background: rgba(255, 255, 255, 0.9);
+        box-shadow: 0 0 1px rgba(255, 255, 255, 0.32);
+        animation: bubble-mark-fade 1.2s ease-out forwards;
+      }
+
+      .global-ripple .bubble-highlight-2 {
+        width: calc(var(--bubble-size) * 0.16);
+        height: calc(var(--bubble-size) * 0.05);
+        border-radius: 9999px;
+        transform: translate(calc(-50% + var(--bubble-size) * 0.2), calc(-50% + var(--bubble-size) * 0.2)) rotate(142deg);
+        background: rgba(255, 255, 255, 0.72);
+        box-shadow: 0 0 1px rgba(255, 255, 255, 0.22);
+        animation: bubble-mark-fade 1.2s ease-out forwards;
+      }
+
+      .global-ripple .bubble-dot {
+        width: calc(var(--bubble-size) * 0.045);
+        height: calc(var(--bubble-size) * 0.045);
+        border-radius: 9999px;
+        transform: translate(calc(-50% - var(--bubble-size) * 0.28), calc(-50% - var(--bubble-size) * 0.1));
+        background: rgba(255, 255, 255, 0.82);
+        box-shadow: 0 0 1px rgba(255, 255, 255, 0.3);
+        animation: bubble-mark-fade 1.2s ease-out forwards;
+      }
+
+      html.dark .global-ripple .bubble-highlight {
+        background: rgba(255, 255, 255, 0.84);
+        filter: blur(0.2px);
+      }
+
+      html.dark .global-ripple .bubble-highlight-2 {
+        background: rgba(255, 255, 255, 0.6);
+        filter: blur(0.2px);
+      }
+
+      html.dark .global-ripple .bubble-dot {
+        background: rgba(255, 255, 255, 0.72);
+      }
+
+      .global-meteor {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: var(--meteor-length, 86px);
+        height: 0.55px;
+        border-radius: 9999px;
+        pointer-events: none;
+        opacity: 0;
+        transform: translate(-50%, -50%) rotate(var(--meteor-angle, 169deg)) translateX(0);
+        transform-origin: left center;
+        background: linear-gradient(
+          90deg,
+          rgba(255, 255, 255, 0.03) 0%,
+          rgba(255, 255, 255, 0.18) 22%,
+          rgba(255, 255, 255, 0.92) 58%,
+          rgba(255, 255, 255, 0.12) 100%
+        );
+        box-shadow:
+          0 0 3px rgba(207, 226, 255, 0.44),
+          0 0 1px rgba(255, 255, 255, 0.8);
+        animation: meteor-pass var(--meteor-duration, 760ms) cubic-bezier(0.2, 0.65, 0.2, 1) forwards;
+      }
+
+      @keyframes bubble-shell-fade {
+        0% {
+          transform: translate(-50%, -50%) scale(0.86);
+          opacity: 0;
+        }
+        12% {
+          opacity: 0.96;
+        }
+        99% {
+          opacity: 0.96;
+        }
+        100% {
+          transform: translate(-50%, -50%) scale(1.03);
+          opacity: 0;
+        }
+      }
+
+      @keyframes bubble-drift {
+        0% {
+          transform: translate(-50%, -50%) translate(0, 0);
+        }
+        60% {
+          transform: translate(-50%, -50%) translate(calc(var(--bubble-sway-x) * 0.42), calc(var(--bubble-sway-y) * -0.32));
+        }
+        100% {
+          transform: translate(-50%, -50%) translate(calc(var(--bubble-sway-x) * 0.1), calc(var(--bubble-sway-y) * -0.08));
+        }
+      }
+
+      @keyframes bubble-mark-fade {
+        0% {
+          opacity: 0;
+        }
+        12% {
+          opacity: 0.94;
+        }
+        99% {
+          opacity: 0.94;
+        }
+        100% {
+          opacity: 0;
+        }
+      }
+
+      @keyframes meteor-pass {
+        0% {
+          opacity: 0;
+          transform: translate(-50%, -50%) rotate(var(--meteor-angle, 169deg)) translateX(calc(-1 * var(--meteor-pre, 72px)));
+        }
+        10% {
+          opacity: 0.96;
+        }
+        100% {
+          opacity: 0;
+          transform: translate(-50%, -50%) rotate(var(--meteor-angle, 169deg)) translateX(var(--meteor-post, 72px));
         }
       }
     </style>
   </head>
 
-  <body class="max-w-screen-md mx-auto px-2.5" style="min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column;">
-
-    
-    <div class="flex flex-col items-center px-1.5 w-full" style="margin-bottom: 2px;">
-      <header class="flex flex-col w-full gap-3">
-  <div class="w-full flex justify-center">
-    <a href="/" class="title-interactive" aria-label="Site title image">
-      <div class="title-water-layer" aria-hidden="true"></div>
-      <img
-        src="/img/day_back.png"
-        class="title-back-day-src"
-        style="display:none;"
-        aria-hidden="true"
-        onerror="this.onerror=null;this.src='\/img\/title_day.png';"
-      >
-      <img
-        src="/img/night_back.png"
-        class="title-back-night-src"
-        style="display:none;"
-        aria-hidden="true"
-        onerror="this.onerror=null;this.src='\/img\/title_night.png';"
-      >
-      <img
-        src="/img/day_front.png"
-        class="title-front-day"
-        style="display:block;"
-        onerror="this.onerror=null;this.src='\/img\/title_day1.png';"
-      >
-      <img
-        src="/img/night_front.png"
-        class="title-front-night"
-        style="display:none;"
-        onerror="this.onerror=null;this.src='\/img\/title_night1.png';"
-      >
-    </a>
-  </div>
-</header>
-
-<style>
-  .title-interactive {
-    position: relative;
-    display: inline-block;
-    line-height: 0;
-    overflow: hidden;
-  }
-
-  .title-interactive .title-water-layer {
-    position: absolute;
-    inset: 0;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: contain;
-    z-index: 1;
-  }
-
-  .title-interactive .title-front-day,
-  .title-interactive .title-front-night {
-    display: block;
-    position: relative;
-    z-index: 2;
-    pointer-events: none;
-  }
-
-  #global-ripple-layer {
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    overflow: hidden;
-    z-index: 64;
-  }
-
-  .global-ripple {
-    position: absolute;
-    --bubble-size: 32px;
-    --bubble-line: 0.28px;
-    --bubble-sway-x: 1.2px;
-    --bubble-sway-y: 0.8px;
-    width: 1px;
-    height: 1px;
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-  }
-
-  .global-ripple .bubble-drift {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    width: 0;
-    height: 0;
-    transform: translate(-50%, -50%);
-    animation: bubble-drift 1.2s ease-out forwards;
-  }
-
-  .global-ripple .bubble-shell,
-  .global-ripple .bubble-highlight,
-  .global-ripple .bubble-highlight-2,
-  .global-ripple .bubble-dot {
-    position: absolute;
-    left: 0;
-    top: 0;
-    opacity: 0;
-  }
-
-  .global-ripple .bubble-shell {
-    width: var(--bubble-size);
-    height: var(--bubble-size);
-    border-radius: 9999px;
-    transform: translate(-50%, -50%) scale(0.84);
-    background:
-      radial-gradient(
-        circle at center,
-        rgba(255, 255, 255, 0) 0%,
-        rgba(255, 255, 255, 0) 56%,
-        rgba(209, 232, 255, 0.09) 78%,
-        rgba(255, 220, 241, 0.11) 100%
-      ),
-      conic-gradient(
-        from 24deg,
-        rgba(255, 198, 234, 0.11) 0deg,
-        rgba(196, 224, 255, 0.11) 94deg,
-        rgba(205, 255, 238, 0.09) 182deg,
-        rgba(255, 241, 196, 0.09) 274deg,
-        rgba(255, 198, 234, 0.11) 360deg
-      ),
-      radial-gradient(circle at 28% 26%, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0) 34%),
-      radial-gradient(circle at 72% 74%, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 32%),
-      radial-gradient(circle at center, rgba(255, 255, 255, 0.01) 0%, rgba(255, 255, 255, 0) 68%);
-    backdrop-filter: blur(0.35px) saturate(108%);
-    -webkit-backdrop-filter: blur(0.35px) saturate(108%);
-    box-shadow:
-      inset 0 0 0 var(--bubble-line) rgba(255, 255, 255, 0.82),
-      inset 0 0 0 calc(var(--bubble-line) + 0.1px) rgba(172, 214, 255, 0.17),
-      inset calc(var(--bubble-size) * 0.17) calc(var(--bubble-size) * -0.13) calc(var(--bubble-size) * 0.14) rgba(186, 229, 255, 0.14),
-      inset calc(var(--bubble-size) * -0.16) calc(var(--bubble-size) * 0.15) calc(var(--bubble-size) * 0.15) rgba(255, 196, 231, 0.13),
-      0 0 calc(var(--bubble-size) * 0.14) rgba(255, 255, 255, 0.12),
-      0 0 calc(var(--bubble-size) * 0.28) rgba(186, 229, 255, 0.11);
-    animation: bubble-shell-fade 1.2s ease-out forwards;
-  }
-
-  html.dark .global-ripple .bubble-shell {
-    backdrop-filter: blur(1.2px) saturate(132%);
-    -webkit-backdrop-filter: blur(1.2px) saturate(132%);
-    box-shadow:
-      inset 0 0 0 var(--bubble-line) rgba(255, 255, 255, 0.88),
-      inset 0 0 0 calc(var(--bubble-line) + 0.1px) rgba(172, 214, 255, 0.2),
-      inset calc(var(--bubble-size) * 0.17) calc(var(--bubble-size) * -0.13) calc(var(--bubble-size) * 0.14) rgba(186, 229, 255, 0.18),
-      inset calc(var(--bubble-size) * -0.16) calc(var(--bubble-size) * 0.15) calc(var(--bubble-size) * 0.15) rgba(255, 196, 231, 0.17),
-      0 0 calc(var(--bubble-size) * 0.22) rgba(255, 255, 255, 0.16);
-  }
-
-  .global-ripple .bubble-highlight {
-    width: calc(var(--bubble-size) * 0.2);
-    height: calc(var(--bubble-size) * 0.06);
-    border-radius: 9999px;
-    transform: translate(calc(-50% - var(--bubble-size) * 0.18), calc(-50% - var(--bubble-size) * 0.18)) rotate(-38deg);
-    background: rgba(255, 255, 255, 0.82);
-    box-shadow: 0 0 1px rgba(255, 255, 255, 0.22);
-    animation: bubble-mark-fade 1.2s ease-out forwards;
-  }
-
-  .global-ripple .bubble-highlight-2 {
-    width: calc(var(--bubble-size) * 0.16);
-    height: calc(var(--bubble-size) * 0.05);
-    border-radius: 9999px;
-    transform: translate(calc(-50% + var(--bubble-size) * 0.2), calc(-50% + var(--bubble-size) * 0.2)) rotate(142deg);
-    background: rgba(255, 255, 255, 0.6);
-    box-shadow: 0 0 1px rgba(255, 255, 255, 0.15);
-    animation: bubble-mark-fade 1.2s ease-out forwards;
-  }
-
-  .global-ripple .bubble-dot {
-    width: calc(var(--bubble-size) * 0.045);
-    height: calc(var(--bubble-size) * 0.045);
-    border-radius: 9999px;
-    transform: translate(calc(-50% - var(--bubble-size) * 0.28), calc(-50% - var(--bubble-size) * 0.1));
-    background: rgba(255, 255, 255, 0.72);
-    box-shadow: 0 0 1px rgba(255, 255, 255, 0.2);
-    animation: bubble-mark-fade 1.2s ease-out forwards;
-  }
-
-  html.dark .global-ripple .bubble-highlight {
-    background: rgba(255, 255, 255, 0.84);
-    filter: blur(0.2px);
-  }
-
-  html.dark .global-ripple .bubble-highlight-2 {
-    background: rgba(255, 255, 255, 0.6);
-    filter: blur(0.2px);
-  }
-
-  html.dark .global-ripple .bubble-dot {
-    background: rgba(255, 255, 255, 0.72);
-  }
-
-  .global-meteor {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: var(--meteor-length, 86px);
-    height: 0.55px;
-    border-radius: 9999px;
-    pointer-events: none;
-    opacity: 0;
-    transform: translate(-50%, -50%) rotate(var(--meteor-angle, 169deg)) translateX(0);
-    transform-origin: left center;
-    background: linear-gradient(
-      90deg,
-      rgba(255, 255, 255, 0.03) 0%,
-      rgba(255, 255, 255, 0.18) 22%,
-      rgba(255, 255, 255, 0.92) 58%,
-      rgba(255, 255, 255, 0.12) 100%
-    );
-    box-shadow:
-      0 0 3px rgba(207, 226, 255, 0.44),
-      0 0 1px rgba(255, 255, 255, 0.8);
-    animation: meteor-pass var(--meteor-duration, 760ms) cubic-bezier(0.2, 0.65, 0.2, 1) forwards;
-  }
-
-  @keyframes bubble-shell-fade {
-    0% {
-      transform: translate(-50%, -50%) scale(0.86);
-      opacity: 0;
-    }
-    12% {
-      opacity: 0.96;
-    }
-    99% {
-      opacity: 0.96;
-    }
-    100% {
-      transform: translate(-50%, -50%) scale(1.03);
-      opacity: 0;
-    }
-  }
-
-  @keyframes bubble-drift {
-    0% {
-      transform: translate(-50%, -50%) translate(0, 0);
-    }
-    60% {
-      transform: translate(-50%, -50%) translate(calc(var(--bubble-sway-x) * 0.42), calc(var(--bubble-sway-y) * -0.32));
-    }
-    100% {
-      transform: translate(-50%, -50%) translate(calc(var(--bubble-sway-x) * 0.1), calc(var(--bubble-sway-y) * -0.08));
-    }
-  }
-
-  @keyframes bubble-mark-fade {
-    0% {
-      opacity: 0;
-    }
-    12% {
-      opacity: 0.94;
-    }
-    99% {
-      opacity: 0.94;
-    }
-    100% {
-      opacity: 0;
-    }
-  }
-
-  @keyframes meteor-pass {
-    0% {
-      opacity: 0;
-      transform: translate(-50%, -50%) rotate(var(--meteor-angle, 169deg)) translateX(calc(-1 * var(--meteor-pre, 72px)));
-    }
-    10% {
-      opacity: 0.96;
-    }
-    100% {
-      opacity: 0;
-      transform: translate(-50%, -50%) rotate(var(--meteor-angle, 169deg)) translateX(var(--meteor-post, 72px));
-    }
-  }
-
-</style>
-
-<script src="/js/jquery-1.11.0.min.js"></script>
-<script src="/js/jquery.ripples.min.js?v=20260221j"></script>
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      return;
-    }
-
-    const root = document.documentElement;
-    let layer = null;
-
-    const createLayer = function () {
-      if (layer) return;
-      layer = document.createElement("div");
-      layer.id = "global-ripple-layer";
-      document.body.appendChild(layer);
-    };
-
-    const removeLayer = function () {
-      if (!layer) return;
-      layer.remove();
-      layer = null;
-    };
-
-    const spawnRipple = function (event) {
-      if (!layer) return;
-      if (root.classList.contains("dark")) return;
-      const titleArea = document.querySelector(".title-interactive");
-      if (titleArea && titleArea.contains(event.target)) return;
-      const homeRippleArea = document.querySelector(".home-ripple-image");
-      if (homeRippleArea && homeRippleArea.contains(event.target)) return;
-
-      const ripple = document.createElement("div");
-      ripple.className = "global-ripple";
-      const bubbleSize = 5 + Math.random() * 55;
-      const lineWidth = Math.max(0.1, Math.min(0.48, 0.1 + bubbleSize * 0.0062));
-      const swayXDir = Math.random() < 0.5 ? -1 : 1;
-      const swayYDir = Math.random() < 0.5 ? -1 : 1;
-      const swayX = (0.28 + Math.random() * 0.95) * swayXDir;
-      const swayY = (0.22 + Math.random() * 0.7) * swayYDir;
-      ripple.style.setProperty("--bubble-size", bubbleSize.toFixed(1) + "px");
-      ripple.style.setProperty("--bubble-line", lineWidth.toFixed(2) + "px");
-      ripple.style.setProperty("--bubble-sway-x", swayX.toFixed(2) + "px");
-      ripple.style.setProperty("--bubble-sway-y", swayY.toFixed(2) + "px");
-      ripple.style.left = event.clientX + "px";
-      ripple.style.top = event.clientY + "px";
-      ripple.innerHTML = "<span class=\"bubble-drift\"><span class=\"bubble-shell\"></span><span class=\"bubble-highlight\"></span><span class=\"bubble-highlight-2\"></span><span class=\"bubble-dot\"></span></span>";
-      layer.appendChild(ripple);
-
-      window.setTimeout(function () {
-        ripple.remove();
-      }, 1200);
-    };
-
-    const spawnMeteor = function (event) {
-      if (!layer) return;
-      if (!root.classList.contains("dark")) return;
-      const titleArea = document.querySelector(".title-interactive");
-      if (titleArea && titleArea.contains(event.target)) return;
-      const homeRippleArea = document.querySelector(".home-ripple-image");
-      if (homeRippleArea && homeRippleArea.contains(event.target)) return;
-
-      const meteor = document.createElement("span");
-      meteor.className = "global-meteor";
-      const sweep = 92 + Math.random() * 50;
-      const pre = sweep * 0.5;
-      const post = sweep * 0.5;
-      const length = 34 + Math.random() * 38;
-      const tilt = Math.random() * 45;
-      const angle = Math.random() < 0.5 ? tilt : 180 - tilt;
-      meteor.style.setProperty("--meteor-length", length.toFixed(1) + "px");
-      meteor.style.setProperty("--meteor-pre", pre.toFixed(1) + "px");
-      meteor.style.setProperty("--meteor-post", post.toFixed(1) + "px");
-      meteor.style.setProperty("--meteor-angle", angle.toFixed(1) + "deg");
-      meteor.style.left = (event.clientX + 14) + "px";
-      meteor.style.top = (event.clientY - 3) + "px";
-      layer.appendChild(meteor);
-
-      window.setTimeout(function () {
-        meteor.remove();
-      }, 840);
-    };
-
-    const spawnClickFx = function (event) {
-      if (event.pointerType === "mouse" && event.button !== 0) return;
-      if (root.classList.contains("dark")) {
-        spawnMeteor(event);
-      } else {
-        spawnRipple(event);
-      }
-    };
-
-    const syncRippleMode = function () {
-      createLayer();
-    };
-
-    syncRippleMode();
-    document.addEventListener("pointerdown", spawnClickFx, { passive: true });
-    const observer = new MutationObserver(syncRippleMode);
-    observer.observe(root, { attributes: true, attributeFilter: ["class"] });
-  });
-</script>
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const title = document.querySelector(".title-interactive");
-    const waterLayer = title ? title.querySelector(".title-water-layer") : null;
-    const root = document.documentElement;
-    const dayFront = title ? title.querySelector(".title-front-day") : null;
-    const nightFront = title ? title.querySelector(".title-front-night") : null;
-    const dayBack = title ? title.querySelector(".title-back-day-src") : null;
-    const nightBack = title ? title.querySelector(".title-back-night-src") : null;
-    if (!title || !waterLayer || !dayFront || !nightFront || !dayBack || !nightBack) return;
-    const TITLE_RIPPLE_ENABLED = false;
-    const hasRipples = TITLE_RIPPLE_ENABLED && !!(window.jQuery && window.jQuery.fn && window.jQuery.fn.ripples);
-    const LIGHT_PERTURBANCE = 0.052;
-    const DARK_PERTURBANCE = 0.044;
-    const $water = hasRipples ? window.jQuery(waterLayer) : null;
-
-    const getCurrentBackSrc = function () {
-      const back = root.classList.contains("dark") ? nightBack : dayBack;
-      return (back && (back.currentSrc || back.getAttribute("src"))) || "";
-    };
-
-    const syncTitleRippleImage = function () {
-      const isDark = root.classList.contains("dark");
-      dayFront.style.display = isDark ? "none" : "block";
-      nightFront.style.display = isDark ? "block" : "none";
-
-      if ($water && $water.data("ripples")) {
-        try {
-          $water.ripples("set", "perturbance", isDark ? DARK_PERTURBANCE : LIGHT_PERTURBANCE);
-        } catch (_) {}
-      }
-
-      const src = getCurrentBackSrc();
-      if (!src) return;
-      if ($water && $water.data("ripples")) {
-        try {
-          $water.ripples("set", "imageUrl", src);
-        } catch (_) {}
-      } else {
-        waterLayer.style.backgroundImage = "url('" + src + "')";
-      }
-    };
-
-    syncTitleRippleImage();
-
-    if (hasRipples) {
-      try {
-        $water.ripples({
-          resolution: 256,
-          dropRadius: 24,
-          perturbance: root.classList.contains("dark") ? DARK_PERTURBANCE : LIGHT_PERTURBANCE,
-          interactive: true,
-          crossOrigin: ""
-        });
-        syncTitleRippleImage();
-        const rect = title.getBoundingClientRect();
-        if (rect.width > 0 && rect.height > 0) {
-          $water.ripples("drop", rect.width * 0.5, rect.height * 0.52, 26, 0.18);
-          $water.ripples("drop", rect.width * 0.32, rect.height * 0.68, 18, 0.11);
-        }
-      } catch (_) {}
-
-      let lastMoveDropAt = 0;
-      const dropAtPointer = function (event, radius, strength) {
-        if (!$water.data("ripples")) return;
-        const rect = title.getBoundingClientRect();
-        if (rect.width <= 0 || rect.height <= 0) return;
-        const x = event.clientX - rect.left;
-        const y = event.clientY - rect.top;
-        if (x < 0 || y < 0 || x > rect.width || y > rect.height) return;
-        try {
-          $water.ripples("drop", x, y, radius, strength);
-        } catch (_) {}
-      };
-
-      title.addEventListener("pointermove", function (event) {
-        const now = Date.now();
-        if (now - lastMoveDropAt < 28) return;
-        lastMoveDropAt = now;
-        dropAtPointer(event, 13, 0.03);
-      }, { passive: true });
-
-      title.addEventListener("pointerdown", function (event) {
-        if (event.button !== 0) return;
-        dropAtPointer(event, 24, 0.17);
-      }, { passive: true });
-
-    }
-
-    const observer = new MutationObserver(syncTitleRippleImage);
-    observer.observe(root, { attributes: true, attributeFilter: ["class"] });
-    window.setTitleRippleImage = syncTitleRippleImage;
-  });
-</script>
-
-    </div>
+  <body class="mx-auto px-2.5" style="max-width: var(--site-content-max-width); min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column;">
 
     
     <div class="site-sticky-sentinel" aria-hidden="true"></div>
     <header class="site-sticky-bar">
       <div class="site-sticky-bg" aria-hidden="true"></div>
+      <div class="site-sticky-side-titles">
+        <a class="site-sticky-side-link" href="/" aria-label="回到主页（中文标题）">
+          <img class="site-sticky-side-title site-sticky-side-title-cn" src="/img/title_cn.png" alt="" loading="lazy">
+        </a>
+        <a class="site-sticky-side-link" href="/" aria-label="Back to home (English title)">
+          <img class="site-sticky-side-title site-sticky-side-title-en" src="/img/title_en.png" alt="" loading="lazy">
+        </a>
+      </div>
       <div class="site-sticky-inner">
         <div class="site-sticky-nav">
           <nav>
-  <ul><li>
+  <ul><li class="nav-menu-item">
       <a href="/" class="">
         Home
       </a>
+      
     </li>
-    <li>
+    <li class="nav-menu-item nav-with-dropdown">
       <a href="/posts" class="">
         Posts
       </a>
+      
+        <ul class="nav-submenu" aria-label="Posts years">
+          
+            <li>
+              <a href="/posts/#posts-year-2026">2026</a>
+            </li>
+          
+            <li>
+              <a href="/posts/#posts-year-2025">2025</a>
+            </li>
+          
+            <li>
+              <a href="/posts/#posts-year-2024">2024</a>
+            </li>
+          
+        </ul>
+      
     </li>
-    <li>
+    <li class="nav-menu-item nav-with-dropdown">
       <a href="/collection" class="active">
         Collection
       </a>
+      
+        <ul class="nav-submenu" aria-label="Collection projects">
+          
+            <li>
+              <a href="/collection/bench/" class="">四季长椅</a>
+            </li>
+          
+          
+            <li>
+              <a href="/collection/empa-office/" class="active">Empa office</a>
+            </li>
+          
+        </ul>
+      
     </li>
-    <li>
+    <li class="nav-menu-item">
       <a href="/corner" class="">
         Corner
       </a>
+      
+    </li>
+    <li class="nav-menu-item">
+      <a href="/message" class="">
+        Message
+      </a>
+      
     </li>
     
     <li class="nav-theme-item">
@@ -689,9 +887,12 @@
         </div>
       </div>
     </header>
+    <img class="site-kamaboko-corner" src="/img/kamaboko.png" alt="kamaboko" role="button" tabindex="0" loading="lazy">
 
     
     <main id="content" class="px-2.5" style="flex: 1 1 auto; display: flex; flex-direction: column;">
+
+
 
 <article class="flex flex-col gap-5" style="flex: 1 1 auto;">
   <header class="flex flex-col">
@@ -702,1813 +903,2902 @@
 
     
     <h5 class="title-large">Empa office</h5>
+    
+      <div class="collection-layout-switch" role="group" aria-label="Collection layout switch">
+        <button type="button" class="collection-layout-btn is-active" data-layout-target="single" title="单列"><span class="collection-layout-emoji-run"><span class="collection-layout-emoji-unit">🍥</span></span></button>
+        <button type="button" class="collection-layout-btn" data-layout-target="double" title="双列"><span class="collection-layout-emoji-run"><span class="collection-layout-emoji-unit">🍥</span><span class="collection-layout-emoji-unit">🍥</span></span></button>
+        <button type="button" class="collection-layout-btn" data-layout-target="triple" title="三列"><span class="collection-layout-emoji-run"><span class="collection-layout-emoji-unit">🍥</span><span class="collection-layout-emoji-unit">🍥</span><span class="collection-layout-emoji-unit">🍥</span></span></button>
+      </div>
+    
   </header>
 
   
 
-  <section>
-
-
-
-
-<figure class='mb-5'>
-  <img 
-    src="/collection/empa-office/IMG_0078.jpg" 
-    alt="" 
-    width="3544" 
-    height="613" 
-    loading="lazy" 
-  />
-
-  
-    <figcaption 
-      class=' flex justify-center '
-    >
-      2026-01-22 17:36
-    </figcaption>
-  
-</figure>
-
-
-
-
-
-
-<figure class='mb-5'>
-  <img 
-    src="/collection/empa-office/IMG_0077.jpg" 
-    alt="" 
-    width="3888" 
-    height="898" 
-    loading="lazy" 
-  />
-
-  
-    <figcaption 
-      class=' flex justify-center '
-    >
-      2026-01-13 17:57
-    </figcaption>
-  
-</figure>
-
-
-
-
-
-
-<figure class='mb-5'>
-  <img 
-    src="/collection/empa-office/IMG_0076.jpg" 
-    alt="" 
-    width="3350" 
-    height="761" 
-    loading="lazy" 
-  />
-
-  
-    <figcaption 
-      class=' flex justify-center '
-    >
-      2025-11-27 17:01
-    </figcaption>
-  
-</figure>
-
-
-
-
-
-
-<figure class='mb-5'>
-  <img 
-    src="/collection/empa-office/IMG_0075.jpg" 
-    alt="" 
-    width="3213" 
-    height="625" 
-    loading="lazy" 
-  />
-
-  
-    <figcaption 
-      class=' flex justify-center '
-    >
-      2025-11-27 16:17
-    </figcaption>
-  
-</figure>
-
-
-
-
-
-
-<figure class='mb-5'>
-  <img 
-    src="/collection/empa-office/IMG_0074.jpg" 
-    alt="" 
-    width="3213" 
-    height="657" 
-    loading="lazy" 
-  />
-
-  
-    <figcaption 
-      class=' flex justify-center '
-    >
-      2025-11-27 10:10
-    </figcaption>
-  
-</figure>
-
-
-
-
-
-
-<figure class='mb-5'>
-  <img 
-    src="/collection/empa-office/IMG_0073.jpg" 
-    alt="" 
-    width="3254" 
-    height="563" 
-    loading="lazy" 
-  />
-
-  
-    <figcaption 
-      class=' flex justify-center '
-    >
-      2025-11-18 16:20
-    </figcaption>
-  
-</figure>
-
-
-
-
-
-
-<figure class='mb-5'>
-  <img 
-    src="/collection/empa-office/IMG_0072.jpg" 
-    alt="" 
-    width="3609" 
-    height="668" 
-    loading="lazy" 
-  />
-
-  
-    <figcaption 
-      class=' flex justify-center '
-    >
-      2025-11-12 16:52
-    </figcaption>
-  
-</figure>
-
-
-
-
-
-
-<figure class='mb-5'>
-  <img 
-    src="/collection/empa-office/IMG_0071.jpg" 
-    alt="" 
-    width="3352" 
-    height="541" 
-    loading="lazy" 
-  />
-
-  
-    <figcaption 
-      class=' flex justify-center '
-    >
-      2025-11-06 17:04
-    </figcaption>
-  
-</figure>
-
-
-
-
-
-
-<figure class='mb-5'>
-  <img 
-    src="/collection/empa-office/IMG_0070.jpg" 
-    alt="" 
-    width="3635" 
-    height="730" 
-    loading="lazy" 
-  />
-
-  
-    <figcaption 
-      class=' flex justify-center '
-    >
-      2025-11-05 17:33
-    </figcaption>
-  
-</figure>
-
-
-
-
-
-
-<figure class='mb-5'>
-  <img 
-    src="/collection/empa-office/IMG_0069.jpg" 
-    alt="" 
-    width="3599" 
-    height="623" 
-    loading="lazy" 
-  />
-
-  
-    <figcaption 
-      class=' flex justify-center '
-    >
-      2025-11-03 13:54
-    </figcaption>
-  
-</figure>
-
-
-
-
-
-
-<figure class='mb-5'>
-  <img 
-    src="/collection/empa-office/IMG_0068.jpg" 
-    alt="" 
-    width="3512" 
-    height="607" 
-    loading="lazy" 
-  />
-
-  
-    <figcaption 
-      class=' flex justify-center '
-    >
-      2025-10-28 16:59
-    </figcaption>
-  
-</figure>
-
-
-
-
-
-
-<figure class='mb-5'>
-  <img 
-    src="/collection/empa-office/IMG_0067.jpg" 
-    alt="" 
-    width="3341" 
-    height="650" 
-    loading="lazy" 
-  />
-
-  
-    <figcaption 
-      class=' flex justify-center '
-    >
-      2025-10-27 18:15
-    </figcaption>
-  
-</figure>
-
-
-
-
-
-
-<figure class='mb-5'>
-  <img 
-    src="/collection/empa-office/IMG_0066.jpg" 
-    alt="" 
-    width="3095" 
-    height="602" 
-    loading="lazy" 
-  />
-
-  
-    <figcaption 
-      class=' flex justify-center '
-    >
-      2025-10-17 16:58
-    </figcaption>
-  
-</figure>
-
-
-
-
-
-
-<figure class='mb-5'>
-  <img 
-    src="/collection/empa-office/IMG_0065.jpg" 
-    alt="" 
-    width="3314" 
-    height="587" 
-    loading="lazy" 
-  />
-
-  
-    <figcaption 
-      class=' flex justify-center '
-    >
-      2025-10-10 10:28
-    </figcaption>
-  
-</figure>
-
-
-
-
-
-
-<figure class='mb-5'>
-  <img 
-    src="/collection/empa-office/IMG_0064.jpg" 
-    alt="" 
-    width="3252" 
-    height="624" 
-    loading="lazy" 
-  />
-
-  
-    <figcaption 
-      class=' flex justify-center '
-    >
-      2025-10-08 18:33
-    </figcaption>
-  
-</figure>
-
-
-
-
-
-
-<figure class='mb-5'>
-  <img 
-    src="/collection/empa-office/IMG_0063.jpg" 
-    alt="" 
-    width="3431" 
-    height="683" 
-    loading="lazy" 
-  />
-
-  
-    <figcaption 
-      class=' flex justify-center '
-    >
-      2025-10-07 13:14
-    </figcaption>
-  
-</figure>
-
-
-
-
-
-
-<figure class='mb-5'>
-  <img 
-    src="/collection/empa-office/IMG_0062.jpg" 
-    alt="" 
-    width="3376" 
-    height="584" 
-    loading="lazy" 
-  />
-
-  
-    <figcaption 
-      class=' flex justify-center '
-    >
-      2025-10-06 18:26
-    </figcaption>
-  
-</figure>
-
-
-
-
-
-
-<figure class='mb-5'>
-  <img 
-    src="/collection/empa-office/IMG_0061.jpg" 
-    alt="" 
-    width="3386" 
-    height="566" 
-    loading="lazy" 
-  />
-
-  
-    <figcaption 
-      class=' flex justify-center '
-    >
-      2025-09-17 18:15
-    </figcaption>
-  
-</figure>
-
-
-
-
-
-
-<figure class='mb-5'>
-  <img 
-    src="/collection/empa-office/IMG_0060.jpg" 
-    alt="" 
-    width="3300" 
-    height="612" 
-    loading="lazy" 
-  />
-
-  
-    <figcaption 
-      class=' flex justify-center '
-    >
-      2025-09-09 17:30
-    </figcaption>
-  
-</figure>
-
-
-
-
-
-
-<figure class='mb-5'>
-  <img 
-    src="/collection/empa-office/IMG_0059.jpg" 
-    alt="" 
-    width="3249" 
-    height="649" 
-    loading="lazy" 
-  />
-
-  
-    <figcaption 
-      class=' flex justify-center '
-    >
-      2025-09-04 19:13
-    </figcaption>
-  
-</figure>
-
-
-
-
-
-
-<figure class='mb-5'>
-  <img 
-    src="/collection/empa-office/IMG_0058.jpg" 
-    alt="" 
-    width="3194" 
-    height="552" 
-    loading="lazy" 
-  />
-
-  
-    <figcaption 
-      class=' flex justify-center '
-    >
-      2025-09-01 18:38
-    </figcaption>
-  
-</figure>
-
-
-
-
-
-
-<figure class='mb-5'>
-  <img 
-    src="/collection/empa-office/IMG_0057.jpg" 
-    alt="" 
-    width="3078" 
-    height="618" 
-    loading="lazy" 
-  />
-
-  
-    <figcaption 
-      class=' flex justify-center '
-    >
-      2025-08-06 18:14
-    </figcaption>
-  
-</figure>
-
-
-
-
-
-
-<figure class='mb-5'>
-  <img 
-    src="/collection/empa-office/IMG_0056.jpg" 
-    alt="" 
-    width="2993" 
-    height="545" 
-    loading="lazy" 
-  />
-
-  
-    <figcaption 
-      class=' flex justify-center '
-    >
-      2025-06-25 13:18
-    </figcaption>
-  
-</figure>
-
-
-
-
-
-
-<figure class='mb-5'>
-  <img 
-    src="/collection/empa-office/IMG_0055.jpg" 
-    alt="" 
-    width="3075" 
-    height="551" 
-    loading="lazy" 
-  />
-
-  
-    <figcaption 
-      class=' flex justify-center '
-    >
-      2025-06-16 17:46
-    </figcaption>
-  
-</figure>
-
-
-
-
-
-
-<figure class='mb-5'>
-  <img 
-    src="/collection/empa-office/IMG_0054.jpg" 
-    alt="" 
-    width="3078" 
-    height="663" 
-    loading="lazy" 
-  />
-
-  
-    <figcaption 
-      class=' flex justify-center '
-    >
-      2025-05-21 13:11
-    </figcaption>
-  
-</figure>
-
-
-
-
-
-
-<figure class='mb-5'>
-  <img 
-    src="/collection/empa-office/IMG_0053.jpg" 
-    alt="" 
-    width="2980" 
-    height="668" 
-    loading="lazy" 
-  />
-
-  
-    <figcaption 
-      class=' flex justify-center '
-    >
-      2025-03-19 18:26
-    </figcaption>
-  
-</figure>
-
-
-
-
-
-
-<figure class='mb-5'>
-  <img 
-    src="/collection/empa-office/IMG_0052.jpg" 
-    alt="" 
-    width="3186" 
-    height="686" 
-    loading="lazy" 
-  />
-
-  
-    <figcaption 
-      class=' flex justify-center '
-    >
-      2025-03-13 19:34
-    </figcaption>
-  
-</figure>
-
-
-
-
-
-
-<figure class='mb-5'>
-  <img 
-    src="/collection/empa-office/IMG_0051.jpg" 
-    alt="" 
-    width="3086" 
-    height="691" 
-    loading="lazy" 
-  />
-
-  
-    <figcaption 
-      class=' flex justify-center '
-    >
-      2025-03-12 12:14
-    </figcaption>
-  
-</figure>
-
-
-
-
-
-
-<figure class='mb-5'>
-  <img 
-    src="/collection/empa-office/IMG_0050.jpg" 
-    alt="" 
-    width="3035" 
-    height="665" 
-    loading="lazy" 
-  />
-
-  
-    <figcaption 
-      class=' flex justify-center '
-    >
-      2025-03-03 10:12
-    </figcaption>
-  
-</figure>
-
-
-
-
-
-
-<figure class='mb-5'>
-  <img 
-    src="/collection/empa-office/IMG_0049.jpg" 
-    alt="" 
-    width="3060" 
-    height="649" 
-    loading="lazy" 
-  />
-
-  
-    <figcaption 
-      class=' flex justify-center '
-    >
-      2025-02-21 14:43
-    </figcaption>
-  
-</figure>
-
-
-
-
-
-
-<figure class='mb-5'>
-  <img 
-    src="/collection/empa-office/IMG_0048.jpg" 
-    alt="" 
-    width="3238" 
-    height="697" 
-    loading="lazy" 
-  />
-
-  
-    <figcaption 
-      class=' flex justify-center '
-    >
-      2025-02-12 18:11
-    </figcaption>
-  
-</figure>
-
-
-
-
-
-
-<figure class='mb-5'>
-  <img 
-    src="/collection/empa-office/IMG_0047.jpg" 
-    alt="" 
-    width="3202" 
-    height="788" 
-    loading="lazy" 
-  />
-
-  
-    <figcaption 
-      class=' flex justify-center '
-    >
-      2025-02-04 17:32
-    </figcaption>
-  
-</figure>
-
-
-
-
-
-
-<figure class='mb-5'>
-  <img 
-    src="/collection/empa-office/IMG_0046.jpg" 
-    alt="" 
-    width="2919" 
-    height="642" 
-    loading="lazy" 
-  />
-
-  
-    <figcaption 
-      class=' flex justify-center '
-    >
-      2025-01-29 11:58
-    </figcaption>
-  
-</figure>
-
-
-
-
-
-
-<figure class='mb-5'>
-  <img 
-    src="/collection/empa-office/IMG_0045.jpg" 
-    alt="" 
-    width="2972" 
-    height="668" 
-    loading="lazy" 
-  />
-
-  
-    <figcaption 
-      class=' flex justify-center '
-    >
-      2025-01-08 17:14
-    </figcaption>
-  
-</figure>
-
-
-
-
-
-
-<figure class='mb-5'>
-  <img 
-    src="/collection/empa-office/IMG_0044.jpg" 
-    alt="" 
-    width="3221" 
-    height="773" 
-    loading="lazy" 
-  />
-
-  
-    <figcaption 
-      class=' flex justify-center '
-    >
-      2025-01-06 17:25
-    </figcaption>
-  
-</figure>
-
-
-
-
-
-
-<figure class='mb-5'>
-  <img 
-    src="/collection/empa-office/IMG_0043.jpg" 
-    alt="" 
-    width="2888" 
-    height="603" 
-    loading="lazy" 
-  />
-
-  
-    <figcaption 
-      class=' flex justify-center '
-    >
-      2024-12-19 17:00
-    </figcaption>
-  
-</figure>
-
-
-
-
-
-
-<figure class='mb-5'>
-  <img 
-    src="/collection/empa-office/IMG_0042.jpg" 
-    alt="" 
-    width="3489" 
-    height="840" 
-    loading="lazy" 
-  />
-
-  
-    <figcaption 
-      class=' flex justify-center '
-    >
-      2024-12-16 17:09
-    </figcaption>
-  
-</figure>
-
-
-
-
-
-
-<figure class='mb-5'>
-  <img 
-    src="/collection/empa-office/IMG_0041.jpg" 
-    alt="" 
-    width="3141" 
-    height="633" 
-    loading="lazy" 
-  />
-
-  
-    <figcaption 
-      class=' flex justify-center '
-    >
-      2024-12-16 13:13
-    </figcaption>
-  
-</figure>
-
-
-
-
-
-
-<figure class='mb-5'>
-  <img 
-    src="/collection/empa-office/IMG_0040.jpg" 
-    alt="" 
-    width="3195" 
-    height="809" 
-    loading="lazy" 
-  />
-
-  
-    <figcaption 
-      class=' flex justify-center '
-    >
-      2024-12-03 16:24
-    </figcaption>
-  
-</figure>
-
-
-
-
-
-
-<figure class='mb-5'>
-  <img 
-    src="/collection/empa-office/IMG_0039.jpg" 
-    alt="" 
-    width="3622" 
-    height="762" 
-    loading="lazy" 
-  />
-
-  
-    <figcaption 
-      class=' flex justify-center '
-    >
-      2024-11-29 16:22
-    </figcaption>
-  
-</figure>
-
-
-
-
-
-
-<figure class='mb-5'>
-  <img 
-    src="/collection/empa-office/IMG_0038.jpg" 
-    alt="" 
-    width="3241" 
-    height="743" 
-    loading="lazy" 
-  />
-
-  
-    <figcaption 
-      class=' flex justify-center '
-    >
-      2024-11-29 16:10
-    </figcaption>
-  
-</figure>
-
-
-
-
-
-
-<figure class='mb-5'>
-  <img 
-    src="/collection/empa-office/IMG_0037.jpg" 
-    alt="" 
-    width="3082" 
-    height="746" 
-    loading="lazy" 
-  />
-
-  
-    <figcaption 
-      class=' flex justify-center '
-    >
-      2024-11-29 13:38
-    </figcaption>
-  
-</figure>
-
-
-
-
-
-
-<figure class='mb-5'>
-  <img 
-    src="/collection/empa-office/IMG_0036.jpg" 
-    alt="" 
-    width="3289" 
-    height="780" 
-    loading="lazy" 
-  />
-
-  
-    <figcaption 
-      class=' flex justify-center '
-    >
-      2024-11-28 16:27
-    </figcaption>
-  
-</figure>
-
-
-
-
-
-
-<figure class='mb-5'>
-  <img 
-    src="/collection/empa-office/IMG_0035.jpg" 
-    alt="" 
-    width="3383" 
-    height="728" 
-    loading="lazy" 
-  />
-
-  
-    <figcaption 
-      class=' flex justify-center '
-    >
-      2024-11-27 17:03
-    </figcaption>
-  
-</figure>
-
-
-
-
-
-
-<figure class='mb-5'>
-  <img 
-    src="/collection/empa-office/IMG_0034.jpg" 
-    alt="" 
-    width="3138" 
-    height="694" 
-    loading="lazy" 
-  />
-
-  
-    <figcaption 
-      class=' flex justify-center '
-    >
-      2024-11-26 16:35
-    </figcaption>
-  
-</figure>
-
-
-
-
-
-
-<figure class='mb-5'>
-  <img 
-    src="/collection/empa-office/IMG_0033.jpg" 
-    alt="" 
-    width="3133" 
-    height="734" 
-    loading="lazy" 
-  />
-
-  
-    <figcaption 
-      class=' flex justify-center '
-    >
-      2024-11-25 18:17
-    </figcaption>
-  
-</figure>
-
-
-
-
-
-
-<figure class='mb-5'>
-  <img 
-    src="/collection/empa-office/IMG_0032.jpg" 
-    alt="" 
-    width="3078" 
-    height="706" 
-    loading="lazy" 
-  />
-
-  
-    <figcaption 
-      class=' flex justify-center '
-    >
-      2024-11-20 17:04
-    </figcaption>
-  
-</figure>
-
-
-
-
-
-
-<figure class='mb-5'>
-  <img 
-    src="/collection/empa-office/IMG_0031.jpg" 
-    alt="" 
-    width="2810" 
-    height="646" 
-    loading="lazy" 
-  />
-
-  
-    <figcaption 
-      class=' flex justify-center '
-    >
-      2024-10-31 17:52
-    </figcaption>
-  
-</figure>
-
-
-
-
-
-
-<figure class='mb-5'>
-  <img 
-    src="/collection/empa-office/IMG_0030.jpg" 
-    alt="" 
-    width="3115" 
-    height="732" 
-    loading="lazy" 
-  />
-
-  
-    <figcaption 
-      class=' flex justify-center '
-    >
-      2024-10-29 17:06
-    </figcaption>
-  
-</figure>
-
-
-
-
-
-
-<figure class='mb-5'>
-  <img 
-    src="/collection/empa-office/IMG_0029.jpg" 
-    alt="" 
-    width="2872" 
-    height="629" 
-    loading="lazy" 
-  />
-
-  
-    <figcaption 
-      class=' flex justify-center '
-    >
-      2024-10-29 16:49
-    </figcaption>
-  
-</figure>
-
-
-
-
-
-
-<figure class='mb-5'>
-  <img 
-    src="/collection/empa-office/IMG_0028.jpg" 
-    alt="" 
-    width="3009" 
-    height="681" 
-    loading="lazy" 
-  />
-
-  
-    <figcaption 
-      class=' flex justify-center '
-    >
-      2024-10-29 16:42
-    </figcaption>
-  
-</figure>
-
-
-
-
-
-
-<figure class='mb-5'>
-  <img 
-    src="/collection/empa-office/IMG_0027.jpg" 
-    alt="" 
-    width="3129" 
-    height="700" 
-    loading="lazy" 
-  />
-
-  
-    <figcaption 
-      class=' flex justify-center '
-    >
-      2024-10-24 18:20
-    </figcaption>
-  
-</figure>
-
-
-
-
-
-
-<figure class='mb-5'>
-  <img 
-    src="/collection/empa-office/IMG_0026.jpg" 
-    alt="" 
-    width="2904" 
-    height="638" 
-    loading="lazy" 
-  />
-
-  
-    <figcaption 
-      class=' flex justify-center '
-    >
-      2024-10-22 17:26
-    </figcaption>
-  
-</figure>
-
-
-
-
-
-
-<figure class='mb-5'>
-  <img 
-    src="/collection/empa-office/IMG_0025.jpg" 
-    alt="" 
-    width="3031" 
-    height="661" 
-    loading="lazy" 
-  />
-
-  
-    <figcaption 
-      class=' flex justify-center '
-    >
-      2024-10-17 18:56
-    </figcaption>
-  
-</figure>
-
-
-
-
-
-
-<figure class='mb-5'>
-  <img 
-    src="/collection/empa-office/IMG_0024.jpg" 
-    alt="" 
-    width="3100" 
-    height="673" 
-    loading="lazy" 
-  />
-
-  
-    <figcaption 
-      class=' flex justify-center '
-    >
-      2024-10-17 18:13
-    </figcaption>
-  
-</figure>
-
-
-
-
-
-
-<figure class='mb-5'>
-  <img 
-    src="/collection/empa-office/IMG_0023.jpg" 
-    alt="" 
-    width="2661" 
-    height="573" 
-    loading="lazy" 
-  />
-
-  
-    <figcaption 
-      class=' flex justify-center '
-    >
-      2024-10-15 17:36
-    </figcaption>
-  
-</figure>
-
-
-
-
-
-
-<figure class='mb-5'>
-  <img 
-    src="/collection/empa-office/IMG_0022.jpg" 
-    alt="" 
-    width="3049" 
-    height="858" 
-    loading="lazy" 
-  />
-
-  
-    <figcaption 
-      class=' flex justify-center '
-    >
-      2024-03-20 17:32
-    </figcaption>
-  
-</figure>
-
-
-
-
-
-
-<figure class='mb-5'>
-  <img 
-    src="/collection/empa-office/IMG_0021.jpg" 
-    alt="" 
-    width="2931" 
-    height="780" 
-    loading="lazy" 
-  />
-
-  
-    <figcaption 
-      class=' flex justify-center '
-    >
-      2024-02-29 17:34
-    </figcaption>
-  
-</figure>
-
-
-
-
-
-
-<figure class='mb-5'>
-  <img 
-    src="/collection/empa-office/IMG_0020.jpg" 
-    alt="" 
-    width="3020" 
-    height="816" 
-    loading="lazy" 
-  />
-
-  
-    <figcaption 
-      class=' flex justify-center '
-    >
-      2024-01-30 16:11
-    </figcaption>
-  
-</figure>
-
-
-
-
-
-
-<figure class='mb-5'>
-  <img 
-    src="/collection/empa-office/IMG_0019.jpg" 
-    alt="" 
-    width="3256" 
-    height="697" 
-    loading="lazy" 
-  />
-
-  
-    <figcaption 
-      class=' flex justify-center '
-    >
-      2024-01-16 16:56
-    </figcaption>
-  
-</figure>
-
-
-
-
-
-
-<figure class='mb-5'>
-  <img 
-    src="/collection/empa-office/IMG_0018.jpg" 
-    alt="" 
-    width="3202" 
-    height="684" 
-    loading="lazy" 
-  />
-
-  
-    <figcaption 
-      class=' flex justify-center '
-    >
-      2024-01-15 17:27
-    </figcaption>
-  
-</figure>
-
-
-
-
-
-
-<figure class='mb-5'>
-  <img 
-    src="/collection/empa-office/IMG_0017.jpg" 
-    alt="" 
-    width="3049" 
-    height="752" 
-    loading="lazy" 
-  />
-
-  
-    <figcaption 
-      class=' flex justify-center '
-    >
-      2024-01-08 11:59
-    </figcaption>
-  
-</figure>
-
-
-
-
-
-
-<figure class='mb-5'>
-  <img 
-    src="/collection/empa-office/IMG_0016.jpg" 
-    alt="" 
-    width="3386" 
-    height="673" 
-    loading="lazy" 
-  />
-
-  
-    <figcaption 
-      class=' flex justify-center '
-    >
-      2023-12-19 17:10
-    </figcaption>
-  
-</figure>
-
-
-
-
-
-
-<figure class='mb-5'>
-  <img 
-    src="/collection/empa-office/IMG_0015.jpg" 
-    alt="" 
-    width="3044" 
-    height="672" 
-    loading="lazy" 
-  />
-
-  
-    <figcaption 
-      class=' flex justify-center '
-    >
-      2023-12-12 17:39
-    </figcaption>
-  
-</figure>
-
-
-
-
-
-
-<figure class='mb-5'>
-  <img 
-    src="/collection/empa-office/IMG_0014.jpg" 
-    alt="" 
-    width="3306" 
-    height="730" 
-    loading="lazy" 
-  />
-
-  
-    <figcaption 
-      class=' flex justify-center '
-    >
-      2023-12-07 16:03
-    </figcaption>
-  
-</figure>
-
-
-
-
-
-
-<figure class='mb-5'>
-  <img 
-    src="/collection/empa-office/IMG_0013.jpg" 
-    alt="" 
-    width="3063" 
-    height="729" 
-    loading="lazy" 
-  />
-
-  
-    <figcaption 
-      class=' flex justify-center '
-    >
-      2023-12-07 12:17
-    </figcaption>
-  
-</figure>
-
-
-
-
-
-
-<figure class='mb-5'>
-  <img 
-    src="/collection/empa-office/IMG_0012.jpg" 
-    alt="" 
-    width="3245" 
-    height="781" 
-    loading="lazy" 
-  />
-
-  
-    <figcaption 
-      class=' flex justify-center '
-    >
-      2023-12-05 16:14
-    </figcaption>
-  
-</figure>
-
-
-
-
-
-
-<figure class='mb-5'>
-  <img 
-    src="/collection/empa-office/IMG_0011.jpg" 
-    alt="" 
-    width="3240" 
-    height="765" 
-    loading="lazy" 
-  />
-
-  
-    <figcaption 
-      class=' flex justify-center '
-    >
-      2023-11-29 17:09
-    </figcaption>
-  
-</figure>
-
-
-
-
-
-
-<figure class='mb-5'>
-  <img 
-    src="/collection/empa-office/IMG_0010.jpg" 
-    alt="" 
-    width="3224" 
-    height="741" 
-    loading="lazy" 
-  />
-
-  
-    <figcaption 
-      class=' flex justify-center '
-    >
-      2023-11-29 16:13
-    </figcaption>
-  
-</figure>
-
-
-
-
-
-
-<figure class='mb-5'>
-  <img 
-    src="/collection/empa-office/IMG_0009.jpg" 
-    alt="" 
-    width="3322" 
-    height="741" 
-    loading="lazy" 
-  />
-
-  
-    <figcaption 
-      class=' flex justify-center '
-    >
-      2023-11-29 15:36
-    </figcaption>
-  
-</figure>
-
-
-
-
-
-
-<figure class='mb-5'>
-  <img 
-    src="/collection/empa-office/IMG_0008.jpg" 
-    alt="" 
-    width="3180" 
-    height="721" 
-    loading="lazy" 
-  />
-
-  
-    <figcaption 
-      class=' flex justify-center '
-    >
-      2023-11-29 13:30
-    </figcaption>
-  
-</figure>
-
-
-
-
-
-
-<figure class='mb-5'>
-  <img 
-    src="/collection/empa-office/IMG_0007.jpg" 
-    alt="" 
-    width="3442" 
-    height="748" 
-    loading="lazy" 
-  />
-
-  
-    <figcaption 
-      class=' flex justify-center '
-    >
-      2023-11-23 17:21
-    </figcaption>
-  
-</figure>
-
-
-
-
-
-
-<figure class='mb-5'>
-  <img 
-    src="/collection/empa-office/IMG_0006.jpg" 
-    alt="" 
-    width="2970" 
-    height="620" 
-    loading="lazy" 
-  />
-
-  
-    <figcaption 
-      class=' flex justify-center '
-    >
-      2023-11-23 16:34
-    </figcaption>
-  
-</figure>
-
-
-
-
-
-
-<figure class='mb-5'>
-  <img 
-    src="/collection/empa-office/IMG_0005.jpg" 
-    alt="" 
-    width="2889" 
-    height="623" 
-    loading="lazy" 
-  />
-
-  
-    <figcaption 
-      class=' flex justify-center '
-    >
-      2023-11-23 16:07
-    </figcaption>
-  
-</figure>
-
-
-
-
-
-
-<figure class='mb-5'>
-  <img 
-    src="/collection/empa-office/IMG_0004.jpg" 
-    alt="" 
-    width="3115" 
-    height="697" 
-    loading="lazy" 
-  />
-
-  
-    <figcaption 
-      class=' flex justify-center '
-    >
-      2023-11-23 13:01
-    </figcaption>
-  
-</figure>
-
-
-
-
-
-
-<figure class='mb-5'>
-  <img 
-    src="/collection/empa-office/IMG_0003.jpg" 
-    alt="" 
-    width="2929" 
-    height="628" 
-    loading="lazy" 
-  />
-
-  
-    <figcaption 
-      class=' flex justify-center '
-    >
-      2023-11-23 11:09
-    </figcaption>
-  
-</figure>
-
-
-
-
-
-
-<figure class='mb-5'>
-  <img 
-    src="/collection/empa-office/IMG_0002.jpg" 
-    alt="" 
-    width="3937" 
-    height="873" 
-    loading="lazy" 
-  />
-
-  
-    <figcaption 
-      class=' flex justify-center '
-    >
-      2023-11-07 15:18
-    </figcaption>
-  
-</figure>
-
-
-
-
-
-
-<figure class='mb-5'>
-  <img 
-    src="/collection/empa-office/IMG_0001.jpg" 
-    alt="" 
-    width="3214" 
-    height="709" 
-    loading="lazy" 
-  />
-
-  
-    <figcaption 
-      class=' flex justify-center '
-    >
-      2023-11-07 12:18
-    </figcaption>
-  
-</figure>
-
-</section>
-
   
     
-  
-
     
+    
+    
+    <section class="collection-auto-gallery" data-layout="single" aria-label="Auto gallery">
+      <div class="collection-auto-grid">
+        
+          
+          
+          
+          
+            
+              
+            
+          
+          
+          
+          
+          <article class="collection-codex-entry">
+            <div class="collection-codex-meta">
+              <div class="collection-codex-date"><span class="collection-codex-no">No.078</span> · 2026-01-22 17:36</div>
+            </div>
+            <figure class="collection-auto-item">
+              <a
+                href="/collection/empa-office/IMG_0078.jpg"
+                class="collection-auto-link"
+                data-codex-zoom="1"
+                data-codex-src="/collection/empa-office/IMG_0078.jpg"
+                data-codex-alt="Empa office image"
+                data-codex-caption="No.078 · 2026-01-22 17:36"
+              >
+                <img
+                  src="/collection/empa-office/IMG_0078_hu17837162452859443118.jpg"
+                  alt="Empa office image"
+                  width="1500"
+                  height="259"
+                  loading="lazy"
+                />
+              </a>
+            </figure>
+          </article>
+        
+          
+          
+          
+          
+            
+              
+            
+          
+          
+          
+          
+          <article class="collection-codex-entry">
+            <div class="collection-codex-meta">
+              <div class="collection-codex-date"><span class="collection-codex-no">No.077</span> · 2026-01-13 17:57</div>
+            </div>
+            <figure class="collection-auto-item">
+              <a
+                href="/collection/empa-office/IMG_0077.jpg"
+                class="collection-auto-link"
+                data-codex-zoom="1"
+                data-codex-src="/collection/empa-office/IMG_0077.jpg"
+                data-codex-alt="Empa office image"
+                data-codex-caption="No.077 · 2026-01-13 17:57"
+              >
+                <img
+                  src="/collection/empa-office/IMG_0077_hu12953193770952380466.jpg"
+                  alt="Empa office image"
+                  width="1500"
+                  height="346"
+                  loading="lazy"
+                />
+              </a>
+            </figure>
+          </article>
+        
+          
+          
+          
+          
+            
+              
+            
+          
+          
+          
+          
+          <article class="collection-codex-entry">
+            <div class="collection-codex-meta">
+              <div class="collection-codex-date"><span class="collection-codex-no">No.076</span> · 2025-11-27 17:01</div>
+            </div>
+            <figure class="collection-auto-item">
+              <a
+                href="/collection/empa-office/IMG_0076.jpg"
+                class="collection-auto-link"
+                data-codex-zoom="1"
+                data-codex-src="/collection/empa-office/IMG_0076.jpg"
+                data-codex-alt="Empa office image"
+                data-codex-caption="No.076 · 2025-11-27 17:01"
+              >
+                <img
+                  src="/collection/empa-office/IMG_0076_hu10082434683031801237.jpg"
+                  alt="Empa office image"
+                  width="1500"
+                  height="341"
+                  loading="lazy"
+                />
+              </a>
+            </figure>
+          </article>
+        
+          
+          
+          
+          
+            
+              
+            
+          
+          
+          
+          
+          <article class="collection-codex-entry">
+            <div class="collection-codex-meta">
+              <div class="collection-codex-date"><span class="collection-codex-no">No.075</span> · 2025-11-27 16:17</div>
+            </div>
+            <figure class="collection-auto-item">
+              <a
+                href="/collection/empa-office/IMG_0075.jpg"
+                class="collection-auto-link"
+                data-codex-zoom="1"
+                data-codex-src="/collection/empa-office/IMG_0075.jpg"
+                data-codex-alt="Empa office image"
+                data-codex-caption="No.075 · 2025-11-27 16:17"
+              >
+                <img
+                  src="/collection/empa-office/IMG_0075_hu17575007095767950847.jpg"
+                  alt="Empa office image"
+                  width="1500"
+                  height="292"
+                  loading="lazy"
+                />
+              </a>
+            </figure>
+          </article>
+        
+          
+          
+          
+          
+            
+              
+            
+          
+          
+          
+          
+          <article class="collection-codex-entry">
+            <div class="collection-codex-meta">
+              <div class="collection-codex-date"><span class="collection-codex-no">No.074</span> · 2025-11-27 10:10</div>
+            </div>
+            <figure class="collection-auto-item">
+              <a
+                href="/collection/empa-office/IMG_0074.jpg"
+                class="collection-auto-link"
+                data-codex-zoom="1"
+                data-codex-src="/collection/empa-office/IMG_0074.jpg"
+                data-codex-alt="Empa office image"
+                data-codex-caption="No.074 · 2025-11-27 10:10"
+              >
+                <img
+                  src="/collection/empa-office/IMG_0074_hu3582749131638905876.jpg"
+                  alt="Empa office image"
+                  width="1500"
+                  height="307"
+                  loading="lazy"
+                />
+              </a>
+            </figure>
+          </article>
+        
+          
+          
+          
+          
+            
+              
+            
+          
+          
+          
+          
+          <article class="collection-codex-entry">
+            <div class="collection-codex-meta">
+              <div class="collection-codex-date"><span class="collection-codex-no">No.073</span> · 2025-11-18 16:20</div>
+            </div>
+            <figure class="collection-auto-item">
+              <a
+                href="/collection/empa-office/IMG_0073.jpg"
+                class="collection-auto-link"
+                data-codex-zoom="1"
+                data-codex-src="/collection/empa-office/IMG_0073.jpg"
+                data-codex-alt="Empa office image"
+                data-codex-caption="No.073 · 2025-11-18 16:20"
+              >
+                <img
+                  src="/collection/empa-office/IMG_0073_hu6128075340685074214.jpg"
+                  alt="Empa office image"
+                  width="1500"
+                  height="260"
+                  loading="lazy"
+                />
+              </a>
+            </figure>
+          </article>
+        
+          
+          
+          
+          
+            
+              
+            
+          
+          
+          
+          
+          <article class="collection-codex-entry">
+            <div class="collection-codex-meta">
+              <div class="collection-codex-date"><span class="collection-codex-no">No.072</span> · 2025-11-12 16:52</div>
+            </div>
+            <figure class="collection-auto-item">
+              <a
+                href="/collection/empa-office/IMG_0072.jpg"
+                class="collection-auto-link"
+                data-codex-zoom="1"
+                data-codex-src="/collection/empa-office/IMG_0072.jpg"
+                data-codex-alt="Empa office image"
+                data-codex-caption="No.072 · 2025-11-12 16:52"
+              >
+                <img
+                  src="/collection/empa-office/IMG_0072_hu11200763391806157927.jpg"
+                  alt="Empa office image"
+                  width="1500"
+                  height="278"
+                  loading="lazy"
+                />
+              </a>
+            </figure>
+          </article>
+        
+          
+          
+          
+          
+            
+              
+            
+          
+          
+          
+          
+          <article class="collection-codex-entry">
+            <div class="collection-codex-meta">
+              <div class="collection-codex-date"><span class="collection-codex-no">No.071</span> · 2025-11-06 17:04</div>
+            </div>
+            <figure class="collection-auto-item">
+              <a
+                href="/collection/empa-office/IMG_0071.jpg"
+                class="collection-auto-link"
+                data-codex-zoom="1"
+                data-codex-src="/collection/empa-office/IMG_0071.jpg"
+                data-codex-alt="Empa office image"
+                data-codex-caption="No.071 · 2025-11-06 17:04"
+              >
+                <img
+                  src="/collection/empa-office/IMG_0071_hu18368804213806774832.jpg"
+                  alt="Empa office image"
+                  width="1500"
+                  height="242"
+                  loading="lazy"
+                />
+              </a>
+            </figure>
+          </article>
+        
+          
+          
+          
+          
+            
+              
+            
+          
+          
+          
+          
+          <article class="collection-codex-entry">
+            <div class="collection-codex-meta">
+              <div class="collection-codex-date"><span class="collection-codex-no">No.070</span> · 2025-11-05 17:33</div>
+            </div>
+            <figure class="collection-auto-item">
+              <a
+                href="/collection/empa-office/IMG_0070.jpg"
+                class="collection-auto-link"
+                data-codex-zoom="1"
+                data-codex-src="/collection/empa-office/IMG_0070.jpg"
+                data-codex-alt="Empa office image"
+                data-codex-caption="No.070 · 2025-11-05 17:33"
+              >
+                <img
+                  src="/collection/empa-office/IMG_0070_hu13125987592150356078.jpg"
+                  alt="Empa office image"
+                  width="1500"
+                  height="301"
+                  loading="lazy"
+                />
+              </a>
+            </figure>
+          </article>
+        
+          
+          
+          
+          
+            
+              
+            
+          
+          
+          
+          
+          <article class="collection-codex-entry">
+            <div class="collection-codex-meta">
+              <div class="collection-codex-date"><span class="collection-codex-no">No.069</span> · 2025-11-03 13:54</div>
+            </div>
+            <figure class="collection-auto-item">
+              <a
+                href="/collection/empa-office/IMG_0069.jpg"
+                class="collection-auto-link"
+                data-codex-zoom="1"
+                data-codex-src="/collection/empa-office/IMG_0069.jpg"
+                data-codex-alt="Empa office image"
+                data-codex-caption="No.069 · 2025-11-03 13:54"
+              >
+                <img
+                  src="/collection/empa-office/IMG_0069_hu14489702878595129800.jpg"
+                  alt="Empa office image"
+                  width="1500"
+                  height="260"
+                  loading="lazy"
+                />
+              </a>
+            </figure>
+          </article>
+        
+          
+          
+          
+          
+            
+              
+            
+          
+          
+          
+          
+          <article class="collection-codex-entry">
+            <div class="collection-codex-meta">
+              <div class="collection-codex-date"><span class="collection-codex-no">No.068</span> · 2025-10-28 16:59</div>
+            </div>
+            <figure class="collection-auto-item">
+              <a
+                href="/collection/empa-office/IMG_0068.jpg"
+                class="collection-auto-link"
+                data-codex-zoom="1"
+                data-codex-src="/collection/empa-office/IMG_0068.jpg"
+                data-codex-alt="Empa office image"
+                data-codex-caption="No.068 · 2025-10-28 16:59"
+              >
+                <img
+                  src="/collection/empa-office/IMG_0068_hu6837675551364907728.jpg"
+                  alt="Empa office image"
+                  width="1500"
+                  height="259"
+                  loading="lazy"
+                />
+              </a>
+            </figure>
+          </article>
+        
+          
+          
+          
+          
+            
+              
+            
+          
+          
+          
+          
+          <article class="collection-codex-entry">
+            <div class="collection-codex-meta">
+              <div class="collection-codex-date"><span class="collection-codex-no">No.067</span> · 2025-10-27 18:15</div>
+            </div>
+            <figure class="collection-auto-item">
+              <a
+                href="/collection/empa-office/IMG_0067.jpg"
+                class="collection-auto-link"
+                data-codex-zoom="1"
+                data-codex-src="/collection/empa-office/IMG_0067.jpg"
+                data-codex-alt="Empa office image"
+                data-codex-caption="No.067 · 2025-10-27 18:15"
+              >
+                <img
+                  src="/collection/empa-office/IMG_0067_hu2935933793799144549.jpg"
+                  alt="Empa office image"
+                  width="1500"
+                  height="292"
+                  loading="lazy"
+                />
+              </a>
+            </figure>
+          </article>
+        
+          
+          
+          
+          
+            
+              
+            
+          
+          
+          
+          
+          <article class="collection-codex-entry">
+            <div class="collection-codex-meta">
+              <div class="collection-codex-date"><span class="collection-codex-no">No.066</span> · 2025-10-17 16:58</div>
+            </div>
+            <figure class="collection-auto-item">
+              <a
+                href="/collection/empa-office/IMG_0066.jpg"
+                class="collection-auto-link"
+                data-codex-zoom="1"
+                data-codex-src="/collection/empa-office/IMG_0066.jpg"
+                data-codex-alt="Empa office image"
+                data-codex-caption="No.066 · 2025-10-17 16:58"
+              >
+                <img
+                  src="/collection/empa-office/IMG_0066_hu7879704250918345277.jpg"
+                  alt="Empa office image"
+                  width="1500"
+                  height="292"
+                  loading="lazy"
+                />
+              </a>
+            </figure>
+          </article>
+        
+          
+          
+          
+          
+            
+              
+            
+          
+          
+          
+          
+          <article class="collection-codex-entry">
+            <div class="collection-codex-meta">
+              <div class="collection-codex-date"><span class="collection-codex-no">No.065</span> · 2025-10-10 10:28</div>
+            </div>
+            <figure class="collection-auto-item">
+              <a
+                href="/collection/empa-office/IMG_0065.jpg"
+                class="collection-auto-link"
+                data-codex-zoom="1"
+                data-codex-src="/collection/empa-office/IMG_0065.jpg"
+                data-codex-alt="Empa office image"
+                data-codex-caption="No.065 · 2025-10-10 10:28"
+              >
+                <img
+                  src="/collection/empa-office/IMG_0065_hu632910781809209744.jpg"
+                  alt="Empa office image"
+                  width="1500"
+                  height="266"
+                  loading="lazy"
+                />
+              </a>
+            </figure>
+          </article>
+        
+          
+          
+          
+          
+            
+              
+            
+          
+          
+          
+          
+          <article class="collection-codex-entry">
+            <div class="collection-codex-meta">
+              <div class="collection-codex-date"><span class="collection-codex-no">No.064</span> · 2025-10-08 18:33</div>
+            </div>
+            <figure class="collection-auto-item">
+              <a
+                href="/collection/empa-office/IMG_0064.jpg"
+                class="collection-auto-link"
+                data-codex-zoom="1"
+                data-codex-src="/collection/empa-office/IMG_0064.jpg"
+                data-codex-alt="Empa office image"
+                data-codex-caption="No.064 · 2025-10-08 18:33"
+              >
+                <img
+                  src="/collection/empa-office/IMG_0064_hu8811325199545770666.jpg"
+                  alt="Empa office image"
+                  width="1500"
+                  height="288"
+                  loading="lazy"
+                />
+              </a>
+            </figure>
+          </article>
+        
+          
+          
+          
+          
+            
+              
+            
+          
+          
+          
+          
+          <article class="collection-codex-entry">
+            <div class="collection-codex-meta">
+              <div class="collection-codex-date"><span class="collection-codex-no">No.063</span> · 2025-10-07 13:14</div>
+            </div>
+            <figure class="collection-auto-item">
+              <a
+                href="/collection/empa-office/IMG_0063.jpg"
+                class="collection-auto-link"
+                data-codex-zoom="1"
+                data-codex-src="/collection/empa-office/IMG_0063.jpg"
+                data-codex-alt="Empa office image"
+                data-codex-caption="No.063 · 2025-10-07 13:14"
+              >
+                <img
+                  src="/collection/empa-office/IMG_0063_hu11604358116989309356.jpg"
+                  alt="Empa office image"
+                  width="1500"
+                  height="299"
+                  loading="lazy"
+                />
+              </a>
+            </figure>
+          </article>
+        
+          
+          
+          
+          
+            
+              
+            
+          
+          
+          
+          
+          <article class="collection-codex-entry">
+            <div class="collection-codex-meta">
+              <div class="collection-codex-date"><span class="collection-codex-no">No.062</span> · 2025-10-06 18:26</div>
+            </div>
+            <figure class="collection-auto-item">
+              <a
+                href="/collection/empa-office/IMG_0062.jpg"
+                class="collection-auto-link"
+                data-codex-zoom="1"
+                data-codex-src="/collection/empa-office/IMG_0062.jpg"
+                data-codex-alt="Empa office image"
+                data-codex-caption="No.062 · 2025-10-06 18:26"
+              >
+                <img
+                  src="/collection/empa-office/IMG_0062_hu14844169514277088280.jpg"
+                  alt="Empa office image"
+                  width="1500"
+                  height="259"
+                  loading="lazy"
+                />
+              </a>
+            </figure>
+          </article>
+        
+          
+          
+          
+          
+            
+              
+            
+          
+          
+          
+          
+          <article class="collection-codex-entry">
+            <div class="collection-codex-meta">
+              <div class="collection-codex-date"><span class="collection-codex-no">No.061</span> · 2025-09-17 18:15</div>
+            </div>
+            <figure class="collection-auto-item">
+              <a
+                href="/collection/empa-office/IMG_0061.jpg"
+                class="collection-auto-link"
+                data-codex-zoom="1"
+                data-codex-src="/collection/empa-office/IMG_0061.jpg"
+                data-codex-alt="Empa office image"
+                data-codex-caption="No.061 · 2025-09-17 18:15"
+              >
+                <img
+                  src="/collection/empa-office/IMG_0061_hu8099015494068266612.jpg"
+                  alt="Empa office image"
+                  width="1500"
+                  height="251"
+                  loading="lazy"
+                />
+              </a>
+            </figure>
+          </article>
+        
+          
+          
+          
+          
+            
+              
+            
+          
+          
+          
+          
+          <article class="collection-codex-entry">
+            <div class="collection-codex-meta">
+              <div class="collection-codex-date"><span class="collection-codex-no">No.060</span> · 2025-09-09 17:30</div>
+            </div>
+            <figure class="collection-auto-item">
+              <a
+                href="/collection/empa-office/IMG_0060.jpg"
+                class="collection-auto-link"
+                data-codex-zoom="1"
+                data-codex-src="/collection/empa-office/IMG_0060.jpg"
+                data-codex-alt="Empa office image"
+                data-codex-caption="No.060 · 2025-09-09 17:30"
+              >
+                <img
+                  src="/collection/empa-office/IMG_0060_hu1167230368510496393.jpg"
+                  alt="Empa office image"
+                  width="1500"
+                  height="278"
+                  loading="lazy"
+                />
+              </a>
+            </figure>
+          </article>
+        
+          
+          
+          
+          
+            
+              
+            
+          
+          
+          
+          
+          <article class="collection-codex-entry">
+            <div class="collection-codex-meta">
+              <div class="collection-codex-date"><span class="collection-codex-no">No.059</span> · 2025-09-04 19:13</div>
+            </div>
+            <figure class="collection-auto-item">
+              <a
+                href="/collection/empa-office/IMG_0059.jpg"
+                class="collection-auto-link"
+                data-codex-zoom="1"
+                data-codex-src="/collection/empa-office/IMG_0059.jpg"
+                data-codex-alt="Empa office image"
+                data-codex-caption="No.059 · 2025-09-04 19:13"
+              >
+                <img
+                  src="/collection/empa-office/IMG_0059_hu17610415643293114808.jpg"
+                  alt="Empa office image"
+                  width="1500"
+                  height="300"
+                  loading="lazy"
+                />
+              </a>
+            </figure>
+          </article>
+        
+          
+          
+          
+          
+            
+              
+            
+          
+          
+          
+          
+          <article class="collection-codex-entry">
+            <div class="collection-codex-meta">
+              <div class="collection-codex-date"><span class="collection-codex-no">No.058</span> · 2025-09-01 18:38</div>
+            </div>
+            <figure class="collection-auto-item">
+              <a
+                href="/collection/empa-office/IMG_0058.jpg"
+                class="collection-auto-link"
+                data-codex-zoom="1"
+                data-codex-src="/collection/empa-office/IMG_0058.jpg"
+                data-codex-alt="Empa office image"
+                data-codex-caption="No.058 · 2025-09-01 18:38"
+              >
+                <img
+                  src="/collection/empa-office/IMG_0058_hu13225657104881165637.jpg"
+                  alt="Empa office image"
+                  width="1500"
+                  height="259"
+                  loading="lazy"
+                />
+              </a>
+            </figure>
+          </article>
+        
+          
+          
+          
+          
+            
+              
+            
+          
+          
+          
+          
+          <article class="collection-codex-entry">
+            <div class="collection-codex-meta">
+              <div class="collection-codex-date"><span class="collection-codex-no">No.057</span> · 2025-08-06 18:38</div>
+            </div>
+            <figure class="collection-auto-item">
+              <a
+                href="/collection/empa-office/IMG_0057.jpg"
+                class="collection-auto-link"
+                data-codex-zoom="1"
+                data-codex-src="/collection/empa-office/IMG_0057.jpg"
+                data-codex-alt="Empa office image"
+                data-codex-caption="No.057 · 2025-08-06 18:38"
+              >
+                <img
+                  src="/collection/empa-office/IMG_0057_hu6616399856192060713.jpg"
+                  alt="Empa office image"
+                  width="1500"
+                  height="301"
+                  loading="lazy"
+                />
+              </a>
+            </figure>
+          </article>
+        
+          
+          
+          
+          
+            
+              
+            
+          
+          
+          
+          
+          <article class="collection-codex-entry">
+            <div class="collection-codex-meta">
+              <div class="collection-codex-date"><span class="collection-codex-no">No.056</span> · 2025-06-25 13:18</div>
+            </div>
+            <figure class="collection-auto-item">
+              <a
+                href="/collection/empa-office/IMG_0056.jpg"
+                class="collection-auto-link"
+                data-codex-zoom="1"
+                data-codex-src="/collection/empa-office/IMG_0056.jpg"
+                data-codex-alt="Empa office image"
+                data-codex-caption="No.056 · 2025-06-25 13:18"
+              >
+                <img
+                  src="/collection/empa-office/IMG_0056_hu9996749890460568821.jpg"
+                  alt="Empa office image"
+                  width="1500"
+                  height="273"
+                  loading="lazy"
+                />
+              </a>
+            </figure>
+          </article>
+        
+          
+          
+          
+          
+            
+              
+            
+          
+          
+          
+          
+          <article class="collection-codex-entry">
+            <div class="collection-codex-meta">
+              <div class="collection-codex-date"><span class="collection-codex-no">No.055</span> · 2025-06-16 17:46</div>
+            </div>
+            <figure class="collection-auto-item">
+              <a
+                href="/collection/empa-office/IMG_0055.jpg"
+                class="collection-auto-link"
+                data-codex-zoom="1"
+                data-codex-src="/collection/empa-office/IMG_0055.jpg"
+                data-codex-alt="Empa office image"
+                data-codex-caption="No.055 · 2025-06-16 17:46"
+              >
+                <img
+                  src="/collection/empa-office/IMG_0055_hu15627694990041133479.jpg"
+                  alt="Empa office image"
+                  width="1500"
+                  height="269"
+                  loading="lazy"
+                />
+              </a>
+            </figure>
+          </article>
+        
+          
+          
+          
+          
+            
+              
+            
+          
+          
+          
+          
+          <article class="collection-codex-entry">
+            <div class="collection-codex-meta">
+              <div class="collection-codex-date"><span class="collection-codex-no">No.054</span> · 2025-05-21 13:11</div>
+            </div>
+            <figure class="collection-auto-item">
+              <a
+                href="/collection/empa-office/IMG_0054.jpg"
+                class="collection-auto-link"
+                data-codex-zoom="1"
+                data-codex-src="/collection/empa-office/IMG_0054.jpg"
+                data-codex-alt="Empa office image"
+                data-codex-caption="No.054 · 2025-05-21 13:11"
+              >
+                <img
+                  src="/collection/empa-office/IMG_0054_hu7057471413226595164.jpg"
+                  alt="Empa office image"
+                  width="1500"
+                  height="323"
+                  loading="lazy"
+                />
+              </a>
+            </figure>
+          </article>
+        
+          
+          
+          
+          
+            
+              
+            
+          
+          
+          
+          
+          <article class="collection-codex-entry">
+            <div class="collection-codex-meta">
+              <div class="collection-codex-date"><span class="collection-codex-no">No.053</span> · 2025-03-19 18:26</div>
+            </div>
+            <figure class="collection-auto-item">
+              <a
+                href="/collection/empa-office/IMG_0053.jpg"
+                class="collection-auto-link"
+                data-codex-zoom="1"
+                data-codex-src="/collection/empa-office/IMG_0053.jpg"
+                data-codex-alt="Empa office image"
+                data-codex-caption="No.053 · 2025-03-19 18:26"
+              >
+                <img
+                  src="/collection/empa-office/IMG_0053_hu13477380553472534225.jpg"
+                  alt="Empa office image"
+                  width="1500"
+                  height="336"
+                  loading="lazy"
+                />
+              </a>
+            </figure>
+          </article>
+        
+          
+          
+          
+          
+            
+              
+            
+          
+          
+          
+          
+          <article class="collection-codex-entry">
+            <div class="collection-codex-meta">
+              <div class="collection-codex-date"><span class="collection-codex-no">No.052</span> · 2025-03-13 19:34</div>
+            </div>
+            <figure class="collection-auto-item">
+              <a
+                href="/collection/empa-office/IMG_0052.jpg"
+                class="collection-auto-link"
+                data-codex-zoom="1"
+                data-codex-src="/collection/empa-office/IMG_0052.jpg"
+                data-codex-alt="Empa office image"
+                data-codex-caption="No.052 · 2025-03-13 19:34"
+              >
+                <img
+                  src="/collection/empa-office/IMG_0052_hu16524097786661908975.jpg"
+                  alt="Empa office image"
+                  width="1500"
+                  height="323"
+                  loading="lazy"
+                />
+              </a>
+            </figure>
+          </article>
+        
+          
+          
+          
+          
+            
+              
+            
+          
+          
+          
+          
+          <article class="collection-codex-entry">
+            <div class="collection-codex-meta">
+              <div class="collection-codex-date"><span class="collection-codex-no">No.051</span> · 2025-03-12 12:14</div>
+            </div>
+            <figure class="collection-auto-item">
+              <a
+                href="/collection/empa-office/IMG_0051.jpg"
+                class="collection-auto-link"
+                data-codex-zoom="1"
+                data-codex-src="/collection/empa-office/IMG_0051.jpg"
+                data-codex-alt="Empa office image"
+                data-codex-caption="No.051 · 2025-03-12 12:14"
+              >
+                <img
+                  src="/collection/empa-office/IMG_0051_hu10673439132334787728.jpg"
+                  alt="Empa office image"
+                  width="1500"
+                  height="336"
+                  loading="lazy"
+                />
+              </a>
+            </figure>
+          </article>
+        
+          
+          
+          
+          
+            
+              
+            
+          
+          
+          
+          
+          <article class="collection-codex-entry">
+            <div class="collection-codex-meta">
+              <div class="collection-codex-date"><span class="collection-codex-no">No.050</span> · 2025-03-03 10:12</div>
+            </div>
+            <figure class="collection-auto-item">
+              <a
+                href="/collection/empa-office/IMG_0050.jpg"
+                class="collection-auto-link"
+                data-codex-zoom="1"
+                data-codex-src="/collection/empa-office/IMG_0050.jpg"
+                data-codex-alt="Empa office image"
+                data-codex-caption="No.050 · 2025-03-03 10:12"
+              >
+                <img
+                  src="/collection/empa-office/IMG_0050_hu14716127711870243957.jpg"
+                  alt="Empa office image"
+                  width="1500"
+                  height="329"
+                  loading="lazy"
+                />
+              </a>
+            </figure>
+          </article>
+        
+          
+          
+          
+          
+            
+              
+            
+          
+          
+          
+          
+          <article class="collection-codex-entry">
+            <div class="collection-codex-meta">
+              <div class="collection-codex-date"><span class="collection-codex-no">No.049</span> · 2025-02-21 14:43</div>
+            </div>
+            <figure class="collection-auto-item">
+              <a
+                href="/collection/empa-office/IMG_0049.jpg"
+                class="collection-auto-link"
+                data-codex-zoom="1"
+                data-codex-src="/collection/empa-office/IMG_0049.jpg"
+                data-codex-alt="Empa office image"
+                data-codex-caption="No.049 · 2025-02-21 14:43"
+              >
+                <img
+                  src="/collection/empa-office/IMG_0049_hu8278792216676854281.jpg"
+                  alt="Empa office image"
+                  width="1500"
+                  height="318"
+                  loading="lazy"
+                />
+              </a>
+            </figure>
+          </article>
+        
+          
+          
+          
+          
+            
+              
+            
+          
+          
+          
+          
+          <article class="collection-codex-entry">
+            <div class="collection-codex-meta">
+              <div class="collection-codex-date"><span class="collection-codex-no">No.048</span> · 2025-02-12 18:11</div>
+            </div>
+            <figure class="collection-auto-item">
+              <a
+                href="/collection/empa-office/IMG_0048.jpg"
+                class="collection-auto-link"
+                data-codex-zoom="1"
+                data-codex-src="/collection/empa-office/IMG_0048.jpg"
+                data-codex-alt="Empa office image"
+                data-codex-caption="No.048 · 2025-02-12 18:11"
+              >
+                <img
+                  src="/collection/empa-office/IMG_0048_hu17341720694997060014.jpg"
+                  alt="Empa office image"
+                  width="1500"
+                  height="323"
+                  loading="lazy"
+                />
+              </a>
+            </figure>
+          </article>
+        
+          
+          
+          
+          
+            
+              
+            
+          
+          
+          
+          
+          <article class="collection-codex-entry">
+            <div class="collection-codex-meta">
+              <div class="collection-codex-date"><span class="collection-codex-no">No.047</span> · 2025-02-04 17:32</div>
+            </div>
+            <figure class="collection-auto-item">
+              <a
+                href="/collection/empa-office/IMG_0047.jpg"
+                class="collection-auto-link"
+                data-codex-zoom="1"
+                data-codex-src="/collection/empa-office/IMG_0047.jpg"
+                data-codex-alt="Empa office image"
+                data-codex-caption="No.047 · 2025-02-04 17:32"
+              >
+                <img
+                  src="/collection/empa-office/IMG_0047_hu13707052148730437669.jpg"
+                  alt="Empa office image"
+                  width="1500"
+                  height="369"
+                  loading="lazy"
+                />
+              </a>
+            </figure>
+          </article>
+        
+          
+          
+          
+          
+            
+              
+            
+          
+          
+          
+          
+          <article class="collection-codex-entry">
+            <div class="collection-codex-meta">
+              <div class="collection-codex-date"><span class="collection-codex-no">No.046</span> · 2025-01-29 11:58</div>
+            </div>
+            <figure class="collection-auto-item">
+              <a
+                href="/collection/empa-office/IMG_0046.jpg"
+                class="collection-auto-link"
+                data-codex-zoom="1"
+                data-codex-src="/collection/empa-office/IMG_0046.jpg"
+                data-codex-alt="Empa office image"
+                data-codex-caption="No.046 · 2025-01-29 11:58"
+              >
+                <img
+                  src="/collection/empa-office/IMG_0046_hu14752918109916256885.jpg"
+                  alt="Empa office image"
+                  width="1500"
+                  height="330"
+                  loading="lazy"
+                />
+              </a>
+            </figure>
+          </article>
+        
+          
+          
+          
+          
+            
+              
+            
+          
+          
+          
+          
+          <article class="collection-codex-entry">
+            <div class="collection-codex-meta">
+              <div class="collection-codex-date"><span class="collection-codex-no">No.045</span> · 2025-01-08 17:14</div>
+            </div>
+            <figure class="collection-auto-item">
+              <a
+                href="/collection/empa-office/IMG_0045.jpg"
+                class="collection-auto-link"
+                data-codex-zoom="1"
+                data-codex-src="/collection/empa-office/IMG_0045.jpg"
+                data-codex-alt="Empa office image"
+                data-codex-caption="No.045 · 2025-01-08 17:14"
+              >
+                <img
+                  src="/collection/empa-office/IMG_0045_hu2047614499908769717.jpg"
+                  alt="Empa office image"
+                  width="1500"
+                  height="337"
+                  loading="lazy"
+                />
+              </a>
+            </figure>
+          </article>
+        
+          
+          
+          
+          
+            
+              
+            
+          
+          
+          
+          
+          <article class="collection-codex-entry">
+            <div class="collection-codex-meta">
+              <div class="collection-codex-date"><span class="collection-codex-no">No.044</span> · 2025-01-06 17:25</div>
+            </div>
+            <figure class="collection-auto-item">
+              <a
+                href="/collection/empa-office/IMG_0044.jpg"
+                class="collection-auto-link"
+                data-codex-zoom="1"
+                data-codex-src="/collection/empa-office/IMG_0044.jpg"
+                data-codex-alt="Empa office image"
+                data-codex-caption="No.044 · 2025-01-06 17:25"
+              >
+                <img
+                  src="/collection/empa-office/IMG_0044_hu12769403199849102858.jpg"
+                  alt="Empa office image"
+                  width="1500"
+                  height="360"
+                  loading="lazy"
+                />
+              </a>
+            </figure>
+          </article>
+        
+          
+          
+          
+          
+            
+              
+            
+          
+          
+          
+          
+          <article class="collection-codex-entry">
+            <div class="collection-codex-meta">
+              <div class="collection-codex-date"><span class="collection-codex-no">No.043</span> · 2024-12-19 17:00</div>
+            </div>
+            <figure class="collection-auto-item">
+              <a
+                href="/collection/empa-office/IMG_0043.jpg"
+                class="collection-auto-link"
+                data-codex-zoom="1"
+                data-codex-src="/collection/empa-office/IMG_0043.jpg"
+                data-codex-alt="Empa office image"
+                data-codex-caption="No.043 · 2024-12-19 17:00"
+              >
+                <img
+                  src="/collection/empa-office/IMG_0043_hu2132881181089034554.jpg"
+                  alt="Empa office image"
+                  width="1500"
+                  height="313"
+                  loading="lazy"
+                />
+              </a>
+            </figure>
+          </article>
+        
+          
+          
+          
+          
+            
+              
+            
+          
+          
+          
+          
+          <article class="collection-codex-entry">
+            <div class="collection-codex-meta">
+              <div class="collection-codex-date"><span class="collection-codex-no">No.042</span> · 2024-12-16 17:09</div>
+            </div>
+            <figure class="collection-auto-item">
+              <a
+                href="/collection/empa-office/IMG_0042.jpg"
+                class="collection-auto-link"
+                data-codex-zoom="1"
+                data-codex-src="/collection/empa-office/IMG_0042.jpg"
+                data-codex-alt="Empa office image"
+                data-codex-caption="No.042 · 2024-12-16 17:09"
+              >
+                <img
+                  src="/collection/empa-office/IMG_0042_hu17923867296625585416.jpg"
+                  alt="Empa office image"
+                  width="1500"
+                  height="361"
+                  loading="lazy"
+                />
+              </a>
+            </figure>
+          </article>
+        
+          
+          
+          
+          
+            
+              
+            
+          
+          
+          
+          
+          <article class="collection-codex-entry">
+            <div class="collection-codex-meta">
+              <div class="collection-codex-date"><span class="collection-codex-no">No.041</span> · 2024-12-16 13:13</div>
+            </div>
+            <figure class="collection-auto-item">
+              <a
+                href="/collection/empa-office/IMG_0041.jpg"
+                class="collection-auto-link"
+                data-codex-zoom="1"
+                data-codex-src="/collection/empa-office/IMG_0041.jpg"
+                data-codex-alt="Empa office image"
+                data-codex-caption="No.041 · 2024-12-16 13:13"
+              >
+                <img
+                  src="/collection/empa-office/IMG_0041_hu14395230693456645319.jpg"
+                  alt="Empa office image"
+                  width="1500"
+                  height="302"
+                  loading="lazy"
+                />
+              </a>
+            </figure>
+          </article>
+        
+          
+          
+          
+          
+            
+              
+            
+          
+          
+          
+          
+          <article class="collection-codex-entry">
+            <div class="collection-codex-meta">
+              <div class="collection-codex-date"><span class="collection-codex-no">No.040</span> · 2024-12-03 16:24</div>
+            </div>
+            <figure class="collection-auto-item">
+              <a
+                href="/collection/empa-office/IMG_0040.jpg"
+                class="collection-auto-link"
+                data-codex-zoom="1"
+                data-codex-src="/collection/empa-office/IMG_0040.jpg"
+                data-codex-alt="Empa office image"
+                data-codex-caption="No.040 · 2024-12-03 16:24"
+              >
+                <img
+                  src="/collection/empa-office/IMG_0040_hu13825137400248278593.jpg"
+                  alt="Empa office image"
+                  width="1500"
+                  height="380"
+                  loading="lazy"
+                />
+              </a>
+            </figure>
+          </article>
+        
+          
+          
+          
+          
+            
+              
+            
+          
+          
+          
+          
+          <article class="collection-codex-entry">
+            <div class="collection-codex-meta">
+              <div class="collection-codex-date"><span class="collection-codex-no">No.039</span> · 2024-11-29 16:22</div>
+            </div>
+            <figure class="collection-auto-item">
+              <a
+                href="/collection/empa-office/IMG_0039.jpg"
+                class="collection-auto-link"
+                data-codex-zoom="1"
+                data-codex-src="/collection/empa-office/IMG_0039.jpg"
+                data-codex-alt="Empa office image"
+                data-codex-caption="No.039 · 2024-11-29 16:22"
+              >
+                <img
+                  src="/collection/empa-office/IMG_0039_hu16353578812089249156.jpg"
+                  alt="Empa office image"
+                  width="1500"
+                  height="316"
+                  loading="lazy"
+                />
+              </a>
+            </figure>
+          </article>
+        
+          
+          
+          
+          
+            
+              
+            
+          
+          
+          
+          
+          <article class="collection-codex-entry">
+            <div class="collection-codex-meta">
+              <div class="collection-codex-date"><span class="collection-codex-no">No.038</span> · 2024-11-29 16:10</div>
+            </div>
+            <figure class="collection-auto-item">
+              <a
+                href="/collection/empa-office/IMG_0038.jpg"
+                class="collection-auto-link"
+                data-codex-zoom="1"
+                data-codex-src="/collection/empa-office/IMG_0038.jpg"
+                data-codex-alt="Empa office image"
+                data-codex-caption="No.038 · 2024-11-29 16:10"
+              >
+                <img
+                  src="/collection/empa-office/IMG_0038_hu14231193693566104558.jpg"
+                  alt="Empa office image"
+                  width="1500"
+                  height="344"
+                  loading="lazy"
+                />
+              </a>
+            </figure>
+          </article>
+        
+          
+          
+          
+          
+            
+              
+            
+          
+          
+          
+          
+          <article class="collection-codex-entry">
+            <div class="collection-codex-meta">
+              <div class="collection-codex-date"><span class="collection-codex-no">No.037</span> · 2024-11-29 13:38</div>
+            </div>
+            <figure class="collection-auto-item">
+              <a
+                href="/collection/empa-office/IMG_0037.jpg"
+                class="collection-auto-link"
+                data-codex-zoom="1"
+                data-codex-src="/collection/empa-office/IMG_0037.jpg"
+                data-codex-alt="Empa office image"
+                data-codex-caption="No.037 · 2024-11-29 13:38"
+              >
+                <img
+                  src="/collection/empa-office/IMG_0037_hu8301709100342359486.jpg"
+                  alt="Empa office image"
+                  width="1500"
+                  height="363"
+                  loading="lazy"
+                />
+              </a>
+            </figure>
+          </article>
+        
+          
+          
+          
+          
+            
+              
+            
+          
+          
+          
+          
+          <article class="collection-codex-entry">
+            <div class="collection-codex-meta">
+              <div class="collection-codex-date"><span class="collection-codex-no">No.036</span> · 2024-11-28 16:27</div>
+            </div>
+            <figure class="collection-auto-item">
+              <a
+                href="/collection/empa-office/IMG_0036.jpg"
+                class="collection-auto-link"
+                data-codex-zoom="1"
+                data-codex-src="/collection/empa-office/IMG_0036.jpg"
+                data-codex-alt="Empa office image"
+                data-codex-caption="No.036 · 2024-11-28 16:27"
+              >
+                <img
+                  src="/collection/empa-office/IMG_0036_hu8005805572294871426.jpg"
+                  alt="Empa office image"
+                  width="1500"
+                  height="356"
+                  loading="lazy"
+                />
+              </a>
+            </figure>
+          </article>
+        
+          
+          
+          
+          
+            
+              
+            
+          
+          
+          
+          
+          <article class="collection-codex-entry">
+            <div class="collection-codex-meta">
+              <div class="collection-codex-date"><span class="collection-codex-no">No.035</span> · 2024-11-27 17:03</div>
+            </div>
+            <figure class="collection-auto-item">
+              <a
+                href="/collection/empa-office/IMG_0035.jpg"
+                class="collection-auto-link"
+                data-codex-zoom="1"
+                data-codex-src="/collection/empa-office/IMG_0035.jpg"
+                data-codex-alt="Empa office image"
+                data-codex-caption="No.035 · 2024-11-27 17:03"
+              >
+                <img
+                  src="/collection/empa-office/IMG_0035_hu12315544119651408356.jpg"
+                  alt="Empa office image"
+                  width="1500"
+                  height="323"
+                  loading="lazy"
+                />
+              </a>
+            </figure>
+          </article>
+        
+          
+          
+          
+          
+            
+              
+            
+          
+          
+          
+          
+          <article class="collection-codex-entry">
+            <div class="collection-codex-meta">
+              <div class="collection-codex-date"><span class="collection-codex-no">No.034</span> · 2024-11-26 16:35</div>
+            </div>
+            <figure class="collection-auto-item">
+              <a
+                href="/collection/empa-office/IMG_0034.jpg"
+                class="collection-auto-link"
+                data-codex-zoom="1"
+                data-codex-src="/collection/empa-office/IMG_0034.jpg"
+                data-codex-alt="Empa office image"
+                data-codex-caption="No.034 · 2024-11-26 16:35"
+              >
+                <img
+                  src="/collection/empa-office/IMG_0034_hu4120990526559667899.jpg"
+                  alt="Empa office image"
+                  width="1500"
+                  height="332"
+                  loading="lazy"
+                />
+              </a>
+            </figure>
+          </article>
+        
+          
+          
+          
+          
+            
+              
+            
+          
+          
+          
+          
+          <article class="collection-codex-entry">
+            <div class="collection-codex-meta">
+              <div class="collection-codex-date"><span class="collection-codex-no">No.033</span> · 2024-11-25 18:17</div>
+            </div>
+            <figure class="collection-auto-item">
+              <a
+                href="/collection/empa-office/IMG_0033.jpg"
+                class="collection-auto-link"
+                data-codex-zoom="1"
+                data-codex-src="/collection/empa-office/IMG_0033.jpg"
+                data-codex-alt="Empa office image"
+                data-codex-caption="No.033 · 2024-11-25 18:17"
+              >
+                <img
+                  src="/collection/empa-office/IMG_0033_hu274928778597170522.jpg"
+                  alt="Empa office image"
+                  width="1500"
+                  height="351"
+                  loading="lazy"
+                />
+              </a>
+            </figure>
+          </article>
+        
+          
+          
+          
+          
+            
+              
+            
+          
+          
+          
+          
+          <article class="collection-codex-entry">
+            <div class="collection-codex-meta">
+              <div class="collection-codex-date"><span class="collection-codex-no">No.032</span> · 2024-11-20 17:04</div>
+            </div>
+            <figure class="collection-auto-item">
+              <a
+                href="/collection/empa-office/IMG_0032.jpg"
+                class="collection-auto-link"
+                data-codex-zoom="1"
+                data-codex-src="/collection/empa-office/IMG_0032.jpg"
+                data-codex-alt="Empa office image"
+                data-codex-caption="No.032 · 2024-11-20 17:04"
+              >
+                <img
+                  src="/collection/empa-office/IMG_0032_hu13380284768008031401.jpg"
+                  alt="Empa office image"
+                  width="1500"
+                  height="344"
+                  loading="lazy"
+                />
+              </a>
+            </figure>
+          </article>
+        
+          
+          
+          
+          
+            
+              
+            
+          
+          
+          
+          
+          <article class="collection-codex-entry">
+            <div class="collection-codex-meta">
+              <div class="collection-codex-date"><span class="collection-codex-no">No.031</span> · 2024-10-31 17:52</div>
+            </div>
+            <figure class="collection-auto-item">
+              <a
+                href="/collection/empa-office/IMG_0031.jpg"
+                class="collection-auto-link"
+                data-codex-zoom="1"
+                data-codex-src="/collection/empa-office/IMG_0031.jpg"
+                data-codex-alt="Empa office image"
+                data-codex-caption="No.031 · 2024-10-31 17:52"
+              >
+                <img
+                  src="/collection/empa-office/IMG_0031_hu14001871913794480263.jpg"
+                  alt="Empa office image"
+                  width="1500"
+                  height="345"
+                  loading="lazy"
+                />
+              </a>
+            </figure>
+          </article>
+        
+          
+          
+          
+          
+            
+              
+            
+          
+          
+          
+          
+          <article class="collection-codex-entry">
+            <div class="collection-codex-meta">
+              <div class="collection-codex-date"><span class="collection-codex-no">No.030</span> · 2024-10-29 17:06</div>
+            </div>
+            <figure class="collection-auto-item">
+              <a
+                href="/collection/empa-office/IMG_0030.jpg"
+                class="collection-auto-link"
+                data-codex-zoom="1"
+                data-codex-src="/collection/empa-office/IMG_0030.jpg"
+                data-codex-alt="Empa office image"
+                data-codex-caption="No.030 · 2024-10-29 17:06"
+              >
+                <img
+                  src="/collection/empa-office/IMG_0030_hu3137378727872197120.jpg"
+                  alt="Empa office image"
+                  width="1500"
+                  height="352"
+                  loading="lazy"
+                />
+              </a>
+            </figure>
+          </article>
+        
+          
+          
+          
+          
+            
+              
+            
+          
+          
+          
+          
+          <article class="collection-codex-entry">
+            <div class="collection-codex-meta">
+              <div class="collection-codex-date"><span class="collection-codex-no">No.029</span> · 2024-10-29 16:49</div>
+            </div>
+            <figure class="collection-auto-item">
+              <a
+                href="/collection/empa-office/IMG_0029.jpg"
+                class="collection-auto-link"
+                data-codex-zoom="1"
+                data-codex-src="/collection/empa-office/IMG_0029.jpg"
+                data-codex-alt="Empa office image"
+                data-codex-caption="No.029 · 2024-10-29 16:49"
+              >
+                <img
+                  src="/collection/empa-office/IMG_0029_hu1212224407648003174.jpg"
+                  alt="Empa office image"
+                  width="1500"
+                  height="329"
+                  loading="lazy"
+                />
+              </a>
+            </figure>
+          </article>
+        
+          
+          
+          
+          
+            
+              
+            
+          
+          
+          
+          
+          <article class="collection-codex-entry">
+            <div class="collection-codex-meta">
+              <div class="collection-codex-date"><span class="collection-codex-no">No.028</span> · 2024-10-29 16:42</div>
+            </div>
+            <figure class="collection-auto-item">
+              <a
+                href="/collection/empa-office/IMG_0028.jpg"
+                class="collection-auto-link"
+                data-codex-zoom="1"
+                data-codex-src="/collection/empa-office/IMG_0028.jpg"
+                data-codex-alt="Empa office image"
+                data-codex-caption="No.028 · 2024-10-29 16:42"
+              >
+                <img
+                  src="/collection/empa-office/IMG_0028_hu16401678492109285200.jpg"
+                  alt="Empa office image"
+                  width="1500"
+                  height="339"
+                  loading="lazy"
+                />
+              </a>
+            </figure>
+          </article>
+        
+          
+          
+          
+          
+            
+              
+            
+          
+          
+          
+          
+          <article class="collection-codex-entry">
+            <div class="collection-codex-meta">
+              <div class="collection-codex-date"><span class="collection-codex-no">No.027</span> · 2024-10-24 18:20</div>
+            </div>
+            <figure class="collection-auto-item">
+              <a
+                href="/collection/empa-office/IMG_0027.jpg"
+                class="collection-auto-link"
+                data-codex-zoom="1"
+                data-codex-src="/collection/empa-office/IMG_0027.jpg"
+                data-codex-alt="Empa office image"
+                data-codex-caption="No.027 · 2024-10-24 18:20"
+              >
+                <img
+                  src="/collection/empa-office/IMG_0027_hu4074285261482304154.jpg"
+                  alt="Empa office image"
+                  width="1500"
+                  height="336"
+                  loading="lazy"
+                />
+              </a>
+            </figure>
+          </article>
+        
+          
+          
+          
+          
+            
+              
+            
+          
+          
+          
+          
+          <article class="collection-codex-entry">
+            <div class="collection-codex-meta">
+              <div class="collection-codex-date"><span class="collection-codex-no">No.026</span> · 2024-10-22 17:26</div>
+            </div>
+            <figure class="collection-auto-item">
+              <a
+                href="/collection/empa-office/IMG_0026.jpg"
+                class="collection-auto-link"
+                data-codex-zoom="1"
+                data-codex-src="/collection/empa-office/IMG_0026.jpg"
+                data-codex-alt="Empa office image"
+                data-codex-caption="No.026 · 2024-10-22 17:26"
+              >
+                <img
+                  src="/collection/empa-office/IMG_0026_hu2560310889453187361.jpg"
+                  alt="Empa office image"
+                  width="1500"
+                  height="330"
+                  loading="lazy"
+                />
+              </a>
+            </figure>
+          </article>
+        
+          
+          
+          
+          
+            
+              
+            
+          
+          
+          
+          
+          <article class="collection-codex-entry">
+            <div class="collection-codex-meta">
+              <div class="collection-codex-date"><span class="collection-codex-no">No.025</span> · 2024-10-17 18:56</div>
+            </div>
+            <figure class="collection-auto-item">
+              <a
+                href="/collection/empa-office/IMG_0025.jpg"
+                class="collection-auto-link"
+                data-codex-zoom="1"
+                data-codex-src="/collection/empa-office/IMG_0025.jpg"
+                data-codex-alt="Empa office image"
+                data-codex-caption="No.025 · 2024-10-17 18:56"
+              >
+                <img
+                  src="/collection/empa-office/IMG_0025_hu15353567257639075877.jpg"
+                  alt="Empa office image"
+                  width="1500"
+                  height="327"
+                  loading="lazy"
+                />
+              </a>
+            </figure>
+          </article>
+        
+          
+          
+          
+          
+            
+              
+            
+          
+          
+          
+          
+          <article class="collection-codex-entry">
+            <div class="collection-codex-meta">
+              <div class="collection-codex-date"><span class="collection-codex-no">No.024</span> · 2024-10-17 18:13</div>
+            </div>
+            <figure class="collection-auto-item">
+              <a
+                href="/collection/empa-office/IMG_0024.jpg"
+                class="collection-auto-link"
+                data-codex-zoom="1"
+                data-codex-src="/collection/empa-office/IMG_0024.jpg"
+                data-codex-alt="Empa office image"
+                data-codex-caption="No.024 · 2024-10-17 18:13"
+              >
+                <img
+                  src="/collection/empa-office/IMG_0024_hu16214893016205020098.jpg"
+                  alt="Empa office image"
+                  width="1500"
+                  height="326"
+                  loading="lazy"
+                />
+              </a>
+            </figure>
+          </article>
+        
+          
+          
+          
+          
+            
+              
+            
+          
+          
+          
+          
+          <article class="collection-codex-entry">
+            <div class="collection-codex-meta">
+              <div class="collection-codex-date"><span class="collection-codex-no">No.023</span> · 2024-10-15 17:36</div>
+            </div>
+            <figure class="collection-auto-item">
+              <a
+                href="/collection/empa-office/IMG_0023.jpg"
+                class="collection-auto-link"
+                data-codex-zoom="1"
+                data-codex-src="/collection/empa-office/IMG_0023.jpg"
+                data-codex-alt="Empa office image"
+                data-codex-caption="No.023 · 2024-10-15 17:36"
+              >
+                <img
+                  src="/collection/empa-office/IMG_0023_hu15630722810358462092.jpg"
+                  alt="Empa office image"
+                  width="1500"
+                  height="323"
+                  loading="lazy"
+                />
+              </a>
+            </figure>
+          </article>
+        
+          
+          
+          
+          
+            
+              
+            
+          
+          
+          
+          
+          <article class="collection-codex-entry">
+            <div class="collection-codex-meta">
+              <div class="collection-codex-date"><span class="collection-codex-no">No.022</span> · 2024-03-20 17:32</div>
+            </div>
+            <figure class="collection-auto-item">
+              <a
+                href="/collection/empa-office/IMG_0022.jpg"
+                class="collection-auto-link"
+                data-codex-zoom="1"
+                data-codex-src="/collection/empa-office/IMG_0022.jpg"
+                data-codex-alt="Empa office image"
+                data-codex-caption="No.022 · 2024-03-20 17:32"
+              >
+                <img
+                  src="/collection/empa-office/IMG_0022_hu17408535304759668634.jpg"
+                  alt="Empa office image"
+                  width="1500"
+                  height="422"
+                  loading="lazy"
+                />
+              </a>
+            </figure>
+          </article>
+        
+          
+          
+          
+          
+            
+              
+            
+          
+          
+          
+          
+          <article class="collection-codex-entry">
+            <div class="collection-codex-meta">
+              <div class="collection-codex-date"><span class="collection-codex-no">No.021</span> · 2024-02-29 17:34</div>
+            </div>
+            <figure class="collection-auto-item">
+              <a
+                href="/collection/empa-office/IMG_0021.jpg"
+                class="collection-auto-link"
+                data-codex-zoom="1"
+                data-codex-src="/collection/empa-office/IMG_0021.jpg"
+                data-codex-alt="Empa office image"
+                data-codex-caption="No.021 · 2024-02-29 17:34"
+              >
+                <img
+                  src="/collection/empa-office/IMG_0021_hu6769801726311682784.jpg"
+                  alt="Empa office image"
+                  width="1500"
+                  height="399"
+                  loading="lazy"
+                />
+              </a>
+            </figure>
+          </article>
+        
+          
+          
+          
+          
+            
+              
+            
+          
+          
+          
+          
+          <article class="collection-codex-entry">
+            <div class="collection-codex-meta">
+              <div class="collection-codex-date"><span class="collection-codex-no">No.020</span> · 2024-01-30 16:11</div>
+            </div>
+            <figure class="collection-auto-item">
+              <a
+                href="/collection/empa-office/IMG_0020.jpg"
+                class="collection-auto-link"
+                data-codex-zoom="1"
+                data-codex-src="/collection/empa-office/IMG_0020.jpg"
+                data-codex-alt="Empa office image"
+                data-codex-caption="No.020 · 2024-01-30 16:11"
+              >
+                <img
+                  src="/collection/empa-office/IMG_0020_hu13346278212124335082.jpg"
+                  alt="Empa office image"
+                  width="1500"
+                  height="405"
+                  loading="lazy"
+                />
+              </a>
+            </figure>
+          </article>
+        
+          
+          
+          
+          
+            
+              
+            
+          
+          
+          
+          
+          <article class="collection-codex-entry">
+            <div class="collection-codex-meta">
+              <div class="collection-codex-date"><span class="collection-codex-no">No.019</span> · 2024-01-16 16:56</div>
+            </div>
+            <figure class="collection-auto-item">
+              <a
+                href="/collection/empa-office/IMG_0019.jpg"
+                class="collection-auto-link"
+                data-codex-zoom="1"
+                data-codex-src="/collection/empa-office/IMG_0019.jpg"
+                data-codex-alt="Empa office image"
+                data-codex-caption="No.019 · 2024-01-16 16:56"
+              >
+                <img
+                  src="/collection/empa-office/IMG_0019_hu3166293504177664658.jpg"
+                  alt="Empa office image"
+                  width="1500"
+                  height="321"
+                  loading="lazy"
+                />
+              </a>
+            </figure>
+          </article>
+        
+          
+          
+          
+          
+            
+              
+            
+          
+          
+          
+          
+          <article class="collection-codex-entry">
+            <div class="collection-codex-meta">
+              <div class="collection-codex-date"><span class="collection-codex-no">No.018</span> · 2024-01-15 17:27</div>
+            </div>
+            <figure class="collection-auto-item">
+              <a
+                href="/collection/empa-office/IMG_0018.jpg"
+                class="collection-auto-link"
+                data-codex-zoom="1"
+                data-codex-src="/collection/empa-office/IMG_0018.jpg"
+                data-codex-alt="Empa office image"
+                data-codex-caption="No.018 · 2024-01-15 17:27"
+              >
+                <img
+                  src="/collection/empa-office/IMG_0018_hu615754077233340477.jpg"
+                  alt="Empa office image"
+                  width="1500"
+                  height="320"
+                  loading="lazy"
+                />
+              </a>
+            </figure>
+          </article>
+        
+          
+          
+          
+          
+            
+              
+            
+          
+          
+          
+          
+          <article class="collection-codex-entry">
+            <div class="collection-codex-meta">
+              <div class="collection-codex-date"><span class="collection-codex-no">No.017</span> · 2024-01-08 11:59</div>
+            </div>
+            <figure class="collection-auto-item">
+              <a
+                href="/collection/empa-office/IMG_0017.jpg"
+                class="collection-auto-link"
+                data-codex-zoom="1"
+                data-codex-src="/collection/empa-office/IMG_0017.jpg"
+                data-codex-alt="Empa office image"
+                data-codex-caption="No.017 · 2024-01-08 11:59"
+              >
+                <img
+                  src="/collection/empa-office/IMG_0017_hu5217025970626291198.jpg"
+                  alt="Empa office image"
+                  width="1500"
+                  height="370"
+                  loading="lazy"
+                />
+              </a>
+            </figure>
+          </article>
+        
+          
+          
+          
+          
+            
+              
+            
+          
+          
+          
+          
+          <article class="collection-codex-entry">
+            <div class="collection-codex-meta">
+              <div class="collection-codex-date"><span class="collection-codex-no">No.016</span> · 2023-12-19 17:10</div>
+            </div>
+            <figure class="collection-auto-item">
+              <a
+                href="/collection/empa-office/IMG_0016.jpg"
+                class="collection-auto-link"
+                data-codex-zoom="1"
+                data-codex-src="/collection/empa-office/IMG_0016.jpg"
+                data-codex-alt="Empa office image"
+                data-codex-caption="No.016 · 2023-12-19 17:10"
+              >
+                <img
+                  src="/collection/empa-office/IMG_0016_hu73531606068381363.jpg"
+                  alt="Empa office image"
+                  width="1500"
+                  height="298"
+                  loading="lazy"
+                />
+              </a>
+            </figure>
+          </article>
+        
+          
+          
+          
+          
+            
+              
+            
+          
+          
+          
+          
+          <article class="collection-codex-entry">
+            <div class="collection-codex-meta">
+              <div class="collection-codex-date"><span class="collection-codex-no">No.015</span> · 2023-12-12 17:39</div>
+            </div>
+            <figure class="collection-auto-item">
+              <a
+                href="/collection/empa-office/IMG_0015.jpg"
+                class="collection-auto-link"
+                data-codex-zoom="1"
+                data-codex-src="/collection/empa-office/IMG_0015.jpg"
+                data-codex-alt="Empa office image"
+                data-codex-caption="No.015 · 2023-12-12 17:39"
+              >
+                <img
+                  src="/collection/empa-office/IMG_0015_hu14137675408677319243.jpg"
+                  alt="Empa office image"
+                  width="1500"
+                  height="331"
+                  loading="lazy"
+                />
+              </a>
+            </figure>
+          </article>
+        
+          
+          
+          
+          
+            
+              
+            
+          
+          
+          
+          
+          <article class="collection-codex-entry">
+            <div class="collection-codex-meta">
+              <div class="collection-codex-date"><span class="collection-codex-no">No.014</span> · 2023-12-07 16:03</div>
+            </div>
+            <figure class="collection-auto-item">
+              <a
+                href="/collection/empa-office/IMG_0014.jpg"
+                class="collection-auto-link"
+                data-codex-zoom="1"
+                data-codex-src="/collection/empa-office/IMG_0014.jpg"
+                data-codex-alt="Empa office image"
+                data-codex-caption="No.014 · 2023-12-07 16:03"
+              >
+                <img
+                  src="/collection/empa-office/IMG_0014_hu7145557468345586330.jpg"
+                  alt="Empa office image"
+                  width="1500"
+                  height="331"
+                  loading="lazy"
+                />
+              </a>
+            </figure>
+          </article>
+        
+          
+          
+          
+          
+            
+              
+            
+          
+          
+          
+          
+          <article class="collection-codex-entry">
+            <div class="collection-codex-meta">
+              <div class="collection-codex-date"><span class="collection-codex-no">No.013</span> · 2023-12-07 12:17</div>
+            </div>
+            <figure class="collection-auto-item">
+              <a
+                href="/collection/empa-office/IMG_0013.jpg"
+                class="collection-auto-link"
+                data-codex-zoom="1"
+                data-codex-src="/collection/empa-office/IMG_0013.jpg"
+                data-codex-alt="Empa office image"
+                data-codex-caption="No.013 · 2023-12-07 12:17"
+              >
+                <img
+                  src="/collection/empa-office/IMG_0013_hu9114975343149251783.jpg"
+                  alt="Empa office image"
+                  width="1500"
+                  height="357"
+                  loading="lazy"
+                />
+              </a>
+            </figure>
+          </article>
+        
+          
+          
+          
+          
+            
+              
+            
+          
+          
+          
+          
+          <article class="collection-codex-entry">
+            <div class="collection-codex-meta">
+              <div class="collection-codex-date"><span class="collection-codex-no">No.012</span> · 2023-12-05 16:14</div>
+            </div>
+            <figure class="collection-auto-item">
+              <a
+                href="/collection/empa-office/IMG_0012.jpg"
+                class="collection-auto-link"
+                data-codex-zoom="1"
+                data-codex-src="/collection/empa-office/IMG_0012.jpg"
+                data-codex-alt="Empa office image"
+                data-codex-caption="No.012 · 2023-12-05 16:14"
+              >
+                <img
+                  src="/collection/empa-office/IMG_0012_hu4125046874101864792.jpg"
+                  alt="Empa office image"
+                  width="1500"
+                  height="361"
+                  loading="lazy"
+                />
+              </a>
+            </figure>
+          </article>
+        
+          
+          
+          
+          
+            
+              
+            
+          
+          
+          
+          
+          <article class="collection-codex-entry">
+            <div class="collection-codex-meta">
+              <div class="collection-codex-date"><span class="collection-codex-no">No.011</span> · 2023-11-29 17:09</div>
+            </div>
+            <figure class="collection-auto-item">
+              <a
+                href="/collection/empa-office/IMG_0011.jpg"
+                class="collection-auto-link"
+                data-codex-zoom="1"
+                data-codex-src="/collection/empa-office/IMG_0011.jpg"
+                data-codex-alt="Empa office image"
+                data-codex-caption="No.011 · 2023-11-29 17:09"
+              >
+                <img
+                  src="/collection/empa-office/IMG_0011_hu7130341836833839656.jpg"
+                  alt="Empa office image"
+                  width="1500"
+                  height="354"
+                  loading="lazy"
+                />
+              </a>
+            </figure>
+          </article>
+        
+          
+          
+          
+          
+            
+              
+            
+          
+          
+          
+          
+          <article class="collection-codex-entry">
+            <div class="collection-codex-meta">
+              <div class="collection-codex-date"><span class="collection-codex-no">No.010</span> · 2023-11-29 16:13</div>
+            </div>
+            <figure class="collection-auto-item">
+              <a
+                href="/collection/empa-office/IMG_0010.jpg"
+                class="collection-auto-link"
+                data-codex-zoom="1"
+                data-codex-src="/collection/empa-office/IMG_0010.jpg"
+                data-codex-alt="Empa office image"
+                data-codex-caption="No.010 · 2023-11-29 16:13"
+              >
+                <img
+                  src="/collection/empa-office/IMG_0010_hu12728818257379003468.jpg"
+                  alt="Empa office image"
+                  width="1500"
+                  height="345"
+                  loading="lazy"
+                />
+              </a>
+            </figure>
+          </article>
+        
+          
+          
+          
+          
+            
+              
+            
+          
+          
+          
+          
+          <article class="collection-codex-entry">
+            <div class="collection-codex-meta">
+              <div class="collection-codex-date"><span class="collection-codex-no">No.009</span> · 2023-11-29 15:36</div>
+            </div>
+            <figure class="collection-auto-item">
+              <a
+                href="/collection/empa-office/IMG_0009.jpg"
+                class="collection-auto-link"
+                data-codex-zoom="1"
+                data-codex-src="/collection/empa-office/IMG_0009.jpg"
+                data-codex-alt="Empa office image"
+                data-codex-caption="No.009 · 2023-11-29 15:36"
+              >
+                <img
+                  src="/collection/empa-office/IMG_0009_hu5404072406950189974.jpg"
+                  alt="Empa office image"
+                  width="1500"
+                  height="335"
+                  loading="lazy"
+                />
+              </a>
+            </figure>
+          </article>
+        
+          
+          
+          
+          
+            
+              
+            
+          
+          
+          
+          
+          <article class="collection-codex-entry">
+            <div class="collection-codex-meta">
+              <div class="collection-codex-date"><span class="collection-codex-no">No.008</span> · 2023-11-29 13:30</div>
+            </div>
+            <figure class="collection-auto-item">
+              <a
+                href="/collection/empa-office/IMG_0008.jpg"
+                class="collection-auto-link"
+                data-codex-zoom="1"
+                data-codex-src="/collection/empa-office/IMG_0008.jpg"
+                data-codex-alt="Empa office image"
+                data-codex-caption="No.008 · 2023-11-29 13:30"
+              >
+                <img
+                  src="/collection/empa-office/IMG_0008_hu4319562393965182612.jpg"
+                  alt="Empa office image"
+                  width="1500"
+                  height="340"
+                  loading="lazy"
+                />
+              </a>
+            </figure>
+          </article>
+        
+          
+          
+          
+          
+            
+              
+            
+          
+          
+          
+          
+          <article class="collection-codex-entry">
+            <div class="collection-codex-meta">
+              <div class="collection-codex-date"><span class="collection-codex-no">No.007</span> · 2023-11-23 17:21</div>
+            </div>
+            <figure class="collection-auto-item">
+              <a
+                href="/collection/empa-office/IMG_0007.jpg"
+                class="collection-auto-link"
+                data-codex-zoom="1"
+                data-codex-src="/collection/empa-office/IMG_0007.jpg"
+                data-codex-alt="Empa office image"
+                data-codex-caption="No.007 · 2023-11-23 17:21"
+              >
+                <img
+                  src="/collection/empa-office/IMG_0007_hu4896535002200597353.jpg"
+                  alt="Empa office image"
+                  width="1500"
+                  height="326"
+                  loading="lazy"
+                />
+              </a>
+            </figure>
+          </article>
+        
+          
+          
+          
+          
+            
+              
+            
+          
+          
+          
+          
+          <article class="collection-codex-entry">
+            <div class="collection-codex-meta">
+              <div class="collection-codex-date"><span class="collection-codex-no">No.006</span> · 2023-11-23 16:34</div>
+            </div>
+            <figure class="collection-auto-item">
+              <a
+                href="/collection/empa-office/IMG_0006.jpg"
+                class="collection-auto-link"
+                data-codex-zoom="1"
+                data-codex-src="/collection/empa-office/IMG_0006.jpg"
+                data-codex-alt="Empa office image"
+                data-codex-caption="No.006 · 2023-11-23 16:34"
+              >
+                <img
+                  src="/collection/empa-office/IMG_0006_hu14110671276681672891.jpg"
+                  alt="Empa office image"
+                  width="1500"
+                  height="313"
+                  loading="lazy"
+                />
+              </a>
+            </figure>
+          </article>
+        
+          
+          
+          
+          
+            
+              
+            
+          
+          
+          
+          
+          <article class="collection-codex-entry">
+            <div class="collection-codex-meta">
+              <div class="collection-codex-date"><span class="collection-codex-no">No.005</span> · 2023-11-23 16:07</div>
+            </div>
+            <figure class="collection-auto-item">
+              <a
+                href="/collection/empa-office/IMG_0005.jpg"
+                class="collection-auto-link"
+                data-codex-zoom="1"
+                data-codex-src="/collection/empa-office/IMG_0005.jpg"
+                data-codex-alt="Empa office image"
+                data-codex-caption="No.005 · 2023-11-23 16:07"
+              >
+                <img
+                  src="/collection/empa-office/IMG_0005_hu15509764199126917889.jpg"
+                  alt="Empa office image"
+                  width="1500"
+                  height="323"
+                  loading="lazy"
+                />
+              </a>
+            </figure>
+          </article>
+        
+          
+          
+          
+          
+            
+              
+            
+          
+          
+          
+          
+          <article class="collection-codex-entry">
+            <div class="collection-codex-meta">
+              <div class="collection-codex-date"><span class="collection-codex-no">No.004</span> · 2023-11-23 13:01</div>
+            </div>
+            <figure class="collection-auto-item">
+              <a
+                href="/collection/empa-office/IMG_0004.jpg"
+                class="collection-auto-link"
+                data-codex-zoom="1"
+                data-codex-src="/collection/empa-office/IMG_0004.jpg"
+                data-codex-alt="Empa office image"
+                data-codex-caption="No.004 · 2023-11-23 13:01"
+              >
+                <img
+                  src="/collection/empa-office/IMG_0004_hu1260153021527634362.jpg"
+                  alt="Empa office image"
+                  width="1500"
+                  height="336"
+                  loading="lazy"
+                />
+              </a>
+            </figure>
+          </article>
+        
+          
+          
+          
+          
+            
+              
+            
+          
+          
+          
+          
+          <article class="collection-codex-entry">
+            <div class="collection-codex-meta">
+              <div class="collection-codex-date"><span class="collection-codex-no">No.003</span> · 2023-11-23 11:09</div>
+            </div>
+            <figure class="collection-auto-item">
+              <a
+                href="/collection/empa-office/IMG_0003.jpg"
+                class="collection-auto-link"
+                data-codex-zoom="1"
+                data-codex-src="/collection/empa-office/IMG_0003.jpg"
+                data-codex-alt="Empa office image"
+                data-codex-caption="No.003 · 2023-11-23 11:09"
+              >
+                <img
+                  src="/collection/empa-office/IMG_0003_hu14033123401601151873.jpg"
+                  alt="Empa office image"
+                  width="1500"
+                  height="322"
+                  loading="lazy"
+                />
+              </a>
+            </figure>
+          </article>
+        
+          
+          
+          
+          
+            
+              
+            
+          
+          
+          
+          
+          <article class="collection-codex-entry">
+            <div class="collection-codex-meta">
+              <div class="collection-codex-date"><span class="collection-codex-no">No.002</span> · 2023-11-07 15:18</div>
+            </div>
+            <figure class="collection-auto-item">
+              <a
+                href="/collection/empa-office/IMG_0002.jpg"
+                class="collection-auto-link"
+                data-codex-zoom="1"
+                data-codex-src="/collection/empa-office/IMG_0002.jpg"
+                data-codex-alt="Empa office image"
+                data-codex-caption="No.002 · 2023-11-07 15:18"
+              >
+                <img
+                  src="/collection/empa-office/IMG_0002_hu10651210091290700046.jpg"
+                  alt="Empa office image"
+                  width="1500"
+                  height="333"
+                  loading="lazy"
+                />
+              </a>
+            </figure>
+          </article>
+        
+          
+          
+          
+          
+            
+              
+            
+          
+          
+          
+          
+          <article class="collection-codex-entry">
+            <div class="collection-codex-meta">
+              <div class="collection-codex-date"><span class="collection-codex-no">No.001</span> · 2023-11-07 12:18</div>
+            </div>
+            <figure class="collection-auto-item">
+              <a
+                href="/collection/empa-office/IMG_0001.jpg"
+                class="collection-auto-link"
+                data-codex-zoom="1"
+                data-codex-src="/collection/empa-office/IMG_0001.jpg"
+                data-codex-alt="Empa office image"
+                data-codex-caption="No.001 · 2023-11-07 12:18"
+              >
+                <img
+                  src="/collection/empa-office/IMG_0001_hu15327035862956635992.jpg"
+                  alt="Empa office image"
+                  width="1500"
+                  height="331"
+                  loading="lazy"
+                />
+              </a>
+            </figure>
+          </article>
+        
+      </div>
+
+      <div class="collection-lightbox" id="collectionLightbox" aria-hidden="true">
+        <button class="collection-lightbox-nav collection-lightbox-prev" type="button" aria-label="Previous image">
+          <img src="/icons/arrow-left.png" alt="" aria-hidden="true" loading="lazy" />
+        </button>
+        <button class="collection-lightbox-nav collection-lightbox-next" type="button" aria-label="Next image">
+          <img src="/icons/arrow-right.png" alt="" aria-hidden="true" loading="lazy" />
+        </button>
+        <button class="collection-lightbox-close" type="button" aria-label="Close image">×</button>
+        <figure class="collection-lightbox-figure">
+          <img class="collection-lightbox-image" src="" alt="" loading="eager" />
+          <figcaption class="collection-lightbox-caption"></figcaption>
+        </figure>
+      </div>
+
+      <script>
+        document.addEventListener("DOMContentLoaded", function () {
+          const gallery = document.querySelector(".collection-auto-gallery");
+          const layoutButtons = Array.from(document.querySelectorAll(".collection-layout-btn[data-layout-target]"));
+          const layoutStorageKey = "collection-layout:" + window.location.pathname;
+          const allowedLayouts = ["single", "double", "triple"];
+
+          const setLayout = function (layout) {
+            if (!gallery || allowedLayouts.indexOf(layout) < 0) return;
+            gallery.setAttribute("data-layout", layout);
+            layoutButtons.forEach(function (button) {
+              button.classList.toggle("is-active", button.getAttribute("data-layout-target") === layout);
+            });
+            try {
+              window.localStorage.setItem(layoutStorageKey, layout);
+            } catch (e) {}
+          };
+
+          if (gallery && layoutButtons.length > 0) {
+            let initialLayout = "single";
+            try {
+              const stored = window.localStorage.getItem(layoutStorageKey);
+              if (stored && allowedLayouts.indexOf(stored) >= 0) {
+                initialLayout = stored;
+              }
+            } catch (e) {}
+            setLayout(initialLayout);
+            layoutButtons.forEach(function (button) {
+              button.addEventListener("click", function () {
+                const layout = button.getAttribute("data-layout-target");
+                if (!layout) return;
+                setLayout(layout);
+                if (layout === "triple" && window.matchMedia("(max-width: 680px)").matches) {
+                  const emojiRun = button.querySelector(".collection-layout-emoji-run");
+                  if (!emojiRun) return;
+                  emojiRun.classList.remove("is-wobble");
+                  void emojiRun.offsetWidth;
+                  emojiRun.classList.add("is-wobble");
+                  window.setTimeout(function () {
+                    emojiRun.classList.remove("is-wobble");
+                  }, 520);
+                }
+              });
+            });
+          }
+
+          const lightbox = document.getElementById("collectionLightbox");
+          if (!lightbox) return;
+          const links = Array.from(document.querySelectorAll("a[data-codex-zoom=\"1\"]"));
+          const lightboxImage = lightbox.querySelector(".collection-lightbox-image");
+          const lightboxCaption = lightbox.querySelector(".collection-lightbox-caption");
+          const closeButton = lightbox.querySelector(".collection-lightbox-close");
+          const prevButton = lightbox.querySelector(".collection-lightbox-prev");
+          const nextButton = lightbox.querySelector(".collection-lightbox-next");
+          if (!lightboxImage || !lightboxCaption || !closeButton || !prevButton || !nextButton || links.length === 0) return;
+          let activeIndex = -1;
+
+          const closeLightbox = function () {
+            lightbox.classList.remove("is-open");
+            lightbox.setAttribute("aria-hidden", "true");
+            lightboxImage.src = "";
+            lightboxImage.alt = "";
+            lightboxCaption.textContent = "";
+            activeIndex = -1;
+            document.body.style.overflow = "";
+          };
+
+          const setLightboxByIndex = function (index) {
+            const total = links.length;
+            const safeIndex = ((index % total) + total) % total;
+            activeIndex = safeIndex;
+            const link = links[safeIndex];
+            const src = link.getAttribute("data-codex-src");
+            const alt = link.getAttribute("data-codex-alt");
+            const caption = link.getAttribute("data-codex-caption");
+            if (!src) return;
+            lightboxImage.src = src;
+            lightboxImage.alt = alt || "";
+            lightboxCaption.textContent = caption || "";
+          };
+
+          const openLightboxByIndex = function (index) {
+            setLightboxByIndex(index);
+            lightbox.classList.add("is-open");
+            lightbox.setAttribute("aria-hidden", "false");
+            document.body.style.overflow = "hidden";
+          };
+
+          const stepLightbox = function (step) {
+            if (!lightbox.classList.contains("is-open") || activeIndex < 0) return;
+            setLightboxByIndex(activeIndex + step);
+          };
+
+          links.forEach(function (link, index) {
+            link.addEventListener("click", function (event) {
+              event.preventDefault();
+              openLightboxByIndex(index);
+            });
+          });
+
+          closeButton.addEventListener("click", closeLightbox);
+          prevButton.addEventListener("click", function (event) {
+            event.stopPropagation();
+            stepLightbox(-1);
+          });
+          nextButton.addEventListener("click", function (event) {
+            event.stopPropagation();
+            stepLightbox(1);
+          });
+          lightbox.addEventListener("click", function (event) {
+            if (event.target === lightbox) {
+              closeLightbox();
+            }
+          });
+
+          document.addEventListener("keydown", function (event) {
+            if (!lightbox.classList.contains("is-open")) return;
+            if (event.key === "Escape") {
+              closeLightbox();
+            } else if (event.key === "ArrowLeft") {
+              stepLightbox(-1);
+            } else if (event.key === "ArrowRight") {
+              stepLightbox(1);
+            }
+          });
+        });
+      </script>
+    </section>
   
 
+  
 
   
 
@@ -2563,10 +3853,6 @@
     <footer class="flex-col items-center" style="padding-bottom: 1.5rem;">
         
         
-
-        
-        
-        
             
         
             
@@ -2638,11 +3924,20 @@
             
         
             
+        
+            
+        
+            
+        
+            
+        
         
 
         <img id="footer-banner" data-base="/img/" data-banners="banner_blue.png,banner_brown.png,banner_green.png,banner_pink.png,banner_purple.png,banner_yellow.png,banner_yellow2.png" class="mb-5" alt="Footer banner">
         <noscript>
-          <img src="/img/banner_brown.png" class="mb-5" alt="Footer banner">
+          
+            <img src="/img/banner_blue.png" class="mb-5" alt="Footer banner">
+          
         </noscript>
         <script>
           (function () {
@@ -2667,16 +3962,433 @@
 </div>
 
     
+<script src="/js/jquery-1.11.0.min.js"></script>
+    <script src="/js/jquery.ripples.min.js?v=20260221j"></script>
 
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+          return;
+        }
+
+        const root = document.documentElement;
+        let layer = null;
+        let dragBubbleTrailPointerId = null;
+        let lastDragBubbleAt = 0;
+
+        const createLayer = function () {
+          if (layer) return;
+          layer = document.createElement("div");
+          layer.id = "global-ripple-layer";
+          document.body.appendChild(layer);
+        };
+
+        const isFxExcludedTarget = function (event) {
+          const target = event.target instanceof Element ? event.target : null;
+          if (target && target.closest(".collection-banner-card")) return true;
+          if (target && target.closest(".collection-layout-btn")) return true;
+          if (target && target.closest(".collection-layout-switch")) return true;
+          if (target && target.closest("a[data-codex-zoom=\"1\"]")) return true;
+          if (target && target.closest(".collection-auto-link")) return true;
+          const titleArea = document.querySelector(".title-interactive");
+          if (titleArea && titleArea.contains(event.target)) return true;
+          const homeRippleArea = document.querySelector(".home-ripple-image");
+          if (homeRippleArea && homeRippleArea.contains(event.target)) return true;
+          const kamaboko = document.querySelector(".site-kamaboko-corner");
+          if (kamaboko && kamaboko.contains(event.target)) return true;
+          return false;
+        };
+
+        const spawnRipple = function (event) {
+          if (!layer) return;
+          if (root.classList.contains("dark")) return;
+          if (isFxExcludedTarget(event)) return;
+
+          const ripple = document.createElement("div");
+          ripple.className = "global-ripple";
+          const bubbleSize = 5 + Math.random() * 55;
+          const lineWidth = Math.max(0.1, Math.min(0.48, 0.1 + bubbleSize * 0.0062));
+          const swayXDir = Math.random() < 0.5 ? -1 : 1;
+          const swayYDir = Math.random() < 0.5 ? -1 : 1;
+          const swayX = (0.28 + Math.random() * 0.95) * swayXDir;
+          const swayY = (0.22 + Math.random() * 0.7) * swayYDir;
+          ripple.style.setProperty("--bubble-size", bubbleSize.toFixed(1) + "px");
+          ripple.style.setProperty("--bubble-line", lineWidth.toFixed(2) + "px");
+          ripple.style.setProperty("--bubble-sway-x", swayX.toFixed(2) + "px");
+          ripple.style.setProperty("--bubble-sway-y", swayY.toFixed(2) + "px");
+          ripple.style.left = event.clientX + "px";
+          ripple.style.top = event.clientY + "px";
+          ripple.innerHTML = "<span class=\"bubble-drift\"><span class=\"bubble-shell\"></span><span class=\"bubble-highlight\"></span><span class=\"bubble-highlight-2\"></span><span class=\"bubble-dot\"></span></span>";
+          layer.appendChild(ripple);
+
+          window.setTimeout(function () {
+            ripple.remove();
+          }, 1200);
+        };
+
+        const spawnMeteor = function (event) {
+          if (!layer) return;
+          if (!root.classList.contains("dark")) return;
+          if (isFxExcludedTarget(event)) return;
+
+          const meteor = document.createElement("span");
+          meteor.className = "global-meteor";
+          const sweep = 92 + Math.random() * 50;
+          const pre = sweep * 0.5;
+          const post = sweep * 0.5;
+          const length = 34 + Math.random() * 38;
+          const tilt = Math.random() * 45;
+          const angle = Math.random() < 0.5 ? tilt : 180 - tilt;
+          meteor.style.setProperty("--meteor-length", length.toFixed(1) + "px");
+          meteor.style.setProperty("--meteor-pre", pre.toFixed(1) + "px");
+          meteor.style.setProperty("--meteor-post", post.toFixed(1) + "px");
+          meteor.style.setProperty("--meteor-angle", angle.toFixed(1) + "deg");
+          meteor.style.left = (event.clientX + 14) + "px";
+          meteor.style.top = (event.clientY - 3) + "px";
+          layer.appendChild(meteor);
+
+          window.setTimeout(function () {
+            meteor.remove();
+          }, 840);
+        };
+
+        const dismissBubbleAtPointer = function (event) {
+          if (!layer || root.classList.contains("dark")) return false;
+          const ripples = layer.querySelectorAll(".global-ripple");
+          for (let i = ripples.length - 1; i >= 0; i -= 1) {
+            const ripple = ripples[i];
+            const x = parseFloat(ripple.style.left);
+            const y = parseFloat(ripple.style.top);
+            const size = parseFloat(ripple.style.getPropertyValue("--bubble-size") || "0");
+            if (!Number.isFinite(x) || !Number.isFinite(y) || !Number.isFinite(size) || size <= 0) continue;
+            const dx = event.clientX - x;
+            const dy = event.clientY - y;
+            const hitRadius = size * 0.42;
+            if ((dx * dx) + (dy * dy) <= (hitRadius * hitRadius)) {
+              ripple.remove();
+              return true;
+            }
+          }
+          return false;
+        };
+
+        const spawnClickFx = function (event) {
+          if (event.pointerType === "mouse" && event.button !== 0) return;
+          if (isFxExcludedTarget(event)) return;
+          if (!root.classList.contains("dark") && dismissBubbleAtPointer(event)) return;
+          if (!root.classList.contains("dark")) {
+            dragBubbleTrailPointerId = event.pointerId;
+            lastDragBubbleAt = 0;
+          }
+          if (root.classList.contains("dark")) {
+            spawnMeteor(event);
+          } else {
+            spawnRipple(event);
+          }
+        };
+
+        const spawnDragBubbleTrail = function (event) {
+          if (root.classList.contains("dark")) return;
+          if (dragBubbleTrailPointerId == null) return;
+          if (event.pointerId !== dragBubbleTrailPointerId) return;
+          if ((event.buttons & 1) === 0) return;
+          const now = Date.now();
+          if (now - lastDragBubbleAt < 118) return;
+          lastDragBubbleAt = now;
+          spawnRipple(event);
+        };
+
+        const stopDragBubbleTrail = function (event) {
+          if (dragBubbleTrailPointerId == null) return;
+          if (event && event.pointerId != null && event.pointerId !== dragBubbleTrailPointerId) return;
+          dragBubbleTrailPointerId = null;
+        };
+
+        const syncRippleMode = function () {
+          createLayer();
+        };
+
+        syncRippleMode();
+        document.addEventListener("pointerdown", spawnClickFx, { passive: true });
+        document.addEventListener("pointermove", spawnDragBubbleTrail, { passive: true });
+        document.addEventListener("pointerup", stopDragBubbleTrail, { passive: true });
+        document.addEventListener("pointercancel", stopDragBubbleTrail, { passive: true });
+        const observer = new MutationObserver(syncRippleMode);
+        observer.observe(root, { attributes: true, attributeFilter: ["class"] });
+      });
+    </script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const kamaboko = document.querySelector(".site-kamaboko-corner");
+        if (!kamaboko) return;
+
+        let rainLayer = null;
+        let centerLayer = null;
+        let rollLayer = null;
+
+        const ensureRainLayer = function () {
+          if (rainLayer && rainLayer.isConnected) return rainLayer;
+          rainLayer = document.createElement("div");
+          rainLayer.id = "kamaboko-rain-layer";
+          document.body.appendChild(rainLayer);
+          return rainLayer;
+        };
+
+        const ensureCenterLayer = function () {
+          if (centerLayer && centerLayer.isConnected) return centerLayer;
+          centerLayer = document.createElement("div");
+          centerLayer.id = "kamaboko-center-layer";
+          document.body.appendChild(centerLayer);
+          return centerLayer;
+        };
+
+        const ensureRollLayer = function () {
+          if (rollLayer && rollLayer.isConnected) return rollLayer;
+          rollLayer = document.createElement("div");
+          rollLayer.id = "kamaboko-roll-layer";
+          document.body.appendChild(rollLayer);
+          return rollLayer;
+        };
+
+        const setKamabokoPressing = function (pressing) {
+          kamaboko.classList.toggle("is-pressing", !!pressing);
+        };
+
+        const spawnKamabokoRain = function () {
+          const layer = ensureRainLayer();
+          const src = kamaboko.getAttribute("src");
+          if (!src) return;
+
+          const width = window.innerWidth || document.documentElement.clientWidth || 0;
+          const count = width >= 640 ? 48 : 36;
+
+          for (let i = 0; i < count; i += 1) {
+            const piece = document.createElement("img");
+            const delay = Math.random() * 260;
+            const duration = 700 + Math.random() * 5600;
+            const drift = (-170 + Math.random() * 340).toFixed(1) + "px";
+            const rotStart = (-90 + Math.random() * 180).toFixed(1) + "deg";
+            let rotEndValue = -10080 + Math.random() * 20160;
+            const sizeBias = 1 - Math.pow(Math.random(), 2.4);
+            let sizeValue = 64 + sizeBias * 216;
+            if (Math.random() < 0.12) {
+              sizeValue *= 1.8 + Math.random() * 1.1;
+              rotEndValue *= 1.8 + Math.random() * 1.1;
+            }
+            const rotEnd = rotEndValue.toFixed(1) + "deg";
+            const size = sizeValue.toFixed(1) + "px";
+            const opacity = "0.95";
+            const scale = (0.94 + Math.random() * 0.42).toFixed(2);
+            const x = (-6 + Math.random() * 112).toFixed(2) + "vw";
+
+            piece.className = "kamaboko-rain-piece";
+            piece.src = src;
+            piece.alt = "";
+            piece.setAttribute("aria-hidden", "true");
+            piece.style.left = x;
+            piece.style.setProperty("--kamaboko-rain-size", size);
+            piece.style.setProperty("--kamaboko-rain-duration", duration.toFixed(0) + "ms");
+            piece.style.setProperty("--kamaboko-rain-drift", drift);
+            piece.style.setProperty("--kamaboko-rain-rot-start", rotStart);
+            piece.style.setProperty("--kamaboko-rain-rot-end", rotEnd);
+            piece.style.setProperty("--kamaboko-rain-opacity", opacity);
+            piece.style.setProperty("--kamaboko-rain-scale", scale);
+
+            window.setTimeout(function () {
+              layer.appendChild(piece);
+              window.setTimeout(function () {
+                piece.remove();
+              }, duration + 120);
+            }, delay);
+          }
+        };
+
+        const spawnKamabokoCenterBloom = function () {
+          const layer = ensureCenterLayer();
+          const src = kamaboko.getAttribute("src");
+          if (!src) return;
+
+          const piece = document.createElement("div");
+          const pieceImg = document.createElement("img");
+          const buttonRect = kamaboko.getBoundingClientRect();
+          const initialWidth = Math.max(1, buttonRect.width * 2);
+          const viewportWidth = window.innerWidth || document.documentElement.clientWidth || 0;
+          const viewportHeight = window.innerHeight || document.documentElement.clientHeight || 0;
+          const ratio = (kamaboko.naturalWidth && kamaboko.naturalHeight)
+            ? (kamaboko.naturalWidth / kamaboko.naturalHeight)
+            : (buttonRect.width && buttonRect.height ? (buttonRect.width / buttonRect.height) : 1);
+          const safeViewport = Math.max(1, Math.min(viewportWidth, viewportHeight) * 0.9);
+          const safeWidthForRotation = safeViewport / Math.sqrt(1 + Math.pow(1 / Math.max(ratio, 0.001), 2));
+          const maxWidth = Math.max(initialWidth, safeWidthForRotation * 2);
+          const scaleMax = Math.max(1, maxWidth / initialWidth);
+          const scaleMin = 0.02;
+          const spinDir = Math.random() < 0.5 ? -1 : 1;
+          const rotStartValue = Math.random() * 360;
+          const rotEndValue = rotStartValue + (spinDir * (4320 + Math.random() * 2160));
+          const rotStart = rotStartValue.toFixed(1) + "deg";
+          const rotEnd = rotEndValue.toFixed(1) + "deg";
+
+          piece.className = "kamaboko-center-piece";
+          piece.setAttribute("aria-hidden", "true");
+          piece.style.setProperty("--kamaboko-center-base-size", initialWidth.toFixed(1) + "px");
+          piece.style.setProperty("--kamaboko-center-scale-min", scaleMin.toFixed(3));
+          piece.style.setProperty("--kamaboko-center-scale-max", scaleMax.toFixed(3));
+          piece.style.setProperty("--kamaboko-center-rot-start", rotStart);
+          piece.style.setProperty("--kamaboko-center-rot-end", rotEnd);
+
+          pieceImg.className = "kamaboko-center-piece-img";
+          pieceImg.src = src;
+          pieceImg.alt = "";
+          pieceImg.setAttribute("aria-hidden", "true");
+          piece.appendChild(pieceImg);
+
+          layer.appendChild(piece);
+          piece.addEventListener("animationend", function () {
+            piece.remove();
+          }, { once: true });
+        };
+
+        const spawnKamabokoRollLine = function () {
+          const layer = ensureRollLayer();
+          const src = kamaboko.getAttribute("src");
+          if (!src) return;
+
+          const buttonRect = kamaboko.getBoundingClientRect();
+          const pieceSize = Math.max(1, buttonRect.width * 5.0);
+          const count = 5;
+          const stagger = 560;
+          const duration = 3300;
+          const rotationDegrees = 1260;
+
+          for (let i = 0; i < count; i += 1) {
+            const piece = document.createElement("img");
+            const rotStartValue = Math.random() * 360;
+            
+            const rotEndValue = rotStartValue + rotationDegrees;
+            const startX = (-pieceSize - 28).toFixed(1) + "px";
+            const endX = "calc(100vw + " + (pieceSize + 28).toFixed(1) + "px)";
+
+            piece.className = "kamaboko-roll-piece";
+            piece.src = src;
+            piece.alt = "";
+            piece.setAttribute("aria-hidden", "true");
+            piece.style.setProperty("--kamaboko-roll-size", pieceSize.toFixed(1) + "px");
+            piece.style.setProperty("--kamaboko-roll-duration", duration + "ms");
+            piece.style.setProperty("--kamaboko-roll-start-x", startX);
+            piece.style.setProperty("--kamaboko-roll-end-x", endX);
+            piece.style.setProperty("--kamaboko-roll-rot-start", rotStartValue.toFixed(1) + "deg");
+            piece.style.setProperty("--kamaboko-roll-rot-end", rotEndValue.toFixed(1) + "deg");
+
+            window.setTimeout(function () {
+              layer.appendChild(piece);
+              piece.addEventListener("animationend", function () {
+                piece.remove();
+              }, { once: true });
+            }, i * stagger);
+          }
+        };
+
+        const handleKamabokoActivate = function (event) {
+          event.preventDefault();
+          event.stopPropagation();
+          const effects = [spawnKamabokoRain, spawnKamabokoCenterBloom, spawnKamabokoRollLine];
+          effects[Math.floor(Math.random() * effects.length)]();
+        };
+
+        kamaboko.addEventListener("pointerdown", function (event) {
+          event.stopPropagation();
+          if (event.pointerType === "mouse" && event.button !== 0) return;
+          setKamabokoPressing(true);
+        });
+
+        const releaseKamabokoPressing = function () {
+          setKamabokoPressing(false);
+        };
+
+        kamaboko.addEventListener("pointerup", releaseKamabokoPressing);
+        kamaboko.addEventListener("pointercancel", releaseKamabokoPressing);
+        kamaboko.addEventListener("pointerleave", function (event) {
+          if ((event.buttons & 1) === 0) releaseKamabokoPressing();
+        });
+        window.addEventListener("pointerup", releaseKamabokoPressing, { passive: true });
+        window.addEventListener("pointercancel", releaseKamabokoPressing, { passive: true });
+
+        kamaboko.addEventListener("click", handleKamabokoActivate);
+        kamaboko.addEventListener("keydown", function (event) {
+          if (event.key !== "Enter" && event.key !== " ") return;
+          handleKamabokoActivate(event);
+        });
+      });
+    </script>
+
+    
     <script>
       document.addEventListener("DOMContentLoaded", function() {
         const stickyBar = document.querySelector(".site-sticky-bar");
         const stickySentinel = document.querySelector(".site-sticky-sentinel");
+        const stickyNav = stickyBar ? stickyBar.querySelector(".site-sticky-nav") : null;
         const root = document.documentElement;
         if (!stickyBar || !stickySentinel) return;
 
+        const updateSubmenuState = function() {
+          if (!stickyNav) {
+            stickyBar.classList.remove("is-submenu-open");
+            stickyBar.style.setProperty("--sticky-submenu-extent", "0px");
+            return;
+          }
+          if (!window.matchMedia("(min-width: 640px)").matches) {
+            stickyBar.classList.remove("is-submenu-open");
+            stickyBar.style.setProperty("--sticky-submenu-extent", "0px");
+            return;
+          }
+          const dropdownItems = stickyNav.querySelectorAll("li.nav-with-dropdown");
+          let hasOpenDropdown = false;
+          let maxSubmenuBottom = 0;
+          const stickyBarRect = stickyBar.getBoundingClientRect();
+          for (let i = 0; i < dropdownItems.length; i += 1) {
+            const item = dropdownItems[i];
+            const submenu = item.querySelector(".nav-submenu");
+            if (!submenu) continue;
+            const hasHover = item.matches(":hover");
+            const hasFocusVisible = item.querySelector(":focus-visible") !== null;
+            const isOpen = hasHover || hasFocusVisible;
+            item.classList.toggle("is-open", isOpen);
+            if (isOpen) {
+              hasOpenDropdown = true;
+              const submenuRect = submenu.getBoundingClientRect();
+              if (submenuRect.bottom > maxSubmenuBottom) {
+                maxSubmenuBottom = submenuRect.bottom;
+              }
+            } else {
+              item.classList.remove("is-open");
+            }
+          }
+          const submenuExtent = hasOpenDropdown
+            ? Math.max(0, Math.ceil(maxSubmenuBottom - stickyBarRect.bottom))
+            : 0;
+          stickyBar.style.setProperty("--sticky-submenu-extent", submenuExtent + "px");
+          stickyBar.classList.toggle("is-submenu-open", hasOpenDropdown);
+        };
+
+        const queueSubmenuStateUpdate = function() {
+          window.requestAnimationFrame(updateSubmenuState);
+        };
+
+        const closeSubmenuState = function() {
+          if (!stickyNav) return;
+          const dropdownItems = stickyNav.querySelectorAll("li.nav-with-dropdown.is-open");
+          for (let i = 0; i < dropdownItems.length; i += 1) {
+            dropdownItems[i].classList.remove("is-open");
+          }
+          stickyBar.classList.remove("is-submenu-open");
+          stickyBar.style.setProperty("--sticky-submenu-extent", "0px");
+        };
+
         const updateStickyState = function() {
-          stickyBar.style.setProperty("--sticky-bg-height", Math.ceil(stickyBar.offsetHeight) + "px");
+          const stickyBarHeight = Math.ceil(stickyBar.offsetHeight);
+          stickyBar.style.setProperty("--sticky-bg-height", stickyBarHeight + "px");
+          root.style.setProperty("--site-sticky-bar-height", stickyBarHeight + "px");
           const viewportHeight = window.innerHeight || root.clientHeight || 0;
           const pageHeight = Math.max(
             root.scrollHeight,
@@ -2687,14 +4399,31 @@
           const isShortPage = root.classList.contains("page-short") || pageHeight <= viewportHeight * 1.22;
           const canScroll = (root.scrollHeight - window.innerHeight) > 2;
           const reachedTop = stickySentinel.getBoundingClientRect().top <= 0;
-          const isStuck = !isShortPage && canScroll && reachedTop;
+          const hasScrolled = (window.scrollY || root.scrollTop || 0) > 0;
+          const isStuck = !isShortPage && canScroll && reachedTop && hasScrolled;
           stickyBar.classList.toggle("is-stuck", isStuck);
+          updateSubmenuState();
         };
 
         updateStickyState();
         window.addEventListener("scroll", updateStickyState, { passive: true });
         window.addEventListener("resize", updateStickyState);
         window.addEventListener("load", updateStickyState);
+        if (stickyNav) {
+          stickyNav.addEventListener("mouseover", queueSubmenuStateUpdate, { passive: true });
+          stickyNav.addEventListener("mouseout", queueSubmenuStateUpdate, { passive: true });
+          stickyNav.addEventListener("focusin", queueSubmenuStateUpdate);
+          stickyNav.addEventListener("focusout", queueSubmenuStateUpdate);
+          document.addEventListener("pointerdown", function(event) {
+            const target = event.target instanceof Element ? event.target : null;
+            if (target && stickyNav.contains(target)) return;
+            closeSubmenuState();
+          }, { passive: true });
+          window.addEventListener("blur", closeSubmenuState);
+          document.addEventListener("visibilitychange", function() {
+            if (document.hidden) closeSubmenuState();
+          });
+        }
         const observer = new MutationObserver(updateStickyState);
         observer.observe(root, { attributes: true, attributeFilter: ["class"] });
       });

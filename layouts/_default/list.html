@@ -19,24 +19,174 @@
   </div>
 {{ end }}
 
-<section class="flex flex-col" style="padding-bottom: 1.2rem; padding-top: 0.5rem; gap: 0.6rem;">
-  {{ $prevYear := 0 }}
-  {{ range $index, $page := $pages }}
-    {{ if $page.PublishDate }}
-      {{ $year := $page.PublishDate.Year }}
-
-      {{ if ne $year $prevYear }}
-      <div class="year-separator flex justify-center items-center text-xs font-semibold text-gray-400 dark:text-gray-400 my-2"
-      style="margin-top:1rem; margin-bottom:1rem;">
-                ～ {{ $year }} ～
-        </div>
-        {{ $prevYear = $year }}
-      {{ end }}
+{{ if and (eq .Section "collection") (eq .Kind "section") }}
+  {{ $benchPage := .Site.GetPage "/collection/bench" }}
+  {{ $officePage := .Site.GetPage "/collection/empa-office" }}
+  <section class="collection-banner-list" aria-label="Collection projects">
+    {{ with $benchPage }}
+      {{ $banner := .Resources.GetMatch "250501.*" }}
+      <a class="collection-banner-card" href="{{ .RelPermalink }}">
+        {{ with $banner }}
+          <img
+            class="collection-banner-image"
+            src="{{ .RelPermalink }}"
+            alt="{{ $benchPage.Title }} banner"
+            loading="lazy"
+            style="object-position: 50% 100%;"
+          />
+        {{ end }}
+        <span class="collection-banner-frost" aria-hidden="true"></span>
+        <span class="collection-banner-mask" aria-hidden="true"></span>
+        <span class="collection-banner-copy">
+          <span class="collection-banner-title">{{ .Title }}</span>
+          {{ with .Params.description }}
+            <span class="collection-banner-description">{{ . }}</span>
+          {{ end }}
+        </span>
+      </a>
     {{ end }}
 
-    {{ partial "list/default" $page }}
+    {{ with $officePage }}
+      {{ $banner := .Resources.GetMatch "IMG_0001.*" }}
+      <a class="collection-banner-card" href="{{ .RelPermalink }}">
+        {{ with $banner }}
+          <img
+            class="collection-banner-image"
+            src="{{ .RelPermalink }}"
+            alt="{{ $officePage.Title }} banner"
+            loading="lazy"
+            style="object-position: 50% 78%;"
+          />
+        {{ end }}
+        <span class="collection-banner-frost" aria-hidden="true"></span>
+        <span class="collection-banner-mask" aria-hidden="true"></span>
+        <span class="collection-banner-copy">
+          <span class="collection-banner-title">{{ .Title }}</span>
+          {{ with .Params.description }}
+            <span class="collection-banner-description">{{ . }}</span>
+          {{ end }}
+        </span>
+      </a>
+    {{ end }}
+  </section>
+{{ else if and (eq .Section "corner") (eq .Kind "section") }}
+  {{ $cornerPages := slice }}
+  {{ range readDir "content/corner" }}
+    {{ if and (not .IsDir) (hasSuffix .Name ".md") (ne .Name "_index.md") }}
+      {{ $pagePath := printf "/corner/%s" (replaceRE "\\.md$" "" .Name) }}
+      {{ with $.Site.GetPage $pagePath }}
+        {{ $cornerPages = $cornerPages | append . }}
+      {{ end }}
+    {{ end }}
   {{ end }}
-</section>
+  {{ $cornerPages = sort $cornerPages "Date" "desc" }}
+  <section class="corner-entry-list" aria-label="Corner entries">
+    {{ range $cornerPages }}
+      <details class="corner-entry-item">
+        <summary class="corner-entry-summary">
+          <span class="corner-entry-title">{{ .Title }}</span>
+          {{ with .Date }}
+            <time class="corner-entry-date" datetime="{{ .Format "2006-01-02T15:04:05Z07:00" }}">{{ .Format "2006-01-02" }}</time>
+          {{ end }}
+        </summary>
+        <div class="corner-entry-body">
+          {{ .Content }}
+        </div>
+      </details>
+    {{ end }}
+  </section>
+{{ else if and (eq .Section "message") (eq .Kind "section") }}
+  {{ $messageFormConfig := .Site.Params.messageForm }}
+  {{ $messageActionURL := "" }}
+  {{ with $messageFormConfig.actionURL }}
+    {{ $messageActionURL = . }}
+  {{ end }}
+  {{ $messageSubject := "Kamaboko Home Message" }}
+  {{ with $messageFormConfig.subject }}
+    {{ $messageSubject = . }}
+  {{ end }}
+  <section
+    class="message-board"
+    data-message-board
+    data-message-action="{{ $messageActionURL }}"
+  >
+    <form class="message-form" data-message-form autocomplete="off" method="POST" accept-charset="UTF-8" action="{{ $messageActionURL }}" onsubmit="var n=this.querySelector('[data-message-next]');if(n){n.value=window.location.origin+window.location.pathname+'?sent=1&t='+Date.now();}">
+      <input type="hidden" name="_subject" value="{{ $messageSubject }}" />
+      <input type="hidden" name="_captcha" value="false" />
+      <input type="hidden" name="_next" value="" data-message-next />
+      <div class="message-form-row">
+        <label for="guestbook-content">信的内容</label>
+        <textarea id="guestbook-content" name="message" rows="6" maxlength="500" placeholder="似乎有什么想说的样子" required></textarea>
+      </div>
+      <div class="message-form-row">
+        <label for="guestbook-signature">落款</label>
+        <input id="guestbook-signature" name="signature" type="text" maxlength="24" placeholder="香甜的年轮蛋糕" />
+      </div>
+      <div class="message-form-row">
+        <label for="guestbook-reply">回信地址</label>
+        <input id="guestbook-reply" name="reply_address" type="text" maxlength="120" placeholder="不写也没关系，写了也不一定会收到回信的样子" />
+      </div>
+      <div class="message-form-actions">
+        <button class="message-submit-button" type="submit">寄出</button>
+      </div>
+      <p class="message-board-status" data-message-status aria-live="polite"></p>
+    </form>
+    <p class="message-board-note" data-message-note></p>
+  </section>
+{{ else }}
+  {{ $isPostsSection := and (eq .Section "posts") (eq .Kind "section") }}
+  {{ $postYears := slice }}
+  {{ if $isPostsSection }}
+    {{ $prevPickerYear := 0 }}
+    {{ range $pages }}
+      {{ if .PublishDate }}
+        {{ $pickerYear := .PublishDate.Year }}
+        {{ if ne $pickerYear $prevPickerYear }}
+          {{ $postYears = $postYears | append $pickerYear }}
+          {{ $prevPickerYear = $pickerYear }}
+        {{ end }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+
+  <section class="section-list-default">
+    {{ $prevYear := 0 }}
+    {{ range $index, $page := $pages }}
+      {{ if $page.PublishDate }}
+        {{ $year := $page.PublishDate.Year }}
+
+        {{ if ne $year $prevYear }}
+        {{ $yearAnchorID := printf "year-%d" $year }}
+        {{ if eq $.Section "posts" }}
+          {{ $yearAnchorID = printf "posts-year-%d" $year }}
+        {{ end }}
+        {{ if and $isPostsSection (gt (len $postYears) 0) }}
+          {{ $currentPostsYear := $year }}
+          <div id="{{ $yearAnchorID }}" data-posts-year="{{ $year }}" class="year-separator flex justify-center items-center text-xs font-semibold text-gray-400 dark:text-gray-400 my-2 posts-year-separator"
+          style="margin-top:1rem; margin-bottom:1rem; scroll-margin-top: 5rem;">
+            <details class="posts-year-dropdown">
+              <summary class="posts-year-trigger">～ {{ $year }} ～</summary>
+              <div class="posts-year-jump-menu" role="menu" aria-label="Posts years">
+                {{ range $postYears }}
+                  <a role="menuitem" href="#posts-year-{{ . }}"{{ if eq . $currentPostsYear }} class="is-current" aria-current="true"{{ end }}>{{ . }}</a>
+                {{ end }}
+              </div>
+            </details>
+          </div>
+        {{ else }}
+          <div id="{{ $yearAnchorID }}" class="year-separator flex justify-center items-center text-xs font-semibold text-gray-400 dark:text-gray-400 my-2"
+          style="margin-top:1rem; margin-bottom:1rem; scroll-margin-top: 5rem;">
+                    ～ {{ $year }} ～
+            </div>
+        {{ end }}
+          {{ $prevYear = $year }}
+        {{ end }}
+      {{ end }}
+
+      {{ partial "list/default" $page }}
+    {{ end }}
+  </section>
+{{ end }}
 
 
 {{/*
@@ -47,7 +197,7 @@
 
 <div class="flex justify-center" style="margin-top: auto; padding-top: 1rem;">
   <a href="#" onclick="scrollToTop()" class="pagination-button text-xs font-semibold" style="color: #9CA3AF; text-decoration: none; cursor: pointer;">
-    T🍥P 
+    T🍥P
   </a>
 </div>
 
@@ -74,6 +224,128 @@
   function scrollToTop() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
+
+  const messageBoard = document.querySelector('[data-message-board]');
+  if (messageBoard) {
+    const form = messageBoard.querySelector('[data-message-form]');
+    const contentInput = messageBoard.querySelector('#guestbook-content');
+    const signatureInput = messageBoard.querySelector('#guestbook-signature');
+    const replyInput = messageBoard.querySelector('#guestbook-reply');
+    const note = messageBoard.querySelector('[data-message-note]');
+    const status = messageBoard.querySelector('[data-message-status]');
+    const submitButton = form ? form.querySelector('button[type="submit"]') : null;
+    const nextInput = form ? form.querySelector('[data-message-next]') : null;
+    const formAction = form ? (form.getAttribute('action') || '').trim() : '';
+    const hasAction = formAction.length > 0;
+
+    const normalizeNickname = (value) => value.trim().replace(/\s+/g, ' ').slice(0, 24);
+    const normalizeMessage = (value) => value.trim().slice(0, 500);
+
+    const setStatus = (text, tone = 'normal') => {
+      if (!status) return;
+      status.textContent = text || '';
+      status.dataset.tone = tone;
+      status.hidden = !text;
+    };
+
+    const setSubmitting = (isSubmitting) => {
+      if (!submitButton) return;
+      submitButton.disabled = isSubmitting;
+      submitButton.setAttribute('aria-busy', isSubmitting ? 'true' : 'false');
+    };
+
+    if (note) {
+      note.textContent = hasAction
+        ? '填写后会发送到站长邮箱。若未收到，请检查并激活 FormSubmit 确认邮件。'
+        : '当前未配置邮件发送地址。';
+    }
+
+    if (status) {
+      status.hidden = true;
+    }
+
+    const url = new URL(window.location.href);
+    const isSent = url.searchParams.get('sent') === '1';
+    if (isSent) {
+      const sentMsRaw = url.searchParams.get('t');
+      const sentMs = sentMsRaw ? Number(sentMsRaw) : NaN;
+      const sentDate = Number.isFinite(sentMs) && sentMs > 0 ? new Date(sentMs) : new Date();
+      const sentAtText = sentDate.toLocaleString();
+      setStatus(`信件已经寄出了！（${sentAtText}）`, 'success');
+      url.searchParams.delete('sent');
+      url.searchParams.delete('t');
+      window.history.replaceState({}, '', url.toString());
+    }
+
+    if (!hasAction) {
+      if (form) {
+        form.setAttribute('aria-disabled', 'true');
+      }
+      if (contentInput) contentInput.disabled = true;
+      if (signatureInput) signatureInput.disabled = true;
+      if (replyInput) replyInput.disabled = true;
+      setSubmitting(true);
+      setStatus('请先在站点配置中填写邮件表单地址。', 'error');
+      return;
+    }
+
+    if (!form) return;
+    form.addEventListener('submit', async (event) => {
+      const content = contentInput ? normalizeMessage(contentInput.value) : '';
+      const signature = signatureInput ? (normalizeNickname(signatureInput.value) || '香甜的年轮蛋糕') : '香甜的年轮蛋糕';
+      const replyAddress = replyInput ? replyInput.value.trim().slice(0, 120) : '';
+      if (!content) {
+        event.preventDefault();
+        setStatus('请填写留言内容。', 'error');
+        return;
+      }
+
+      if (nextInput) {
+        const base = `${window.location.origin}${window.location.pathname}`;
+        const nextURL = `${base}?sent=1&t=${Date.now()}`;
+        nextInput.value = nextURL;
+      }
+
+      event.preventDefault();
+      if (contentInput) contentInput.value = content;
+      if (signatureInput) signatureInput.value = signature;
+      if (replyInput) replyInput.value = replyAddress;
+      setSubmitting(true);
+      setStatus('正在发送，请稍候...', 'normal');
+
+      try {
+        const ajaxAction = formAction.includes('/ajax/')
+          ? formAction
+          : formAction.replace('://formsubmit.co/', '://formsubmit.co/ajax/');
+        const payload = new FormData(form);
+        const response = await fetch(ajaxAction, {
+          method: 'POST',
+          headers: {
+            Accept: 'application/json'
+          },
+          body: payload
+        });
+        const result = await response.json().catch(() => ({}));
+
+        if (!response.ok) {
+          const errorText = (result && typeof result.message === 'string' && result.message.trim())
+            ? result.message.trim()
+            : `发送失败（${response.status}）`;
+          setStatus(errorText, 'error');
+          return;
+        }
+
+        const sentAtText = new Date().toLocaleString();
+        setStatus(`信件已经寄出了！（${sentAtText}）`, 'success');
+        if (contentInput) contentInput.value = '';
+      } catch (error) {
+        setStatus('发送失败，请检查网络后重试。', 'error');
+      } finally {
+        setSubmitting(false);
+      }
+    });
+  }
+
 </script>
 
 {{ end }}

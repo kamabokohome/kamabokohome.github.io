@@ -1,21 +1,18 @@
 <div class="mt-auto" style="margin-top: auto; padding-top: 1.5rem !important;">
     <footer class="flex-col items-center" style="padding-bottom: 1.5rem;">
-        {{ $color := .Params.banner }}
-        {{ if not $color }}
-            {{ $color = "green" }}
-        {{ end }}
-
-        {{ $defaultBanner := printf "banner_%s.png" $color }}
         {{ $bannerFiles := slice }}
         {{ range (readDir "static/img") }}
             {{ if and (not .IsDir) (hasPrefix .Name "banner_") (hasSuffix .Name ".png") }}
                 {{ $bannerFiles = $bannerFiles | append .Name }}
             {{ end }}
         {{ end }}
+        {{ $fallbackBanner := index $bannerFiles 0 }}
 
         <img id="footer-banner" data-base="{{ "/img/" | relURL }}" data-banners="{{ delimit $bannerFiles "," }}" class="mb-5" alt="Footer banner">
         <noscript>
-          <img src="{{ "/img/" | relURL }}{{ $defaultBanner }}" class="mb-5" alt="Footer banner">
+          {{ if $fallbackBanner }}
+            <img src="{{ "/img/" | relURL }}{{ $fallbackBanner }}" class="mb-5" alt="Footer banner">
+          {{ end }}
         </noscript>
         <script>
           (function () {
