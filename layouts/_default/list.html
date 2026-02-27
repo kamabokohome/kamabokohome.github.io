@@ -126,12 +126,11 @@
         <label for="guestbook-reply">回信地址</label>
         <input id="guestbook-reply" name="reply_address" type="text" maxlength="120" placeholder="不写也没关系，写了也不一定会收到回信的样子" />
       </div>
+      <p class="message-board-status" data-message-status aria-live="polite"></p>
       <div class="message-form-actions">
         <button class="message-submit-button" type="submit">寄出</button>
       </div>
-      <p class="message-board-status" data-message-status aria-live="polite"></p>
     </form>
-    <p class="message-board-note" data-message-note></p>
   </section>
 {{ else }}
   {{ $isPostsSection := and (eq .Section "posts") (eq .Kind "section") }}
@@ -231,7 +230,6 @@
     const contentInput = messageBoard.querySelector('#guestbook-content');
     const signatureInput = messageBoard.querySelector('#guestbook-signature');
     const replyInput = messageBoard.querySelector('#guestbook-reply');
-    const note = messageBoard.querySelector('[data-message-note]');
     const status = messageBoard.querySelector('[data-message-status]');
     const submitButton = form ? form.querySelector('button[type="submit"]') : null;
     const nextInput = form ? form.querySelector('[data-message-next]') : null;
@@ -240,6 +238,16 @@
 
     const normalizeNickname = (value) => value.trim().replace(/\s+/g, ' ').slice(0, 24);
     const normalizeMessage = (value) => value.trim().slice(0, 500);
+    const padDateNumber = (value) => String(value).padStart(2, '0');
+    const formatLocalDateTime = (date) => {
+      const year = date.getFullYear();
+      const month = padDateNumber(date.getMonth() + 1);
+      const day = padDateNumber(date.getDate());
+      const hours = padDateNumber(date.getHours());
+      const minutes = padDateNumber(date.getMinutes());
+      const seconds = padDateNumber(date.getSeconds());
+      return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+    };
 
     const setStatus = (text, tone = 'normal') => {
       if (!status) return;
@@ -254,12 +262,6 @@
       submitButton.setAttribute('aria-busy', isSubmitting ? 'true' : 'false');
     };
 
-    if (note) {
-      note.textContent = hasAction
-        ? '填写后会发送到站长邮箱。若未收到，请检查并激活 FormSubmit 确认邮件。'
-        : '当前未配置邮件发送地址。';
-    }
-
     if (status) {
       status.hidden = true;
     }
@@ -270,7 +272,7 @@
       const sentMsRaw = url.searchParams.get('t');
       const sentMs = sentMsRaw ? Number(sentMsRaw) : NaN;
       const sentDate = Number.isFinite(sentMs) && sentMs > 0 ? new Date(sentMs) : new Date();
-      const sentAtText = sentDate.toLocaleString();
+      const sentAtText = formatLocalDateTime(sentDate);
       setStatus(`信件已经寄出了！（${sentAtText}）`, 'success');
       url.searchParams.delete('sent');
       url.searchParams.delete('t');
@@ -332,7 +334,7 @@
             return;
           }
 
-          const sentAtText = new Date().toLocaleString();
+          const sentAtText = formatLocalDateTime(new Date());
           setStatus(`信件已经寄出了！（${sentAtText}）`, 'success');
           if (contentInput) contentInput.value = '';
         } catch (error) {

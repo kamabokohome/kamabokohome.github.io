@@ -616,7 +616,7 @@ html.dark #content .corner-entry-date {
 
 #content .message-form-actions {
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   margin-left: 0;
   margin-top: 0.32rem;
 }
@@ -659,6 +659,7 @@ html.dark #content .corner-entry-date {
   font-size: 0.72rem;
   color: #9ca3af;
   margin-left: 0;
+  text-align: center;
 }
 
 #content .message-board-status[data-tone="success"] {

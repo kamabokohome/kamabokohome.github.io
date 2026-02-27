@@ -66,7 +66,7 @@
         --sticky-surface-shadow: 0 5px 14px rgba(0, 0, 0, 0.3);
       }
 
-      html.page-short .site-sticky-bar:not(.is-submenu-open) .site-sticky-bg {
+      html.page-short .site-sticky-bar:not(.is-stuck):not(.is-submenu-open) .site-sticky-bg {
         display: none !important;
       }
 
@@ -1172,18 +1172,10 @@
           const stickyBarHeight = Math.ceil(stickyBar.offsetHeight);
           stickyBar.style.setProperty("--sticky-bg-height", stickyBarHeight + "px");
           root.style.setProperty("--site-sticky-bar-height", stickyBarHeight + "px");
-          const viewportHeight = window.innerHeight || root.clientHeight || 0;
-          const pageHeight = Math.max(
-            root.scrollHeight,
-            root.offsetHeight,
-            document.body ? document.body.scrollHeight : 0,
-            document.body ? document.body.offsetHeight : 0
-          );
-          const isShortPage = root.classList.contains("page-short") || pageHeight <= viewportHeight * 1.22;
           const canScroll = (root.scrollHeight - window.innerHeight) > 2;
           const reachedTop = stickySentinel.getBoundingClientRect().top <= 0;
           const hasScrolled = (window.scrollY || root.scrollTop || 0) > 0;
-          const isStuck = !isShortPage && canScroll && reachedTop && hasScrolled;
+          const isStuck = canScroll && reachedTop && hasScrolled;
           stickyBar.classList.toggle("is-stuck", isStuck);
           updateSubmenuState();
         };
