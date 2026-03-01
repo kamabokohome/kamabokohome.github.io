@@ -1711,6 +1711,57 @@
 </article>
 
     
+      
+        
+
+        
+        
+        
+        
+          <div id="year-2025" class="year-separator flex justify-center items-center text-xs font-semibold text-gray-400 dark:text-gray-400 my-2"
+          style="margin-top:1rem; margin-bottom:1rem; scroll-margin-top: 5rem;">
+                    ～ 2025 ～
+            </div>
+        
+          
+        
+      
+
+      <article class="flex flex-col">
+  
+  <div class="flex flex-col">
+  
+<div class="meta">
+  
+    
+    
+    
+    
+
+    <time datetime="2025-11-24 20:00:00 &#43;0100 CET" title='2025-11-24 20:00'>
+      11-24
+    </time>
+  
+</div>
+
+
+  <h5 style="margin-top: -0.25rem;">
+    <a href="/corner/2025-11-24-%E3%82%AB%E3%83%8A%E3%83%98%E3%82%A4%E3%81%AE%E5%B0%8F%E5%8B%95%E7%89%A9/">カナヘイの小動物</a>
+  </h5>
+
+  </div>
+  
+  <div class="description">
+    
+  </div>
+  
+  
+    
+  </div>
+  
+</article>
+
+    
   </section>
 
 
@@ -2842,6 +2893,31 @@
       document.addEventListener("DOMContentLoaded", function() {
         const theme = localStorage.getItem('theme') || 'light';
         setTheme(theme);
+      });
+    </script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        const anchors = document.querySelectorAll("a[href]");
+        anchors.forEach(function(anchor) {
+          const rawHref = (anchor.getAttribute("href") || "").trim();
+          if (!rawHref) return;
+          if (/^(#|mailto:|tel:|javascript:)/i.test(rawHref)) return;
+
+          let parsed;
+          try {
+            parsed = new URL(rawHref, window.location.href);
+          } catch (e) {
+            return;
+          }
+
+          const isWebLink = /^https?:$/i.test(parsed.protocol);
+          const isExternal = parsed.origin !== window.location.origin;
+          if (!isWebLink || !isExternal) return;
+
+          anchor.setAttribute("target", "_blank");
+          anchor.setAttribute("rel", "noopener noreferrer");
+        });
       });
     </script>
 

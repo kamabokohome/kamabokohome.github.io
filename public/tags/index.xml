@@ -2,39 +2,39 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Kamaboko Home | 鱼糕的树屋</title>
-    <link>https://kamabokohome.com/tags/</link>
+    <link>http://localhost:1313/tags/</link>
     <description>Recent content in Tags on Kamaboko Home | 鱼糕的树屋</description>
     <generator>Hugo</generator>
     <language>en-US</language>
     <copyright>Kamaboko Home</copyright>
     <lastBuildDate>Sun, 01 Mar 2026 10:00:00 +0100</lastBuildDate>
-    <atom:link href="https://kamabokohome.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>可爱的</title>
-      <link>https://kamabokohome.com/tags/%E5%8F%AF%E7%88%B1%E7%9A%84/</link>
+      <title>有趣的</title>
+      <link>http://localhost:1313/tags/%E6%9C%89%E8%B6%A3%E7%9A%84/</link>
       <pubDate>Sun, 01 Mar 2026 10:00:00 +0100</pubDate>
-      <guid>https://kamabokohome.com/tags/%E5%8F%AF%E7%88%B1%E7%9A%84/</guid>
+      <guid>http://localhost:1313/tags/%E6%9C%89%E8%B6%A3%E7%9A%84/</guid>
       <description></description>
     </item>
     <item>
       <title>日常的</title>
-      <link>https://kamabokohome.com/tags/%E6%97%A5%E5%B8%B8%E7%9A%84/</link>
+      <link>http://localhost:1313/tags/%E6%97%A5%E5%B8%B8%E7%9A%84/</link>
       <pubDate>Fri, 23 Jan 2026 20:00:00 +0100</pubDate>
-      <guid>https://kamabokohome.com/tags/%E6%97%A5%E5%B8%B8%E7%9A%84/</guid>
+      <guid>http://localhost:1313/tags/%E6%97%A5%E5%B8%B8%E7%9A%84/</guid>
       <description></description>
     </item>
     <item>
       <title>好吃的</title>
-      <link>https://kamabokohome.com/tags/%E5%A5%BD%E5%90%83%E7%9A%84/</link>
+      <link>http://localhost:1313/tags/%E5%A5%BD%E5%90%83%E7%9A%84/</link>
       <pubDate>Sat, 08 Nov 2025 20:03:00 +0100</pubDate>
-      <guid>https://kamabokohome.com/tags/%E5%A5%BD%E5%90%83%E7%9A%84/</guid>
+      <guid>http://localhost:1313/tags/%E5%A5%BD%E5%90%83%E7%9A%84/</guid>
       <description></description>
     </item>
     <item>
       <title>好玩的</title>
-      <link>https://kamabokohome.com/tags/%E5%A5%BD%E7%8E%A9%E7%9A%84/</link>
+      <link>http://localhost:1313/tags/%E5%A5%BD%E7%8E%A9%E7%9A%84/</link>
       <pubDate>Sat, 08 Nov 2025 20:02:00 +0100</pubDate>
-      <guid>https://kamabokohome.com/tags/%E5%A5%BD%E7%8E%A9%E7%9A%84/</guid>
+      <guid>http://localhost:1313/tags/%E5%A5%BD%E7%8E%A9%E7%9A%84/</guid>
       <description></description>
     </item>
   </channel>

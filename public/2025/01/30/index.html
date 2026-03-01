@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-US" class="scroll-smooth dark">
-  <head><meta charset="UTF-8" />
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#e6f2fb" />
@@ -23,7 +23,7 @@
 在冰岛时和同伴聊到，我好像已经厌倦了旅行打卡。但徒步登山不让人厌倦。每每回忆起徒步的经历，当时走在路上的感觉都能被唤醒。那种记忆是很深刻的。因为身体认真地体验了山、亲近了山。为了保护自然景观，徒步路线中对人的保护措施往往都很简陋，甚至完全没有。如果大意掉下山崖，多半会骨折，甚至有生命危险。相关的噩耗并不少见。因此，我只选择简单到中等难度的路线，而且走的时候都万分小心。自从买了登山杖，徒步就总会带上。在几次中等难度的徒步中，开始感觉到压力后，我都会不由自主地萌生“好想回家，回到熟悉的城市街道，回到火车的座位上”这样的想法。困难路段要靠毅力支撑。走的时候内心在啊啊大叫，只能专心看着脚下，无暇关注风景。但站稳脚跟、眺望远处时，就感觉内心满满都是为美产生的感动。等到麻烦的路段走完、抵达终点后，就不可自拔地沉浸在愉快和成就感中，庆幸“还好来登山了，还好坚持走完了”。我已经小结出一条经验：如果一次徒步中产生了好可怕好想回家的念头，那么恭喜自己，这一定会是一次铭记于心的旅程。
 徒步往返Saxerlücke的路上不仅陡峭，尖尖的小碎石块还特别多。在走得人简直要崩溃的路段，我捡了两块石头，塞进冲锋衣的口袋（还是那件，至今都只有一件冲锋衣）带回了家。现在，这两块尽是棱角的小石头还在我的餐桌上。偶尔把玩它们、体会石头的触感，就会想起那天看到的耀眼的夕阳和云海。当时的恐惧、疲惫早已消散，只剩下了愉悦和感激。"
 />
-<link rel="canonical" href="https://kamabokohome.com/2025/01/30/" />
+<link rel="canonical" href="http://localhost:1313/2025/01/30/" />
 <meta name="robots" content="index,follow" />
 
 <link rel="icon" href="/img/favicon.ico" />
@@ -35,7 +35,7 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <script type="text/x-mathjax-config">MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });</script>
 
-<link rel="stylesheet" href="/css/app.min.e40b630e77e90ef7f01e509887f24e42748300b86c80976a818d75c7112e1669.css" integrity="sha256-5AtjDnfpDvfwHlCYh/JOQnSDALhsgJdqgY11xxEuFmk=" /><style>
+<link rel="stylesheet" href="/css/app.css" /><style>
       html {
         scrollbar-gutter: stable;
         --site-content-max-width: 50rem;
@@ -2795,6 +2795,31 @@
       document.addEventListener("DOMContentLoaded", function() {
         const theme = localStorage.getItem('theme') || 'light';
         setTheme(theme);
+      });
+    </script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        const anchors = document.querySelectorAll("a[href]");
+        anchors.forEach(function(anchor) {
+          const rawHref = (anchor.getAttribute("href") || "").trim();
+          if (!rawHref) return;
+          if (/^(#|mailto:|tel:|javascript:)/i.test(rawHref)) return;
+
+          let parsed;
+          try {
+            parsed = new URL(rawHref, window.location.href);
+          } catch (e) {
+            return;
+          }
+
+          const isWebLink = /^https?:$/i.test(parsed.protocol);
+          const isExternal = parsed.origin !== window.location.origin;
+          if (!isWebLink || !isExternal) return;
+
+          anchor.setAttribute("target", "_blank");
+          anchor.setAttribute("rel", "noopener noreferrer");
+        });
       });
     </script>
 

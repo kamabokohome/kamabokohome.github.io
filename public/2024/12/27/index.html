@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-US" class="scroll-smooth dark">
-  <head><meta charset="UTF-8" />
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#e6f2fb" />
@@ -21,7 +21,7 @@ ACG音乐固然好，但我的歌曲探索并未止步于此。初中的时候�
 另外，我还喜欢上了日系吉他指弹，特别是岸部眞明、ゴンチチ、押尾コータロー和DEPAPEPE。有幸听了2018年和2019年岸部さん在北京的演奏会，排队请他在《奇跡の山》的CD&#43;DVD上签了名，一直幸福珍藏。演奏会上还购买了《奇跡の山》的乐谱集，后来在大学宿舍楼梯间苦练《流れ行く云》5。磕磕绊绊，算是弹了下来，可惜太久不练，现在大概已经不会了。那时梦想着有一天能练会《Time travel》6，不知道这个愿望是不是有朝一日还能实现。
 如今回看那时大杂烩般的长长歌单，发现了好多怀念的名字：夕焼けランプ、ラブリーサマーちゃん、advantage Lucy、Lamp、Canappeco、Reol、さユり、ケラケラ、whiteeeen、Popoyans……之所以怀念，是因为许久没听她们的歌了。大学期间，我的音乐探索之路越走越窄，寻找新歌变得不如听歌单里已收集的歌更有吸引力。同时，几个音乐团体在我心中的份量越来越重：“其实近在眼前，无需费力寻找，她们的每一首歌我都喜欢……”再后来出了国，不方便继续使用网易云音乐，换成了Spotify。不知怎的，虽然Spotify也有Mix歌单推荐，但我养成了按顺序把一张专辑从头听到尾的习惯，不会再建大杂烩式的歌单了。"
 />
-<link rel="canonical" href="https://kamabokohome.com/2024/12/27/" />
+<link rel="canonical" href="http://localhost:1313/2024/12/27/" />
 <meta name="robots" content="index,follow" />
 
 <link rel="icon" href="/img/favicon.ico" />
@@ -33,7 +33,7 @@ ACG音乐固然好，但我的歌曲探索并未止步于此。初中的时候�
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <script type="text/x-mathjax-config">MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });</script>
 
-<link rel="stylesheet" href="/css/app.min.e40b630e77e90ef7f01e509887f24e42748300b86c80976a818d75c7112e1669.css" integrity="sha256-5AtjDnfpDvfwHlCYh/JOQnSDALhsgJdqgY11xxEuFmk=" /><style>
+<link rel="stylesheet" href="/css/app.css" /><style>
       html {
         scrollbar-gutter: stable;
         --site-content-max-width: 50rem;
@@ -2815,6 +2815,31 @@ ACG音乐固然好，但我的歌曲探索并未止步于此。初中的时候�
       document.addEventListener("DOMContentLoaded", function() {
         const theme = localStorage.getItem('theme') || 'light';
         setTheme(theme);
+      });
+    </script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        const anchors = document.querySelectorAll("a[href]");
+        anchors.forEach(function(anchor) {
+          const rawHref = (anchor.getAttribute("href") || "").trim();
+          if (!rawHref) return;
+          if (/^(#|mailto:|tel:|javascript:)/i.test(rawHref)) return;
+
+          let parsed;
+          try {
+            parsed = new URL(rawHref, window.location.href);
+          } catch (e) {
+            return;
+          }
+
+          const isWebLink = /^https?:$/i.test(parsed.protocol);
+          const isExternal = parsed.origin !== window.location.origin;
+          if (!isWebLink || !isExternal) return;
+
+          anchor.setAttribute("target", "_blank");
+          anchor.setAttribute("rel", "noopener noreferrer");
+        });
       });
     </script>
 
