@@ -2699,5 +2699,30 @@
       });
     </script>
 
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        const anchors = document.querySelectorAll("a[href]");
+        anchors.forEach(function(anchor) {
+          const rawHref = (anchor.getAttribute("href") || "").trim();
+          if (!rawHref) return;
+          if (/^(#|mailto:|tel:|javascript:)/i.test(rawHref)) return;
+
+          let parsed;
+          try {
+            parsed = new URL(rawHref, window.location.href);
+          } catch (e) {
+            return;
+          }
+
+          const isWebLink = /^https?:$/i.test(parsed.protocol);
+          const isExternal = parsed.origin !== window.location.origin;
+          if (!isWebLink || !isExternal) return;
+
+          anchor.setAttribute("target", "_blank");
+          anchor.setAttribute("rel", "noopener noreferrer");
+        });
+      });
+    </script>
+
   </body>
 </html>

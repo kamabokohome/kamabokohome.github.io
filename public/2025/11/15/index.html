@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-US" class="scroll-smooth dark">
-  <head><meta charset="UTF-8" />
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#e6f2fb" />
@@ -19,7 +19,7 @@
 刚开始玩邦邦，是疫情爆发后无法返校、一直都在家上网课的那个六月。其实早就有在玩Cytus II，是喜欢打音游的。当时在家很闲，碰巧在应用商店看到邦邦，就下载来试试看，结果彻底从Cytus II跳坑了。后来一直打邦邦到本科毕业，每期活动都不落下。再后来出了国，手机从安卓换成了iPhone，但国服两个系统的账号是不互通的。而且当时国服在海外的链接速度极慢，几乎只能单机自己玩。加上当时学业繁重，决定暂时退坑（一心去玩Pokémon GO了）。后来国服宣布双端互通，网络连接的问题也不知不觉修复了，于是变成了半回坑状态。完全回坑是今年国服宣布和暹罗猫小豆泥联动。手感尽失的我，原本习惯用手机打邦邦，趁着复健的机会，换成了iPad。一开始很不习惯，觉得跨度太大、手指移动很累。但很快就适应了平板，然后打邦邦的技术突飞猛进。现在我的玩家履历，已经成了当年会觉得遥不可及、超级厉害的样子！EX试炼牌、all perfect也都不是很稀有的东西了。
 啊……又扯远了。但今天已经到了该睡觉的时候……感觉写不完了……"
 />
-<link rel="canonical" href="https://kamabokohome.com/2025/11/15/" />
+<link rel="canonical" href="http://localhost:1313/2025/11/15/" />
 <meta name="robots" content="index,follow" />
 
 <link rel="icon" href="/img/favicon.ico" />
@@ -31,7 +31,7 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <script type="text/x-mathjax-config">MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });</script>
 
-<link rel="stylesheet" href="/css/app.min.e40b630e77e90ef7f01e509887f24e42748300b86c80976a818d75c7112e1669.css" integrity="sha256-5AtjDnfpDvfwHlCYh/JOQnSDALhsgJdqgY11xxEuFmk=" /><style>
+<link rel="stylesheet" href="/css/app.css" /><style>
       html {
         scrollbar-gutter: stable;
         --site-content-max-width: 50rem;
@@ -2811,6 +2811,31 @@
       document.addEventListener("DOMContentLoaded", function() {
         const theme = localStorage.getItem('theme') || 'light';
         setTheme(theme);
+      });
+    </script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        const anchors = document.querySelectorAll("a[href]");
+        anchors.forEach(function(anchor) {
+          const rawHref = (anchor.getAttribute("href") || "").trim();
+          if (!rawHref) return;
+          if (/^(#|mailto:|tel:|javascript:)/i.test(rawHref)) return;
+
+          let parsed;
+          try {
+            parsed = new URL(rawHref, window.location.href);
+          } catch (e) {
+            return;
+          }
+
+          const isWebLink = /^https?:$/i.test(parsed.protocol);
+          const isExternal = parsed.origin !== window.location.origin;
+          if (!isWebLink || !isExternal) return;
+
+          anchor.setAttribute("target", "_blank");
+          anchor.setAttribute("rel", "noopener noreferrer");
+        });
       });
     </script>
 

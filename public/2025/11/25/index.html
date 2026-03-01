@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-US" class="scroll-smooth dark">
-  <head><meta charset="UTF-8" />
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#e6f2fb" />
@@ -27,7 +27,7 @@
 （可如果真的到了“这次非它不可，不然就完蛋了”的地步，就努力唤起经验1吧！用“无”的状态来对付这份执念吧）
 最后，相信长期积累的力量。刚开始打邦邦的时候，我觉得那些能够fc甚至ap难曲的人简直像是进化过一样，自己却被看不见的东西束缚，无论如何也做不到。大家总说，想要进步的方法就是“多练”。如今我想，这个非常质朴的方法，确实没有错，也是唯一的方法。"
 />
-<link rel="canonical" href="https://kamabokohome.com/2025/11/25/" />
+<link rel="canonical" href="http://localhost:1313/2025/11/25/" />
 <meta name="robots" content="index,follow" />
 
 <link rel="icon" href="/img/favicon.ico" />
@@ -39,7 +39,7 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <script type="text/x-mathjax-config">MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });</script>
 
-<link rel="stylesheet" href="/css/app.min.e40b630e77e90ef7f01e509887f24e42748300b86c80976a818d75c7112e1669.css" integrity="sha256-5AtjDnfpDvfwHlCYh/JOQnSDALhsgJdqgY11xxEuFmk=" /><style>
+<link rel="stylesheet" href="/css/app.css" /><style>
       html {
         scrollbar-gutter: stable;
         --site-content-max-width: 50rem;
@@ -2808,6 +2808,31 @@
       document.addEventListener("DOMContentLoaded", function() {
         const theme = localStorage.getItem('theme') || 'light';
         setTheme(theme);
+      });
+    </script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        const anchors = document.querySelectorAll("a[href]");
+        anchors.forEach(function(anchor) {
+          const rawHref = (anchor.getAttribute("href") || "").trim();
+          if (!rawHref) return;
+          if (/^(#|mailto:|tel:|javascript:)/i.test(rawHref)) return;
+
+          let parsed;
+          try {
+            parsed = new URL(rawHref, window.location.href);
+          } catch (e) {
+            return;
+          }
+
+          const isWebLink = /^https?:$/i.test(parsed.protocol);
+          const isExternal = parsed.origin !== window.location.origin;
+          if (!isWebLink || !isExternal) return;
+
+          anchor.setAttribute("target", "_blank");
+          anchor.setAttribute("rel", "noopener noreferrer");
+        });
       });
     </script>
 
