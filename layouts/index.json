@@ -14,7 +14,7 @@
       "permalink" $targetPermalink
       "section" ($page.Section | default "")
       "date" ($page.Date.Format "2006-01-02")
-      "content" ($text | truncate 320)
+      "content" $text
     | jsonify -}}
 {{- end -}}
 ]
