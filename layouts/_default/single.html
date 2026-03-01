@@ -246,57 +246,62 @@
   </footer>
   -->
 
-<!-- Previous and Next Post Buttons -->
-<div class="flex items-center justify-between font-semibold w-full mt-4" style="margin-top: auto; padding-top: 1rem;">
-  <!-- Previous post (left side). -->
-  <div class="flex justify-start w-1/2">
-    {{ $prev := .Prev }}
-    {{ if and $prev (eq $prev.Section .Section) }}
-      <a href="{{ $prev.RelPermalink }}" class="pagination-button" title="前一篇">
-        {{ $prevArrow := resources.Get "icons/arrow-left.png" }}
-        <img src="{{ $prevArrow.RelPermalink }}" alt="Previous" style="width:32px; height:32px;" />
-      </a>
-    {{ else }}
-      <a href="#" class="pagination-button pointer-events-none" title="没有啦">
-        {{ $prevArrow := resources.Get "icons/arrow-left.png" }}
-        <img src="{{ $prevArrow.RelPermalink }}" alt="Previous" style="width:32px; height:32px;"/>
-      </a>
-    {{ end }}
+<!-- Previous / Jump Menu / Next -->
+{{ $isJumpSection := or (eq .Section "posts") (eq .Section "collection") }}
+{{ $jumpPages := slice }}
+{{ if $isJumpSection }}
+  {{ $jumpPages = sort (where site.RegularPages "Section" .Section) "Date" "desc" }}
+{{ end }}
+{{ if $isJumpSection }}
+  <div class="single-bottom-nav" style="margin-top: auto; padding-top: 1rem;">
+    <details class="single-jump-menu">
+      <summary class="single-jump-trigger">
+        <span class="single-jump-emoji" aria-hidden="true">🍥</span>
+        <span class="single-jump-label">Jump To</span>
+        <span class="single-jump-emoji" aria-hidden="true">🍥</span>
+      </summary>
+      <div class="single-jump-panel" role="menu" aria-label="{{ if eq .Section "posts" }}Posts{{ else }}Collection{{ end }} 列表">
+        {{ range $jumpPages }}
+          {{ if eq .RelPermalink $.RelPermalink }}
+            <span class="single-jump-link is-current" aria-current="page">{{ .Title }}</span>
+          {{ else }}
+            <a class="single-jump-link" role="menuitem" href="{{ .RelPermalink }}">{{ .Title }}</a>
+          {{ end }}
+        {{ end }}
+      </div>
+    </details>
   </div>
+{{ end }}
 
-<!-- JavaScript for Scrolling to Top -->
 <script>
-  function scrollToTop() {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth' // Smooth scrolling
+  document.addEventListener("DOMContentLoaded", function () {
+    const jumpMenu = document.querySelector(".single-jump-menu");
+    if (!jumpMenu) return;
+    const jumpTrigger = jumpMenu.querySelector(".single-jump-trigger");
+
+    if (jumpTrigger) {
+      jumpTrigger.addEventListener("click", function () {
+        jumpTrigger.classList.remove("is-spinning");
+        void jumpTrigger.offsetWidth;
+        jumpTrigger.classList.add("is-spinning");
+        window.setTimeout(function () {
+          jumpTrigger.classList.remove("is-spinning");
+        }, 1500);
+      });
+    }
+
+    document.addEventListener("click", function (event) {
+      const target = event.target instanceof Element ? event.target : null;
+      if (!target || jumpMenu.contains(target)) return;
+      jumpMenu.removeAttribute("open");
     });
-  }
+
+    document.addEventListener("keydown", function (event) {
+      if (event.key !== "Escape") return;
+      jumpMenu.removeAttribute("open");
+    });
+  });
 </script>
-
-<!-- Back to Top Button -->
-<div class="flex justify-center mx-auto">
-  <a href="#" onclick="scrollToTop()" class="text-xs font-semibold" style="color: #9CA3AF; text-decoration: none;">
-    T🍥P
-  </a>
-</div>
-
-  <!-- Next post (right side). -->
-  <div class="flex justify-end w-1/2">
-    {{ $next := .Next }}
-    {{ if and $next (eq $next.Section .Section) }}
-      <a href="{{ $next.RelPermalink }}" class="pagination-button" title="后一篇">
-        {{ $nextArrow := resources.Get "icons/arrow-right.png" }}
-        <img src="{{ $nextArrow.RelPermalink }}" alt="Next" style="width:32px; height:32px;" />
-      </a>
-    {{ else }}
-      <a href="#" class="pagination-button pointer-events-none" title="没有啦">
-        {{ $nextArrow := resources.Get "icons/arrow-right.png" }}
-        <img src="{{ $nextArrow.RelPermalink }}" alt="Next" style="width:32px; height:32px;" />
-      </a>
-    {{ end }}
-  </div>
-</div>
 
 </article>
 

@@ -14,6 +14,9 @@ posts = "/:year/:month/:day/"
 [pagination]
 pagerSize = 10
 
+[outputs]
+home = ['HTML', 'JSON']
+
 [markup]
   [markup.highlight]
   anchorLineNos = false

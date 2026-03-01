@@ -1,0 +1,20 @@
+[
+{{- $pages := sort site.RegularPages "Date" "desc" -}}
+{{- range $index, $page := $pages -}}
+  {{- if gt $index 0 }},{{ end -}}
+  {{- $text := $page.Plain | default ($page.Summary | plainify) -}}
+  {{- $entryKey := md5 $page.RelPermalink -}}
+  {{- $entryID := printf "corner-entry-%s" $entryKey -}}
+  {{- $targetPermalink := $page.RelPermalink -}}
+  {{- if eq $page.Section "corner" -}}
+    {{- $targetPermalink = printf "/corner/#%s" $entryID -}}
+  {{- end -}}
+  {{- dict
+      "title" $page.Title
+      "permalink" $targetPermalink
+      "section" ($page.Section | default "")
+      "date" ($page.Date.Format "2006-01-02")
+      "content" ($text | truncate 320)
+    | jsonify -}}
+{{- end -}}
+]

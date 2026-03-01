@@ -1,6 +1,7 @@
 {{ define "main" }}
 
 {{ $pages := .Pages }}
+{{ $cornerPages := slice }}
 {{/* {{ $paginator := .Paginate $pages }} */}}
 
 <!--
@@ -70,7 +71,6 @@
     {{ end }}
   </section>
 {{ else if and (eq .Section "corner") (eq .Kind "section") }}
-  {{ $cornerPages := slice }}
   {{ range readDir "content/corner" }}
     {{ if and (not .IsDir) (hasSuffix .Name ".md") (ne .Name "_index.md") }}
       {{ $pagePath := printf "/corner/%s" (replaceRE "\\.md$" "" .Name) }}
@@ -81,20 +81,40 @@
   {{ end }}
   {{ $cornerPages = sort $cornerPages "Date" "desc" }}
   <section class="corner-entry-list" aria-label="Corner entries">
-    {{ range $cornerPages }}
-      <details class="corner-entry-item">
+    {{ range $idx, $cornerPage := $cornerPages }}
+      {{ $entryKey := md5 $cornerPage.RelPermalink }}
+      {{ $entryID := printf "corner-entry-%s" $entryKey }}
+      <details class="corner-entry-item" id="{{ $entryID }}" data-corner-entry>
         <summary class="corner-entry-summary">
-          <span class="corner-entry-title">{{ .Title }}</span>
-          {{ with .Date }}
+          <span class="corner-entry-title">{{ $cornerPage.Title }}</span>
+          {{ with $cornerPage.Date }}
             <time class="corner-entry-date" datetime="{{ .Format "2006-01-02T15:04:05Z07:00" }}">{{ .Format "2006-01-02" }}</time>
           {{ end }}
         </summary>
         <div class="corner-entry-body">
-          {{ .Content }}
+          {{ $cornerPage.Content }}
         </div>
       </details>
     {{ end }}
   </section>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const openCornerFromHash = function() {
+        if (!window.location.hash) return;
+        const rawId = window.location.hash.slice(1);
+        if (!rawId) return;
+        const entry = document.getElementById(rawId);
+        if (!entry || !entry.matches("[data-corner-entry]")) return;
+        entry.open = true;
+        window.requestAnimationFrame(function() {
+          entry.scrollIntoView({ block: "start", behavior: "smooth" });
+        });
+      };
+
+      openCornerFromHash();
+      window.addEventListener("hashchange", openCornerFromHash);
+    });
+  </script>
 {{ else if and (eq .Section "message") (eq .Kind "section") }}
   {{ $messageFormConfig := .Site.Params.messageForm }}
   {{ $messageActionURL := "" }}
@@ -195,9 +215,9 @@
 */}}
 
 <div class="flex justify-center" style="margin-top: auto; padding-top: 1rem;">
-  <a href="#" onclick="scrollToTop()" class="pagination-button text-xs font-semibold" style="color: #9CA3AF; text-decoration: none; cursor: pointer;">
+  <button type="button" onclick="scrollToTop()" class="pagination-button text-xs font-semibold" style="color: #9CA3AF; text-decoration: none; cursor: pointer; background: none; border: none;">
     T🍥P
-  </a>
+  </button>
 </div>
 
 <script>

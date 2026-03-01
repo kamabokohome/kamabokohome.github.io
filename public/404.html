@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-US" class="scroll-smooth dark">
-  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="UTF-8" />
+  <head><meta charset="UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#e6f2fb" />
@@ -16,7 +16,7 @@
   name="description"
   content=""
 />
-<link rel="canonical" href="http://localhost:1313/404.html" />
+<link rel="canonical" href="https://kamabokohome.com/404.html" />
 <meta name="robots" content="index,follow" />
 
 <link rel="icon" href="/img/favicon.ico" />
@@ -28,7 +28,7 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <script type="text/x-mathjax-config">MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });</script>
 
-<link rel="stylesheet" href="/css/app.css" /><style>
+<link rel="stylesheet" href="/css/app.min.ba9c5f60913ce71a0de65734072f9ab14e738f0b9aeee3d51b068d85ef2a3969.css" integrity="sha256-upxfYJE85xoN5lc0By+asU5zjwua7uPVGwaNhe8qOWk=" /><style>
       html {
         scrollbar-gutter: stable;
         --site-content-max-width: 50rem;
@@ -71,7 +71,7 @@
 
       .site-sticky-bar.is-stuck,
       .site-sticky-bar.is-submenu-open {
-        --sticky-surface-bg: rgba(249, 245, 236, 0.66);
+        --sticky-surface-bg: rgba(249, 245, 236, 0.82);
         --sticky-surface-blur: 11px;
         --sticky-surface-shadow: 0 5px 14px rgba(0, 0, 0, 0.1);
       }
@@ -88,11 +88,11 @@
 
       html.dark .site-sticky-bar.is-stuck,
       html.dark .site-sticky-bar.is-submenu-open {
-        --sticky-surface-bg: rgba(47, 47, 47, 0.68);
+        --sticky-surface-bg: rgba(47, 47, 47, 0.82);
         --sticky-surface-shadow: 0 5px 14px rgba(0, 0, 0, 0.3);
       }
 
-      html.page-short .site-sticky-bar:not(.is-submenu-open) .site-sticky-bg {
+      html.page-short .site-sticky-bar:not(.is-stuck):not(.is-submenu-open) .site-sticky-bg {
         display: none !important;
       }
 
@@ -216,6 +216,58 @@
         font-weight: 600;
       }
 
+      .site-sticky-nav .nav-search-item {
+        display: inline-flex;
+        align-items: center;
+      }
+
+      .site-sticky-nav .nav-tools-item {
+        margin-left: auto;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.22rem;
+      }
+
+      .site-search-toggle {
+        font: inherit;
+        font-size: 0.74rem;
+        line-height: 1;
+        font-weight: 600;
+        color: rgb(156 163 175 / 1);
+        background: transparent;
+        border: none;
+        border-radius: 0.48rem;
+        padding: 0.2rem 0.3rem;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        transition: background-color 130ms ease, opacity 130ms ease;
+      }
+
+      .site-search-icon {
+        display: block;
+        width: 1.3rem;
+        height: 1.3rem;
+        object-fit: contain;
+        user-select: none;
+        -webkit-user-drag: none;
+        opacity: 0.92;
+      }
+
+      .site-desktop-search-toggle {
+        display: inline-flex;
+      }
+
+      .site-search-toggle:hover,
+      .site-search-toggle:focus-visible {
+        background: rgba(177, 167, 147, 0.18);
+      }
+
+      html.dark .site-search-toggle:hover,
+      html.dark .site-search-toggle:focus-visible {
+        background: rgba(123, 135, 152, 0.25);
+      }
+
       .site-sticky-nav nav li.nav-menu-item > a {
         position: relative;
         display: inline-block;
@@ -307,6 +359,152 @@
         align-items: center;
       }
 
+      .site-mobile-home-item,
+      .site-mobile-menu-item,
+      .site-mobile-menu-panel {
+        display: none;
+      }
+
+      .site-search-modal[hidden] {
+        display: none !important;
+      }
+
+      .site-search-modal {
+        position: fixed;
+        inset: 0;
+        z-index: 90;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        padding: calc(var(--site-sticky-bar-height, 0px) + 0.34rem) 1rem 1rem;
+      }
+
+      .site-search-backdrop {
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.2);
+        backdrop-filter: blur(2px);
+        -webkit-backdrop-filter: blur(2px);
+      }
+
+      .site-search-dialog {
+        position: relative;
+        width: min(44rem, 100%);
+        max-height: calc(100vh - var(--site-sticky-bar-height, 0px) - 1.34rem);
+        overflow: hidden;
+        border-radius: 0.72rem;
+        background-color: rgba(249, 245, 236, 0.86);
+        backdrop-filter: blur(11px);
+        -webkit-backdrop-filter: blur(11px);
+        box-shadow: 0 5px 14px rgba(0, 0, 0, 0.1);
+        border: none;
+        display: flex;
+        flex-direction: column;
+      }
+
+      html.dark .site-search-dialog {
+        background-color: rgba(47, 47, 47, 0.72);
+        box-shadow: 0 5px 14px rgba(0, 0, 0, 0.3);
+      }
+
+      .site-search-close {
+        position: absolute;
+        top: 0.46rem;
+        right: 0.5rem;
+        font: inherit;
+        font-size: 0.88rem;
+        line-height: 1;
+        font-weight: 700;
+        color: rgb(156 163 175 / 1);
+        background: transparent;
+        border: none;
+        border-radius: 0.42rem;
+        padding: 0.3rem 0.42rem;
+      }
+
+      .site-search-close:hover,
+      .site-search-close:focus-visible {
+        background: rgba(177, 167, 147, 0.18);
+        color: rgb(55 65 81 / 1);
+      }
+
+      html.dark .site-search-close:hover,
+      html.dark .site-search-close:focus-visible {
+        background: rgba(123, 135, 152, 0.25);
+        color: rgb(229 231 235 / 1);
+      }
+
+      .site-search-input-wrap {
+        padding: 0.9rem 0.9rem 0.54rem;
+      }
+
+      .site-search-input {
+        display: block;
+        width: 100%;
+        font: inherit;
+        font-size: 0.9rem;
+        line-height: 1.4;
+        border: none;
+        border-radius: 0.56rem;
+        padding: 0.56rem 0.68rem;
+        background: rgba(255, 255, 255, 0.35);
+        color: rgb(55 65 81 / 1);
+      }
+
+      html.dark .site-search-input {
+        background: rgba(0, 0, 0, 0.22);
+        color: rgb(229 231 235 / 1);
+      }
+
+      .site-search-input::placeholder {
+        color: rgb(156 163 175 / 1);
+      }
+
+      .site-search-results {
+        margin: 0;
+        padding: 0 0.45rem 0.66rem;
+        list-style: none;
+        overflow-y: auto;
+      }
+
+      .site-search-results a {
+        display: block;
+        padding: 0.46rem 0.48rem;
+        border-radius: 0.5rem;
+        text-decoration: none;
+      }
+
+      .site-search-result-title {
+        display: block;
+        font-size: 0.82rem;
+        line-height: 1.35;
+        font-weight: 700;
+        color: rgb(55 65 81 / 1);
+      }
+
+      .site-search-result-meta {
+        display: block;
+        margin-top: 0.1rem;
+        font-size: 0.68rem;
+        line-height: 1.35;
+        font-weight: 600;
+        color: rgb(156 163 175 / 1);
+      }
+
+      .site-search-results a:hover,
+      .site-search-results a:focus-visible {
+        background: rgba(177, 167, 147, 0.18);
+      }
+
+      html.dark .site-search-results a:hover,
+      html.dark .site-search-results a:focus-visible {
+        background: rgba(123, 135, 152, 0.25);
+      }
+
+      html.dark .site-search-result-title {
+        color: rgb(229 231 235 / 1);
+      }
+
       @media (max-width: 639px) {
         .site-sticky-inner {
           padding-left: 0.25rem;
@@ -319,15 +517,396 @@
         }
 
         .site-sticky-nav nav {
+          position: relative;
           width: 100%;
         }
 
         .site-sticky-nav nav ul {
-          width: min(100%, 22rem);
-          margin: 0 auto;
+          width: 100%;
+          margin: 0;
           justify-content: space-between;
-          gap: 0;
+          gap: 0.3rem;
           font-size: 0.78rem;
+        }
+
+        .site-sticky-nav nav li.nav-menu-item {
+          display: none;
+        }
+
+        .site-sticky-nav nav .nav-search-item {
+          display: none;
+        }
+
+        .site-sticky-nav nav .site-desktop-search-toggle {
+          display: none;
+        }
+
+        .site-sticky-nav nav .site-mobile-home-item {
+          display: inline-flex;
+          align-items: center;
+          flex: 0 0 auto;
+        }
+
+        .site-sticky-nav nav .site-mobile-home-link {
+          display: inline-flex;
+          align-items: center;
+          line-height: 0;
+          padding: 0.08rem 0.1rem;
+          border-radius: 0.36rem;
+        }
+
+        .site-sticky-nav nav .site-mobile-home-link:hover,
+        .site-sticky-nav nav .site-mobile-home-link:focus-visible {
+          background: rgba(177, 167, 147, 0.18);
+        }
+
+        html.dark .site-sticky-nav nav .site-mobile-home-link:hover,
+        html.dark .site-sticky-nav nav .site-mobile-home-link:focus-visible {
+          background: rgba(123, 135, 152, 0.25);
+        }
+
+        .site-mobile-home-title {
+          height: max(12px, min(20px, calc(var(--sticky-bg-height, 0px) - 12px)));
+          width: auto;
+          opacity: 0.94;
+          user-select: none;
+          -webkit-user-drag: none;
+        }
+
+        html:not(.dark) .site-mobile-home-title {
+          filter: grayscale(1) brightness(0.38) contrast(1.08);
+        }
+
+        .site-sticky-nav nav .nav-theme-item {
+          display: inline-flex;
+          align-items: center;
+          margin-left: auto;
+          flex: 0 0 auto;
+        }
+
+        .site-sticky-nav nav .nav-tools-item {
+          gap: 0;
+        }
+
+        .site-sticky-nav nav .site-mobile-menu-item {
+          display: inline-flex;
+          align-items: center;
+          flex: 0 0 auto;
+        }
+
+        .site-mobile-menu-toggle {
+          font: inherit;
+          font-size: 0.74rem;
+          line-height: 1;
+          font-weight: 600;
+          color: rgb(156 163 175 / 1);
+          background: transparent;
+          border: none;
+          border-radius: 0.48rem;
+          padding: 0.2rem 0.3rem;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          transition: background-color 130ms ease, opacity 130ms ease;
+        }
+
+        .site-mobile-menu-icon {
+          display: block;
+          width: 1.3rem;
+          height: 1.3rem;
+          object-fit: contain;
+          user-select: none;
+          -webkit-user-drag: none;
+          opacity: 0.92;
+        }
+
+        .site-mobile-menu-toggle:hover,
+        .site-mobile-menu-toggle:focus-visible,
+        .site-mobile-menu-toggle[aria-expanded="true"] {
+          background: rgba(177, 167, 147, 0.18);
+        }
+
+        html.dark .site-mobile-menu-toggle:hover,
+        html.dark .site-mobile-menu-toggle:focus-visible,
+        html.dark .site-mobile-menu-toggle[aria-expanded="true"] {
+          background: rgba(123, 135, 152, 0.25);
+        }
+
+        .site-mobile-menu-panel {
+          display: block;
+          position: fixed;
+          top: var(--site-sticky-bar-height, 0px);
+          left: 0;
+          right: 0;
+          bottom: 0;
+          margin: 0;
+          padding: 0.44rem 0.62rem max(0.7rem, env(safe-area-inset-bottom, 0px));
+          border-radius: 0;
+          border: none;
+          background: transparent;
+          backdrop-filter: none;
+          -webkit-backdrop-filter: none;
+          box-shadow: none;
+          z-index: 65;
+          overflow: hidden;
+        }
+
+        .site-mobile-menu-panel[hidden] {
+          display: none !important;
+        }
+
+        .site-mobile-menu-scroll {
+          height: 100%;
+          overflow-y: auto;
+          -webkit-overflow-scrolling: touch;
+        }
+
+        .site-mobile-menu-list {
+          margin: 0;
+          padding: 0;
+          list-style: none;
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-start;
+          align-items: flex-end;
+          gap: 0.14rem;
+          width: auto;
+          max-width: 100%;
+          margin-left: auto;
+          margin-right: 0;
+          text-align: right;
+        }
+
+        .site-mobile-menu-line {
+          margin: 0;
+          width: fit-content;
+          max-width: min(86vw, 24rem);
+          align-self: flex-end;
+          margin-left: auto;
+          margin-right: 0;
+        }
+
+        .site-mobile-menu-line > a {
+          display: block;
+          font-size: 0.8rem;
+          line-height: 1.4;
+          text-align: right;
+          text-decoration: none;
+          padding: 0.4rem 0.62rem;
+          border-radius: 0.52rem;
+          white-space: nowrap;
+          font-weight: 600;
+          color: rgb(156 163 175 / 1);
+        }
+
+        .site-mobile-menu-row {
+          display: flex;
+          align-items: center;
+          justify-content: flex-end;
+          gap: 0.12rem;
+        }
+
+        .site-mobile-menu-row > a {
+          display: block;
+          font-size: 0.8rem;
+          line-height: 1.4;
+          text-align: right;
+          text-decoration: none;
+          padding: 0.4rem 0.62rem;
+          border-radius: 0.52rem;
+          white-space: nowrap;
+          font-weight: 600;
+          color: rgb(156 163 175 / 1);
+        }
+
+        .site-mobile-submenu-toggle {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          width: 1.5rem;
+          height: 1.5rem;
+          padding: 0;
+          border: none;
+          border-radius: 0.44rem;
+          background: transparent;
+          color: rgb(156 163 175 / 1);
+          flex: 0 0 auto;
+        }
+
+        .site-mobile-caret {
+          display: inline-block;
+          font-size: 0.78rem;
+          line-height: 1;
+          transform: rotate(0deg);
+          transition: transform 150ms ease;
+        }
+
+        .site-mobile-submenu-toggle[aria-expanded="true"] .site-mobile-caret {
+          transform: rotate(90deg);
+        }
+
+        .site-mobile-menu-subblock {
+          margin: -0.02rem 0 0.18rem;
+          width: fit-content;
+          max-width: min(86vw, 22.4rem);
+          display: flex;
+          flex-direction: column;
+          align-items: flex-end;
+          gap: 0.08rem;
+          padding: 0.12rem 0.2rem 0.18rem;
+          border-radius: 0.52rem;
+          background: rgba(177, 167, 147, 0.08);
+          align-self: flex-end;
+          margin-left: auto;
+          margin-right: 0;
+        }
+
+        .site-mobile-menu-subblock[hidden] {
+          display: none !important;
+        }
+
+        .site-mobile-menu-subblock a {
+          display: block;
+          font-size: 0.72rem;
+          line-height: 1.35;
+          text-align: right;
+          text-decoration: none;
+          padding: 0.34rem 0.52rem;
+          border-radius: 0.48rem;
+          white-space: nowrap;
+          font-weight: 600;
+          color: rgb(156 163 175 / 1);
+        }
+
+        .site-mobile-menu-line > a:hover,
+        .site-mobile-menu-line > a:focus-visible,
+        .site-mobile-menu-row > a:hover,
+        .site-mobile-menu-row > a:focus-visible,
+        .site-mobile-menu-subblock a:hover,
+        .site-mobile-menu-subblock a:focus-visible {
+          background: rgba(177, 167, 147, 0.18);
+        }
+
+        .site-mobile-submenu-toggle:hover,
+        .site-mobile-submenu-toggle:focus-visible {
+          background: rgba(177, 167, 147, 0.18);
+        }
+
+        html.dark .site-mobile-menu-subblock {
+          background: rgba(123, 135, 152, 0.12);
+        }
+
+        html.dark .site-mobile-menu-line > a:hover,
+        html.dark .site-mobile-menu-line > a:focus-visible,
+        html.dark .site-mobile-menu-row > a:hover,
+        html.dark .site-mobile-menu-row > a:focus-visible,
+        html.dark .site-mobile-menu-subblock a:hover,
+        html.dark .site-mobile-menu-subblock a:focus-visible {
+          background: rgba(123, 135, 152, 0.25);
+        }
+
+        html.dark .site-mobile-submenu-toggle:hover,
+        html.dark .site-mobile-submenu-toggle:focus-visible {
+          background: rgba(123, 135, 152, 0.25);
+        }
+
+        .site-mobile-menu-line > a.active,
+        .site-mobile-menu-row > a.active,
+        .site-mobile-menu-subblock a.active {
+          background: transparent;
+          color: rgb(156 163 175 / 1);
+        }
+
+        html.dark .site-mobile-menu-line > a.active,
+        html.dark .site-mobile-menu-row > a.active,
+        html.dark .site-mobile-menu-subblock a.active {
+          color: rgb(156 163 175 / 1);
+        }
+
+        .site-mobile-search-line {
+          margin-top: 0.4rem;
+          padding-top: 0.32rem;
+          border-top: 1px solid rgba(156, 163, 175, 0.28);
+        }
+
+        html.dark .site-mobile-search-line {
+          border-top-color: rgba(123, 135, 152, 0.42);
+        }
+
+        .site-mobile-search-toggle {
+          font: inherit;
+          font-size: 0.8rem;
+          line-height: 1;
+          font-weight: 600;
+          color: rgb(156 163 175 / 1);
+          background: transparent;
+          border: none;
+          border-radius: 0.52rem;
+          padding: 0.22rem 0.3rem;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          width: fit-content;
+          max-width: min(86vw, 24rem);
+          margin-left: auto;
+          margin-right: 0;
+        }
+
+        .site-mobile-search-toggle:hover,
+        .site-mobile-search-toggle:focus-visible {
+          background: rgba(177, 167, 147, 0.18);
+        }
+
+        html.dark .site-mobile-search-toggle:hover,
+        html.dark .site-mobile-search-toggle:focus-visible {
+          background: rgba(123, 135, 152, 0.25);
+        }
+
+        .site-search-modal {
+          padding: 0;
+          align-items: flex-start;
+          justify-content: stretch;
+        }
+
+        .site-search-dialog {
+          width: 100%;
+          max-height: calc(100vh - var(--site-sticky-bar-height, 0px));
+          margin-top: var(--site-sticky-bar-height, 0px);
+          border-radius: 0;
+          background: transparent;
+          backdrop-filter: none;
+          -webkit-backdrop-filter: none;
+          box-shadow: none;
+          border: none;
+        }
+
+        .site-search-backdrop {
+          display: none;
+        }
+
+        .site-search-close {
+          top: 0.5rem;
+          right: 0.62rem;
+        }
+
+        .site-search-input-wrap {
+          padding: 0.5rem 0.62rem 0.38rem;
+        }
+
+        .site-search-results {
+          padding: 0 0.42rem 0.64rem;
+        }
+
+        .site-sticky-nav nav li.nav-with-dropdown::after {
+          display: none;
+        }
+
+        .site-sticky-nav nav .nav-submenu,
+        .site-sticky-nav nav li.nav-with-dropdown:hover > .nav-submenu,
+        .site-sticky-nav nav li.nav-with-dropdown.is-open > .nav-submenu {
+          display: none !important;
+          opacity: 0 !important;
+          pointer-events: none !important;
         }
       }
 
@@ -740,7 +1319,7 @@
     </style>
   </head>
 
-  <body class="mx-auto px-2.5" style="max-width: var(--site-content-max-width); min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column;">
+  <body class="mx-auto px-2.5 sm:px-2.5" style="max-width: var(--site-content-max-width); min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column;">
 
     
     <div class="site-sticky-sentinel" aria-hidden="true"></div>
@@ -757,7 +1336,12 @@
       <div class="site-sticky-inner">
         <div class="site-sticky-nav">
           <nav>
-  <ul><li class="nav-menu-item">
+  <ul>
+    <li class="site-mobile-home-item">
+      <a href="/" class="site-mobile-home-link" aria-label="回到主页">
+        <img class="site-mobile-home-title" src="/img/title_cn.png" alt="" loading="lazy">
+      </a>
+    </li><li class="nav-menu-item">
       <a href="/" class="">
         Home
       </a>
@@ -817,7 +1401,7 @@
       
     </li>
     
-    <li class="nav-theme-item">
+    <li class="nav-theme-item nav-tools-item">
       
 
 
@@ -880,8 +1464,127 @@
   }
 </script>
 
+      <button
+        type="button"
+        class="site-search-toggle site-desktop-search-toggle"
+        data-site-search-open
+        aria-label="打开搜索"
+      >
+        <img class="site-search-icon" src="/img/search.png" alt="" loading="lazy">
+      </button>
+    </li>
+    <li class="site-mobile-menu-item">
+      <button
+        type="button"
+        class="site-mobile-menu-toggle"
+        aria-expanded="false"
+        aria-controls="site-mobile-menu-panel"
+        aria-label="展开导航菜单"
+      >
+        <img class="site-mobile-menu-icon" src="/img/menu.png" alt="" loading="lazy">
+      </button>
     </li>
   </ul>
+  <div class="site-mobile-menu-panel" id="site-mobile-menu-panel" hidden>
+    <div class="site-mobile-menu-scroll">
+      <ul class="site-mobile-menu-list" aria-label="Mobile navigation">
+        <li class="site-mobile-menu-line">
+          
+            <a href="/" class="">Home</a>
+          
+        </li>
+        
+        <li class="site-mobile-menu-line">
+          
+            <div class="site-mobile-menu-row">
+              <button
+                type="button"
+                class="site-mobile-submenu-toggle"
+                data-mobile-submenu-toggle
+                aria-expanded="false"
+                aria-controls="site-mobile-submenu-posts"
+                aria-label="展开 Posts 子菜单"
+              >
+                <span class="site-mobile-caret" aria-hidden="true">▸</span>
+              </button>
+              <a href="/posts" class="">Posts</a>
+            </div>
+          
+        </li>
+        
+          <li class="site-mobile-menu-subblock" id="site-mobile-submenu-posts" aria-label="Posts years" hidden>
+            
+              <a href="/posts/#posts-year-2026">2026</a>
+            
+              <a href="/posts/#posts-year-2025">2025</a>
+            
+              <a href="/posts/#posts-year-2024">2024</a>
+            
+          </li>
+        
+        <li class="site-mobile-menu-line">
+          
+            <div class="site-mobile-menu-row">
+              <button
+                type="button"
+                class="site-mobile-submenu-toggle"
+                data-mobile-submenu-toggle
+                aria-expanded="false"
+                aria-controls="site-mobile-submenu-collection"
+                aria-label="展开 Collection 子菜单"
+              >
+                <span class="site-mobile-caret" aria-hidden="true">▸</span>
+              </button>
+              <a href="/collection" class="">Collection</a>
+            </div>
+          
+        </li>
+        
+          <li class="site-mobile-menu-subblock" id="site-mobile-submenu-collection" aria-label="Collection projects" hidden>
+            
+              <a href="/collection/bench/" class="">四季长椅</a>
+            
+            
+              <a href="/collection/empa-office/" class="">Empa office</a>
+            
+          </li>
+        
+        <li class="site-mobile-menu-line">
+          
+            <a href="/corner" class="">Corner</a>
+          
+        </li>
+        
+        <li class="site-mobile-menu-line">
+          
+            <a href="/message" class="">Message</a>
+          
+        </li>
+        
+        
+        <li class="site-mobile-menu-line site-mobile-search-line">
+          <button
+            type="button"
+            class="site-mobile-search-toggle"
+            data-site-search-open
+            aria-label="打开搜索"
+          >
+            <img class="site-search-icon" src="/img/search.png" alt="" loading="lazy">
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="site-search-modal" id="site-search-modal" data-index-url="/index.json" hidden>
+    <div class="site-search-backdrop" data-site-search-close></div>
+    <section class="site-search-dialog" role="dialog" aria-modal="true" aria-label="Site search">
+      <button type="button" class="site-search-close" data-site-search-close aria-label="关闭搜索">✕</button>
+      <div class="site-search-input-wrap">
+        <input id="site-search-input" class="site-search-input" type="search" placeholder="在意的关键词是……" autocomplete="off">
+      </div>
+      <ul id="site-search-results" class="site-search-results" aria-label="Search results"></ul>
+    </section>
+  </div>
 </nav>
 
         </div>
@@ -890,7 +1593,7 @@
     <img class="site-kamaboko-corner" src="/img/kamaboko.png" alt="kamaboko" role="button" tabindex="0" loading="lazy">
 
     
-    <main id="content" class="px-2.5" style="flex: 1 1 auto; display: flex; flex-direction: column;">
+    <main id="content" class="px-2.5 sm:px-2.5" style="flex: 1 1 auto; display: flex; flex-direction: column;">
 
 <article class="flex flex-col gap-3">
   <header>
@@ -945,6 +1648,10 @@
         
             
                 
+            
+        
+            
+        
             
         
             
@@ -1384,8 +2091,41 @@
         const stickyBar = document.querySelector(".site-sticky-bar");
         const stickySentinel = document.querySelector(".site-sticky-sentinel");
         const stickyNav = stickyBar ? stickyBar.querySelector(".site-sticky-nav") : null;
+        const mobileMenuToggle = stickyNav ? stickyNav.querySelector(".site-mobile-menu-toggle") : null;
+        const mobileMenuPanel = stickyNav ? stickyNav.querySelector("#site-mobile-menu-panel") : null;
+        const mobileSubmenuToggles = stickyNav ? stickyNav.querySelectorAll("[data-mobile-submenu-toggle]") : [];
         const root = document.documentElement;
         if (!stickyBar || !stickySentinel) return;
+
+        const isMobileNav = function() {
+          return window.matchMedia("(max-width: 639px)").matches;
+        };
+
+        const setMobileSubmenuExpanded = function(toggle, expanded) {
+          if (!toggle) return;
+          const submenuId = toggle.getAttribute("aria-controls");
+          if (!submenuId) return;
+          const submenu = stickyNav ? stickyNav.querySelector("#" + submenuId) : null;
+          toggle.setAttribute("aria-expanded", expanded ? "true" : "false");
+          if (submenu) {
+            submenu.hidden = !expanded;
+          }
+        };
+
+        const resetMobileSubmenus = function() {
+          for (let i = 0; i < mobileSubmenuToggles.length; i += 1) {
+            setMobileSubmenuExpanded(mobileSubmenuToggles[i], false);
+          }
+        };
+
+        const setMobileMenuOpen = function(open) {
+          if (!mobileMenuToggle || !mobileMenuPanel) return;
+          mobileMenuToggle.setAttribute("aria-expanded", open ? "true" : "false");
+          mobileMenuPanel.hidden = !open;
+          if (open) {
+            resetMobileSubmenus();
+          }
+        };
 
         const updateSubmenuState = function() {
           if (!stickyNav) {
@@ -1393,9 +2133,18 @@
             stickyBar.style.setProperty("--sticky-submenu-extent", "0px");
             return;
           }
-          if (!window.matchMedia("(min-width: 640px)").matches) {
-            stickyBar.classList.remove("is-submenu-open");
-            stickyBar.style.setProperty("--sticky-submenu-extent", "0px");
+          if (isMobileNav()) {
+            const hasOpenMobileMenu = !!(mobileMenuPanel && !mobileMenuPanel.hidden);
+            if (!hasOpenMobileMenu) {
+              stickyBar.classList.remove("is-submenu-open");
+              stickyBar.style.setProperty("--sticky-submenu-extent", "0px");
+              return;
+            }
+            const stickyBarRect = stickyBar.getBoundingClientRect();
+            const panelRect = mobileMenuPanel.getBoundingClientRect();
+            const submenuExtent = Math.max(0, Math.ceil(panelRect.bottom - stickyBarRect.bottom));
+            stickyBar.style.setProperty("--sticky-submenu-extent", submenuExtent + "px");
+            stickyBar.classList.add("is-submenu-open");
             return;
           }
           const dropdownItems = stickyNav.querySelectorAll("li.nav-with-dropdown");
@@ -1437,6 +2186,7 @@
           for (let i = 0; i < dropdownItems.length; i += 1) {
             dropdownItems[i].classList.remove("is-open");
           }
+          setMobileMenuOpen(false);
           stickyBar.classList.remove("is-submenu-open");
           stickyBar.style.setProperty("--sticky-submenu-extent", "0px");
         };
@@ -1445,18 +2195,10 @@
           const stickyBarHeight = Math.ceil(stickyBar.offsetHeight);
           stickyBar.style.setProperty("--sticky-bg-height", stickyBarHeight + "px");
           root.style.setProperty("--site-sticky-bar-height", stickyBarHeight + "px");
-          const viewportHeight = window.innerHeight || root.clientHeight || 0;
-          const pageHeight = Math.max(
-            root.scrollHeight,
-            root.offsetHeight,
-            document.body ? document.body.scrollHeight : 0,
-            document.body ? document.body.offsetHeight : 0
-          );
-          const isShortPage = root.classList.contains("page-short") || pageHeight <= viewportHeight * 1.22;
           const canScroll = (root.scrollHeight - window.innerHeight) > 2;
           const reachedTop = stickySentinel.getBoundingClientRect().top <= 0;
           const hasScrolled = (window.scrollY || root.scrollTop || 0) > 0;
-          const isStuck = !isShortPage && canScroll && reachedTop && hasScrolled;
+          const isStuck = canScroll && reachedTop && hasScrolled;
           stickyBar.classList.toggle("is-stuck", isStuck);
           updateSubmenuState();
         };
@@ -1466,6 +2208,34 @@
         window.addEventListener("resize", updateStickyState);
         window.addEventListener("load", updateStickyState);
         if (stickyNav) {
+          if (mobileMenuToggle) {
+            mobileMenuToggle.addEventListener("click", function(event) {
+              event.preventDefault();
+              event.stopPropagation();
+              if (!isMobileNav()) return;
+              const nextOpen = mobileMenuPanel ? mobileMenuPanel.hidden : false;
+              setMobileMenuOpen(nextOpen);
+              updateSubmenuState();
+            });
+          }
+          if (mobileMenuPanel) {
+            mobileMenuPanel.addEventListener("click", function(event) {
+              const target = event.target instanceof Element ? event.target : null;
+              if (!target || !target.closest("a")) return;
+              setMobileMenuOpen(false);
+              updateSubmenuState();
+            });
+          }
+          for (let i = 0; i < mobileSubmenuToggles.length; i += 1) {
+            mobileSubmenuToggles[i].addEventListener("click", function(event) {
+              event.preventDefault();
+              event.stopPropagation();
+              if (!isMobileNav()) return;
+              const isExpanded = mobileSubmenuToggles[i].getAttribute("aria-expanded") === "true";
+              setMobileSubmenuExpanded(mobileSubmenuToggles[i], !isExpanded);
+              updateSubmenuState();
+            });
+          }
           stickyNav.addEventListener("mouseover", queueSubmenuStateUpdate, { passive: true });
           stickyNav.addEventListener("mouseout", queueSubmenuStateUpdate, { passive: true });
           stickyNav.addEventListener("focusin", queueSubmenuStateUpdate);
@@ -1476,12 +2246,178 @@
             closeSubmenuState();
           }, { passive: true });
           window.addEventListener("blur", closeSubmenuState);
+          document.addEventListener("keydown", function(event) {
+            if (event.key !== "Escape") return;
+            closeSubmenuState();
+          });
           document.addEventListener("visibilitychange", function() {
             if (document.hidden) closeSubmenuState();
           });
         }
+        window.addEventListener("resize", function() {
+          if (!isMobileNav()) {
+            setMobileMenuOpen(false);
+          }
+        });
         const observer = new MutationObserver(updateStickyState);
         observer.observe(root, { attributes: true, attributeFilter: ["class"] });
+      });
+    </script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        const searchModal = document.getElementById("site-search-modal");
+        if (!searchModal) return;
+
+        const openButtons = document.querySelectorAll("[data-site-search-open]");
+        const closeButtons = searchModal.querySelectorAll("[data-site-search-close]");
+        const searchInput = searchModal.querySelector("#site-search-input");
+        const resultsEl = searchModal.querySelector("#site-search-results");
+        const indexUrl = searchModal.getAttribute("data-index-url") || "/index.json";
+
+        let indexData = [];
+        let indexLoaded = false;
+        let loadPromise = null;
+
+        const normalize = function(value) {
+          return (value || "").toString().toLowerCase().trim();
+        };
+
+        const escapeHtml = function(value) {
+          return (value || "")
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/\"/g, "&quot;")
+            .replace(/'/g, "&#39;");
+        };
+
+        const loadIndex = function() {
+          if (indexLoaded) return Promise.resolve(indexData);
+          if (loadPromise) return loadPromise;
+          loadPromise = window.fetch(indexUrl, { credentials: "same-origin" })
+            .then(function(response) {
+              if (!response.ok) throw new Error("Failed to load search index");
+              return response.json();
+            })
+            .then(function(data) {
+              indexData = Array.isArray(data) ? data : [];
+              indexLoaded = true;
+              return indexData;
+            })
+            .catch(function() {
+              return [];
+            });
+          return loadPromise;
+        };
+
+        const renderResults = function(query) {
+          const normalizedQuery = normalize(query);
+          resultsEl.innerHTML = "";
+          if (!normalizedQuery) {
+            return;
+          }
+
+          const matches = [];
+          for (let i = 0; i < indexData.length; i += 1) {
+            const item = indexData[i] || {};
+            const title = normalize(item.title);
+            const content = normalize(item.content);
+            if (!title.includes(normalizedQuery) && !content.includes(normalizedQuery)) continue;
+
+            matches.push({
+              title: item.title || "",
+              section: item.section || "",
+              date: item.date || "",
+              permalink: item.permalink || "/",
+            });
+          }
+
+          matches.sort(function(a, b) {
+            return (b.date || "").localeCompare(a.date || "");
+          });
+
+          const visible = matches.slice(0, 40);
+          if (visible.length === 0) return;
+
+          const html = visible.map(function(item) {
+            const title = escapeHtml(item.title);
+            const meta = escapeHtml([item.section, item.date].filter(Boolean).join(" · "));
+            const href = escapeHtml(item.permalink);
+            return (
+              '<li><a href="' + href + '">' +
+                '<span class="site-search-result-title">' + title + "</span>" +
+                '<span class="site-search-result-meta">' + meta + "</span>" +
+              "</a></li>"
+            );
+          }).join("");
+          resultsEl.innerHTML = html;
+        };
+
+        const openSearch = function() {
+          const isMobileNav = window.matchMedia("(max-width: 639px)").matches;
+          if (isMobileNav) {
+            const stickyBar = document.querySelector(".site-sticky-bar");
+            const mobileMenuPanel = document.getElementById("site-mobile-menu-panel");
+            const mobileMenuToggle = document.querySelector(".site-mobile-menu-toggle");
+            if (mobileMenuPanel) {
+              mobileMenuPanel.hidden = true;
+            }
+            if (mobileMenuToggle) {
+              mobileMenuToggle.setAttribute("aria-expanded", "false");
+            }
+            if (stickyBar) {
+              stickyBar.classList.remove("is-submenu-open");
+              stickyBar.style.setProperty("--sticky-submenu-extent", "0px");
+            }
+          }
+          searchModal.hidden = false;
+          loadIndex().then(function() {
+            renderResults(searchInput ? searchInput.value : "");
+          });
+          window.setTimeout(function() {
+            if (searchInput) searchInput.focus();
+          }, 0);
+        };
+
+        const closeSearch = function() {
+          searchModal.hidden = true;
+        };
+
+        for (let i = 0; i < openButtons.length; i += 1) {
+          openButtons[i].addEventListener("click", function(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            openSearch();
+          });
+        }
+
+        for (let i = 0; i < closeButtons.length; i += 1) {
+          closeButtons[i].addEventListener("click", function(event) {
+            event.preventDefault();
+            closeSearch();
+          });
+        }
+
+        if (searchInput) {
+          searchInput.addEventListener("input", function() {
+            renderResults(searchInput.value);
+          });
+        }
+
+        resultsEl.addEventListener("click", function(event) {
+          const target = event.target instanceof Element ? event.target : null;
+          if (!target) return;
+          if (target.closest("a")) {
+            closeSearch();
+          }
+        });
+
+        document.addEventListener("keydown", function(event) {
+          if (event.key === "Escape" && !searchModal.hidden) {
+            closeSearch();
+          }
+        });
       });
     </script>
 

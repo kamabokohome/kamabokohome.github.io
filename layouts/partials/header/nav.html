@@ -1,5 +1,10 @@
 <nav>
   <ul>
+    <li class="site-mobile-home-item">
+      <a href="{{ "/" | relURL }}" class="site-mobile-home-link" aria-label="回到主页">
+        <img class="site-mobile-home-title" src="{{ "img/title_cn.png" | relURL }}" alt="" loading="lazy">
+      </a>
+    </li>
     {{- $currentPage := . -}}
     {{- $pagePath := trim $currentPage.RelPermalink "/" -}}
     {{- $benchPage := site.GetPage "/collection/bench" -}}
@@ -52,8 +57,101 @@
       {{ end }}
     </li>
     {{ end }}
-    <li class="nav-theme-item">
+    <li class="nav-theme-item nav-tools-item">
       {{ partial "header/theme-button" . }}
+      <button
+        type="button"
+        class="site-search-toggle site-desktop-search-toggle"
+        data-site-search-open
+        aria-label="打开搜索"
+      >
+        <img class="site-search-icon" src="{{ "img/search.png" | relURL }}" alt="" loading="lazy">
+      </button>
+    </li>
+    <li class="site-mobile-menu-item">
+      <button
+        type="button"
+        class="site-mobile-menu-toggle"
+        aria-expanded="false"
+        aria-controls="site-mobile-menu-panel"
+        aria-label="展开导航菜单"
+      >
+        <img class="site-mobile-menu-icon" src="{{ "img/menu.png" | relURL }}" alt="" loading="lazy">
+      </button>
     </li>
   </ul>
+  <div class="site-mobile-menu-panel" id="site-mobile-menu-panel" hidden>
+    <div class="site-mobile-menu-scroll">
+      <ul class="site-mobile-menu-list" aria-label="Mobile navigation">
+        {{ range site.Menus.main }}
+        {{- $menuPath := trim .URL "/" -}}
+        {{- $isHomeActive := and $currentPage.IsHome (eq .Identifier "home") -}}
+        {{- $isDirectActive := eq $menuPath $pagePath -}}
+        {{- $isSectionActive := and (ne .Identifier "home") (eq .Identifier $currentPage.Section) -}}
+        {{- $hasMobileSubmenu := or (and (eq .Identifier "posts") (gt (len $postYears) 0)) (eq .Identifier "collection") -}}
+        {{- $submenuId := "" -}}
+        {{- if eq .Identifier "posts" -}}
+          {{- $submenuId = "site-mobile-submenu-posts" -}}
+        {{- else if eq .Identifier "collection" -}}
+          {{- $submenuId = "site-mobile-submenu-collection" -}}
+        {{- end -}}
+        <li class="site-mobile-menu-line">
+          {{ if $hasMobileSubmenu }}
+            <div class="site-mobile-menu-row">
+              <button
+                type="button"
+                class="site-mobile-submenu-toggle"
+                data-mobile-submenu-toggle
+                aria-expanded="false"
+                aria-controls="{{ $submenuId }}"
+                aria-label="展开 {{ .Name }} 子菜单"
+              >
+                <span class="site-mobile-caret" aria-hidden="true">▸</span>
+              </button>
+              <a href="{{ .URL | relLangURL }}" class="{{ if or $isHomeActive $isDirectActive $isSectionActive }}active{{ end }}">{{ .Name }}</a>
+            </div>
+          {{ else }}
+            <a href="{{ .URL | relLangURL }}" class="{{ if or $isHomeActive $isDirectActive $isSectionActive }}active{{ end }}">{{ .Name }}</a>
+          {{ end }}
+        </li>
+        {{ if and (eq .Identifier "posts") (gt (len $postYears) 0) }}
+          <li class="site-mobile-menu-subblock" id="{{ $submenuId }}" aria-label="Posts years" hidden>
+            {{ range $postYears }}
+              <a href="{{ (printf "/posts/#posts-year-%d" .) | relLangURL }}">{{ . }}</a>
+            {{ end }}
+          </li>
+        {{ else if eq .Identifier "collection" }}
+          <li class="site-mobile-menu-subblock" id="{{ $submenuId }}" aria-label="Collection projects" hidden>
+            {{ with $benchPage }}
+              <a href="{{ .RelPermalink }}" class="{{ if eq (trim .RelPermalink "/") $pagePath }}active{{ end }}">{{ .Title }}</a>
+            {{ end }}
+            {{ with $officePage }}
+              <a href="{{ .RelPermalink }}" class="{{ if eq (trim .RelPermalink "/") $pagePath }}active{{ end }}">{{ .Title }}</a>
+            {{ end }}
+          </li>
+        {{ end }}
+        {{ end }}
+        <li class="site-mobile-menu-line site-mobile-search-line">
+          <button
+            type="button"
+            class="site-mobile-search-toggle"
+            data-site-search-open
+            aria-label="打开搜索"
+          >
+            <img class="site-search-icon" src="{{ "img/search.png" | relURL }}" alt="" loading="lazy">
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="site-search-modal" id="site-search-modal" data-index-url="{{ "index.json" | relURL }}" hidden>
+    <div class="site-search-backdrop" data-site-search-close></div>
+    <section class="site-search-dialog" role="dialog" aria-modal="true" aria-label="Site search">
+      <button type="button" class="site-search-close" data-site-search-close aria-label="关闭搜索">✕</button>
+      <div class="site-search-input-wrap">
+        <input id="site-search-input" class="site-search-input" type="search" placeholder="在意的关键词是……" autocomplete="off">
+      </div>
+      <ul id="site-search-results" class="site-search-results" aria-label="Search results"></ul>
+    </section>
+  </div>
 </nav>

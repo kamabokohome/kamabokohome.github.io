@@ -9,10 +9,10 @@
         <img src="{{ $prevArrow.RelPermalink }}" alt="Previous" />
       </a>
     {{ else }}
-      <a href="#" class="pagination-button pointer-events-none" title="没有啦">
+      <span class="pagination-button is-disabled pointer-events-none" title="没有啦" aria-disabled="true">
         {{ $prevArrow := resources.Get "icons/arrow-left.png" }}
         <img src="{{ $prevArrow.RelPermalink }}" alt="Previous" />
-      </a>
+      </span>
     {{ end }}
   </div>
 
@@ -29,10 +29,10 @@
         <img src="{{ $nextArrow.RelPermalink }}" alt="Next" />
       </a>
     {{ else }}
-      <a href="#" class="pagination-button pointer-events-none" title="没有啦">
+      <span class="pagination-button is-disabled pointer-events-none" title="没有啦" aria-disabled="true">
         {{ $nextArrow := resources.Get "icons/arrow-right.png" }}
         <img src="{{ $nextArrow.RelPermalink }}" alt="Next" />
-      </a>
+      </span>
     {{ end }}
   </div>
 </div>
