@@ -98,17 +98,13 @@
         <li class="site-mobile-menu-line">
           {{ if $hasMobileSubmenu }}
             <div class="site-mobile-menu-row">
-              <button
-                type="button"
-                class="site-mobile-submenu-toggle"
-                data-mobile-submenu-toggle
+              <a
+                href="{{ .URL | relLangURL }}"
+                class="{{ if or $isHomeActive $isDirectActive $isSectionActive }}active{{ end }}"
+                data-mobile-submenu-link
                 aria-expanded="false"
                 aria-controls="{{ $submenuId }}"
-                aria-label="展开 {{ .Name }} 子菜单"
-              >
-                <span class="site-mobile-caret" aria-hidden="true">▸</span>
-              </button>
-              <a href="{{ .URL | relLangURL }}" class="{{ if or $isHomeActive $isDirectActive $isSectionActive }}active{{ end }}">{{ .Name }}</a>
+              >{{ .Name }}</a>
             </div>
           {{ else }}
             <a href="{{ .URL | relLangURL }}" class="{{ if or $isHomeActive $isDirectActive $isSectionActive }}active{{ end }}">{{ .Name }}</a>

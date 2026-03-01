@@ -62,6 +62,22 @@
     min-height: 100dvh;
   }
 
+  /* 优先由浏览器优化断行，减少孤行/寡行 */
+  #content p,
+  #content li,
+  #content blockquote {
+    line-break: strict;
+    text-wrap: pretty;
+    hanging-punctuation: allow-end;
+  }
+
+  #content h1,
+  #content h2,
+  #content h3,
+  #content h4 {
+    text-wrap: balance;
+  }
+
   button,
   input,
   select,
@@ -603,11 +619,11 @@ html.dark #content .corner-entry-summary {
 #content .single-jump-menu > summary.single-jump-trigger {
   list-style: none;
   margin: 0;
-  padding: 0.26rem 0.46rem;
+  padding: 0.42rem 0.7rem;
   border: none;
-  border-radius: 0.48rem;
-  font-size: 0.8rem;
-  line-height: 1.4;
+  border-radius: 0.62rem;
+  font-size: 0.75rem;
+  line-height: 1.5;
   font-weight: 600;
   color: #9ca3af;
   background: transparent;
@@ -623,7 +639,7 @@ html.dark #content .corner-entry-summary {
 
 #content .single-jump-trigger .single-jump-label {
   display: inline-block;
-  margin: 0 0.08rem;
+  margin: 0 0.14rem;
 }
 
 #content .single-jump-trigger.is-spinning .single-jump-emoji {
@@ -664,17 +680,17 @@ html.dark #content .corner-entry-summary {
   left: 50%;
   bottom: calc(100% + 0.38rem);
   transform: translateX(-50%);
-  width: min(90vw, 340px);
+  width: min(92vw, 400px);
   display: none;
   margin: 0;
-  padding: 0.24rem;
+  padding: 0.36rem;
   border: none;
-  border-radius: 0.45rem;
+  border-radius: 0.58rem;
   background: rgba(249, 245, 236, 0.66);
   backdrop-filter: blur(11px);
   -webkit-backdrop-filter: blur(11px);
   box-shadow: 0 5px 14px rgba(0, 0, 0, 0.1);
-  max-height: 15rem;
+  max-height: 19rem;
   overflow-y: auto;
   z-index: 12;
 }
@@ -686,10 +702,10 @@ html.dark #content .corner-entry-summary {
 #content .single-jump-link {
   display: block;
   margin: 0;
-  padding: 0.3rem 0.5rem;
-  border-radius: 0.34rem;
-  font-size: 0.8rem;
-  line-height: 1.4;
+  padding: 0.44rem 0.68rem;
+  border-radius: 0.44rem;
+  font-size: 0.92rem;
+  line-height: 1.5;
   text-decoration: none !important;
   color: #6b7280;
   white-space: nowrap;
@@ -749,8 +765,8 @@ html.dark #content .single-jump-link.is-current {
 
 @media (max-width: 680px) {
   #content .single-jump-panel {
-    width: min(88vw, 292px);
-    max-height: 13rem;
+    width: min(92vw, 344px);
+    max-height: 16rem;
   }
 }
 
