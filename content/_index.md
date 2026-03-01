@@ -3,11 +3,7 @@ title: ""
 ---
 
 
-{{< img-ripple
-  back="鸽子_back.jpg"
-  front="鸽子_front.png"
-  alt="鸽子"
->}}
+{{< img-ripple >}}
 
 <div style="text-align:center;">
 ✧ <br><br>
@@ -44,6 +40,10 @@ title: ""
   border: 1px solid #d1d5db;  /* 白天边框 */
   border-radius: 12px;
   padding: 16px;
+}
+
+.treehouse a {
+  font-weight: 600;
 }
 
 /* 夜间模式边框，仅作用于 .treehouse */

@@ -141,15 +141,21 @@
         });
       };
 
+      const foldAllCornerEntries = function() {
+        cornerEntries.forEach(function(entry) {
+          entry.open = false;
+        });
+      };
+
       const applyTagFilter = function(tag) {
         const activeTag = tag || "all";
+        foldAllCornerEntries();
         cornerEntries.forEach(function(entry) {
           const tags = (entry.getAttribute("data-corner-tags") || "")
             .split("|")
             .filter(Boolean);
           const visible = activeTag === "all" || tags.indexOf(activeTag) >= 0;
           entry.hidden = !visible;
-          if (!visible) entry.open = false;
         });
         setActiveTagButton(activeTag);
         try {

@@ -1,20 +1,2 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>好玩的 on Kamaboko Home | 鱼糕的树屋</title>
-    <link>http://localhost:1313/tags/%E5%A5%BD%E7%8E%A9%E7%9A%84/</link>
-    <description>Recent content in 好玩的 on Kamaboko Home | 鱼糕的树屋</description>
-    <generator>Hugo</generator>
-    <language>en-US</language>
-    <copyright>Kamaboko Home</copyright>
-    <lastBuildDate>Sat, 08 Nov 2025 20:02:00 +0100</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/%E5%A5%BD%E7%8E%A9%E7%9A%84/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>九井棋</title>
-      <link>http://localhost:1313/corner/2025-11-08-%E4%B9%9D%E4%BA%95%E6%A3%8B/</link>
-      <pubDate>Sat, 08 Nov 2025 20:02:00 +0100</pubDate>
-      <guid>http://localhost:1313/corner/2025-11-08-%E4%B9%9D%E4%BA%95%E6%A3%8B/</guid>
-      <description>&lt;p&gt;很好玩的 &lt;strong&gt;九井棋（Ultimate tic-tac-toe）&lt;/strong&gt;。是前不久学院 retreat 的时候从其他人那里学到的。原本简简单单的井字棋，九个棋盘一起下的时候，规则还是很简单，玩法却丰富了一百倍。想到九井棋的人好厉害。&lt;/p&gt;&#xA;&lt;p&gt;网上有不少可以玩九井棋的网页。但我最推荐的是 &lt;a href=&#34;https://bejofo.com&#34;&gt;这个&lt;/a&gt;。棋盘很美观，而且还可以通过链接在线联机。已经和小屁孩打成了平手，并在昏昏欲睡的时候输给了哥哥一次。&lt;/p&gt;</description>
-    </item>
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>好玩的 on Kamaboko Home | 鱼糕的树屋</title><link>https://kamabokohome.com/tags/%E5%A5%BD%E7%8E%A9%E7%9A%84/</link><description>Recent content in 好玩的 on Kamaboko Home | 鱼糕的树屋</description><generator>Hugo</generator><language>en-US</language><copyright>Kamaboko Home</copyright><lastBuildDate>Sat, 08 Nov 2025 20:02:00 +0100</lastBuildDate><atom:link href="https://kamabokohome.com/tags/%E5%A5%BD%E7%8E%A9%E7%9A%84/index.xml" rel="self" type="application/rss+xml"/><item><title>九井棋</title><link>https://kamabokohome.com/corner/2025-11-08-%E4%B9%9D%E4%BA%95%E6%A3%8B/</link><pubDate>Sat, 08 Nov 2025 20:02:00 +0100</pubDate><guid>https://kamabokohome.com/corner/2025-11-08-%E4%B9%9D%E4%BA%95%E6%A3%8B/</guid><description>&lt;p>很好玩的 &lt;strong>九井棋（Ultimate tic-tac-toe）&lt;/strong>。是前不久学院 retreat 的时候从其他人那里学到的。原本简简单单的井字棋，九个棋盘一起下的时候，规则还是很简单，玩法却丰富了一百倍。想到九井棋的人好厉害。&lt;/p>
+&lt;p>网上有不少可以玩九井棋的网页。但我最推荐的是 &lt;a href="https://bejofo.com">这个&lt;/a>。棋盘很美观，而且还可以通过链接在线联机。已经和小屁孩打成了平手，并在昏昏欲睡的时候输给了哥哥一次。&lt;/p></description></item></channel></rss>
