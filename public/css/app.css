@@ -1528,6 +1528,24 @@ html.dark summary {
   padding-top: 0.45rem;
 }
 
+#content .corner-tag-switch {
+  margin-top: 0.9rem;
+  margin-bottom: 0.9rem;
+  flex-wrap: wrap;
+}
+
+#content .corner-entry-tags {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0.36rem;
+  margin-top: 0.04rem;
+  margin-bottom: 0.22rem;
+}
+
+#content .corner-entry-tag {
+  cursor: pointer;
+}
+
 #content .corner-entry-item {
   margin: 0;
   --corner-entry-text-start: calc(0.15rem + 0.99rem + 8px + 1.3rem);
