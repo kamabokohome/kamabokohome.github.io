@@ -88,44 +88,9 @@
         {{- $isHomeActive := and $currentPage.IsHome (eq .Identifier "home") -}}
         {{- $isDirectActive := eq $menuPath $pagePath -}}
         {{- $isSectionActive := and (ne .Identifier "home") (eq .Identifier $currentPage.Section) -}}
-        {{- $hasMobileSubmenu := or (and (eq .Identifier "posts") (gt (len $postYears) 0)) (eq .Identifier "collection") -}}
-        {{- $submenuId := "" -}}
-        {{- if eq .Identifier "posts" -}}
-          {{- $submenuId = "site-mobile-submenu-posts" -}}
-        {{- else if eq .Identifier "collection" -}}
-          {{- $submenuId = "site-mobile-submenu-collection" -}}
-        {{- end -}}
         <li class="site-mobile-menu-line">
-          {{ if $hasMobileSubmenu }}
-            <div class="site-mobile-menu-row">
-              <a
-                href="{{ .URL | relLangURL }}"
-                class="{{ if or $isHomeActive $isDirectActive $isSectionActive }}active{{ end }}"
-                data-mobile-submenu-link
-                aria-expanded="false"
-                aria-controls="{{ $submenuId }}"
-              >{{ .Name }}</a>
-            </div>
-          {{ else }}
-            <a href="{{ .URL | relLangURL }}" class="{{ if or $isHomeActive $isDirectActive $isSectionActive }}active{{ end }}">{{ .Name }}</a>
-          {{ end }}
+          <a href="{{ .URL | relLangURL }}" class="{{ if or $isHomeActive $isDirectActive $isSectionActive }}active{{ end }}">{{ .Name }}</a>
         </li>
-        {{ if and (eq .Identifier "posts") (gt (len $postYears) 0) }}
-          <li class="site-mobile-menu-subblock" id="{{ $submenuId }}" aria-label="Posts years" hidden>
-            {{ range $postYears }}
-              <a href="{{ (printf "/posts/#posts-year-%d" .) | relLangURL }}">{{ . }}</a>
-            {{ end }}
-          </li>
-        {{ else if eq .Identifier "collection" }}
-          <li class="site-mobile-menu-subblock" id="{{ $submenuId }}" aria-label="Collection projects" hidden>
-            {{ with $benchPage }}
-              <a href="{{ .RelPermalink }}" class="{{ if eq (trim .RelPermalink "/") $pagePath }}active{{ end }}">{{ .Title }}</a>
-            {{ end }}
-            {{ with $officePage }}
-              <a href="{{ .RelPermalink }}" class="{{ if eq (trim .RelPermalink "/") $pagePath }}active{{ end }}">{{ .Title }}</a>
-            {{ end }}
-          </li>
-        {{ end }}
         {{ end }}
         <li class="site-mobile-menu-line site-mobile-search-line">
           <button

@@ -37,7 +37,7 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <script type="text/x-mathjax-config">MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });</script>
 
-<link rel="stylesheet" href="/css/app.min.abc6d6bb1b6f8bca3ae0dddf550ae3d84440da37febab7cb3c6f0e81979dd85d.css" integrity="sha256-q8bWuxtvi8o64N3fVQrj2ERA2jf+urfLPG8OgZed2F0=" /><style>
+<link rel="stylesheet" href="/css/app.min.9b21a736e218e9a89ad60b9d8f8d01f3bb8a74bedfbb991fae0c0be79f4279ec.css" integrity="sha256-myGnNuIY6aia1gudj40B87uKdL7fu5kfrgwL559Ceew=" /><style>
       html {
         scrollbar-gutter: stable;
         --site-content-max-width: 50rem;
@@ -166,9 +166,9 @@
 
       .site-kamaboko-corner {
         position: fixed;
-        bottom: max(12px, calc(env(safe-area-inset-bottom, 0px) + 12px));
-        right: max(18px, calc(env(safe-area-inset-right, 0px) + 18px));
-        width: clamp(35px, 5.2vw, 60px);
+        bottom: max(14px, calc(env(safe-area-inset-bottom, 0px) + 14px));
+        right: max(14px, calc(env(safe-area-inset-right, 0px) + 14px));
+        width: clamp(28px, 4.3vw, 48px);
         height: auto;
         pointer-events: auto;
         cursor: pointer;
@@ -192,6 +192,73 @@
 
       .site-kamaboko-corner.is-pressing {
         animation-play-state: paused !important;
+      }
+
+      .site-mobile-breadcrumb {
+        display: none;
+      }
+
+      #content .meta .post-meta-time-compact {
+        display: none;
+      }
+
+      @media (max-width: 639px) {
+        #content .meta .post-meta-time-full {
+          display: none;
+        }
+
+        #content .meta .post-meta-time-compact {
+          display: inline;
+        }
+
+        .site-mobile-breadcrumb {
+          display: flex;
+          align-items: center;
+          gap: 0.22rem;
+          margin: 0 0 0.32rem;
+          padding: 0 0.625rem;
+          font-size: 0.72rem;
+          line-height: 1.35;
+          color: rgb(156 163 175 / 1);
+          white-space: nowrap;
+          overflow-x: auto;
+          -webkit-overflow-scrolling: touch;
+          scrollbar-width: none;
+        }
+
+        .site-mobile-breadcrumb.is-collection {
+          margin-bottom: 0.16rem;
+        }
+
+        .site-mobile-breadcrumb::-webkit-scrollbar {
+          display: none;
+        }
+
+        .site-mobile-breadcrumb a {
+          color: inherit;
+          text-decoration: none;
+          border-radius: 0.3rem;
+          padding: 0.06rem 0;
+          flex: 0 0 auto;
+        }
+
+        .site-mobile-breadcrumb a:hover,
+        .site-mobile-breadcrumb a:focus-visible {
+          background: rgba(177, 167, 147, 0.18);
+          color: rgb(107 114 128 / 1);
+        }
+
+        .site-mobile-breadcrumb-sep {
+          color: rgb(156 163 175 / 1);
+          flex: 0 0 auto;
+        }
+
+        html.dark .site-mobile-breadcrumb a:hover,
+        html.dark .site-mobile-breadcrumb a:focus-visible {
+          background: rgba(123, 135, 152, 0.25);
+          color: rgb(209 213 219 / 1);
+        }
+
       }
 
       .site-sticky-nav {
@@ -625,6 +692,17 @@
           flex: 0 0 auto;
         }
 
+        .site-sticky-nav nav .nav-theme-item .toggle-theme {
+          width: 29px !important;
+          height: 29px !important;
+          padding: 3px !important;
+        }
+
+        .site-sticky-nav nav .nav-theme-item .toggle-theme .theme-icon {
+          width: 25px !important;
+          height: 25px !important;
+        }
+
         .site-sticky-nav nav .nav-tools-item {
           gap: 0;
         }
@@ -643,8 +721,8 @@
           color: rgb(156 163 175 / 1);
           background: transparent;
           border: none;
-          border-radius: 0.58rem;
-          padding: 0.28rem 0.4rem;
+          border-radius: 0.52rem;
+          padding: 0.22rem 0.34rem;
           display: inline-flex;
           align-items: center;
           justify-content: center;
@@ -653,8 +731,8 @@
 
         .site-mobile-menu-icon {
           display: block;
-          width: 1.82rem;
-          height: 1.82rem;
+          width: 1.64rem;
+          height: 1.64rem;
           object-fit: contain;
           user-select: none;
           -webkit-user-drag: none;
@@ -729,7 +807,7 @@
 
         .site-mobile-menu-line > a {
           display: block;
-          font-size: 1.02rem;
+          font-size: 0.92rem;
           line-height: 1.5;
           text-align: right;
           text-decoration: none;
@@ -1548,70 +1626,20 @@
     <div class="site-mobile-menu-scroll">
       <ul class="site-mobile-menu-list" aria-label="Mobile navigation">
         <li class="site-mobile-menu-line">
-          
-            <a href="/" class="">Home</a>
-          
+          <a href="/" class="">Home</a>
         </li>
-        
         <li class="site-mobile-menu-line">
-          
-            <div class="site-mobile-menu-row">
-              <a
-                href="/posts"
-                class="active"
-                data-mobile-submenu-link
-                aria-expanded="false"
-                aria-controls="site-mobile-submenu-posts"
-              >Posts</a>
-            </div>
-          
+          <a href="/posts" class="active">Posts</a>
         </li>
-        
-          <li class="site-mobile-menu-subblock" id="site-mobile-submenu-posts" aria-label="Posts years" hidden>
-            
-              <a href="/posts/#posts-year-2026">2026</a>
-            
-              <a href="/posts/#posts-year-2025">2025</a>
-            
-              <a href="/posts/#posts-year-2024">2024</a>
-            
-          </li>
-        
         <li class="site-mobile-menu-line">
-          
-            <div class="site-mobile-menu-row">
-              <a
-                href="/collection"
-                class=""
-                data-mobile-submenu-link
-                aria-expanded="false"
-                aria-controls="site-mobile-submenu-collection"
-              >Collection</a>
-            </div>
-          
+          <a href="/collection" class="">Collection</a>
         </li>
-        
-          <li class="site-mobile-menu-subblock" id="site-mobile-submenu-collection" aria-label="Collection projects" hidden>
-            
-              <a href="/collection/bench/" class="">四季长椅</a>
-            
-            
-              <a href="/collection/empa-office/" class="">Empa office</a>
-            
-          </li>
-        
         <li class="site-mobile-menu-line">
-          
-            <a href="/corner" class="">Corner</a>
-          
+          <a href="/corner" class="">Corner</a>
         </li>
-        
         <li class="site-mobile-menu-line">
-          
-            <a href="/message" class="">Message</a>
-          
+          <a href="/message" class="">Message</a>
         </li>
-        
         
         <li class="site-mobile-menu-line site-mobile-search-line">
           <button
@@ -1643,6 +1671,29 @@
     <img class="site-kamaboko-corner" src="/img/kamaboko.png" alt="kamaboko" role="button" tabindex="0" loading="lazy">
 
     
+      
+      
+      
+      
+      
+      
+        
+        
+        
+        
+      
+      <nav class="site-mobile-breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span class="site-mobile-breadcrumb-sep" aria-hidden="true">›</span>
+        <a href="/posts/">Posts</a>
+        
+          <span class="site-mobile-breadcrumb-sep" aria-hidden="true">›</span>
+          <a href="/posts/#posts-year-2024">2024</a>
+        
+      </nav>
+    
+
+    
     <main id="content" class="px-2.5 sm:px-2.5" style="flex: 1 1 auto; display: flex; flex-direction: column;">
 
 
@@ -1657,9 +1708,14 @@
     
     
 
-    <time datetime="2024-12-21 17:15:48 &#43;0100 CET" title='12-21 17:15'>
-      2024-12-21 17:15
-    </time>
+    
+      <time class="post-meta-time-full" datetime="2024-12-21 17:15:48 &#43;0100 CET" title='2024-12-21 17:15'>
+        2024-12-21 17:15
+      </time>
+      <time class="post-meta-time-compact" datetime="2024-12-21 17:15:48 &#43;0100 CET" title='2024-12-21 17:15'>
+        12-21 17:15
+      </time>
+    
   
 </div>
 
@@ -2782,8 +2838,9 @@
     <script>
       document.addEventListener("DOMContentLoaded", function() {
         const paragraphSelector = "#content p, #content li";
-        const hanCharRe = /^[\u3400-\u9FFF]$/;
-        const endingPuncRe = /^[，。！？；：、,.!?;:）)」』】》]$/;
+        const cjkCharRe = /^[\u3040-\u30ff\u3400-\u9fff]$/;
+        const closingQuoteLikeRe = /^[\"'”’」』】》）)\]]$/;
+        const endingPuncRe = /^[，。！？；：、,.!?;:）)」』】》”’…]$/;
 
         const getLineBands = function(el) {
           const range = document.createRange();
@@ -2861,9 +2918,6 @@
             })
             .sort(function(a, b) {
               return a.left - b.left;
-            })
-            .map(function(item) {
-              return item.ch;
             });
         };
 
@@ -2873,7 +2927,11 @@
           const paragraphChars = getParagraphChars(el);
           const lastLineChars = getLastLineChars(paragraphChars);
           if (lastLineChars.length !== 2) return false;
-          return hanCharRe.test(lastLineChars[0]) && endingPuncRe.test(lastLineChars[1]);
+          const firstChar = lastLineChars[0].ch;
+          const secondChar = lastLineChars[1].ch;
+          const isCjkPlusPunc = cjkCharRe.test(firstChar) && endingPuncRe.test(secondChar);
+          const isQuotePlusPunc = closingQuoteLikeRe.test(firstChar) && endingPuncRe.test(secondChar);
+          return isCjkPlusPunc || isQuotePlusPunc;
         };
 
         const insertNoBreakBeforeLastTwo = function(el) {
