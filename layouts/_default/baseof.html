@@ -167,7 +167,7 @@
         display: none;
       }
 
-      @media (max-width: 639px) {
+      @media (max-width: 1179px) {
         #content .meta .post-meta-time-full {
           display: none;
         }
@@ -584,7 +584,7 @@
         background: rgba(250, 204, 21, 0.4);
       }
 
-      @media (max-width: 639px) {
+      @media (max-width: 1179px) {
         .site-sticky-inner {
           padding-left: 0.25rem;
           padding-right: 0.25rem;
@@ -625,6 +625,18 @@
           display: inline-flex;
           align-items: center;
           flex: 0 0 auto;
+        }
+
+        body.is-home .site-sticky-bar:not(.is-submenu-open) .site-sticky-nav nav .site-mobile-home-item {
+          display: none;
+        }
+
+        body.is-home .site-sticky-bar.is-stuck .site-sticky-nav nav .site-mobile-home-item {
+          display: inline-flex;
+        }
+
+        body.is-home .site-sticky-bar.is-submenu-open .site-sticky-nav nav .site-mobile-home-item {
+          display: inline-flex;
         }
 
         .site-sticky-nav nav .site-mobile-home-link {
@@ -1019,7 +1031,7 @@
         }
       }
 
-      @media (min-width: 640px) {
+      @media (min-width: 1180px) {
         .site-kamaboko-corner {
           width: clamp(31px, 4.6vw, 54px);
         }
@@ -1519,6 +1531,10 @@
           if (titleArea && titleArea.contains(event.target)) return true;
           const homeRippleArea = document.querySelector(".home-ripple-image");
           if (homeRippleArea && homeRippleArea.contains(event.target)) return true;
+          const homeRippleCanvas = document.querySelector(".home-ripple-canvas");
+          if (homeRippleCanvas && homeRippleCanvas.contains(event.target)) return true;
+          const homeRippleStage = document.querySelector(".home-ripple-stage");
+          if (homeRippleStage && homeRippleStage.contains(event.target)) return true;
           const kamaboko = document.querySelector(".site-kamaboko-corner");
           if (kamaboko && kamaboko.contains(event.target)) return true;
           return false;
@@ -1686,7 +1702,7 @@
           if (!src) return;
 
           const width = window.innerWidth || document.documentElement.clientWidth || 0;
-          const count = width >= 640 ? 48 : 36;
+          const count = width >= 1180 ? 48 : 36;
 
           for (let i = 0; i < count; i += 1) {
             const piece = document.createElement("img");
@@ -1860,7 +1876,7 @@
         if (!stickyBar || !stickySentinel) return;
 
         const isMobileNav = function() {
-          return window.matchMedia("(max-width: 639px)").matches;
+          return window.matchMedia("(max-width: 1179px)").matches;
         };
 
         const setMobileSubmenuExpanded = function(link, expanded) {
@@ -2205,7 +2221,7 @@
         };
 
         const openSearch = function() {
-          const isMobileNav = window.matchMedia("(max-width: 639px)").matches;
+          const isMobileNav = window.matchMedia("(max-width: 1179px)").matches;
           if (isMobileNav) {
             const stickyBar = document.querySelector(".site-sticky-bar");
             const mobileMenuPanel = document.getElementById("site-mobile-menu-panel");

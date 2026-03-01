@@ -1,23 +1,92 @@
-{{ $back := .Page.Resources.GetMatch (printf "%s" (.Get "back" | safeURL )) }}
-{{ $front := .Page.Resources.GetMatch (printf "%s" (.Get "front" | safeURL )) }}
-{{ $alt := .Get "alt" }}
+{{ $tree1 := .Page.Resources.GetMatch "tree1.jpg" }}
+{{ $titleBack := .Page.Resources.GetMatch "title_back.jpg" }}
+{{ $titleFront := .Page.Resources.GetMatch "title_front.png" }}
+{{ $tree2 := .Page.Resources.GetMatch "tree2.jpg" }}
+{{ $house4 := .Page.Resources.GetMatch "house4.jpg" }}
+{{ $house1 := .Page.Resources.GetMatch "house1.jpg" }}
+{{ $pigeonBack := .Page.Resources.GetMatch "鸽子_back.jpg" }}
+{{ $pigeonFront := .Page.Resources.GetMatch "鸽子_front.png" }}
+{{ $swing := .Page.Resources.GetMatch "swing.jpg" }}
+{{ $house2 := .Page.Resources.GetMatch "house2.jpg" }}
+{{ $tree3 := .Page.Resources.GetMatch "tree3.jpg" }}
+{{ $house3 := .Page.Resources.GetMatch "house3.jpg" }}
+{{ $tree4 := .Page.Resources.GetMatch "tree4.jpg" }}
+{{ $signBack := .Page.Resources.GetMatch "sign_back.jpg" }}
+{{ $signFront := .Page.Resources.GetMatch "sign_front.png" }}
+{{ $completePigeonBack := .Page.Resources.GetMatch "complete_鸽子_back.jpg" }}
+{{ $completePigeonFront := .Page.Resources.GetMatch "complete_鸽子_front.png" }}
 
-{{ if and $back $front }}
-<figure class="mb-5 home-ripple-stage" style="--home-ripple-back-image: url('{{ $back.RelPermalink }}');">
-  <div class="home-ripple-bleed" aria-hidden="true">
-    <div class="home-ripple-bleed-side home-ripple-bleed-side-left"></div>
-    <div class="home-ripple-bleed-side home-ripple-bleed-side-right"></div>
+{{ $missing := slice }}
+{{ if not $tree1 }}{{ $missing = $missing | append "tree1.jpg" }}{{ end }}
+{{ if not $titleBack }}{{ $missing = $missing | append "title_back.jpg" }}{{ end }}
+{{ if not $titleFront }}{{ $missing = $missing | append "title_front.png" }}{{ end }}
+{{ if not $tree2 }}{{ $missing = $missing | append "tree2.jpg" }}{{ end }}
+{{ if not $house4 }}{{ $missing = $missing | append "house4.jpg" }}{{ end }}
+{{ if not $house1 }}{{ $missing = $missing | append "house1.jpg" }}{{ end }}
+{{ if not $pigeonBack }}{{ $missing = $missing | append "鸽子_back.jpg" }}{{ end }}
+{{ if not $pigeonFront }}{{ $missing = $missing | append "鸽子_front.png" }}{{ end }}
+{{ if not $swing }}{{ $missing = $missing | append "swing.jpg" }}{{ end }}
+{{ if not $house2 }}{{ $missing = $missing | append "house2.jpg" }}{{ end }}
+{{ if not $tree3 }}{{ $missing = $missing | append "tree3.jpg" }}{{ end }}
+{{ if not $house3 }}{{ $missing = $missing | append "house3.jpg" }}{{ end }}
+{{ if not $tree4 }}{{ $missing = $missing | append "tree4.jpg" }}{{ end }}
+{{ if not $signBack }}{{ $missing = $missing | append "sign_back.jpg" }}{{ end }}
+{{ if not $signFront }}{{ $missing = $missing | append "sign_front.png" }}{{ end }}
+{{ if not $completePigeonBack }}{{ $missing = $missing | append "complete_鸽子_back.jpg" }}{{ end }}
+{{ if not $completePigeonFront }}{{ $missing = $missing | append "complete_鸽子_front.png" }}{{ end }}
+
+{{ if eq (len $missing) 0 }}
+<figure class="mb-5 home-ripple-stage">
+  <div class="home-ripple-canvas">
+    <div class="home-ripple-gapfill" aria-hidden="true"></div>
+    <div class="home-ripple-flow" aria-hidden="true"></div>
+    <div class="home-ripple-grid">
+      <div class="home-ripple-tile" data-tile-index="1">
+        <div class="home-ripple-water" data-ripple-src="{{ $tree1.RelPermalink }}" style="background-image: url('{{ $tree1.RelPermalink }}');"></div>
+      </div>
+      <div class="home-ripple-tile" data-tile-index="2">
+        <div class="home-ripple-water" data-ripple-src="{{ $house4.RelPermalink }}" style="background-image: url('{{ $house4.RelPermalink }}');"></div>
+      </div>
+      <div class="home-ripple-tile" data-tile-index="3">
+        <div class="home-ripple-water" data-ripple-src="{{ $titleBack.RelPermalink }}" style="background-image: url('{{ $titleBack.RelPermalink }}');"></div>
+        <img class="home-ripple-front" src="{{ $titleFront.RelPermalink }}" alt="title front" width="{{ $titleFront.Width }}" height="{{ $titleFront.Height }}" loading="lazy" />
+      </div>
+      <div class="home-ripple-tile" data-tile-index="4">
+        <div class="home-ripple-water" data-ripple-src="{{ $tree2.RelPermalink }}" style="background-image: url('{{ $tree2.RelPermalink }}');"></div>
+      </div>
+
+      <div class="home-ripple-tile" data-tile-index="5">
+        <div class="home-ripple-water" data-ripple-src="{{ $house1.RelPermalink }}" style="background-image: url('{{ $house1.RelPermalink }}');"></div>
+      </div>
+      <div class="home-ripple-tile" data-tile-index="6">
+        <div class="home-ripple-water" data-ripple-src="{{ $pigeonBack.RelPermalink }}" style="background-image: url('{{ $pigeonBack.RelPermalink }}');"></div>
+        <img class="home-ripple-front" src="{{ $pigeonFront.RelPermalink }}" alt="pigeon front" width="{{ $pigeonFront.Width }}" height="{{ $pigeonFront.Height }}" loading="lazy" />
+      </div>
+      <div class="home-ripple-tile" data-tile-index="7">
+        <div class="home-ripple-water" data-ripple-src="{{ $swing.RelPermalink }}" style="background-image: url('{{ $swing.RelPermalink }}');"></div>
+      </div>
+      <div class="home-ripple-tile" data-tile-index="8">
+        <div class="home-ripple-water" data-ripple-src="{{ $house2.RelPermalink }}" style="background-image: url('{{ $house2.RelPermalink }}');"></div>
+      </div>
+
+      <div class="home-ripple-tile" data-tile-index="9">
+        <div class="home-ripple-water" data-ripple-src="{{ $tree3.RelPermalink }}" style="background-image: url('{{ $tree3.RelPermalink }}');"></div>
+      </div>
+      <div class="home-ripple-tile" data-tile-index="10">
+        <div class="home-ripple-water" data-ripple-src="{{ $house3.RelPermalink }}" style="background-image: url('{{ $house3.RelPermalink }}');"></div>
+      </div>
+      <div class="home-ripple-tile" data-tile-index="11">
+        <div class="home-ripple-water" data-ripple-src="{{ $tree4.RelPermalink }}" style="background-image: url('{{ $tree4.RelPermalink }}');"></div>
+      </div>
+      <div class="home-ripple-tile" data-tile-index="12">
+        <div class="home-ripple-water" data-ripple-src="{{ $signBack.RelPermalink }}" style="background-image: url('{{ $signBack.RelPermalink }}');"></div>
+        <img class="home-ripple-front" src="{{ $signFront.RelPermalink }}" alt="sign front" width="{{ $signFront.Width }}" height="{{ $signFront.Height }}" loading="lazy" />
+      </div>
+    </div>
   </div>
-  <div class="home-ripple-image" data-back-src="{{ $back.RelPermalink }}">
-    <div class="home-ripple-water" aria-hidden="true"></div>
-    <img
-      class="home-ripple-front"
-      src="{{ $front.RelPermalink }}"
-      alt="{{ $alt }}"
-      width="{{ $front.Width }}"
-      height="{{ $front.Height }}"
-      loading="lazy"
-    />
+  <div class="home-ripple-mobile">
+    <div class="home-ripple-water home-ripple-mobile-water" data-ripple-src="{{ $completePigeonBack.RelPermalink }}" style="background-image: url('{{ $completePigeonBack.RelPermalink }}');"></div>
+    <img class="home-ripple-mobile-front" src="{{ $completePigeonFront.RelPermalink }}" alt="complete pigeon front" width="{{ $completePigeonFront.Width }}" height="{{ $completePigeonFront.Height }}" loading="lazy" />
   </div>
 </figure>
 
@@ -25,153 +94,224 @@
   .home-ripple-stage {
     position: relative;
     isolation: isolate;
-    --home-ripple-core-width: 0px;
-    --home-ripple-side-width: 0px;
-    --home-ripple-side-overlap: 8px;
-    --home-ripple-bleed-blur: 46px;
-    --home-ripple-bleed-saturate: 128%;
-    --home-ripple-bleed-contrast: 112%;
-    --home-ripple-bleed-brightness: 92%;
-    --home-ripple-bleed-opacity: 0.8;
-    --home-ripple-bleed-scale: 1.16;
-    --home-ripple-bleed-zoom: 14;
   }
 
   body.is-home #content > section > .home-ripple-stage:first-child {
     margin-top: calc(-1 * var(--site-sticky-bar-height, 0px));
   }
 
-  .home-ripple-bleed {
-    position: absolute;
-    left: 50%;
-    top: 0;
-    bottom: 0;
-    width: 100vw;
-    transform: translateX(-50%);
-    pointer-events: none;
-    overflow: hidden;
-    z-index: 0;
-    display: none;
-  }
+  @media (min-width: 1180px) {
+    body.is-home .home-ripple-stage {
+      width: 100vw;
+      min-width: 100vw;
+      max-width: none;
+      min-height: 100vh;
+      position: relative;
+      left: 50%;
+      right: 50%;
+      margin-left: -50vw;
+      margin-right: -50vw;
+    }
 
-  .home-ripple-bleed-side {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: calc(var(--home-ripple-side-width) + var(--home-ripple-side-overlap));
-    overflow: hidden;
-  }
+    body.is-home .home-ripple-stage .home-ripple-canvas {
+      width: 100vw;
+      min-width: 100vw;
+      max-width: none;
+      height: 100vh;
+      aspect-ratio: auto;
+    }
 
-  .home-ripple-bleed-side::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background-image: var(--home-ripple-back-image);
-    background-repeat: no-repeat;
-    background-size: calc(max(var(--home-ripple-core-width), 1px) * var(--home-ripple-bleed-zoom)) 100%;
-    filter:
-      blur(var(--home-ripple-bleed-blur))
-      saturate(var(--home-ripple-bleed-saturate))
-      contrast(var(--home-ripple-bleed-contrast))
-      brightness(var(--home-ripple-bleed-brightness));
-    opacity: var(--home-ripple-bleed-opacity);
-    transform: scale(var(--home-ripple-bleed-scale));
-  }
-
-  .home-ripple-bleed-side-left {
-    right: calc(50% + (var(--home-ripple-core-width) / 2) - var(--home-ripple-side-overlap));
-  }
-
-  .home-ripple-bleed-side-left::before {
-    background-position: left center;
-    transform-origin: right center;
-  }
-
-  .home-ripple-bleed-side-right {
-    left: calc(50% + (var(--home-ripple-core-width) / 2) - var(--home-ripple-side-overlap));
-  }
-
-  .home-ripple-bleed-side-right::before {
-    background-position: right center;
-    transform-origin: left center;
-  }
-
-  .home-ripple-image {
-    position: relative;
-    display: block;
-    width: 100%;
-    max-width: 100%;
-    line-height: 0;
-    overflow: hidden;
-    z-index: 1;
-  }
-
-  .home-ripple-image .home-ripple-water {
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: contain;
-  }
-
-  .home-ripple-image .home-ripple-front {
-    position: relative;
-    z-index: 2;
-    display: block;
-    width: 100%;
-    height: auto;
-    pointer-events: none;
-  }
-
-  @media (min-width: 640px) {
-    .home-ripple-bleed {
-      display: block;
+    body.is-home .home-ripple-stage .home-ripple-grid {
+      inset: 0;
+      row-gap: 12px;
+      column-gap: 12px;
     }
   }
 
-  @media (max-width: 639px) {
+  .home-ripple-canvas {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    aspect-ratio: 16 / 9;
+    background: transparent;
+    overflow: hidden;
+    z-index: 1;
+  }
+
+  .home-ripple-gapfill,
+  .home-ripple-flow {
+    position: absolute;
+    inset: 0;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100% 100%;
+    pointer-events: none;
+  }
+
+  .home-ripple-gapfill {
+    z-index: 2;
+    filter: blur(12px) saturate(125%) contrast(108%) brightness(0.72);
+    -webkit-filter: blur(12px) saturate(125%) contrast(108%) brightness(0.72);
+    transform: scale(1.02);
+    transform-origin: center center;
+    opacity: 0.97;
+  }
+
+  .home-ripple-flow {
+    z-index: 1;
+  }
+
+  .home-ripple-mobile {
+    display: none;
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    background: #0f1720;
+  }
+
+  .home-ripple-mobile-front {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  .home-ripple-canvas::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background:
+      linear-gradient(115deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 52%, rgba(255, 255, 255, 0.025) 100%),
+      radial-gradient(95% 78% at 50% 50%, rgba(255, 255, 255, 0.018) 0%, rgba(255, 255, 255, 0.008) 72%, rgba(0, 0, 0, 0.004) 100%);
+    backdrop-filter: blur(3px) saturate(100%);
+    -webkit-backdrop-filter: blur(3px) saturate(100%);
+    opacity: 0.06;
+    pointer-events: none;
+  }
+
+  .home-ripple-grid {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-rows: repeat(3, minmax(0, 1fr));
+    row-gap: clamp(10px, 1.2vw, 16px);
+    column-gap: clamp(12px, 1.5vw, 20px);
+    padding: 0;
+    background: transparent;
+    box-sizing: border-box;
+    z-index: 3;
+  }
+
+  .home-ripple-tile {
+    position: relative;
+    overflow: hidden;
+    background: transparent;
+  }
+
+  .home-ripple-water {
+    position: absolute;
+    inset: 0;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+  }
+
+  .home-ripple-canvas.has-shared-ripple .home-ripple-grid .home-ripple-water {
+    opacity: 0;
+  }
+
+  .home-ripple-front {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  .home-ripple-tile[data-tile-index="1"]::before,
+  .home-ripple-tile[data-tile-index="8"]::before,
+  .home-ripple-tile[data-tile-index="11"]::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 3;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+
+  .home-ripple-tile[data-tile-index="1"]::before {
+    -webkit-mask-image: radial-gradient(145% 145% at 0% 0%, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.9) 34%, rgba(0, 0, 0, 0.55) 64%, rgba(0, 0, 0, 0.08) 86%, rgba(0, 0, 0, 0) 100%);
+    mask-image: radial-gradient(145% 145% at 0% 0%, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.9) 34%, rgba(0, 0, 0, 0.55) 64%, rgba(0, 0, 0, 0.08) 86%, rgba(0, 0, 0, 0) 100%);
+  }
+
+  .home-ripple-tile[data-tile-index="8"]::before {
+    -webkit-mask-image: linear-gradient(to left, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.88) 30%, rgba(0, 0, 0, 0.5) 62%, rgba(0, 0, 0, 0.06) 86%, rgba(0, 0, 0, 0) 100%);
+    mask-image: linear-gradient(to left, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.88) 30%, rgba(0, 0, 0, 0.5) 62%, rgba(0, 0, 0, 0.06) 86%, rgba(0, 0, 0, 0) 100%);
+  }
+
+  .home-ripple-tile[data-tile-index="11"]::before {
+    -webkit-mask-image: linear-gradient(to top, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.9) 30%, rgba(0, 0, 0, 0.5) 60%, rgba(0, 0, 0, 0.06) 86%, rgba(0, 0, 0, 0) 100%);
+    mask-image: linear-gradient(to top, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.9) 30%, rgba(0, 0, 0, 0.5) 60%, rgba(0, 0, 0, 0.06) 86%, rgba(0, 0, 0, 0) 100%);
+  }
+
+  @media (max-width: 1179px) {
     body.is-home #content > section > .home-ripple-stage:first-child {
       margin-top: 0;
     }
 
-    .home-ripple-stage {
-      --home-ripple-side-overlap: 0px;
+    .home-ripple-canvas {
+      display: none;
+    }
+
+    .home-ripple-mobile {
+      display: block;
+    }
+
+    .home-ripple-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      grid-template-rows: repeat(3, minmax(0, 1fr));
+      row-gap: 8px;
+      column-gap: 10px;
     }
   }
 </style>
 
 <script>
   document.addEventListener("DOMContentLoaded", function () {
+    const NARROW_MAX_WIDTH = 1179;
+    const isNarrowViewport = function () {
+      return !!(window.matchMedia && window.matchMedia("(max-width: " + NARROW_MAX_WIDTH + "px)").matches);
+    };
+
     const hasRipples = !!(window.jQuery && window.jQuery.fn && window.jQuery.fn.ripples);
-    const blocks = document.querySelectorAll(".home-ripple-image");
-    blocks.forEach(function (block) {
-      if (block.dataset.rippleInit === "1") return;
-      block.dataset.rippleInit = "1";
-      const stage = block.closest(".home-ripple-stage");
-      const water = block.querySelector(".home-ripple-water");
-      const front = block.querySelector(".home-ripple-front");
-      const src = block.getAttribute("data-back-src");
-      if (!water || !src) return;
+    const waters = document.querySelectorAll(".home-ripple-water[data-ripple-src]");
+    waters.forEach(function (water) {
+      if (water.dataset.rippleInit === "1") return;
+      water.dataset.rippleInit = "1";
 
-      const syncBleedMetrics = function () {
-        if (!stage) return;
-        const rect = block.getBoundingClientRect();
-        const sideWidth = Math.max(0, ((window.innerWidth || document.documentElement.clientWidth || 0) - rect.width) / 2);
-        stage.style.setProperty("--home-ripple-core-width", Math.max(0, rect.width) + "px");
-        stage.style.setProperty("--home-ripple-side-width", sideWidth + "px");
-      };
-
-      syncBleedMetrics();
-      window.addEventListener("resize", syncBleedMetrics, { passive: true });
-      if (front && !front.complete) {
-        front.addEventListener("load", syncBleedMetrics, { once: true });
-      }
-
+      const src = water.getAttribute("data-ripple-src");
+      if (!src) return;
       water.style.backgroundImage = "url('" + src + "')";
-      if (!hasRipples) return;
-      const $water = window.jQuery(water);
+    });
 
+    const initMobileRipple = function (water, host) {
+      if (!hasRipples || !water || !host) return;
+      const src = water.getAttribute("data-ripple-src");
+      if (!src) return;
+      const $water = window.jQuery(water);
+      const mobileFoot = { x: 0.31, y: 0.48 };
       try {
         $water.ripples({
           imageUrl: src,
@@ -181,54 +321,302 @@
           interactive: false,
           crossOrigin: ""
         });
-        const rect = block.getBoundingClientRect();
-        if (rect.width > 0 && rect.height > 0) {
-          $water.ripples("drop", rect.width * 0.5, rect.height * 0.55, 22, 0.1);
-        }
       } catch (_) {
         return;
+      }
+
+      const rect = host.getBoundingClientRect();
+      if (rect.width > 0 && rect.height > 0) {
+        try {
+          $water.ripples("drop", rect.width * mobileFoot.x, rect.height * mobileFoot.y, 22, 0.1);
+        } catch (_) {}
       }
 
       let lastMoveAt = 0;
       const dropAtPointer = function (event, radius, strength) {
         if (!$water.data("ripples")) return;
-        const rect = block.getBoundingClientRect();
-        if (rect.width <= 0 || rect.height <= 0) return;
-        const x = event.clientX - rect.left;
-        const y = event.clientY - rect.top;
-        if (x < 0 || y < 0 || x > rect.width || y > rect.height) return;
+        const hostRect = host.getBoundingClientRect();
+        if (hostRect.width <= 0 || hostRect.height <= 0) return;
+        const x = event.clientX - hostRect.left;
+        const y = event.clientY - hostRect.top;
+        if (x < 0 || y < 0 || x > hostRect.width || y > hostRect.height) return;
         try {
           $water.ripples("drop", x, y, radius, strength);
         } catch (_) {}
       };
 
-      block.addEventListener("pointermove", function (event) {
+      host.addEventListener("pointermove", function (event) {
         const now = Date.now();
         if (now - lastMoveAt < 45) return;
         lastMoveAt = now;
         dropAtPointer(event, 12, 0.03);
       }, { passive: true });
 
-      block.addEventListener("pointerdown", function (event) {
+      host.addEventListener("pointerdown", function (event) {
         if (event.button !== 0) return;
         dropAtPointer(event, 22, 0.12);
       }, { passive: true });
+    };
 
-    });
+    const mobileWater = document.querySelector(".home-ripple-mobile-water[data-ripple-src]");
+    const mobileHost = document.querySelector(".home-ripple-mobile");
+    if (mobileWater && mobileHost && isNarrowViewport()) {
+      initMobileRipple(mobileWater, mobileHost);
+    }
+
+    const canvas = document.querySelector(".home-ripple-canvas");
+    const gapfill = canvas ? canvas.querySelector(".home-ripple-gapfill") : null;
+    const flow = canvas ? canvas.querySelector(".home-ripple-flow") : null;
+    const grid = canvas ? canvas.querySelector(".home-ripple-grid") : null;
+    const tileWaters = grid ? Array.from(grid.querySelectorAll(".home-ripple-water[data-ripple-src]")) : [];
+    const tileHosts = grid ? Array.from(grid.querySelectorAll(".home-ripple-tile")) : [];
+    if (!canvas || !gapfill || !flow || !grid || tileWaters.length === 0 || tileHosts.length === 0) return;
+
+    const drawCover = function (ctx, img, x, y, w, h) {
+      if (!img || w <= 0 || h <= 0) return;
+      const iw = img.naturalWidth || img.width || 0;
+      const ih = img.naturalHeight || img.height || 0;
+      if (iw <= 0 || ih <= 0) return;
+      const scale = Math.max(w / iw, h / ih);
+      const sw = w / scale;
+      const sh = h / scale;
+      const sx = (iw - sw) * 0.5;
+      const sy = (ih - sh) * 0.5;
+      ctx.drawImage(img, sx, sy, sw, sh, x, y, w, h);
+    };
+
+    const loadImage = function (src) {
+      return new Promise(function (resolve) {
+        const img = new Image();
+        img.decoding = "async";
+        img.onload = function () { resolve(img); };
+        img.onerror = function () { resolve(null); };
+        img.src = src;
+      });
+    };
+
+    let renderToken = 0;
+    const buildSharedLayers = function () {
+      const currentToken = ++renderToken;
+      if (isNarrowViewport()) {
+        canvas.classList.remove("has-shared-ripple");
+        return;
+      }
+
+      const canvasRect = canvas.getBoundingClientRect();
+      if (canvasRect.width <= 0 || canvasRect.height <= 0) return;
+      const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+      const outW = Math.max(1, Math.round(canvasRect.width * dpr));
+      const outH = Math.max(1, Math.round(canvasRect.height * dpr));
+      const scaleX = outW / Math.max(1, canvasRect.width);
+      const scaleY = outH / Math.max(1, canvasRect.height);
+
+      const rects = tileHosts.map(function (tile) {
+        const r = tile.getBoundingClientRect();
+        return {
+          x: (r.left - canvasRect.left) * scaleX,
+          y: (r.top - canvasRect.top) * scaleY,
+          w: r.width * scaleX,
+          h: r.height * scaleY
+        };
+      });
+      if (rects.length !== tileWaters.length) return;
+
+      Promise.all(tileWaters.map(function (water) {
+        return loadImage(water.getAttribute("data-ripple-src") || "");
+      })).then(function (images) {
+        if (currentToken !== renderToken) return;
+        if (images.every(function (img) { return !img; })) return;
+
+        const flowCanvas = document.createElement("canvas");
+        flowCanvas.width = outW;
+        flowCanvas.height = outH;
+        const flowCtx = flowCanvas.getContext("2d");
+        if (!flowCtx) return;
+        flowCtx.clearRect(0, 0, outW, outH);
+        rects.forEach(function (rect, idx) {
+          drawCover(flowCtx, images[idx], rect.x, rect.y, rect.w, rect.h);
+        });
+
+        const gapCanvas = document.createElement("canvas");
+        gapCanvas.width = outW;
+        gapCanvas.height = outH;
+        const gapCtx = gapCanvas.getContext("2d");
+        if (!gapCtx) return;
+        gapCtx.clearRect(0, 0, outW, outH);
+        const cols = 4;
+        const rows = 3;
+        const rectAt = function (row, col) {
+          const idx = row * cols + col;
+          return rects[idx] || null;
+        };
+        const edgeSample = Math.max(6, Math.round(Math.min(outW, outH) * 0.008));
+        const edgeBlendAlpha = 0.28;
+
+        for (let row = 0; row < rows; row += 1) {
+          for (let col = 0; col < cols - 1; col += 1) {
+            const left = rectAt(row, col);
+            const right = rectAt(row, col + 1);
+            if (!left || !right) continue;
+            const gx = left.x + left.w;
+            const gw = right.x - gx;
+            const gy = Math.max(left.y, right.y);
+            const gh = Math.min(left.y + left.h, right.y + right.h) - gy;
+            if (gw <= 1 || gh <= 1) continue;
+
+            const sxLeft = Math.max(0, Math.round(gx - edgeSample));
+            const swLeft = Math.max(1, Math.min(edgeSample, outW - sxLeft));
+            const sxRight = Math.max(0, Math.round(right.x));
+            const swRight = Math.max(1, Math.min(edgeSample, outW - sxRight));
+            const y = Math.round(gy);
+            const h = Math.max(1, Math.round(gh));
+            const x = Math.round(gx);
+            const w = Math.max(1, Math.round(gw));
+            const leftBandW = Math.max(1, Math.ceil(w * 0.5));
+            const rightBandW = Math.max(1, w - leftBandW);
+
+            // Core fill: extend the immediate edge pixels into the gap.
+            const leftEdgeX = Math.max(0, Math.round(gx) - 1);
+            const rightEdgeX = Math.max(0, Math.round(right.x));
+            gapCtx.globalAlpha = 1;
+            gapCtx.drawImage(flowCanvas, leftEdgeX, y, 1, h, x, y, leftBandW, h);
+            gapCtx.drawImage(flowCanvas, rightEdgeX, y, 1, h, x + leftBandW, y, rightBandW, h);
+
+            // Soft texture: blend a thin edge strip so it doesn't look too flat.
+            gapCtx.globalAlpha = edgeBlendAlpha;
+            gapCtx.drawImage(flowCanvas, sxLeft, y, swLeft, h, x, y, leftBandW, h);
+            gapCtx.drawImage(flowCanvas, sxRight, y, swRight, h, x + leftBandW, y, rightBandW, h);
+            gapCtx.globalAlpha = 1;
+          }
+        }
+
+        for (let row = 0; row < rows - 1; row += 1) {
+          for (let col = 0; col < cols; col += 1) {
+            const top = rectAt(row, col);
+            const bottom = rectAt(row + 1, col);
+            if (!top || !bottom) continue;
+            const gy = top.y + top.h;
+            const gh = bottom.y - gy;
+            const gx = Math.max(top.x, bottom.x);
+            const gw = Math.min(top.x + top.w, bottom.x + bottom.w) - gx;
+            if (gw <= 1 || gh <= 1) continue;
+
+            const syTop = Math.max(0, Math.round(gy - edgeSample));
+            const shTop = Math.max(1, Math.min(edgeSample, outH - syTop));
+            const syBottom = Math.max(0, Math.round(bottom.y));
+            const shBottom = Math.max(1, Math.min(edgeSample, outH - syBottom));
+            const x = Math.round(gx);
+            const w = Math.max(1, Math.round(gw));
+            const y = Math.round(gy);
+            const h = Math.max(1, Math.round(gh));
+            const topBandH = Math.max(1, Math.ceil(h * 0.5));
+            const bottomBandH = Math.max(1, h - topBandH);
+
+            // Core fill: extend the immediate edge pixels into the gap.
+            const topEdgeY = Math.max(0, Math.round(gy) - 1);
+            const bottomEdgeY = Math.max(0, Math.round(bottom.y));
+            gapCtx.globalAlpha = 1;
+            gapCtx.drawImage(flowCanvas, x, topEdgeY, w, 1, x, y, w, topBandH);
+            gapCtx.drawImage(flowCanvas, x, bottomEdgeY, w, 1, x, y + topBandH, w, bottomBandH);
+
+            // Soft texture: blend a thin edge strip so it doesn't look too flat.
+            gapCtx.globalAlpha = edgeBlendAlpha;
+            gapCtx.drawImage(flowCanvas, x, syTop, w, shTop, x, y, w, topBandH);
+            gapCtx.drawImage(flowCanvas, x, syBottom, w, shBottom, x, y + topBandH, w, bottomBandH);
+            gapCtx.globalAlpha = 1;
+          }
+        }
+        gapCtx.globalAlpha = 1;
+
+        const flowSrc = flowCanvas.toDataURL("image/png");
+        const gapSrc = gapCanvas.toDataURL("image/png");
+        flow.style.backgroundImage = "url('" + flowSrc + "')";
+        gapfill.style.backgroundImage = "url('" + gapSrc + "')";
+        canvas.classList.add("has-shared-ripple");
+
+        if (!hasRipples) return;
+        const $flow = window.jQuery(flow);
+        try {
+          if ($flow.data("ripples")) {
+            $flow.ripples("destroy");
+          }
+        } catch (_) {}
+        try {
+          $flow.ripples({
+            imageUrl: flowSrc,
+            resolution: 256,
+            dropRadius: 18,
+            perturbance: 0.04,
+            interactive: false,
+            crossOrigin: ""
+          });
+        } catch (_) {
+          return;
+        }
+
+        const liveRect = canvas.getBoundingClientRect();
+        if (liveRect.width > 0 && liveRect.height > 0) {
+          let seedX = liveRect.width * 0.5;
+          let seedY = liveRect.height * 0.55;
+          const pigeonTile = tileHosts[5];
+          if (pigeonTile) {
+            const pigeonRect = pigeonTile.getBoundingClientRect();
+            if (pigeonRect.width > 0 && pigeonRect.height > 0) {
+              seedX = (pigeonRect.left - liveRect.left) + (pigeonRect.width * 0.49);
+              seedY = (pigeonRect.top - liveRect.top) + (pigeonRect.height * 0.63);
+            }
+          }
+          try {
+            $flow.ripples("drop", seedX, seedY, 18, 0.1);
+          } catch (_) {}
+        }
+      });
+    };
+
+    let flowLastMoveAt = 0;
+    const dropOnSharedFlow = function (event, radius, strength) {
+      if (!hasRipples) return;
+      const $flow = window.jQuery(flow);
+      if (!$flow.data("ripples")) return;
+      const rect = canvas.getBoundingClientRect();
+      if (rect.width <= 0 || rect.height <= 0) return;
+      const x = event.clientX - rect.left;
+      const y = event.clientY - rect.top;
+      if (x < 0 || y < 0 || x > rect.width || y > rect.height) return;
+      try {
+        $flow.ripples("drop", x, y, radius, strength);
+      } catch (_) {}
+    };
+
+    if (canvas.dataset.sharedRippleBind !== "1") {
+      canvas.dataset.sharedRippleBind = "1";
+      canvas.addEventListener("pointermove", function (event) {
+        const now = Date.now();
+        if (now - flowLastMoveAt < 45) return;
+        flowLastMoveAt = now;
+        dropOnSharedFlow(event, 10, 0.03);
+      }, { passive: true });
+      canvas.addEventListener("pointerdown", function (event) {
+        if (event.button !== 0) return;
+        dropOnSharedFlow(event, 18, 0.12);
+      }, { passive: true });
+    }
+
+    buildSharedLayers();
+    let resizeTimer = 0;
+    window.addEventListener("resize", function () {
+      window.clearTimeout(resizeTimer);
+      resizeTimer = window.setTimeout(buildSharedLayers, 140);
+    }, { passive: true });
   });
 </script>
 {{ else }}
 <figure class="mb-5">
-  {{ if $front }}
-  <img
-    src="{{ $front.RelPermalink }}"
-    alt="{{ $alt }}"
-    width="{{ $front.Width }}"
-    height="{{ $front.Height }}"
-    loading="lazy"
-  />
-  {{ else }}
-  <p>Image not found.</p>
-  {{ end }}
+  <p>Image not found. Missing assets:</p>
+  <ul>
+    {{ range $missing }}
+    <li>{{ . }}</li>
+    {{ end }}
+  </ul>
 </figure>
 {{ end }}

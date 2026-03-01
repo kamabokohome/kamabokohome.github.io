@@ -530,6 +530,21 @@ video {
     min-height: 100dvh;
 }
 
+  html,
+  body,
+  #content {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+         user-select: none;
+  }
+
+  input,
+  textarea {
+    -webkit-user-select: text;
+    -moz-user-select: text;
+         user-select: text;
+  }
+
   /* 优先由浏览器优化断行，减少孤行/寡行 */
   #content p,
   #content li,
@@ -695,7 +710,7 @@ video {
   }
 
   /* 移动端避免星空背景被整体缩小导致“压扁/变小”观感 */
-  @media (max-width: 768px) {
+  @media (max-width: 1179px) {
     :root {
       --light-grad-stop-2: 90px;
       --light-grad-stop-3: 190px;
@@ -1777,7 +1792,7 @@ html.dark #content .single-jump-link.is-current {
   background: rgba(123, 135, 152, 0.34);
 }
 
-@media (max-width: 680px) {
+@media (max-width: 1179px) {
   #content .single-jump-panel {
     width: min(92vw, 344px);
     max-height: 16rem;
@@ -2099,7 +2114,7 @@ textarea {
   cursor: text;
 }
 
-@media (max-width: 680px) {
+@media (max-width: 1179px) {
   #content .corner-entry-body {
     padding-left: var(--corner-entry-text-start);
     padding-right: 0.15rem;
@@ -2399,7 +2414,7 @@ html.dark #content .collection-layout-btn.is-active {
   border-radius: 0.56rem;
 }
 
-@media (max-width: 680px) {
+@media (max-width: 1179px) {
   #content .collection-layout-switch {
     gap: 0.28rem;
     margin-top: 0.26rem;
@@ -2543,6 +2558,18 @@ html.dark #content .collection-auto-link {
   font-size: 1.4rem;
   line-height: 1;
   cursor: pointer;
+}
+
+@media (max-width: 1179px) {
+  #content .collection-lightbox {
+    padding-left: max(6px, env(safe-area-inset-left, 0px));
+    padding-right: max(6px, env(safe-area-inset-right, 0px));
+  }
+
+  #content .collection-lightbox-image {
+    max-width: min(1200px, calc(100vw - 132px));
+    max-height: 84vh;
+  }
 }
 
 #content .section-list-default {
