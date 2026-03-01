@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-US" class="scroll-smooth dark page-corner">
-  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="UTF-8" />
+  <head><meta charset="UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#e6f2fb" />
@@ -20,7 +20,7 @@
 另外，每天都有一个可控的、长期积累的、稳步加深印象的东西，其实是一件很疗愈的事情。每天都做点什么，来体会日积月累学习的效果吧。
 （我也觉得自己要是能积累更多的东西就好了，目前还只有背日语单词这一件事有在坚持）"
 />
-<link rel="canonical" href="http://localhost:1313/corner/2026-01-23-%E6%97%A5%E7%A7%AF%E6%9C%88%E7%B4%AF%E5%AD%A6%E4%B9%A0%E6%B3%95/" />
+<link rel="canonical" href="https://kamabokohome.com/corner/2026-01-23-%E6%97%A5%E7%A7%AF%E6%9C%88%E7%B4%AF%E5%AD%A6%E4%B9%A0%E6%B3%95/" />
 <meta name="robots" content="index,follow" />
 
 <link rel="icon" href="/img/favicon.ico" />
@@ -32,7 +32,7 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <script type="text/x-mathjax-config">MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });</script>
 
-<link rel="stylesheet" href="/css/app.css" /><style>
+<link rel="stylesheet" href="/css/app.min.ba9c5f60913ce71a0de65734072f9ab14e738f0b9aeee3d51b068d85ef2a3969.css" integrity="sha256-upxfYJE85xoN5lc0By+asU5zjwua7uPVGwaNhe8qOWk=" /><style>
       html {
         scrollbar-gutter: stable;
         --site-content-max-width: 50rem;
@@ -867,25 +867,26 @@
         }
 
         .site-search-modal {
-          padding: 0;
+          padding: calc(var(--site-sticky-bar-height, 0px) + 0.2rem) 0.62rem 0.62rem;
           align-items: flex-start;
-          justify-content: stretch;
+          justify-content: center;
         }
 
         .site-search-dialog {
           width: 100%;
-          max-height: calc(100vh - var(--site-sticky-bar-height, 0px));
-          margin-top: var(--site-sticky-bar-height, 0px);
-          border-radius: 0;
-          background: transparent;
-          backdrop-filter: none;
-          -webkit-backdrop-filter: none;
-          box-shadow: none;
+          max-height: calc(100vh - var(--site-sticky-bar-height, 0px) - 0.82rem);
+          margin-top: 0;
+          border-radius: 0.62rem;
+          background-color: rgba(249, 245, 236, 0.86);
+          backdrop-filter: blur(11px);
+          -webkit-backdrop-filter: blur(11px);
+          box-shadow: 0 5px 14px rgba(0, 0, 0, 0.1);
           border: none;
         }
 
-        .site-search-backdrop {
-          display: none;
+        html.dark .site-search-dialog {
+          background-color: rgba(47, 47, 47, 0.72);
+          box-shadow: 0 5px 14px rgba(0, 0, 0, 0.3);
         }
 
         .site-search-close {
