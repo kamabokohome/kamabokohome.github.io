@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-US" class="scroll-smooth dark page-corner">
-  <head><meta charset="UTF-8" />
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#e6f2fb" />
@@ -19,7 +19,7 @@
 ——《和路边的野鸟做朋友》
 "
 />
-<link rel="canonical" href="https://kamabokohome.com/corner/" />
+<link rel="canonical" href="http://localhost:1313/corner/" />
 <meta name="robots" content="index,follow" />
 
 <link rel="icon" href="/img/favicon.ico" />
@@ -31,7 +31,7 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <script type="text/x-mathjax-config">MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });</script>
 
-<link rel="stylesheet" href="/css/app.min.ba9c5f60913ce71a0de65734072f9ab14e738f0b9aeee3d51b068d85ef2a3969.css" integrity="sha256-upxfYJE85xoN5lc0By+asU5zjwua7uPVGwaNhe8qOWk=" /><style>
+<link rel="stylesheet" href="/css/app.css" /><style>
       html {
         scrollbar-gutter: stable;
         --site-content-max-width: 50rem;
@@ -485,9 +485,30 @@
         color: rgb(55 65 81 / 1);
       }
 
+      .site-search-result-preview {
+        display: block;
+        margin-top: 0.16rem;
+        font-size: 0.72rem;
+        line-height: 1.46;
+        font-weight: 500;
+        color: rgb(107 114 128 / 1);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .site-search-result-title strong,
+      .site-search-result-preview strong {
+        font-weight: 800;
+        color: rgb(31 41 55 / 1);
+        background: rgba(250, 204, 21, 0.52);
+        border-radius: 0.16rem;
+        padding: 0 0.12rem;
+      }
+
       .site-search-result-meta {
         display: block;
-        margin-top: 0.1rem;
+        margin-top: 0.14rem;
         font-size: 0.68rem;
         line-height: 1.35;
         font-weight: 600;
@@ -506,6 +527,16 @@
 
       html.dark .site-search-result-title {
         color: rgb(229 231 235 / 1);
+      }
+
+      html.dark .site-search-result-preview {
+        color: rgb(156 163 175 / 1);
+      }
+
+      html.dark .site-search-result-title strong,
+      html.dark .site-search-result-preview strong {
+        color: rgb(243 244 246 / 1);
+        background: rgba(250, 204, 21, 0.4);
       }
 
       @media (max-width: 639px) {
@@ -1600,7 +1631,6 @@
   <div class="site-search-modal" id="site-search-modal" data-index-url="/index.json" hidden>
     <div class="site-search-backdrop" data-site-search-close></div>
     <section class="site-search-dialog" role="dialog" aria-modal="true" aria-label="Site search">
-      <button type="button" class="site-search-close" data-site-search-close aria-label="关闭搜索">✕</button>
       <div class="site-search-input-wrap">
         <input id="site-search-input" class="site-search-input" type="search" placeholder="在意的关键词是……" autocomplete="off">
       </div>
@@ -1671,13 +1701,110 @@
     
   
     
+      
+      
+        
+      
+    
+  
+    
   
   
-  <section class="corner-entry-list" aria-label="Corner entries">
+  
+  
+    
+      
+        
+      
+    
+  
+    
+      
+        
+      
+    
+  
+    
+      
+        
+      
+    
+  
+    
+      
+        
+      
+    
+  
+    
+      
+        
+      
+    
+  
+    
+      
+        
+      
+    
+  
+  
+  
+    <section class="collection-layout-switch corner-tag-switch" role="group" aria-label="Corner tag filter">
+      <button type="button" class="collection-layout-btn is-active" data-corner-tag="all">All</button>
+      
+        <button type="button" class="collection-layout-btn" data-corner-tag="%E5%A5%BD%E5%90%83%E7%9A%84">好吃的</button>
+      
+        <button type="button" class="collection-layout-btn" data-corner-tag="%E5%A5%BD%E7%8E%A9%E7%9A%84">好玩的</button>
+      
+        <button type="button" class="collection-layout-btn" data-corner-tag="%E6%97%A5%E5%B8%B8%E7%9A%84">日常的</button>
+      
+        <button type="button" class="collection-layout-btn" data-corner-tag="%E6%9C%89%E8%B6%A3%E7%9A%84">有趣的</button>
+      
+    </section>
+  
+  <section class="corner-entry-list" id="corner-entry-list" aria-label="Corner entries">
     
       
       
-      <details class="corner-entry-item" id="corner-entry-9ed8c8bfc4b7d6e79794a15bdc2b1e8d" data-corner-entry>
+      
+      
+        
+          
+        
+      
+      <details class="corner-entry-item" id="corner-entry-3426e6fc6830a4cfcab4691a56d0bc0a" data-corner-entry data-corner-tags="%E6%9C%89%E8%B6%A3%E7%9A%84">
+        <summary class="corner-entry-summary">
+          <span class="corner-entry-title">好味小姐</span>
+          
+            <time class="corner-entry-date" datetime="2026-03-01T10:00:00&#43;01:00">2026-03-01</time>
+          
+        </summary>
+        <div class="corner-entry-body">
+          <p><strong>好味小姐</strong>是非常有名的台湾 YouTube 频道！或许有很多人都知道吧。在好味大家庭，有两对夫妻（其中三人是研究所时代的好朋友！）、很多只猫猫狗狗，还有三个可爱的女儿们。感觉好味一家都是真心很温暖的人，所以不管是 YouTube 还是播客，都能带给人朋友般的惬意感觉。也是我少数几个只要有更新就会看的 YouTube 频道哦！</p>
+<p>主频道 <a href="https://www.youtube.com/channel/UCOz7W0VH--2WlqAE_3jtL4w">好味小姐 Lady Flavor</a> 主要是和猫猫狗狗（偶尔也有小孩）有关的十分钟内的日常影片。无论是猫猫狗狗还是小孩，因为有温暖的家庭，都给人很温柔很健康（？）的感觉。</p>
+<p>副频道 <a href="https://www.youtube.com/@ladyflavor_brain">好味小姐腦波弱</a> 则是以更长的影片为主！我的理解是“开箱视频，以及更长的生活记录”，一般会有二十分钟以上甚至更久，比如印象超级深刻的 <a href="https://youtu.be/HqYbSVOo4VY?si=eB2PyX-d5TP-ljTv">给院子里的鸡盖一栋豪宅</a> 回。工业设计出身的好味家动手能力超强，做饭就更不在话下了。</p>
+<p>另外还有坚持了好多年、周更一小时左右的播客 <a href="https://open.spotify.com/show/1UMD24QF04ivrjyzJhZisE">好味小姐開束縛我還你原形</a>，是我的做饭时间好伙伴！好味家的三人会轻松聊聊近期日常和各种想法，经常出现轻松又好笑的对话，也会突然冒出有些深刻的哲思。作为遥远的听众，竟然能从播客得到好朋友的陪伴感，这就是好味家的魔力吧！&gt; &lt;</p>
+
+          
+            <div class="corner-entry-tags" aria-label="Entry tags">
+              
+                <button type="button" class="collection-layout-btn corner-entry-tag" data-corner-entry-tag="%E6%9C%89%E8%B6%A3%E7%9A%84">有趣的</button>
+              
+            </div>
+          
+        </div>
+      </details>
+    
+      
+      
+      
+      
+        
+          
+        
+      
+      <details class="corner-entry-item" id="corner-entry-9ed8c8bfc4b7d6e79794a15bdc2b1e8d" data-corner-entry data-corner-tags="%E6%97%A5%E5%B8%B8%E7%9A%84">
         <summary class="corner-entry-summary">
           <span class="corner-entry-title">日积月累学习法</span>
           
@@ -1691,12 +1818,25 @@
 <p>另外，每天都有一个可控的、长期积累的、稳步加深印象的东西，其实是一件很疗愈的事情。每天都做点什么，来体会日积月累学习的效果吧。</p>
 <p>（我也觉得自己要是能积累更多的东西就好了，目前还只有背日语单词这一件事有在坚持）</p>
 
+          
+            <div class="corner-entry-tags" aria-label="Entry tags">
+              
+                <button type="button" class="collection-layout-btn corner-entry-tag" data-corner-entry-tag="%E6%97%A5%E5%B8%B8%E7%9A%84">日常的</button>
+              
+            </div>
+          
         </div>
       </details>
     
       
       
-      <details class="corner-entry-item" id="corner-entry-83313dc034b3b733ad19a65c3e6cebd6" data-corner-entry>
+      
+      
+        
+          
+        
+      
+      <details class="corner-entry-item" id="corner-entry-83313dc034b3b733ad19a65c3e6cebd6" data-corner-entry data-corner-tags="%E6%9C%89%E8%B6%A3%E7%9A%84">
         <summary class="corner-entry-summary">
           <span class="corner-entry-title">カナヘイの小動物</span>
           
@@ -1711,12 +1851,25 @@
 <p>现在的电脑壁纸依旧是小动物们。书桌上有一只 nene 猫的小玩偶，办公室的电脑桌上有一块粉红兔兔和 P 助的小立牌。大家都好可爱。</p>
 <img src="/img/neneneko.png" style="max-width: 100px; margin-top: 0rem;">
 
+          
+            <div class="corner-entry-tags" aria-label="Entry tags">
+              
+                <button type="button" class="collection-layout-btn corner-entry-tag" data-corner-entry-tag="%E6%9C%89%E8%B6%A3%E7%9A%84">有趣的</button>
+              
+            </div>
+          
         </div>
       </details>
     
       
       
-      <details class="corner-entry-item" id="corner-entry-9a03398b49c4a0cd887872ad86037aeb" data-corner-entry>
+      
+      
+        
+          
+        
+      
+      <details class="corner-entry-item" id="corner-entry-9a03398b49c4a0cd887872ad86037aeb" data-corner-entry data-corner-tags="%E5%A5%BD%E5%90%83%E7%9A%84">
         <summary class="corner-entry-summary">
           <span class="corner-entry-title">牛油果盖饭</span>
           
@@ -1733,12 +1886,25 @@
 </ol>
 <p>趁机附赠另一个自己意外摸索出的牛油果料理，牛油果鸡蛋沙拉。（后来发现这其实是个挺常见的组合）把牛油果和水煮蛋都切成适当的块状，倒上一点橄榄油，再撒上黑胡椒和盐并搅拌均匀即可。简单又好吃。</p>
 
+          
+            <div class="corner-entry-tags" aria-label="Entry tags">
+              
+                <button type="button" class="collection-layout-btn corner-entry-tag" data-corner-entry-tag="%E5%A5%BD%E5%90%83%E7%9A%84">好吃的</button>
+              
+            </div>
+          
         </div>
       </details>
     
       
       
-      <details class="corner-entry-item" id="corner-entry-bb2e5dbdd78378ef8735105477ec24bb" data-corner-entry>
+      
+      
+        
+          
+        
+      
+      <details class="corner-entry-item" id="corner-entry-bb2e5dbdd78378ef8735105477ec24bb" data-corner-entry data-corner-tags="%E5%A5%BD%E7%8E%A9%E7%9A%84">
         <summary class="corner-entry-summary">
           <span class="corner-entry-title">九井棋</span>
           
@@ -1749,12 +1915,25 @@
           <p>很好玩的 <strong>九井棋（Ultimate tic-tac-toe）</strong>。是前不久学院 retreat 的时候从其他人那里学到的。原本简简单单的井字棋，九个棋盘一起下的时候，规则还是很简单，玩法却丰富了一百倍。想到九井棋的人好厉害。</p>
 <p>网上有不少可以玩九井棋的网页。但我最推荐的是 <a href="https://bejofo.com">这个</a>。棋盘很美观，而且还可以通过链接在线联机。已经和小屁孩打成了平手，并在昏昏欲睡的时候输给了哥哥一次。</p>
 
+          
+            <div class="corner-entry-tags" aria-label="Entry tags">
+              
+                <button type="button" class="collection-layout-btn corner-entry-tag" data-corner-entry-tag="%E5%A5%BD%E7%8E%A9%E7%9A%84">好玩的</button>
+              
+            </div>
+          
         </div>
       </details>
     
       
       
-      <details class="corner-entry-item" id="corner-entry-d943be3cd18c139df41f85b38b4093a5" data-corner-entry>
+      
+      
+        
+          
+        
+      
+      <details class="corner-entry-item" id="corner-entry-d943be3cd18c139df41f85b38b4093a5" data-corner-entry data-corner-tags="%E6%97%A5%E5%B8%B8%E7%9A%84">
         <summary class="corner-entry-summary">
           <span class="corner-entry-title">五年日记</span>
           
@@ -1767,18 +1946,96 @@
 <p>之前的日记本和接下来的新日记本都是 <a href="https://www.leuchtturm1917.com/some-lines-a-day.html">Leuchtturm1917 的 Some Lines A Day</a>。我的上一本是很漂亮的蓝色（北欧蓝？），第二本选了鼠尾草绿。其实也调研过各种其它品牌的五年日记本，但还是最喜欢灯塔家没有横线的设计。字可大可小，还可以涂鸦，用起来比较自由。质量也非常好，大推荐。</p>
 <p>以及就算凑不到整十数也完全可以写五年日记喔，请不要太在意这个问题。</p>
 
+          
+            <div class="corner-entry-tags" aria-label="Entry tags">
+              
+                <button type="button" class="collection-layout-btn corner-entry-tag" data-corner-entry-tag="%E6%97%A5%E5%B8%B8%E7%9A%84">日常的</button>
+              
+            </div>
+          
         </div>
       </details>
     
   </section>
   <script>
     document.addEventListener("DOMContentLoaded", function() {
+      const tagButtons = Array.from(document.querySelectorAll(".corner-tag-switch .collection-layout-btn[data-corner-tag]"));
+      const entryTagButtons = Array.from(document.querySelectorAll(".corner-entry-tag[data-corner-entry-tag]"));
+      const cornerEntries = Array.from(document.querySelectorAll("[data-corner-entry]"));
+      const cornerList = document.getElementById("corner-entry-list");
+      const filterStorageKey = "corner-tag-filter";
+
+      const setActiveTagButton = function(tag) {
+        tagButtons.forEach(function(button) {
+          button.classList.toggle("is-active", (button.getAttribute("data-corner-tag") || "all") === tag);
+        });
+      };
+
+      const applyTagFilter = function(tag) {
+        const activeTag = tag || "all";
+        cornerEntries.forEach(function(entry) {
+          const tags = (entry.getAttribute("data-corner-tags") || "")
+            .split("|")
+            .filter(Boolean);
+          const visible = activeTag === "all" || tags.indexOf(activeTag) >= 0;
+          entry.hidden = !visible;
+          if (!visible) entry.open = false;
+        });
+        setActiveTagButton(activeTag);
+        try {
+          if (activeTag && activeTag !== "all") {
+            window.localStorage.setItem(filterStorageKey, activeTag);
+          } else {
+            window.localStorage.removeItem(filterStorageKey);
+          }
+        } catch (e) {}
+      };
+
+      if (tagButtons.length > 0) {
+        let initialTag = "all";
+        try {
+          const storedTag = window.localStorage.getItem(filterStorageKey);
+          const hasStoredTagButton = tagButtons.some(function(button) {
+            return button.getAttribute("data-corner-tag") === storedTag;
+          });
+          if (storedTag && hasStoredTagButton) {
+            initialTag = storedTag;
+          }
+        } catch (e) {}
+        applyTagFilter(initialTag);
+        tagButtons.forEach(function(button) {
+          button.addEventListener("click", function() {
+            const tag = button.getAttribute("data-corner-tag") || "all";
+            const isActive = button.classList.contains("is-active");
+            if (isActive && tag !== "all") {
+              applyTagFilter("all");
+              return;
+            }
+            applyTagFilter(tag);
+          });
+        });
+      }
+
+      if (entryTagButtons.length > 0) {
+        entryTagButtons.forEach(function(button) {
+          button.addEventListener("click", function() {
+            const tag = button.getAttribute("data-corner-entry-tag") || "all";
+            applyTagFilter(tag);
+            window.requestAnimationFrame(function() {
+              if (!cornerList) return;
+              cornerList.scrollIntoView({ block: "start", behavior: "smooth" });
+            });
+          });
+        });
+      }
+
       const openCornerFromHash = function() {
         if (!window.location.hash) return;
         const rawId = window.location.hash.slice(1);
         if (!rawId) return;
         const entry = document.getElementById(rawId);
         if (!entry || !entry.matches("[data-corner-entry]")) return;
+        if (entry.hidden) applyTagFilter("all");
         entry.open = true;
         window.requestAnimationFrame(function() {
           entry.scrollIntoView({ block: "start", behavior: "smooth" });
@@ -1795,8 +2052,8 @@
 
 
 <div class="flex justify-center" style="margin-top: auto; padding-top: 1rem;">
-  <button type="button" onclick="scrollToTop()" class="pagination-button text-xs font-semibold" style="color: #9CA3AF; text-decoration: none; cursor: pointer; background: none; border: none;">
-    T🍥P
+  <button type="button" onclick="foldCornerEntries()" class="pagination-button text-xs font-semibold" style="color: #9CA3AF; text-decoration: none; cursor: pointer; background: none; border: none;">
+    F🍥LD
   </button>
 </div>
 
@@ -1822,6 +2079,13 @@
 
   function scrollToTop() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function foldCornerEntries() {
+    const entries = document.querySelectorAll('[data-corner-entry]');
+    entries.forEach((entry) => {
+      entry.open = false;
+    });
   }
 
   const messageBoard = document.querySelector('[data-message-board]');
@@ -2662,6 +2926,79 @@
           return loadPromise;
         };
 
+        const escapeRegExp = function(value) {
+          return (value || "").replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+        };
+
+        const splitTerms = function(query) {
+          return normalize(query)
+            .split(/\s+/)
+            .filter(Boolean);
+        };
+
+        const highlightKeywords = function(text, query) {
+          const terms = splitTerms(query);
+          if (!text || terms.length === 0) return escapeHtml(text || "");
+          const pattern = terms.map(escapeRegExp).join("|");
+          if (!pattern) return escapeHtml(text || "");
+          const escaped = escapeHtml(text || "");
+          const regex = new RegExp("(" + pattern + ")", "ig");
+          return escaped.replace(regex, "<strong>$1</strong>");
+        };
+
+        const buildPreview = function(content, query) {
+          const raw = (content || "").toString().replace(/\s+/g, " ").trim();
+          if (!raw) return "";
+          const terms = splitTerms(query);
+          if (terms.length === 0) return raw.slice(0, 80);
+
+          const lowerRaw = raw.toLowerCase();
+          let matchIndex = -1;
+          for (let i = 0; i < terms.length; i += 1) {
+            const idx = lowerRaw.indexOf(terms[i]);
+            if (idx >= 0 && (matchIndex < 0 || idx < matchIndex)) {
+              matchIndex = idx;
+            }
+          }
+          if (matchIndex < 0) return raw.slice(0, 80);
+
+          const punctuationRegex = /[。！？.!?；;]/g;
+          let sentenceStart = 0;
+          let sentenceEnd = raw.length;
+          let match;
+
+          while ((match = punctuationRegex.exec(raw)) !== null) {
+            const pos = match.index;
+            if (pos < matchIndex) {
+              sentenceStart = pos + 1;
+              continue;
+            }
+            sentenceEnd = pos + 1;
+            break;
+          }
+
+          while (
+            sentenceStart < raw.length &&
+            /[\s\u3000"'“”‘’」』】》）)\]]/.test(raw.charAt(sentenceStart))
+          ) {
+            sentenceStart += 1;
+          }
+
+          let preview = raw.slice(sentenceStart, sentenceEnd).trim();
+          const maxLen = 80;
+          if (preview.length > maxLen) {
+            const keywordOffset = matchIndex - sentenceStart;
+            const sliceStart = Math.max(0, keywordOffset - 20);
+            preview = preview.slice(sliceStart, sliceStart + maxLen).trim();
+            preview = preview.replace(/^[，。！？；：、,.!?;:]+/, "");
+            if (sliceStart > 0) preview = "…" + preview;
+            if (sentenceEnd < raw.length || sliceStart + maxLen < raw.slice(sentenceStart, sentenceEnd).length) {
+              preview += "…";
+            }
+          }
+          return preview;
+        };
+
         const renderResults = function(query) {
           const normalizedQuery = normalize(query);
           resultsEl.innerHTML = "";
@@ -2678,6 +3015,7 @@
 
             matches.push({
               title: item.title || "",
+              content: item.content || "",
               section: item.section || "",
               date: item.date || "",
               permalink: item.permalink || "/",
@@ -2692,12 +3030,15 @@
           if (visible.length === 0) return;
 
           const html = visible.map(function(item) {
-            const title = escapeHtml(item.title);
+            const title = highlightKeywords(item.title, normalizedQuery);
+            const preview = highlightKeywords(buildPreview(item.content, normalizedQuery), normalizedQuery);
+            const previewHtml = preview ? '<span class="site-search-result-preview">' + preview + "</span>" : "";
             const meta = escapeHtml([item.section, item.date].filter(Boolean).join(" · "));
             const href = escapeHtml(item.permalink);
             return (
               '<li><a href="' + href + '">' +
                 '<span class="site-search-result-title">' + title + "</span>" +
+                previewHtml +
                 '<span class="site-search-result-meta">' + meta + "</span>" +
               "</a></li>"
             );

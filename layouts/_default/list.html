@@ -80,11 +80,34 @@
     {{ end }}
   {{ end }}
   {{ $cornerPages = sort $cornerPages "Date" "desc" }}
-  <section class="corner-entry-list" aria-label="Corner entries">
+  {{ $cornerTags := slice }}
+  {{ range $cornerPage := $cornerPages }}
+    {{ with $cornerPage.Params.tags }}
+      {{ range . }}
+        {{ $cornerTags = $cornerTags | append (printf "%v" .) }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+  {{ $cornerTags = sort (uniq $cornerTags) }}
+  {{ if gt (len $cornerTags) 0 }}
+    <section class="collection-layout-switch corner-tag-switch" role="group" aria-label="Corner tag filter">
+      <button type="button" class="collection-layout-btn is-active" data-corner-tag="all">All</button>
+      {{ range $tag := $cornerTags }}
+        <button type="button" class="collection-layout-btn" data-corner-tag="{{ $tag | urlize }}">{{ $tag }}</button>
+      {{ end }}
+    </section>
+  {{ end }}
+  <section class="corner-entry-list" id="corner-entry-list" aria-label="Corner entries">
     {{ range $idx, $cornerPage := $cornerPages }}
       {{ $entryKey := md5 $cornerPage.RelPermalink }}
       {{ $entryID := printf "corner-entry-%s" $entryKey }}
-      <details class="corner-entry-item" id="{{ $entryID }}" data-corner-entry>
+      {{ $entryTagSlugs := slice }}
+      {{ with $cornerPage.Params.tags }}
+        {{ range . }}
+          {{ $entryTagSlugs = $entryTagSlugs | append ((printf "%v" .) | urlize) }}
+        {{ end }}
+      {{ end }}
+      <details class="corner-entry-item" id="{{ $entryID }}" data-corner-entry data-corner-tags="{{ delimit $entryTagSlugs "|" }}">
         <summary class="corner-entry-summary">
           <span class="corner-entry-title">{{ $cornerPage.Title }}</span>
           {{ with $cornerPage.Date }}
@@ -93,18 +116,96 @@
         </summary>
         <div class="corner-entry-body">
           {{ $cornerPage.Content }}
+          {{ with $cornerPage.Params.tags }}
+            <div class="corner-entry-tags" aria-label="Entry tags">
+              {{ range . }}
+                <button type="button" class="collection-layout-btn corner-entry-tag" data-corner-entry-tag="{{ (printf "%v" .) | urlize }}">{{ . }}</button>
+              {{ end }}
+            </div>
+          {{ end }}
         </div>
       </details>
     {{ end }}
   </section>
   <script>
     document.addEventListener("DOMContentLoaded", function() {
+      const tagButtons = Array.from(document.querySelectorAll(".corner-tag-switch .collection-layout-btn[data-corner-tag]"));
+      const entryTagButtons = Array.from(document.querySelectorAll(".corner-entry-tag[data-corner-entry-tag]"));
+      const cornerEntries = Array.from(document.querySelectorAll("[data-corner-entry]"));
+      const cornerList = document.getElementById("corner-entry-list");
+      const filterStorageKey = "corner-tag-filter";
+
+      const setActiveTagButton = function(tag) {
+        tagButtons.forEach(function(button) {
+          button.classList.toggle("is-active", (button.getAttribute("data-corner-tag") || "all") === tag);
+        });
+      };
+
+      const applyTagFilter = function(tag) {
+        const activeTag = tag || "all";
+        cornerEntries.forEach(function(entry) {
+          const tags = (entry.getAttribute("data-corner-tags") || "")
+            .split("|")
+            .filter(Boolean);
+          const visible = activeTag === "all" || tags.indexOf(activeTag) >= 0;
+          entry.hidden = !visible;
+          if (!visible) entry.open = false;
+        });
+        setActiveTagButton(activeTag);
+        try {
+          if (activeTag && activeTag !== "all") {
+            window.localStorage.setItem(filterStorageKey, activeTag);
+          } else {
+            window.localStorage.removeItem(filterStorageKey);
+          }
+        } catch (e) {}
+      };
+
+      if (tagButtons.length > 0) {
+        let initialTag = "all";
+        try {
+          const storedTag = window.localStorage.getItem(filterStorageKey);
+          const hasStoredTagButton = tagButtons.some(function(button) {
+            return button.getAttribute("data-corner-tag") === storedTag;
+          });
+          if (storedTag && hasStoredTagButton) {
+            initialTag = storedTag;
+          }
+        } catch (e) {}
+        applyTagFilter(initialTag);
+        tagButtons.forEach(function(button) {
+          button.addEventListener("click", function() {
+            const tag = button.getAttribute("data-corner-tag") || "all";
+            const isActive = button.classList.contains("is-active");
+            if (isActive && tag !== "all") {
+              applyTagFilter("all");
+              return;
+            }
+            applyTagFilter(tag);
+          });
+        });
+      }
+
+      if (entryTagButtons.length > 0) {
+        entryTagButtons.forEach(function(button) {
+          button.addEventListener("click", function() {
+            const tag = button.getAttribute("data-corner-entry-tag") || "all";
+            applyTagFilter(tag);
+            window.requestAnimationFrame(function() {
+              if (!cornerList) return;
+              cornerList.scrollIntoView({ block: "start", behavior: "smooth" });
+            });
+          });
+        });
+      }
+
       const openCornerFromHash = function() {
         if (!window.location.hash) return;
         const rawId = window.location.hash.slice(1);
         if (!rawId) return;
         const entry = document.getElementById(rawId);
         if (!entry || !entry.matches("[data-corner-entry]")) return;
+        if (entry.hidden) applyTagFilter("all");
         entry.open = true;
         window.requestAnimationFrame(function() {
           entry.scrollIntoView({ block: "start", behavior: "smooth" });
@@ -215,8 +316,8 @@
 */}}
 
 <div class="flex justify-center" style="margin-top: auto; padding-top: 1rem;">
-  <button type="button" onclick="scrollToTop()" class="pagination-button text-xs font-semibold" style="color: #9CA3AF; text-decoration: none; cursor: pointer; background: none; border: none;">
-    T🍥P
+  <button type="button" onclick="{{ if and (eq .Section "corner") (eq .Kind "section") }}foldCornerEntries(){{ else }}scrollToTop(){{ end }}" class="pagination-button text-xs font-semibold" style="color: #9CA3AF; text-decoration: none; cursor: pointer; background: none; border: none;">
+    {{ if and (eq .Section "corner") (eq .Kind "section") }}F🍥LD{{ else }}T🍥P{{ end }}
   </button>
 </div>
 
@@ -242,6 +343,13 @@
 
   function scrollToTop() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function foldCornerEntries() {
+    const entries = document.querySelectorAll('[data-corner-entry]');
+    entries.forEach((entry) => {
+      entry.open = false;
+    });
   }
 
   const messageBoard = document.querySelector('[data-message-board]');

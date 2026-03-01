@@ -28,7 +28,7 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <script type="text/x-mathjax-config">MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });</script>
 
-<link rel="stylesheet" href="/css/app.min.ba9c5f60913ce71a0de65734072f9ab14e738f0b9aeee3d51b068d85ef2a3969.css" integrity="sha256-upxfYJE85xoN5lc0By+asU5zjwua7uPVGwaNhe8qOWk=" /><style>
+<link rel="stylesheet" href="/css/app.min.e40b630e77e90ef7f01e509887f24e42748300b86c80976a818d75c7112e1669.css" integrity="sha256-5AtjDnfpDvfwHlCYh/JOQnSDALhsgJdqgY11xxEuFmk=" /><style>
       html {
         scrollbar-gutter: stable;
         --site-content-max-width: 50rem;
@@ -482,9 +482,30 @@
         color: rgb(55 65 81 / 1);
       }
 
+      .site-search-result-preview {
+        display: block;
+        margin-top: 0.16rem;
+        font-size: 0.72rem;
+        line-height: 1.46;
+        font-weight: 500;
+        color: rgb(107 114 128 / 1);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .site-search-result-title strong,
+      .site-search-result-preview strong {
+        font-weight: 800;
+        color: rgb(31 41 55 / 1);
+        background: rgba(250, 204, 21, 0.52);
+        border-radius: 0.16rem;
+        padding: 0 0.12rem;
+      }
+
       .site-search-result-meta {
         display: block;
-        margin-top: 0.1rem;
+        margin-top: 0.14rem;
         font-size: 0.68rem;
         line-height: 1.35;
         font-weight: 600;
@@ -503,6 +524,16 @@
 
       html.dark .site-search-result-title {
         color: rgb(229 231 235 / 1);
+      }
+
+      html.dark .site-search-result-preview {
+        color: rgb(156 163 175 / 1);
+      }
+
+      html.dark .site-search-result-title strong,
+      html.dark .site-search-result-preview strong {
+        color: rgb(243 244 246 / 1);
+        background: rgba(250, 204, 21, 0.4);
       }
 
       @media (max-width: 639px) {
@@ -1597,7 +1628,6 @@
   <div class="site-search-modal" id="site-search-modal" data-index-url="/index.json" hidden>
     <div class="site-search-backdrop" data-site-search-close></div>
     <section class="site-search-dialog" role="dialog" aria-modal="true" aria-label="Site search">
-      <button type="button" class="site-search-close" data-site-search-close aria-label="关闭搜索">✕</button>
       <div class="site-search-input-wrap">
         <input id="site-search-input" class="site-search-input" type="search" placeholder="在意的关键词是……" autocomplete="off">
       </div>
@@ -2338,6 +2368,79 @@
           return loadPromise;
         };
 
+        const escapeRegExp = function(value) {
+          return (value || "").replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+        };
+
+        const splitTerms = function(query) {
+          return normalize(query)
+            .split(/\s+/)
+            .filter(Boolean);
+        };
+
+        const highlightKeywords = function(text, query) {
+          const terms = splitTerms(query);
+          if (!text || terms.length === 0) return escapeHtml(text || "");
+          const pattern = terms.map(escapeRegExp).join("|");
+          if (!pattern) return escapeHtml(text || "");
+          const escaped = escapeHtml(text || "");
+          const regex = new RegExp("(" + pattern + ")", "ig");
+          return escaped.replace(regex, "<strong>$1</strong>");
+        };
+
+        const buildPreview = function(content, query) {
+          const raw = (content || "").toString().replace(/\s+/g, " ").trim();
+          if (!raw) return "";
+          const terms = splitTerms(query);
+          if (terms.length === 0) return raw.slice(0, 80);
+
+          const lowerRaw = raw.toLowerCase();
+          let matchIndex = -1;
+          for (let i = 0; i < terms.length; i += 1) {
+            const idx = lowerRaw.indexOf(terms[i]);
+            if (idx >= 0 && (matchIndex < 0 || idx < matchIndex)) {
+              matchIndex = idx;
+            }
+          }
+          if (matchIndex < 0) return raw.slice(0, 80);
+
+          const punctuationRegex = /[。！？.!?；;]/g;
+          let sentenceStart = 0;
+          let sentenceEnd = raw.length;
+          let match;
+
+          while ((match = punctuationRegex.exec(raw)) !== null) {
+            const pos = match.index;
+            if (pos < matchIndex) {
+              sentenceStart = pos + 1;
+              continue;
+            }
+            sentenceEnd = pos + 1;
+            break;
+          }
+
+          while (
+            sentenceStart < raw.length &&
+            /[\s\u3000"'“”‘’」』】》）)\]]/.test(raw.charAt(sentenceStart))
+          ) {
+            sentenceStart += 1;
+          }
+
+          let preview = raw.slice(sentenceStart, sentenceEnd).trim();
+          const maxLen = 80;
+          if (preview.length > maxLen) {
+            const keywordOffset = matchIndex - sentenceStart;
+            const sliceStart = Math.max(0, keywordOffset - 20);
+            preview = preview.slice(sliceStart, sliceStart + maxLen).trim();
+            preview = preview.replace(/^[，。！？；：、,.!?;:]+/, "");
+            if (sliceStart > 0) preview = "…" + preview;
+            if (sentenceEnd < raw.length || sliceStart + maxLen < raw.slice(sentenceStart, sentenceEnd).length) {
+              preview += "…";
+            }
+          }
+          return preview;
+        };
+
         const renderResults = function(query) {
           const normalizedQuery = normalize(query);
           resultsEl.innerHTML = "";
@@ -2354,6 +2457,7 @@
 
             matches.push({
               title: item.title || "",
+              content: item.content || "",
               section: item.section || "",
               date: item.date || "",
               permalink: item.permalink || "/",
@@ -2368,12 +2472,15 @@
           if (visible.length === 0) return;
 
           const html = visible.map(function(item) {
-            const title = escapeHtml(item.title);
+            const title = highlightKeywords(item.title, normalizedQuery);
+            const preview = highlightKeywords(buildPreview(item.content, normalizedQuery), normalizedQuery);
+            const previewHtml = preview ? '<span class="site-search-result-preview">' + preview + "</span>" : "";
             const meta = escapeHtml([item.section, item.date].filter(Boolean).join(" · "));
             const href = escapeHtml(item.permalink);
             return (
               '<li><a href="' + href + '">' +
                 '<span class="site-search-result-title">' + title + "</span>" +
+                previewHtml +
                 '<span class="site-search-result-meta">' + meta + "</span>" +
               "</a></li>"
             );
