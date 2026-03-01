@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-US" class="scroll-smooth dark">
-  <head><meta charset="UTF-8" />
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#e6f2fb" />
@@ -21,7 +21,7 @@ ACG音乐固然好，但我的歌曲探索并未止步于此。初中的时候�
 另外，我还喜欢上了日系吉他指弹，特别是岸部眞明、ゴンチチ、押尾コータロー和DEPAPEPE。有幸听了2018年和2019年岸部さん在北京的演奏会，排队请他在《奇跡の山》的CD&#43;DVD上签了名，一直幸福珍藏。演奏会上还购买了《奇跡の山》的乐谱集，后来在大学宿舍楼梯间苦练《流れ行く云》5。磕磕绊绊，算是弹了下来，可惜太久不练，现在大概已经不会了。那时梦想着有一天能练会《Time travel》6，不知道这个愿望是不是有朝一日还能实现。
 如今回看那时大杂烩般的长长歌单，发现了好多怀念的名字：夕焼けランプ、ラブリーサマーちゃん、advantage Lucy、Lamp、Canappeco、Reol、さユり、ケラケラ、whiteeeen、Popoyans……之所以怀念，是因为许久没听她们的歌了。大学期间，我的音乐探索之路越走越窄，寻找新歌变得不如听歌单里已收集的歌更有吸引力。同时，几个音乐团体在我心中的份量越来越重：“其实近在眼前，无需费力寻找，她们的每一首歌我都喜欢……”再后来出了国，不方便继续使用网易云音乐，换成了Spotify。不知怎的，虽然Spotify也有Mix歌单推荐，但我养成了按顺序把一张专辑从头听到尾的习惯，不会再建大杂烩式的歌单了。"
 />
-<link rel="canonical" href="https://kamabokohome.com/2024/12/27/" />
+<link rel="canonical" href="http://localhost:1313/2024/12/27/" />
 <meta name="robots" content="index,follow" />
 
 <link rel="icon" href="/img/favicon.ico" />
@@ -33,7 +33,7 @@ ACG音乐固然好，但我的歌曲探索并未止步于此。初中的时候�
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <script type="text/x-mathjax-config">MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });</script>
 
-<link rel="stylesheet" href="/css/app.min.9b21a736e218e9a89ad60b9d8f8d01f3bb8a74bedfbb991fae0c0be79f4279ec.css" integrity="sha256-myGnNuIY6aia1gudj40B87uKdL7fu5kfrgwL559Ceew=" /><style>
+<link rel="stylesheet" href="/css/app.css" /><style>
       html {
         scrollbar-gutter: stable;
         --site-content-max-width: 50rem;
@@ -213,7 +213,7 @@ ACG音乐固然好，但我的歌曲探索并未止步于此。初中的时候�
           gap: 0.22rem;
           margin: 0 0 0.32rem;
           padding: 0 0.625rem;
-          font-size: 0.72rem;
+          font-size: 0.82rem;
           line-height: 1.35;
           color: rgb(156 163 175 / 1);
           white-space: nowrap;
@@ -2841,8 +2841,9 @@ ACG音乐固然好，但我的歌曲探索并未止步于此。初中的时候�
     <script>
       document.addEventListener("DOMContentLoaded", function() {
         const paragraphSelector = "#content p, #content li";
-        const cjkCharRe = /^[\u3040-\u30ff\u3400-\u9fff]$/;
-        const closingQuoteLikeRe = /^[\"'”’」』】》）)\]]$/;
+        const cjkCharRe = /^[\u3040-\u30ff\u3400-\u9fff\uf900-\ufaff\uff66-\uff9f]$/;
+        const latinDigitRe = /^[A-Za-z0-9]$/;
+        const closingQuoteLikeRe = /^[\"'“”‘’「」『』【】《》（）()\[\]]$/;
         const endingPuncRe = /^[，。！？；：、,.!?;:）)」』】》”’…]$/;
 
         const getLineBands = function(el) {
@@ -2924,23 +2925,41 @@ ACG音乐固然好，但我的歌曲探索并未止步于此。初中的时候�
             });
         };
 
-        const needsWidowFix = function(el) {
+        const getWidowPattern = function(el) {
           const lines = getLineBands(el);
-          if (lines.length < 2) return false;
+          if (lines.length < 2) return null;
           const paragraphChars = getParagraphChars(el);
+          if (paragraphChars.length < 2) return null;
           const lastLineChars = getLastLineChars(paragraphChars);
-          if (lastLineChars.length !== 2) return false;
+          if (lastLineChars.length === 1) {
+            const onlyChar = lastLineChars[0].ch;
+            if (endingPuncRe.test(onlyChar)) {
+              return { type: "punct_only", paragraphChars: paragraphChars };
+            }
+            return null;
+          }
+
+          if (lastLineChars.length !== 2) return null;
           const firstChar = lastLineChars[0].ch;
           const secondChar = lastLineChars[1].ch;
-          const isCjkPlusPunc = cjkCharRe.test(firstChar) && endingPuncRe.test(secondChar);
-          const isQuotePlusPunc = closingQuoteLikeRe.test(firstChar) && endingPuncRe.test(secondChar);
-          return isCjkPlusPunc || isQuotePlusPunc;
+          const firstIsLetterLike = cjkCharRe.test(firstChar) || latinDigitRe.test(firstChar) || closingQuoteLikeRe.test(firstChar);
+          if (firstIsLetterLike && endingPuncRe.test(secondChar)) {
+            return { type: "char_plus_punc", paragraphChars: paragraphChars };
+          }
+          return null;
         };
 
-        const insertNoBreakBeforeLastTwo = function(el) {
-          const paragraphChars = getParagraphChars(el);
-          if (paragraphChars.length < 3) return;
-          const anchor = paragraphChars[paragraphChars.length - 3];
+        const insertNoBreakByPattern = function(pattern) {
+          if (!pattern || !pattern.paragraphChars) return;
+          const paragraphChars = pattern.paragraphChars;
+          let anchorIndex = -1;
+          if (pattern.type === "punct_only") {
+            anchorIndex = paragraphChars.length - 2;
+          } else if (pattern.type === "char_plus_punc") {
+            anchorIndex = paragraphChars.length - 3;
+          }
+          if (anchorIndex < 0 || anchorIndex >= paragraphChars.length) return;
+          const anchor = paragraphChars[anchorIndex];
           if (!anchor || !anchor.node) return;
           const text = anchor.node.nodeValue || "";
           const pos = anchor.offset + 1;
@@ -2951,8 +2970,11 @@ ACG音乐固然好，但我的歌曲探索并未止步于此。初中的时候�
           if (!el) return;
           if (el.closest(".single-jump-panel")) return;
           normalizeParagraph(el);
-          if (!needsWidowFix(el)) return;
-          insertNoBreakBeforeLastTwo(el);
+          for (let i = 0; i < 3; i += 1) {
+            const pattern = getWidowPattern(el);
+            if (!pattern) break;
+            insertNoBreakByPattern(pattern);
+          }
         };
 
         const applyWidowControl = function() {
