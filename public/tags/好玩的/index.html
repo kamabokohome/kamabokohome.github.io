@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-US" class="scroll-smooth dark">
-  <head><meta charset="UTF-8" />
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#e6f2fb" />
@@ -16,7 +16,7 @@
   name="description"
   content=""
 />
-<link rel="canonical" href="https://kamabokohome.com/tags/%E5%A5%BD%E7%8E%A9%E7%9A%84/" />
+<link rel="canonical" href="http://localhost:1313/tags/%E5%A5%BD%E7%8E%A9%E7%9A%84/" />
 <meta name="robots" content="index,follow" />
 
 <link rel="icon" href="/img/favicon.ico" />
@@ -28,7 +28,7 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <script type="text/x-mathjax-config">MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });</script>
 
-<link rel="stylesheet" href="/css/app.min.9b21a736e218e9a89ad60b9d8f8d01f3bb8a74bedfbb991fae0c0be79f4279ec.css" integrity="sha256-myGnNuIY6aia1gudj40B87uKdL7fu5kfrgwL559Ceew=" /><style>
+<link rel="stylesheet" href="/css/app.css" /><style>
       html {
         scrollbar-gutter: stable;
         --site-content-max-width: 50rem;
@@ -208,7 +208,7 @@
           gap: 0.22rem;
           margin: 0 0 0.32rem;
           padding: 0 0.625rem;
-          font-size: 0.72rem;
+          font-size: 0.82rem;
           line-height: 1.35;
           color: rgb(156 163 175 / 1);
           white-space: nowrap;
@@ -2842,8 +2842,9 @@
     <script>
       document.addEventListener("DOMContentLoaded", function() {
         const paragraphSelector = "#content p, #content li";
-        const cjkCharRe = /^[\u3040-\u30ff\u3400-\u9fff]$/;
-        const closingQuoteLikeRe = /^[\"'”’」』】》）)\]]$/;
+        const cjkCharRe = /^[\u3040-\u30ff\u3400-\u9fff\uf900-\ufaff\uff66-\uff9f]$/;
+        const latinDigitRe = /^[A-Za-z0-9]$/;
+        const closingQuoteLikeRe = /^[\"'“”‘’「」『』【】《》（）()\[\]]$/;
         const endingPuncRe = /^[，。！？；：、,.!?;:）)」』】》”’…]$/;
 
         const getLineBands = function(el) {
@@ -2925,23 +2926,41 @@
             });
         };
 
-        const needsWidowFix = function(el) {
+        const getWidowPattern = function(el) {
           const lines = getLineBands(el);
-          if (lines.length < 2) return false;
+          if (lines.length < 2) return null;
           const paragraphChars = getParagraphChars(el);
+          if (paragraphChars.length < 2) return null;
           const lastLineChars = getLastLineChars(paragraphChars);
-          if (lastLineChars.length !== 2) return false;
+          if (lastLineChars.length === 1) {
+            const onlyChar = lastLineChars[0].ch;
+            if (endingPuncRe.test(onlyChar)) {
+              return { type: "punct_only", paragraphChars: paragraphChars };
+            }
+            return null;
+          }
+
+          if (lastLineChars.length !== 2) return null;
           const firstChar = lastLineChars[0].ch;
           const secondChar = lastLineChars[1].ch;
-          const isCjkPlusPunc = cjkCharRe.test(firstChar) && endingPuncRe.test(secondChar);
-          const isQuotePlusPunc = closingQuoteLikeRe.test(firstChar) && endingPuncRe.test(secondChar);
-          return isCjkPlusPunc || isQuotePlusPunc;
+          const firstIsLetterLike = cjkCharRe.test(firstChar) || latinDigitRe.test(firstChar) || closingQuoteLikeRe.test(firstChar);
+          if (firstIsLetterLike && endingPuncRe.test(secondChar)) {
+            return { type: "char_plus_punc", paragraphChars: paragraphChars };
+          }
+          return null;
         };
 
-        const insertNoBreakBeforeLastTwo = function(el) {
-          const paragraphChars = getParagraphChars(el);
-          if (paragraphChars.length < 3) return;
-          const anchor = paragraphChars[paragraphChars.length - 3];
+        const insertNoBreakByPattern = function(pattern) {
+          if (!pattern || !pattern.paragraphChars) return;
+          const paragraphChars = pattern.paragraphChars;
+          let anchorIndex = -1;
+          if (pattern.type === "punct_only") {
+            anchorIndex = paragraphChars.length - 2;
+          } else if (pattern.type === "char_plus_punc") {
+            anchorIndex = paragraphChars.length - 3;
+          }
+          if (anchorIndex < 0 || anchorIndex >= paragraphChars.length) return;
+          const anchor = paragraphChars[anchorIndex];
           if (!anchor || !anchor.node) return;
           const text = anchor.node.nodeValue || "";
           const pos = anchor.offset + 1;
@@ -2952,8 +2971,11 @@
           if (!el) return;
           if (el.closest(".single-jump-panel")) return;
           normalizeParagraph(el);
-          if (!needsWidowFix(el)) return;
-          insertNoBreakBeforeLastTwo(el);
+          for (let i = 0; i < 3; i += 1) {
+            const pattern = getWidowPattern(el);
+            if (!pattern) break;
+            insertNoBreakByPattern(pattern);
+          }
         };
 
         const applyWidowControl = function() {

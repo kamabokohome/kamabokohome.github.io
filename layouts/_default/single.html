@@ -28,7 +28,7 @@
 </div>
 
     
-    <h5 class="title-large">{{ .Title }}</h5>
+    <h5 class="title-large"{{ if eq .Section "posts" }} style="margin-top: -0.25rem;"{{ end }}>{{ .Title }}</h5>
     {{ if $autoGallery }}
       <div class="collection-layout-switch collection-detail-layout-switch" role="group" aria-label="Collection layout switch">
         <button type="button" class="collection-layout-btn is-active" data-layout-target="single" title="单列"><span class="collection-layout-emoji-run"><span class="collection-layout-emoji-unit">🍥</span></span></button>

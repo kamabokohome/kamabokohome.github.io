@@ -180,7 +180,7 @@
           display: flex;
           align-items: center;
           gap: 0.22rem;
-          margin: 0 0 0.32rem;
+          margin: -0.36rem 0 0.04rem;
           padding: 0 0.625rem;
           font-size: 0.72rem;
           line-height: 1.35;
@@ -192,7 +192,7 @@
         }
 
         .site-mobile-breadcrumb.is-collection {
-          margin-bottom: 0.16rem;
+          margin-bottom: 0.04rem;
         }
 
         .site-mobile-breadcrumb::-webkit-scrollbar {
@@ -203,8 +203,15 @@
           color: inherit;
           text-decoration: none;
           border-radius: 0.3rem;
-          padding: 0.06rem 0;
+          min-height: 32px;
+          padding: 0.06rem 0.18rem;
           flex: 0 0 auto;
+          display: inline-flex;
+          align-items: center;
+        }
+
+        .site-mobile-breadcrumb a:first-child {
+          padding-left: 0;
         }
 
         .site-mobile-breadcrumb a:hover,
@@ -1462,10 +1469,10 @@
       {{ end }}
       <nav class="site-mobile-breadcrumb{{ if eq .Section "collection" }} is-collection{{ end }}" aria-label="Breadcrumb">
         <a href="{{ "/" | relURL }}">Home</a>
-        <span class="site-mobile-breadcrumb-sep" aria-hidden="true">›</span>
+        <span class="site-mobile-breadcrumb-sep" aria-hidden="true">✧</span>
         <a href="{{ $sectionLink }}">{{ $sectionLabel }}</a>
         {{ if and (eq .Section "posts") $postYearLink }}
-          <span class="site-mobile-breadcrumb-sep" aria-hidden="true">›</span>
+          <span class="site-mobile-breadcrumb-sep" aria-hidden="true">✧</span>
           <a href="{{ $postYearLink }}">{{ $postYearLabel }}</a>
         {{ end }}
       </nav>
@@ -2302,8 +2309,9 @@
     <script>
       document.addEventListener("DOMContentLoaded", function() {
         const paragraphSelector = "#content p, #content li";
-        const cjkCharRe = /^[\u3040-\u30ff\u3400-\u9fff]$/;
-        const closingQuoteLikeRe = /^[\"'”’」』】》）)\]]$/;
+        const cjkCharRe = /^[\u3040-\u30ff\u3400-\u9fff\uf900-\ufaff\uff66-\uff9f]$/;
+        const latinDigitRe = /^[A-Za-z0-9]$/;
+        const closingQuoteLikeRe = /^[\"'“”‘’「」『』【】《》（）()\[\]]$/;
         const endingPuncRe = /^[，。！？；：、,.!?;:）)」』】》”’…]$/;
 
         const getLineBands = function(el) {
@@ -2385,23 +2393,41 @@
             });
         };
 
-        const needsWidowFix = function(el) {
+        const getWidowPattern = function(el) {
           const lines = getLineBands(el);
-          if (lines.length < 2) return false;
+          if (lines.length < 2) return null;
           const paragraphChars = getParagraphChars(el);
+          if (paragraphChars.length < 2) return null;
           const lastLineChars = getLastLineChars(paragraphChars);
-          if (lastLineChars.length !== 2) return false;
+          if (lastLineChars.length === 1) {
+            const onlyChar = lastLineChars[0].ch;
+            if (endingPuncRe.test(onlyChar)) {
+              return { type: "punct_only", paragraphChars: paragraphChars };
+            }
+            return null;
+          }
+
+          if (lastLineChars.length !== 2) return null;
           const firstChar = lastLineChars[0].ch;
           const secondChar = lastLineChars[1].ch;
-          const isCjkPlusPunc = cjkCharRe.test(firstChar) && endingPuncRe.test(secondChar);
-          const isQuotePlusPunc = closingQuoteLikeRe.test(firstChar) && endingPuncRe.test(secondChar);
-          return isCjkPlusPunc || isQuotePlusPunc;
+          const firstIsLetterLike = cjkCharRe.test(firstChar) || latinDigitRe.test(firstChar) || closingQuoteLikeRe.test(firstChar);
+          if (firstIsLetterLike && endingPuncRe.test(secondChar)) {
+            return { type: "char_plus_punc", paragraphChars: paragraphChars };
+          }
+          return null;
         };
 
-        const insertNoBreakBeforeLastTwo = function(el) {
-          const paragraphChars = getParagraphChars(el);
-          if (paragraphChars.length < 3) return;
-          const anchor = paragraphChars[paragraphChars.length - 3];
+        const insertNoBreakByPattern = function(pattern) {
+          if (!pattern || !pattern.paragraphChars) return;
+          const paragraphChars = pattern.paragraphChars;
+          let anchorIndex = -1;
+          if (pattern.type === "punct_only") {
+            anchorIndex = paragraphChars.length - 2;
+          } else if (pattern.type === "char_plus_punc") {
+            anchorIndex = paragraphChars.length - 3;
+          }
+          if (anchorIndex < 0 || anchorIndex >= paragraphChars.length) return;
+          const anchor = paragraphChars[anchorIndex];
           if (!anchor || !anchor.node) return;
           const text = anchor.node.nodeValue || "";
           const pos = anchor.offset + 1;
@@ -2412,8 +2438,11 @@
           if (!el) return;
           if (el.closest(".single-jump-panel")) return;
           normalizeParagraph(el);
-          if (!needsWidowFix(el)) return;
-          insertNoBreakBeforeLastTwo(el);
+          for (let i = 0; i < 3; i += 1) {
+            const pattern = getWidowPattern(el);
+            if (!pattern) break;
+            insertNoBreakByPattern(pattern);
+          }
         };
 
         const applyWidowControl = function() {
