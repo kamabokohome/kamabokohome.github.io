@@ -239,7 +239,7 @@
   }
 
   /* 移动端避免星空背景被整体缩小导致“压扁/变小”观感 */
-  @media (max-width: 1179px) {
+  @media (max-width: 911px) {
     :root {
       --light-grad-stop-2: 90px;
       --light-grad-stop-3: 190px;
@@ -776,7 +776,7 @@ html.dark #content .single-jump-link.is-current {
   background: rgba(123, 135, 152, 0.34);
 }
 
-@media (max-width: 1179px) {
+@media (max-width: 911px) {
   #content .single-jump-panel {
     width: min(92vw, 344px);
     max-height: 16rem;
@@ -1096,7 +1096,7 @@ textarea {
   cursor: text;
 }
 
-@media (max-width: 1179px) {
+@media (max-width: 911px) {
   #content .corner-entry-body {
     padding-left: var(--corner-entry-text-start);
     padding-right: 0.15rem;
@@ -1392,7 +1392,7 @@ html.dark #content .collection-layout-btn.is-active {
   border-radius: 0.56rem;
 }
 
-@media (max-width: 1179px) {
+@media (max-width: 911px) {
   #content .collection-layout-switch {
     gap: 0.28rem;
     margin-top: 0.26rem;
@@ -1538,7 +1538,7 @@ html.dark #content .collection-auto-link {
   cursor: pointer;
 }
 
-@media (max-width: 1179px) {
+@media (max-width: 911px) {
   #content .collection-lightbox {
     padding-left: max(6px, env(safe-area-inset-left, 0px));
     padding-right: max(6px, env(safe-area-inset-right, 0px));
