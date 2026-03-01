@@ -2257,6 +2257,10 @@ html.dark #content .collection-banner-frost {
   margin-top: 0.34rem;
 }
 
+#content .collection-detail-layout-switch {
+  margin-top: 0.54rem;
+}
+
 #content .collection-layout-btn {
   border: 1px solid rgba(126, 126, 126, 0.18);
   border-radius: 999px;
@@ -2399,6 +2403,14 @@ html.dark #content .collection-layout-btn.is-active {
   #content .collection-layout-switch {
     gap: 0.28rem;
     margin-top: 0.26rem;
+  }
+
+  #content .collection-detail-layout-switch {
+    margin-top: 0.38rem;
+  }
+
+  #content .collection-detail-layout-switch .collection-layout-btn[data-layout-target="triple"] {
+    display: none;
   }
 
   #content .collection-layout-btn {

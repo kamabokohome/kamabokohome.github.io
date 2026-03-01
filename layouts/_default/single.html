@@ -12,16 +12,25 @@
     {{ $postDate := .PublishDate.Format "2006-01-02" | time }}
     {{ $days := div (sub $today.Unix $postDate.Unix) 86400 }}
 
-    <time datetime="{{ .PublishDate }}" title='{{ .PublishDate.Format "01-02 15:04" }}'>
-      {{ .PublishDate.Format "2006-01-02 15:04" }}
-    </time>
+    {{ if eq .Section "posts" }}
+      <time class="post-meta-time-full" datetime="{{ .PublishDate }}" title='{{ .PublishDate.Format "2006-01-02 15:04" }}'>
+        {{ .PublishDate.Format "2006-01-02 15:04" }}
+      </time>
+      <time class="post-meta-time-compact" datetime="{{ .PublishDate }}" title='{{ .PublishDate.Format "2006-01-02 15:04" }}'>
+        {{ .PublishDate.Format "01-02 15:04" }}
+      </time>
+    {{ else }}
+      <time datetime="{{ .PublishDate }}" title='{{ .PublishDate.Format "01-02 15:04" }}'>
+        {{ .PublishDate.Format "2006-01-02 15:04" }}
+      </time>
+    {{ end }}
   {{ end }}
 </div>
 
     
     <h5 class="title-large">{{ .Title }}</h5>
     {{ if $autoGallery }}
-      <div class="collection-layout-switch" role="group" aria-label="Collection layout switch">
+      <div class="collection-layout-switch collection-detail-layout-switch" role="group" aria-label="Collection layout switch">
         <button type="button" class="collection-layout-btn is-active" data-layout-target="single" title="单列"><span class="collection-layout-emoji-run"><span class="collection-layout-emoji-unit">🍥</span></span></button>
         <button type="button" class="collection-layout-btn" data-layout-target="double" title="双列"><span class="collection-layout-emoji-run"><span class="collection-layout-emoji-unit">🍥</span><span class="collection-layout-emoji-unit">🍥</span></span></button>
         <button type="button" class="collection-layout-btn" data-layout-target="triple" title="三列"><span class="collection-layout-emoji-run"><span class="collection-layout-emoji-unit">🍥</span><span class="collection-layout-emoji-unit">🍥</span><span class="collection-layout-emoji-unit">🍥</span></span></button>

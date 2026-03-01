@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-US" class="scroll-smooth dark">
-  <head><meta charset="UTF-8" />
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#e6f2fb" />
@@ -19,7 +19,7 @@
 刚开始玩邦邦，是疫情爆发后无法返校、一直都在家上网课的那个六月。其实早就有在玩Cytus II，是喜欢打音游的。当时在家很闲，碰巧在应用商店看到邦邦，就下载来试试看，结果彻底从Cytus II跳坑了。后来一直打邦邦到本科毕业，每期活动都不落下。再后来出了国，手机从安卓换成了iPhone，但国服两个系统的账号是不互通的。而且当时国服在海外的链接速度极慢，几乎只能单机自己玩。加上当时学业繁重，决定暂时退坑（一心去玩Pokémon GO了）。后来国服宣布双端互通，网络连接的问题也不知不觉修复了，于是变成了半回坑状态。完全回坑是今年国服宣布和暹罗猫小豆泥联动。手感尽失的我，原本习惯用手机打邦邦，趁着复健的机会，换成了iPad。一开始很不习惯，觉得跨度太大、手指移动很累。但很快就适应了平板，然后打邦邦的技术突飞猛进。现在我的玩家履历，已经成了当年会觉得遥不可及、超级厉害的样子！EX试炼牌、all perfect也都不是很稀有的东西了。
 啊……又扯远了。但今天已经到了该睡觉的时候……感觉写不完了……"
 />
-<link rel="canonical" href="https://kamabokohome.com/2025/11/15/" />
+<link rel="canonical" href="http://localhost:1313/2025/11/15/" />
 <meta name="robots" content="index,follow" />
 
 <link rel="icon" href="/img/favicon.ico" />
@@ -31,7 +31,7 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <script type="text/x-mathjax-config">MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });</script>
 
-<link rel="stylesheet" href="/css/app.min.abc6d6bb1b6f8bca3ae0dddf550ae3d84440da37febab7cb3c6f0e81979dd85d.css" integrity="sha256-q8bWuxtvi8o64N3fVQrj2ERA2jf+urfLPG8OgZed2F0=" /><style>
+<link rel="stylesheet" href="/css/app.css" /><style>
       html {
         scrollbar-gutter: stable;
         --site-content-max-width: 50rem;
@@ -160,9 +160,9 @@
 
       .site-kamaboko-corner {
         position: fixed;
-        bottom: max(12px, calc(env(safe-area-inset-bottom, 0px) + 12px));
-        right: max(18px, calc(env(safe-area-inset-right, 0px) + 18px));
-        width: clamp(35px, 5.2vw, 60px);
+        bottom: max(14px, calc(env(safe-area-inset-bottom, 0px) + 14px));
+        right: max(14px, calc(env(safe-area-inset-right, 0px) + 14px));
+        width: clamp(28px, 4.3vw, 48px);
         height: auto;
         pointer-events: auto;
         cursor: pointer;
@@ -186,6 +186,73 @@
 
       .site-kamaboko-corner.is-pressing {
         animation-play-state: paused !important;
+      }
+
+      .site-mobile-breadcrumb {
+        display: none;
+      }
+
+      #content .meta .post-meta-time-compact {
+        display: none;
+      }
+
+      @media (max-width: 639px) {
+        #content .meta .post-meta-time-full {
+          display: none;
+        }
+
+        #content .meta .post-meta-time-compact {
+          display: inline;
+        }
+
+        .site-mobile-breadcrumb {
+          display: flex;
+          align-items: center;
+          gap: 0.22rem;
+          margin: 0 0 0.32rem;
+          padding: 0 0.625rem;
+          font-size: 0.72rem;
+          line-height: 1.35;
+          color: rgb(156 163 175 / 1);
+          white-space: nowrap;
+          overflow-x: auto;
+          -webkit-overflow-scrolling: touch;
+          scrollbar-width: none;
+        }
+
+        .site-mobile-breadcrumb.is-collection {
+          margin-bottom: 0.16rem;
+        }
+
+        .site-mobile-breadcrumb::-webkit-scrollbar {
+          display: none;
+        }
+
+        .site-mobile-breadcrumb a {
+          color: inherit;
+          text-decoration: none;
+          border-radius: 0.3rem;
+          padding: 0.06rem 0;
+          flex: 0 0 auto;
+        }
+
+        .site-mobile-breadcrumb a:hover,
+        .site-mobile-breadcrumb a:focus-visible {
+          background: rgba(177, 167, 147, 0.18);
+          color: rgb(107 114 128 / 1);
+        }
+
+        .site-mobile-breadcrumb-sep {
+          color: rgb(156 163 175 / 1);
+          flex: 0 0 auto;
+        }
+
+        html.dark .site-mobile-breadcrumb a:hover,
+        html.dark .site-mobile-breadcrumb a:focus-visible {
+          background: rgba(123, 135, 152, 0.25);
+          color: rgb(209 213 219 / 1);
+        }
+
       }
 
       .site-sticky-nav {
@@ -619,6 +686,17 @@
           flex: 0 0 auto;
         }
 
+        .site-sticky-nav nav .nav-theme-item .toggle-theme {
+          width: 29px !important;
+          height: 29px !important;
+          padding: 3px !important;
+        }
+
+        .site-sticky-nav nav .nav-theme-item .toggle-theme .theme-icon {
+          width: 25px !important;
+          height: 25px !important;
+        }
+
         .site-sticky-nav nav .nav-tools-item {
           gap: 0;
         }
@@ -637,8 +715,8 @@
           color: rgb(156 163 175 / 1);
           background: transparent;
           border: none;
-          border-radius: 0.58rem;
-          padding: 0.28rem 0.4rem;
+          border-radius: 0.52rem;
+          padding: 0.22rem 0.34rem;
           display: inline-flex;
           align-items: center;
           justify-content: center;
@@ -647,8 +725,8 @@
 
         .site-mobile-menu-icon {
           display: block;
-          width: 1.82rem;
-          height: 1.82rem;
+          width: 1.64rem;
+          height: 1.64rem;
           object-fit: contain;
           user-select: none;
           -webkit-user-drag: none;
@@ -723,7 +801,7 @@
 
         .site-mobile-menu-line > a {
           display: block;
-          font-size: 1.02rem;
+          font-size: 0.92rem;
           line-height: 1.5;
           text-align: right;
           text-decoration: none;
@@ -1542,70 +1620,20 @@
     <div class="site-mobile-menu-scroll">
       <ul class="site-mobile-menu-list" aria-label="Mobile navigation">
         <li class="site-mobile-menu-line">
-          
-            <a href="/" class="">Home</a>
-          
+          <a href="/" class="">Home</a>
         </li>
-        
         <li class="site-mobile-menu-line">
-          
-            <div class="site-mobile-menu-row">
-              <a
-                href="/posts"
-                class="active"
-                data-mobile-submenu-link
-                aria-expanded="false"
-                aria-controls="site-mobile-submenu-posts"
-              >Posts</a>
-            </div>
-          
+          <a href="/posts" class="active">Posts</a>
         </li>
-        
-          <li class="site-mobile-menu-subblock" id="site-mobile-submenu-posts" aria-label="Posts years" hidden>
-            
-              <a href="/posts/#posts-year-2026">2026</a>
-            
-              <a href="/posts/#posts-year-2025">2025</a>
-            
-              <a href="/posts/#posts-year-2024">2024</a>
-            
-          </li>
-        
         <li class="site-mobile-menu-line">
-          
-            <div class="site-mobile-menu-row">
-              <a
-                href="/collection"
-                class=""
-                data-mobile-submenu-link
-                aria-expanded="false"
-                aria-controls="site-mobile-submenu-collection"
-              >Collection</a>
-            </div>
-          
+          <a href="/collection" class="">Collection</a>
         </li>
-        
-          <li class="site-mobile-menu-subblock" id="site-mobile-submenu-collection" aria-label="Collection projects" hidden>
-            
-              <a href="/collection/bench/" class="">四季长椅</a>
-            
-            
-              <a href="/collection/empa-office/" class="">Empa office</a>
-            
-          </li>
-        
         <li class="site-mobile-menu-line">
-          
-            <a href="/corner" class="">Corner</a>
-          
+          <a href="/corner" class="">Corner</a>
         </li>
-        
         <li class="site-mobile-menu-line">
-          
-            <a href="/message" class="">Message</a>
-          
+          <a href="/message" class="">Message</a>
         </li>
-        
         
         <li class="site-mobile-menu-line site-mobile-search-line">
           <button
@@ -1637,6 +1665,29 @@
     <img class="site-kamaboko-corner" src="/img/kamaboko.png" alt="kamaboko" role="button" tabindex="0" loading="lazy">
 
     
+      
+      
+      
+      
+      
+      
+        
+        
+        
+        
+      
+      <nav class="site-mobile-breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span class="site-mobile-breadcrumb-sep" aria-hidden="true">›</span>
+        <a href="/posts/">Posts</a>
+        
+          <span class="site-mobile-breadcrumb-sep" aria-hidden="true">›</span>
+          <a href="/posts/#posts-year-2025">2025</a>
+        
+      </nav>
+    
+
+    
     <main id="content" class="px-2.5 sm:px-2.5" style="flex: 1 1 auto; display: flex; flex-direction: column;">
 
 
@@ -1651,9 +1702,14 @@
     
     
 
-    <time datetime="2025-11-15 00:31:30 &#43;0100 CET" title='11-15 00:31'>
-      2025-11-15 00:31
-    </time>
+    
+      <time class="post-meta-time-full" datetime="2025-11-15 00:31:30 &#43;0100 CET" title='2025-11-15 00:31'>
+        2025-11-15 00:31
+      </time>
+      <time class="post-meta-time-compact" datetime="2025-11-15 00:31:30 &#43;0100 CET" title='2025-11-15 00:31'>
+        11-15 00:31
+      </time>
+    
   
 </div>
 
@@ -2781,8 +2837,9 @@
     <script>
       document.addEventListener("DOMContentLoaded", function() {
         const paragraphSelector = "#content p, #content li";
-        const hanCharRe = /^[\u3400-\u9FFF]$/;
-        const endingPuncRe = /^[，。！？；：、,.!?;:）)」』】》]$/;
+        const cjkCharRe = /^[\u3040-\u30ff\u3400-\u9fff]$/;
+        const closingQuoteLikeRe = /^[\"'”’」』】》）)\]]$/;
+        const endingPuncRe = /^[，。！？；：、,.!?;:）)」』】》”’…]$/;
 
         const getLineBands = function(el) {
           const range = document.createRange();
@@ -2860,9 +2917,6 @@
             })
             .sort(function(a, b) {
               return a.left - b.left;
-            })
-            .map(function(item) {
-              return item.ch;
             });
         };
 
@@ -2872,7 +2926,11 @@
           const paragraphChars = getParagraphChars(el);
           const lastLineChars = getLastLineChars(paragraphChars);
           if (lastLineChars.length !== 2) return false;
-          return hanCharRe.test(lastLineChars[0]) && endingPuncRe.test(lastLineChars[1]);
+          const firstChar = lastLineChars[0].ch;
+          const secondChar = lastLineChars[1].ch;
+          const isCjkPlusPunc = cjkCharRe.test(firstChar) && endingPuncRe.test(secondChar);
+          const isQuotePlusPunc = closingQuoteLikeRe.test(firstChar) && endingPuncRe.test(secondChar);
+          return isCjkPlusPunc || isQuotePlusPunc;
         };
 
         const insertNoBreakBeforeLastTwo = function(el) {
