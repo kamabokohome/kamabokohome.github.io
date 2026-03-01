@@ -100,12 +100,12 @@
     margin-top: calc(-1 * var(--site-sticky-bar-height, 0px));
   }
 
-  @media (min-width: 1180px) {
+  @media (min-width: 912px) {
     body.is-home .home-ripple-stage {
       width: 100vw;
       min-width: 100vw;
       max-width: none;
-      min-height: 100vh;
+      min-height: 0;
       position: relative;
       left: 50%;
       right: 50%;
@@ -117,8 +117,8 @@
       width: 100vw;
       min-width: 100vw;
       max-width: none;
-      height: 100vh;
-      aspect-ratio: auto;
+      height: auto;
+      aspect-ratio: 16 / 9;
     }
 
     body.is-home .home-ripple-stage .home-ripple-grid {
@@ -266,7 +266,7 @@
     mask-image: linear-gradient(to top, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.9) 30%, rgba(0, 0, 0, 0.5) 60%, rgba(0, 0, 0, 0.06) 86%, rgba(0, 0, 0, 0) 100%);
   }
 
-  @media (max-width: 1179px) {
+  @media (max-width: 911px) {
     body.is-home #content > section > .home-ripple-stage:first-child {
       margin-top: 0;
     }
@@ -290,7 +290,7 @@
 
 <script>
   document.addEventListener("DOMContentLoaded", function () {
-    const NARROW_MAX_WIDTH = 1179;
+    const NARROW_MAX_WIDTH = 911;
     const isNarrowViewport = function () {
       return !!(window.matchMedia && window.matchMedia("(max-width: " + NARROW_MAX_WIDTH + "px)").matches);
     };
