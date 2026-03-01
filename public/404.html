@@ -509,6 +509,7 @@
         .site-sticky-inner {
           padding-left: 0.25rem;
           padding-right: 0.25rem;
+          min-height: 2.38rem;
         }
 
         .site-sticky-nav {
@@ -566,7 +567,7 @@
         }
 
         .site-mobile-home-title {
-          height: max(12px, min(20px, calc(var(--sticky-bg-height, 0px) - 12px)));
+          height: max(14px, min(24px, calc(var(--sticky-bg-height, 0px) - 10px)));
           width: auto;
           opacity: 0.94;
           user-select: none;
@@ -612,8 +613,8 @@
 
         .site-mobile-menu-icon {
           display: block;
-          width: 1.3rem;
-          height: 1.3rem;
+          width: 1.5rem;
+          height: 1.5rem;
           object-fit: contain;
           user-select: none;
           -webkit-user-drag: none;
@@ -688,7 +689,7 @@
 
         .site-mobile-menu-line > a {
           display: block;
-          font-size: 0.8rem;
+          font-size: 0.92rem;
           line-height: 1.4;
           text-align: right;
           text-decoration: none;
@@ -708,7 +709,7 @@
 
         .site-mobile-menu-row > a {
           display: block;
-          font-size: 0.8rem;
+          font-size: 0.92rem;
           line-height: 1.4;
           text-align: right;
           text-decoration: none;
@@ -735,7 +736,7 @@
 
         .site-mobile-caret {
           display: inline-block;
-          font-size: 0.78rem;
+          font-size: 0.9rem;
           line-height: 1;
           transform: rotate(0deg);
           transition: transform 150ms ease;
@@ -767,7 +768,7 @@
 
         .site-mobile-menu-subblock a {
           display: block;
-          font-size: 0.72rem;
+          font-size: 0.84rem;
           line-height: 1.35;
           text-align: right;
           text-decoration: none;
@@ -835,7 +836,7 @@
 
         .site-mobile-search-toggle {
           font: inherit;
-          font-size: 0.8rem;
+          font-size: 0.92rem;
           line-height: 1;
           font-weight: 600;
           color: rgb(156 163 175 / 1);
@@ -850,6 +851,11 @@
           max-width: min(86vw, 24rem);
           margin-left: auto;
           margin-right: 0;
+        }
+
+        .site-mobile-search-toggle .site-search-icon {
+          width: 1.5rem;
+          height: 1.5rem;
         }
 
         .site-mobile-search-toggle:hover,
@@ -894,8 +900,20 @@
           padding: 0.5rem 0.62rem 0.38rem;
         }
 
+        .site-search-input {
+          font-size: 1.04rem;
+        }
+
         .site-search-results {
           padding: 0 0.42rem 0.64rem;
+        }
+
+        .site-search-result-title {
+          font-size: 0.94rem;
+        }
+
+        .site-search-result-meta {
+          font-size: 0.8rem;
         }
 
         .site-sticky-nav nav li.nav-with-dropdown::after {
@@ -2222,9 +2240,17 @@
           if (mobileMenuPanel) {
             mobileMenuPanel.addEventListener("click", function(event) {
               const target = event.target instanceof Element ? event.target : null;
-              if (!target || !target.closest("a")) return;
-              setMobileMenuOpen(false);
-              updateSubmenuState();
+              if (!target) return;
+              const isActionTarget = !!target.closest("a, button");
+              if (!isActionTarget) {
+                setMobileMenuOpen(false);
+                updateSubmenuState();
+                return;
+              }
+              if (target.closest("a")) {
+                setMobileMenuOpen(false);
+                updateSubmenuState();
+              }
             });
           }
           for (let i = 0; i < mobileSubmenuToggles.length; i += 1) {
