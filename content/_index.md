@@ -22,7 +22,7 @@ title: ""
   <a href="/corner/">Corner</a> 栏是喜欢的、想推荐给所有人的有趣的东西的集合！<br>
   可以的话，请务必尝试看看。<br>
   <br>
-  <a href="/posts/">Message</a> 是可以寄信给树屋的地方。<br>
+  <a href="/message/">Message</a> 是可以寄信给树屋的地方。<br>
   如果有任何想说的话，都欢迎来信 ^ ^<br>
   <br>
   找到电源开关之后，就可以切换白天与黑夜模式喔。<br>
