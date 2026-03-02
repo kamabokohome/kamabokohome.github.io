@@ -39,3 +39,5 @@ enableEmoji = true
 [messageForm]
     actionURL = "https://formsubmit.co/kamabokowo@gmail.com"
     subject = "Kamaboko Home Message"
+    # 可选: table / box / basic
+    template = "box"

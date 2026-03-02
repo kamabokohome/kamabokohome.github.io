@@ -1,8 +1,12 @@
+{{- $titleCN := resources.Get "img/title_cn.png" -}}
+{{- $searchIcon := resources.Get "img/search.png" -}}
+{{- $menuIcon := resources.Get "img/menu.png" -}}
+
 <nav>
   <ul>
     <li class="site-mobile-home-item">
       <a href="{{ "/" | relURL }}" class="site-mobile-home-link" aria-label="回到主页">
-        <img class="site-mobile-home-title" src="{{ "img/title_cn.png" | relURL }}" alt="" loading="lazy">
+        <img class="site-mobile-home-title" src="{{ $titleCN.RelPermalink }}" alt="" loading="lazy">
       </a>
     </li>
     {{- $currentPage := . -}}
@@ -63,9 +67,12 @@
         type="button"
         class="site-search-toggle site-desktop-search-toggle"
         data-site-search-open
+        data-hover-tooltip="虫眼鏡"
+        data-hover-tooltip-delay="1000"
         aria-label="打开搜索"
+        aria-expanded="false"
       >
-        <img class="site-search-icon" src="{{ "img/search.png" | relURL }}" alt="" loading="lazy">
+        <img class="site-search-icon" src="{{ $searchIcon.RelPermalink }}" alt="" loading="lazy">
       </button>
     </li>
     <li class="site-mobile-menu-item">
@@ -76,7 +83,7 @@
         aria-controls="site-mobile-menu-panel"
         aria-label="展开导航菜单"
       >
-        <img class="site-mobile-menu-icon" src="{{ "img/menu.png" | relURL }}" alt="" loading="lazy">
+        <img class="site-mobile-menu-icon" src="{{ $menuIcon.RelPermalink }}" alt="" loading="lazy">
       </button>
     </li>
   </ul>
@@ -97,9 +104,12 @@
             type="button"
             class="site-mobile-search-toggle"
             data-site-search-open
+            data-hover-tooltip="虫眼鏡"
+            data-hover-tooltip-delay="1000"
             aria-label="打开搜索"
+            aria-expanded="false"
           >
-            <img class="site-search-icon" src="{{ "img/search.png" | relURL }}" alt="" loading="lazy">
+            <img class="site-search-icon" src="{{ $searchIcon.RelPermalink }}" alt="" loading="lazy">
           </button>
         </li>
       </ul>

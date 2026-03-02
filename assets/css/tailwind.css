@@ -831,7 +831,7 @@ html.dark #content .single-jump-link.is-current {
 }
 
 #content .message-form-row textarea {
-  min-height: 8.4rem;
+  min-height: 10.2rem;
   resize: vertical;
 }
 
@@ -846,7 +846,7 @@ html.dark #content .single-jump-link.is-current {
   display: flex;
   justify-content: flex-end;
   margin-left: 0;
-  margin-top: 0.32rem;
+  margin-top: 0.24rem;
 }
 
 #content .message-submit-button {
@@ -883,19 +883,22 @@ html.dark #content .single-jump-link.is-current {
 }
 
 #content .message-board-status {
-  margin: 0.1rem 0 0;
+  margin: 0.2rem 0 0;
   font-size: 0.72rem;
-  color: #9ca3af;
-  margin-left: 0;
+  line-height: 1.72;
+  font-weight: 400;
+  color: #1f2937;
   text-align: center;
+  white-space: normal;
 }
 
-#content .message-board-status[data-tone="success"] {
-  color: #6b7280;
-}
-
-#content .message-board-status[data-tone="error"] {
-  color: #9b5252;
+#content .message-board-status .message-board-status-line {
+  display: inline;
+  padding: 0.02rem 0.14rem;
+  border-radius: 0.16rem;
+  background: rgba(250, 204, 21, 0.52);
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
 }
 
 html.dark #content .message-form {
@@ -938,15 +941,11 @@ html.dark #content .message-board-note {
 }
 
 html.dark #content .message-board-status {
-  color: #9ca3af;
+  color: #f3f4f6;
 }
 
-html.dark #content .message-board-status[data-tone="success"] {
-  color: #d1d5db;
-}
-
-html.dark #content .message-board-status[data-tone="error"] {
-  color: #f2a7a7;
+html.dark #content .message-board-status .message-board-status-line {
+  background: rgba(250, 204, 21, 0.4);
 }
 
 #content .posts-year-separator {
