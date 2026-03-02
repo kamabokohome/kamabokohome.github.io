@@ -1,30 +1,29 @@
 <div class="mt-auto" style="margin-top: auto; padding-top: 1.5rem !important;">
     <footer class="flex-col items-center" style="padding-bottom: 1.5rem;">
-        {{ $bannerFiles := slice }}
-        {{ range (readDir "static/img") }}
-            {{ if and (not .IsDir) (hasPrefix .Name "banner_") (hasSuffix .Name ".png") }}
-                {{ $bannerFiles = $bannerFiles | append .Name }}
-            {{ end }}
+        {{ $bannerURLs := slice }}
+        {{ range resources.Match "img/banner_*.png" }}
+            {{ $bannerURLs = $bannerURLs | append .RelPermalink }}
         {{ end }}
-        {{ $fallbackBanner := index $bannerFiles 0 }}
+        {{ $fallbackBanner := "" }}
+        {{ if gt (len $bannerURLs) 0 }}
+          {{ $fallbackBanner = index $bannerURLs 0 }}
+        {{ end }}
 
-        <img id="footer-banner" data-base="{{ "/img/" | relURL }}" data-banners="{{ delimit $bannerFiles "," }}" class="mb-5" alt="Footer banner">
+        <img id="footer-banner" data-banners='{{ $bannerURLs | jsonify }}' class="mb-5" alt="Footer banner">
         <noscript>
           {{ if $fallbackBanner }}
-            <img src="{{ "/img/" | relURL }}{{ $fallbackBanner }}" class="mb-5" alt="Footer banner">
+            <img src="{{ $fallbackBanner }}" class="mb-5" alt="Footer banner">
           {{ end }}
         </noscript>
         <script>
           (function () {
             const bannerEl = document.getElementById("footer-banner");
             if (!bannerEl) return;
-            const basePath = bannerEl.dataset.base || "{{ "/img/" | relURL }}";
-            const bannerFiles = (bannerEl.dataset.banners || "").split(",").filter(Boolean);
-            if (bannerFiles.length === 0) return;
+            const bannerUrls = JSON.parse(bannerEl.dataset.banners || "[]");
+            if (!Array.isArray(bannerUrls) || bannerUrls.length === 0) return;
 
-            const randomIndex = Math.floor(Math.random() * bannerFiles.length);
-            const randomBanner = bannerFiles[randomIndex];
-            bannerEl.src = basePath + randomBanner;
+            const randomIndex = Math.floor(Math.random() * bannerUrls.length);
+            bannerEl.src = bannerUrls[randomIndex];
           })();
         </script>
 

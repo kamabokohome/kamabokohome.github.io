@@ -232,6 +232,10 @@
   {{ with $messageFormConfig.subject }}
     {{ $messageSubject = . }}
   {{ end }}
+  {{ $messageTemplate := "table" }}
+  {{ with $messageFormConfig.template }}
+    {{ $messageTemplate = . }}
+  {{ end }}
   <section
     class="message-board"
     data-message-board
@@ -239,23 +243,27 @@
   >
     <form class="message-form" data-message-form autocomplete="off" method="POST" accept-charset="UTF-8" action="{{ $messageActionURL }}" onsubmit="var n=this.querySelector('[data-message-next]');if(n){n.value=window.location.origin+window.location.pathname+'?sent=1&t='+Date.now();}">
       <input type="hidden" name="_subject" value="{{ $messageSubject }}" />
+      <input type="hidden" name="_template" value="{{ $messageTemplate }}" />
       <input type="hidden" name="_captcha" value="false" />
       <input type="hidden" name="_next" value="" data-message-next />
+      <input type="hidden" name="_replyto" value="" data-message-replyto />
+      <input type="hidden" name="提交时间" value="" data-message-submitted-local />
+      <input type="hidden" name="提交时区" value="" data-message-timezone />
       <div class="message-form-row">
         <label for="guestbook-content">信的内容</label>
-        <textarea id="guestbook-content" name="message" rows="6" maxlength="500" placeholder="似乎有什么想说的样子" required></textarea>
+        <textarea id="guestbook-content" name="信的内容" rows="8" maxlength="500" placeholder="似乎有什么想说的样子" required></textarea>
       </div>
       <div class="message-form-row">
         <label for="guestbook-signature">落款</label>
-        <input id="guestbook-signature" name="signature" type="text" maxlength="24" placeholder="香甜的年轮蛋糕" />
+        <input id="guestbook-signature" name="落款" type="text" maxlength="24" placeholder="香甜的年轮蛋糕" />
       </div>
       <div class="message-form-row">
         <label for="guestbook-reply">回信地址</label>
-        <input id="guestbook-reply" name="email" type="email" inputmode="email" autocomplete="email" autocapitalize="off" spellcheck="false" maxlength="120" placeholder="说不定会有回信的样子" />
+        <input id="guestbook-reply" name="回信地址" type="email" inputmode="email" autocomplete="email" autocapitalize="off" spellcheck="false" maxlength="120" placeholder="说不定会有回信的样子" />
       </div>
       <p class="message-board-status" data-message-status aria-live="polite"></p>
       <div class="message-form-actions">
-        <button class="message-submit-button" type="submit">寄出</button>
+        <button class="message-submit-button" type="submit" data-label-default="写好了" data-label-confirm="确认好了！">写好了</button>
       </div>
     </form>
   </section>
@@ -367,8 +375,14 @@
     const status = messageBoard.querySelector('[data-message-status]');
     const submitButton = form ? form.querySelector('button[type="submit"]') : null;
     const nextInput = form ? form.querySelector('[data-message-next]') : null;
+    const replyToInput = form ? form.querySelector('[data-message-replyto]') : null;
+    const submittedLocalInput = form ? form.querySelector('[data-message-submitted-local]') : null;
+    const timezoneInput = form ? form.querySelector('[data-message-timezone]') : null;
     const formAction = form ? (form.getAttribute('action') || '').trim() : '';
     const hasAction = formAction.length > 0;
+    const submitLabelDefault = submitButton ? (submitButton.getAttribute('data-label-default') || submitButton.textContent.trim() || '写好了') : '写好了';
+    const submitLabelConfirm = submitButton ? (submitButton.getAttribute('data-label-confirm') || '确认好了！') : '确认好了！';
+    let isAwaitingConfirm = false;
 
     const normalizeNickname = (value) => value.trim().replace(/\s+/g, ' ').slice(0, 24);
     const normalizeMessage = (value) => value.trim().slice(0, 500);
@@ -382,12 +396,41 @@
       const seconds = padDateNumber(date.getSeconds());
       return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
     };
+    const formatUTCOffset = (date) => {
+      const offsetMinutes = -date.getTimezoneOffset();
+      const sign = offsetMinutes >= 0 ? '+' : '-';
+      const absoluteMinutes = Math.abs(offsetMinutes);
+      const offsetHours = padDateNumber(Math.floor(absoluteMinutes / 60));
+      const minutes = padDateNumber(absoluteMinutes % 60);
+      return `UTC${sign}${offsetHours}:${minutes}`;
+    };
+    const getTimezoneName = () => {
+      try {
+        return Intl.DateTimeFormat().resolvedOptions().timeZone || '';
+      } catch (error) {
+        return '';
+      }
+    };
 
     const setStatus = (text, tone = 'normal') => {
       if (!status) return;
-      status.textContent = text || '';
       status.dataset.tone = tone;
-      status.hidden = !text;
+      status.textContent = '';
+      if (!text) {
+        status.hidden = true;
+        return;
+      }
+      const lines = String(text).split('\n');
+      lines.forEach((line, index) => {
+        const lineNode = document.createElement('span');
+        lineNode.className = 'message-board-status-line';
+        lineNode.textContent = line;
+        status.appendChild(lineNode);
+        if (index < lines.length - 1) {
+          status.appendChild(document.createElement('br'));
+        }
+      });
+      status.hidden = false;
     };
 
     const setSubmitting = (isSubmitting) => {
@@ -396,9 +439,17 @@
       submitButton.setAttribute('aria-busy', isSubmitting ? 'true' : 'false');
     };
 
+    const setConfirmState = (isConfirming) => {
+      isAwaitingConfirm = !!isConfirming;
+      if (!submitButton) return;
+      submitButton.dataset.confirmPending = isAwaitingConfirm ? 'true' : 'false';
+      submitButton.textContent = isAwaitingConfirm ? submitLabelConfirm : submitLabelDefault;
+    };
+
     if (status) {
       status.hidden = true;
     }
+    setConfirmState(false);
 
     const url = new URL(window.location.href);
     const isSent = url.searchParams.get('sent') === '1';
@@ -406,8 +457,8 @@
       const sentMsRaw = url.searchParams.get('t');
       const sentMs = sentMsRaw ? Number(sentMsRaw) : NaN;
       const sentDate = Number.isFinite(sentMs) && sentMs > 0 ? new Date(sentMs) : new Date();
-      const sentAtText = formatLocalDateTime(sentDate);
-      setStatus(`${sentAtText} 信件已经寄出了！`, 'success');
+      const sentAtText = formatLocalDateTime(sentDate).replace(' ', '\u00A0');
+      setStatus(`${sentAtText}\n信件已经寄出了！`, 'success');
       url.searchParams.delete('sent');
       url.searchParams.delete('t');
       window.history.replaceState({}, '', url.toString());
@@ -423,6 +474,17 @@
       setSubmitting(true);
       setStatus('请先在站点配置中填写邮件表单地址。', 'error');
     } else if (form) {
+      const clearConfirmStateForEdit = () => {
+        if (!isAwaitingConfirm) return;
+        setConfirmState(false);
+        setStatus('修改修改……', 'normal');
+      };
+
+      [contentInput, signatureInput, replyInput].forEach((input) => {
+        if (!input) return;
+        input.addEventListener('input', clearConfirmStateForEdit, { passive: true });
+      });
+
       form.addEventListener('submit', async (event) => {
         const content = contentInput ? normalizeMessage(contentInput.value) : '';
         const signature = signatureInput ? (normalizeNickname(signatureInput.value) || '香甜的年轮蛋糕') : '香甜的年轮蛋糕';
@@ -443,10 +505,30 @@
         if (contentInput) contentInput.value = content;
         if (signatureInput) signatureInput.value = signature;
         if (replyInput) replyInput.value = replyAddress;
+
+        if (!isAwaitingConfirm) {
+          setConfirmState(true);
+          setStatus('确认写好了吗？', 'normal');
+          return;
+        }
+
+        setConfirmState(false);
         setSubmitting(true);
         setStatus('正在发送，请稍候...', 'normal');
 
         try {
+          const submittedAt = new Date();
+          if (replyToInput) {
+            replyToInput.value = replyAddress;
+          }
+          if (submittedLocalInput) {
+            submittedLocalInput.value = `${formatLocalDateTime(submittedAt)} (${formatUTCOffset(submittedAt)})`;
+          }
+          if (timezoneInput) {
+            const timezoneName = getTimezoneName();
+            timezoneInput.value = timezoneName || formatUTCOffset(submittedAt);
+          }
+
           const ajaxAction = formAction.includes('/ajax/')
             ? formAction
             : formAction.replace('://formsubmit.co/', '://formsubmit.co/ajax/');
@@ -468,13 +550,16 @@
             return;
           }
 
-          const sentAtText = formatLocalDateTime(new Date());
-          setStatus(`${sentAtText} 信件已经寄出了！`, 'success');
+          const sentAtText = formatLocalDateTime(new Date()).replace(' ', '\u00A0');
+          setStatus(`${sentAtText}\n信件已经寄出了！`, 'success');
           if (contentInput) contentInput.value = '';
         } catch (error) {
           setStatus('发送失败，请检查网络后重试。', 'error');
         } finally {
           setSubmitting(false);
+          if (submitButton && !isAwaitingConfirm) {
+            submitButton.textContent = submitLabelDefault;
+          }
         }
       });
     }

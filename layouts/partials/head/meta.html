@@ -19,9 +19,11 @@
 <link rel="canonical" href="{{ .Permalink }}" />
 <meta name="robots" content="index,follow" />
 
-<link rel="icon" href="{{ "img/favicon.ico" | relURL }}" />
-<link rel="icon" type="image/png" href="{{ "img/favicon.png" | relURL }}" />
-<link rel="apple-touch-icon" href="{{ "img/favicon.png" | relURL }}" />
+{{- $faviconIco := resources.Get "img/favicon.ico" -}}
+{{- $faviconPng := resources.Get "img/favicon.png" -}}
+<link rel="icon" href="{{ $faviconIco.RelPermalink }}" />
+<link rel="icon" type="image/png" href="{{ $faviconPng.RelPermalink }}" />
+<link rel="apple-touch-icon" href="{{ $faviconPng.RelPermalink }}" />
 
 {{ if .Site.Config.Services.GoogleAnalytics.ID }}
 <!-- Google Analytics -->

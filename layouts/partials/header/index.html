@@ -1,32 +1,41 @@
+{{- $dayBack := resources.Get "img/day_back.png" -}}
+{{- $nightBack := resources.Get "img/night_back.png" -}}
+{{- $dayFront := resources.Get "img/day_front.png" -}}
+{{- $nightFront := resources.Get "img/night_front.png" -}}
+{{- $titleDayFallback := resources.Get "img/title_day.png" -}}
+{{- $titleNightFallback := resources.Get "img/title_night.png" -}}
+{{- $titleDayFrontFallback := resources.Get "img/title_day1.png" -}}
+{{- $titleNightFrontFallback := resources.Get "img/title_night1.png" -}}
+
 <header class="flex flex-col w-full gap-3">
   <div class="w-full flex justify-center">
     <a href="{{ "/" | relURL }}" class="title-interactive" aria-label="Site title image">
       <div class="title-water-layer" aria-hidden="true"></div>
       <img
-        src="{{ "img/day_back.png" | relURL }}"
+        src="{{ $dayBack.RelPermalink }}"
         class="title-back-day-src"
         style="display:none;"
         aria-hidden="true"
-        onerror="this.onerror=null;this.src='{{ "img/title_day.png" | relURL }}';"
+        onerror="this.onerror=null;this.src='{{ $titleDayFallback.RelPermalink }}';"
       >
       <img
-        src="{{ "img/night_back.png" | relURL }}"
+        src="{{ $nightBack.RelPermalink }}"
         class="title-back-night-src"
         style="display:none;"
         aria-hidden="true"
-        onerror="this.onerror=null;this.src='{{ "img/title_night.png" | relURL }}';"
+        onerror="this.onerror=null;this.src='{{ $titleNightFallback.RelPermalink }}';"
       >
       <img
-        src="{{ "img/day_front.png" | relURL }}"
+        src="{{ $dayFront.RelPermalink }}"
         class="title-front-day"
         style="display:block;"
-        onerror="this.onerror=null;this.src='{{ "img/title_day1.png" | relURL }}';"
+        onerror="this.onerror=null;this.src='{{ $titleDayFrontFallback.RelPermalink }}';"
       >
       <img
-        src="{{ "img/night_front.png" | relURL }}"
+        src="{{ $nightFront.RelPermalink }}"
         class="title-front-night"
         style="display:none;"
-        onerror="this.onerror=null;this.src='{{ "img/title_night1.png" | relURL }}';"
+        onerror="this.onerror=null;this.src='{{ $titleNightFrontFallback.RelPermalink }}';"
       >
     </a>
   </div>

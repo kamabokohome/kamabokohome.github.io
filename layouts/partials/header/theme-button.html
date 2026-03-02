@@ -2,9 +2,12 @@
 {{ $sunIcon := resources.Get "icons/sun.svg" }}
 
 <button 
-  class="toggle-theme flex items-center justify-center" 
+  class="toggle-theme site-search-toggle site-theme-toggle flex items-center justify-center" 
+  type="button"
   aria-label="Toggle Theme" 
-  title="電源" 
+  aria-pressed="false"
+  data-hover-tooltip="電源"
+  data-hover-tooltip-delay="1000"
   onclick="toggleTheme()"
   style="width:25px !important; height:25px !important; padding:2px !important;"
 >
@@ -29,24 +32,28 @@
   });
 
   function setTheme(theme) {
-    const html = document.querySelector('html');
+    const html = document.documentElement;
     localStorage.setItem('theme', theme);
 
     if (theme === 'light') {
       if (html.classList.contains('dark')) {
-        document.querySelector('html').classList.remove('dark');
+        html.classList.remove('dark');
       }
-
-      document.querySelector('.theme-icon.light').style.display = 'none';
-      document.querySelector('.theme-icon.dark').style.display = 'block';
     } else {
       if (!html.classList.contains('dark')) {
-        document.querySelector('html').classList.add('dark');
+        html.classList.add('dark');
       }
-
-      document.querySelector('.theme-icon.dark').style.display = 'none';
-      document.querySelector('.theme-icon.light').style.display = 'block';
     }
+
+    const isDark = theme !== 'light';
+    const toggleButtons = document.querySelectorAll('.toggle-theme');
+    toggleButtons.forEach(function(button) {
+      button.setAttribute('aria-pressed', isDark ? 'true' : 'false');
+      const lightIcon = button.querySelector('.theme-icon.light');
+      const darkIcon = button.querySelector('.theme-icon.dark');
+      if (lightIcon) lightIcon.style.display = isDark ? 'inline-block' : 'none';
+      if (darkIcon) darkIcon.style.display = isDark ? 'none' : 'inline-block';
+    });
   }
 
   function toggleTheme() {

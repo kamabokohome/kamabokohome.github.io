@@ -311,9 +311,52 @@
         background: rgba(177, 167, 147, 0.18);
       }
 
+      .site-search-toggle[aria-expanded="true"],
+      .site-theme-toggle[aria-pressed="true"] {
+        background: rgba(177, 167, 147, 0.18);
+      }
+
+      .site-hover-tooltip {
+        position: fixed;
+        left: 0;
+        top: 0;
+        transform: translate(-50%, 0);
+        padding: 0.22rem 0.46rem;
+        border-radius: 0.42rem;
+        border: 1px solid rgba(177, 167, 147, 0.42);
+        background: rgba(249, 245, 236, 0.96);
+        color: rgb(75 85 99 / 1);
+        font-size: 0.68rem;
+        line-height: 1.2;
+        font-weight: 600;
+        white-space: nowrap;
+        pointer-events: none;
+        user-select: none;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 120ms ease;
+        z-index: 120;
+      }
+
+      .site-hover-tooltip.is-visible {
+        opacity: 1;
+        visibility: visible;
+      }
+
       html.dark .site-search-toggle:hover,
       html.dark .site-search-toggle:focus-visible {
         background: rgba(123, 135, 152, 0.25);
+      }
+
+      html.dark .site-search-toggle[aria-expanded="true"],
+      html.dark .site-theme-toggle[aria-pressed="true"] {
+        background: rgba(123, 135, 152, 0.25);
+      }
+
+      html.dark .site-hover-tooltip {
+        border-color: rgba(123, 135, 152, 0.5);
+        background: rgba(47, 47, 47, 0.94);
+        color: rgb(229 231 235 / 1);
       }
 
       .site-sticky-nav nav li.nav-menu-item > a {
@@ -1440,6 +1483,10 @@
     </style>
   </head>
 
+  {{- $titleCN := resources.Get "img/title_cn.png" -}}
+  {{- $titleEN := resources.Get "img/title_en.png" -}}
+  {{- $kamaboko := resources.Get "img/kamaboko.png" -}}
+
   <body class="mx-auto px-2.5 sm:px-2.5{{ if .IsHome }} is-home{{ end }}{{ if eq .Section "corner" }} page-corner{{ end }}" style="max-width: var(--site-content-max-width); min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column;">
 
     <!-- Sticky Nav -->
@@ -1448,10 +1495,10 @@
       <div class="site-sticky-bg" aria-hidden="true"></div>
       <div class="site-sticky-side-titles">
         <a class="site-sticky-side-link" href="{{ "/" | relURL }}" aria-label="回到主页（中文标题）">
-          <img class="site-sticky-side-title site-sticky-side-title-cn" src="{{ "img/title_cn.png" | relURL }}" alt="" loading="lazy">
+          <img class="site-sticky-side-title site-sticky-side-title-cn" src="{{ $titleCN.RelPermalink }}" alt="" loading="lazy">
         </a>
         <a class="site-sticky-side-link" href="{{ "/" | relURL }}" aria-label="Back to home (English title)">
-          <img class="site-sticky-side-title site-sticky-side-title-en" src="{{ "img/title_en.png" | relURL }}" alt="" loading="lazy">
+          <img class="site-sticky-side-title site-sticky-side-title-en" src="{{ $titleEN.RelPermalink }}" alt="" loading="lazy">
         </a>
       </div>
       <div class="site-sticky-inner">
@@ -1460,7 +1507,7 @@
         </div>
       </div>
     </header>
-    <img class="site-kamaboko-corner" src="{{ "img/kamaboko.png" | relURL }}" alt="kamaboko" role="button" tabindex="0" loading="lazy">
+    <img class="site-kamaboko-corner" src="{{ $kamaboko.RelPermalink }}" alt="kamaboko" role="button" tabindex="0" loading="lazy" data-hover-tooltip="转啊转" data-hover-tooltip-delay="1000">
 
     {{ if and (or .IsPage (and (eq .Section "collection") (eq .Kind "section"))) (not .IsHome) }}
       {{ $sectionPage := site.GetPage (printf "/%s" .Section) }}
@@ -1529,12 +1576,12 @@
           if (target && target.closest(".collection-auto-link")) return true;
           const titleArea = document.querySelector(".title-interactive");
           if (titleArea && titleArea.contains(event.target)) return true;
-          const homeRippleArea = document.querySelector(".home-ripple-image");
-          if (homeRippleArea && homeRippleArea.contains(event.target)) return true;
-          const homeRippleCanvas = document.querySelector(".home-ripple-canvas");
-          if (homeRippleCanvas && homeRippleCanvas.contains(event.target)) return true;
-          const homeRippleStage = document.querySelector(".home-ripple-stage");
-          if (homeRippleStage && homeRippleStage.contains(event.target)) return true;
+          if (target && target.closest(".home-ripple-water[data-ripple-enabled=\"1\"]")) return true;
+          if (target && target.closest(".home-ripple-mobile-water[data-ripple-src]")) return true;
+          if (target) {
+            const tile = target.closest(".home-ripple-tile");
+            if (tile && tile.querySelector(".home-ripple-water[data-ripple-enabled=\"1\"]")) return true;
+          }
           const kamaboko = document.querySelector(".site-kamaboko-corner");
           if (kamaboko && kamaboko.contains(event.target)) return true;
           return false;
@@ -2063,6 +2110,12 @@
         const searchInput = searchModal.querySelector("#site-search-input");
         const resultsEl = searchModal.querySelector("#site-search-results");
         const indexUrl = searchModal.getAttribute("data-index-url") || "/index.json";
+        const setSearchButtonsExpanded = function(expanded) {
+          for (let i = 0; i < openButtons.length; i += 1) {
+            openButtons[i].setAttribute("aria-expanded", expanded ? "true" : "false");
+          }
+        };
+        setSearchButtonsExpanded(false);
 
         let indexData = [];
         let indexLoaded = false;
@@ -2238,6 +2291,7 @@
             }
           }
           searchModal.hidden = false;
+          setSearchButtonsExpanded(true);
           loadIndex().then(function() {
             renderResults(searchInput ? searchInput.value : "");
           });
@@ -2248,6 +2302,7 @@
 
         const closeSearch = function() {
           searchModal.hidden = true;
+          setSearchButtonsExpanded(false);
         };
 
         for (let i = 0; i < openButtons.length; i += 1) {
@@ -2283,6 +2338,101 @@
           if (event.key === "Escape" && !searchModal.hidden) {
             closeSearch();
           }
+        });
+      });
+    </script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        const tooltipTriggers = Array.from(document.querySelectorAll("[data-hover-tooltip]"));
+        if (tooltipTriggers.length === 0) return;
+
+        let tooltipEl = null;
+        let activeTrigger = null;
+        let showTimer = 0;
+
+        const ensureTooltip = function() {
+          if (tooltipEl && tooltipEl.isConnected) return tooltipEl;
+          tooltipEl = document.createElement("div");
+          tooltipEl.className = "site-hover-tooltip";
+          document.body.appendChild(tooltipEl);
+          return tooltipEl;
+        };
+
+        const clearShowTimer = function() {
+          if (!showTimer) return;
+          window.clearTimeout(showTimer);
+          showTimer = 0;
+        };
+
+        const hideTooltip = function() {
+          clearShowTimer();
+          if (!tooltipEl) return;
+          tooltipEl.classList.remove("is-visible");
+          activeTrigger = null;
+        };
+
+        const positionTooltip = function(trigger) {
+          if (!tooltipEl || !trigger || !tooltipEl.classList.contains("is-visible")) return;
+          const rect = trigger.getBoundingClientRect();
+          const tooltipRect = tooltipEl.getBoundingClientRect();
+          const margin = 10;
+          const center = rect.left + (rect.width * 0.5);
+          const minX = margin + (tooltipRect.width * 0.5);
+          const maxX = window.innerWidth - margin - (tooltipRect.width * 0.5);
+          const clampedX = Math.max(minX, Math.min(maxX, center));
+          const top = Math.min(window.innerHeight - tooltipRect.height - margin, rect.bottom + 8);
+          tooltipEl.style.left = clampedX + "px";
+          tooltipEl.style.top = top + "px";
+        };
+
+        const showTooltip = function(trigger) {
+          const text = trigger.getAttribute("data-hover-tooltip");
+          if (!text) return;
+          const el = ensureTooltip();
+          el.textContent = text;
+          el.classList.add("is-visible");
+          activeTrigger = trigger;
+          positionTooltip(trigger);
+        };
+
+        const scheduleTooltip = function(trigger) {
+          hideTooltip();
+          const rawDelay = parseInt(trigger.getAttribute("data-hover-tooltip-delay") || "", 10);
+          const delay = Number.isFinite(rawDelay) ? rawDelay : 1500;
+          showTimer = window.setTimeout(function() {
+            showTimer = 0;
+            showTooltip(trigger);
+          }, Math.max(0, delay));
+        };
+
+        tooltipTriggers.forEach(function(trigger) {
+          trigger.addEventListener("pointerenter", function() {
+            scheduleTooltip(trigger);
+          }, { passive: true });
+
+          trigger.addEventListener("pointerleave", hideTooltip, { passive: true });
+          trigger.addEventListener("pointerdown", hideTooltip, { passive: true });
+
+          trigger.addEventListener("focus", function() {
+            scheduleTooltip(trigger);
+          }, { passive: true });
+
+          trigger.addEventListener("blur", hideTooltip, { passive: true });
+        });
+
+        window.addEventListener("scroll", function() {
+          if (!activeTrigger) return;
+          positionTooltip(activeTrigger);
+        }, { passive: true, capture: true });
+
+        window.addEventListener("resize", function() {
+          if (!activeTrigger) return;
+          positionTooltip(activeTrigger);
+        }, { passive: true });
+
+        document.addEventListener("visibilitychange", function() {
+          if (document.hidden) hideTooltip();
         });
       });
     </script>
