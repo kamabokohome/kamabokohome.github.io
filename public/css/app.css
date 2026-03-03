@@ -504,6 +504,7 @@ video {
     --site-font-cjk: "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC", "Source Han Sans SC", "Microsoft YaHei", sans-serif;
     --site-font-sans: var(--site-font-latin), var(--site-font-cjk);
     --banner-link-rgb: 135, 206, 235;
+    --banner-link-opacity-scale: 1;
     --sun-halo-center-y: calc(100% - 36px);
     --light-grad-color-1: rgba(204, 210, 218, 0.42);
     --light-grad-color-2: rgba(217, 222, 229, 0.3);
@@ -1620,7 +1621,7 @@ html.dark summary {
 }
 
 #content .corner-entry-body a {
-  --link-highlight-color: rgba(var(--banner-link-rgb), 0.74);
+  --link-highlight-color: rgba(var(--banner-link-rgb), calc(0.74 * var(--banner-link-opacity-scale)));
   text-decoration: none;
   background-image: linear-gradient(
     to top,
@@ -1637,7 +1638,7 @@ html.dark summary {
 }
 
 body.is-home #content > section a {
-  --link-highlight-color: rgba(var(--banner-link-rgb), 0.72);
+  --link-highlight-color: rgba(var(--banner-link-rgb), calc(0.72 * var(--banner-link-opacity-scale)));
   text-decoration: none;
   background-image: linear-gradient(
     to top,
@@ -1654,7 +1655,7 @@ body.is-home #content > section a {
 }
 
 body.page-post-single #content article > section a {
-  --link-highlight-color: rgba(var(--banner-link-rgb), 0.74);
+  --link-highlight-color: rgba(var(--banner-link-rgb), calc(0.74 * var(--banner-link-opacity-scale)));
   text-decoration: none;
   background-image: linear-gradient(
     to top,
@@ -1692,21 +1693,21 @@ body.page-post-single #content article > section a.footnote-ref {
   line-height: 1;
   vertical-align: super;
   transform: translateY(-0.06em);
-  background-color: rgba(var(--banner-link-rgb), 0.28);
+  background-color: rgba(var(--banner-link-rgb), calc(0.28 * var(--banner-link-opacity-scale)));
 }
 
 body.page-post-single #content article > section a.footnote-ref:hover,
 body.page-post-single #content article > section a.footnote-ref:focus-visible {
-  background-color: rgba(var(--banner-link-rgb), 0.44);
+  background-color: rgba(var(--banner-link-rgb), calc(0.44 * var(--banner-link-opacity-scale)));
 }
 
 html.dark body.page-post-single #content article > section a.footnote-ref {
-  background-color: rgba(var(--banner-link-rgb), 0.36);
+  background-color: rgba(var(--banner-link-rgb), calc(0.36 * var(--banner-link-opacity-scale)));
 }
 
 html.dark body.page-post-single #content article > section a.footnote-ref:hover,
 html.dark body.page-post-single #content article > section a.footnote-ref:focus-visible {
-  background-color: rgba(var(--banner-link-rgb), 0.54);
+  background-color: rgba(var(--banner-link-rgb), calc(0.54 * var(--banner-link-opacity-scale)));
 }
 
 body.page-post-single #content article > section .footnotes ol {
@@ -1739,11 +1740,11 @@ body.page-post-single #content article > section .footnotes ol > li::before {
   font-size: 0.8em;
   line-height: 1;
   font-variant-numeric: tabular-nums;
-  background-color: rgba(var(--banner-link-rgb), 0.28);
+  background-color: rgba(var(--banner-link-rgb), calc(0.28 * var(--banner-link-opacity-scale)));
 }
 
 html.dark body.page-post-single #content article > section .footnotes ol > li::before {
-  background-color: rgba(var(--banner-link-rgb), 0.36);
+  background-color: rgba(var(--banner-link-rgb), calc(0.36 * var(--banner-link-opacity-scale)));
 }
 
 #content .corner-entry-body a::after,
