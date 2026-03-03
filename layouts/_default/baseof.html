@@ -39,7 +39,7 @@
         backdrop-filter: blur(var(--sticky-surface-blur));
         -webkit-backdrop-filter: blur(var(--sticky-surface-blur));
         box-shadow: var(--sticky-surface-shadow);
-        transition: background-color 0.2s ease, backdrop-filter 0.2s ease, box-shadow 0.2s ease, height 0.2s ease;
+        transition: background-color 110ms ease-out, backdrop-filter 110ms ease-out, box-shadow 110ms ease-out, height 110ms ease-out;
         z-index: 40;
       }
 
@@ -1073,8 +1073,38 @@
       }
 
       @media (min-width: 912px) {
+        .site-sticky-nav {
+          width: 100%;
+        }
+
+        .site-sticky-nav nav {
+          width: 100%;
+        }
+
+        .site-sticky-nav nav ul {
+          display: flex;
+          width: 100%;
+          align-items: center;
+          justify-content: space-between;
+          gap: 0;
+        }
+
+        .site-sticky-nav nav ul > li.nav-menu-item,
+        .site-sticky-nav nav ul > li.nav-tools-item {
+          flex: 1 1 0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .site-sticky-nav .nav-tools-item {
+          margin-left: 0;
+          justify-content: center;
+          gap: 0.22rem;
+        }
+
         .site-kamaboko-corner {
-          width: clamp(31px, 4.6vw, 54px);
+          width: clamp(24.8px, 3.68vw, 43.2px);
         }
 
         body.is-home .site-sticky-bar:not(.is-stuck):not(.is-submenu-open) .site-sticky-nav nav a {
@@ -1478,6 +1508,117 @@
           transform: translate(-50%, -50%) rotate(var(--meteor-angle, 169deg)) translateX(var(--meteor-post, 72px));
         }
       }
+
+      @media print {
+        html,
+        body {
+          background: #fff !important;
+          color: #111 !important;
+        }
+
+        html::before {
+          content: none !important;
+          display: none !important;
+        }
+
+        html.dark,
+        html.dark body,
+        html.dark #content,
+        html.dark #content *,
+        html.dark .site-sticky-nav nav a {
+          color: #111 !important;
+        }
+
+        .site-sticky-sentinel,
+        .site-sticky-bg,
+        .site-sticky-side-titles,
+        .site-mobile-breadcrumb,
+        .site-kamaboko-corner,
+        #global-ripple-layer,
+        #kamaboko-rain-layer,
+        #kamaboko-center-layer,
+        #kamaboko-roll-layer {
+          display: none !important;
+        }
+
+        .site-sticky-bar {
+          position: static !important;
+          top: auto !important;
+          margin-bottom: 1rem !important;
+          padding: 0.18rem 0 !important;
+          border-bottom: none !important;
+        }
+
+        .site-sticky-inner {
+          max-width: var(--site-content-max-width) !important;
+          margin: 0 auto !important;
+          padding: 0 0.625rem !important;
+          min-height: 2.1rem !important;
+        }
+
+        .site-sticky-nav {
+          display: flex !important;
+          align-items: center !important;
+          justify-content: center !important;
+          width: 100% !important;
+        }
+
+        .site-sticky-nav nav {
+          width: 100% !important;
+        }
+
+        .site-sticky-nav nav ul {
+          display: flex !important;
+          flex-wrap: nowrap !important;
+          align-items: center !important;
+          justify-content: space-between !important;
+          width: 100% !important;
+          margin: 0 !important;
+          padding: 0 !important;
+          gap: 0 !important;
+        }
+
+        .site-sticky-nav nav ul > li.nav-menu-item,
+        .site-sticky-nav nav ul > li.nav-tools-item {
+          flex: 1 1 0 !important;
+          display: flex !important;
+          align-items: center !important;
+          justify-content: center !important;
+        }
+
+        .site-sticky-nav nav .nav-submenu,
+        .site-sticky-nav .site-mobile-menu-item,
+        .site-sticky-nav .site-mobile-home-item {
+          display: none !important;
+        }
+
+        .site-sticky-nav .nav-tools-item {
+          display: flex !important;
+          align-items: center !important;
+          justify-content: center !important;
+          margin-left: 0 !important;
+          gap: 0.22rem !important;
+        }
+
+        .site-sticky-nav .site-search-icon {
+          display: block !important;
+          width: 1.3rem !important;
+          height: 1.3rem !important;
+          opacity: 1 !important;
+        }
+
+        .site-sticky-nav .site-desktop-search-toggle,
+        .site-sticky-nav .site-theme-toggle {
+          display: inline-flex !important;
+          visibility: visible !important;
+          opacity: 1 !important;
+        }
+
+        main#content {
+          display: block !important;
+          overflow: visible !important;
+        }
+      }
     </style>
   </head>
 
@@ -1485,7 +1626,11 @@
   {{- $titleEN := resources.Get "img/title_en.png" -}}
   {{- $kamaboko := resources.Get "img/kamaboko.png" -}}
 
-  <body class="mx-auto px-2.5 sm:px-2.5{{ if .IsHome }} is-home{{ end }}{{ if eq .Section "corner" }} page-corner{{ end }}{{ if and .IsPage (eq .Section "posts") }} page-post-single{{ end }}" style="max-width: var(--site-content-max-width); min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column;">
+  <body
+    class="mx-auto px-2.5 sm:px-2.5{{ if .IsHome }} is-home{{ end }}{{ if eq .Section "corner" }} page-corner{{ end }}{{ if and .IsPage (eq .Section "posts") }} page-post-single{{ end }}"
+    data-section="{{ .Section }}"
+    style="max-width: var(--site-content-max-width); min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column;"
+  >
 
     <!-- Sticky Nav -->
     <div class="site-sticky-sentinel" aria-hidden="true"></div>
@@ -2687,6 +2832,9 @@
 
     <script>
       document.addEventListener("DOMContentLoaded", function() {
+        const currentSection = (document.body && document.body.dataset && document.body.dataset.section) || "";
+        if (currentSection === "posts" || currentSection === "collection") return;
+
         const titleCache = new Map();
         const inflight = new Map();
 
@@ -2721,6 +2869,7 @@
         const ensureFallbackTitle = function(link) {
           if (!(link instanceof HTMLAnchorElement)) return null;
           if (link.hasAttribute("data-hover-tooltip")) return null;
+          if (link.classList.contains("collection-auto-link")) return null;
 
           const url = parseLinkUrl(link);
           if (!url) return null;
