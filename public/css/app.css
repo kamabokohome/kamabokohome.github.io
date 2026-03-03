@@ -503,6 +503,7 @@ video {
     --site-font-latin: "Site Inter", "Inter", "IBM Plex Sans", "Helvetica Neue", "Segoe UI", sans-serif;
     --site-font-cjk: "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC", "Source Han Sans SC", "Microsoft YaHei", sans-serif;
     --site-font-sans: var(--site-font-latin), var(--site-font-cjk);
+    --banner-link-rgb: 135, 206, 235;
     --sun-halo-center-y: calc(100% - 36px);
     --light-grad-color-1: rgba(204, 210, 218, 0.42);
     --light-grad-color-2: rgba(217, 222, 229, 0.3);
@@ -582,8 +583,8 @@ video {
     background-image:
       repeating-linear-gradient(
         90deg,
-        rgba(171, 201, 229, 0.12) 0px,
-        rgba(171, 201, 229, 0.12) 1px,
+        rgba(191, 164, 132, 0.09) 0px,
+        rgba(191, 164, 132, 0.09) 1px,
         rgba(255, 255, 255, 0) 1px,
         rgba(255, 255, 255, 0) 8px
       );
@@ -615,8 +616,8 @@ video {
     background-image:
       repeating-linear-gradient(
         90deg,
-        rgba(171, 201, 229, 0.12) 0px,
-        rgba(171, 201, 229, 0.12) 1px,
+        rgba(191, 164, 132, 0.09) 0px,
+        rgba(191, 164, 132, 0.09) 1px,
         rgba(255, 255, 255, 0) 1px,
         rgba(255, 255, 255, 0) 8px
       );
@@ -1616,6 +1617,157 @@ html.dark summary {
   padding-right: 0.5rem;
   margin-top: 1.2rem;
   margin-bottom: 1.4rem;
+}
+
+#content .corner-entry-body a {
+  --link-highlight-color: rgba(var(--banner-link-rgb), 0.74);
+  text-decoration: none;
+  background-image: linear-gradient(
+    to top,
+    var(--link-highlight-color) 0%,
+    var(--link-highlight-color) 35%,
+    transparent 35%
+  );
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-position: 0 86%;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  transition: color 160ms ease;
+}
+
+body.is-home #content > section a {
+  --link-highlight-color: rgba(var(--banner-link-rgb), 0.72);
+  text-decoration: none;
+  background-image: linear-gradient(
+    to top,
+    var(--link-highlight-color) 0%,
+    var(--link-highlight-color) 35%,
+    transparent 35%
+  );
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-position: 0 86%;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  transition: color 160ms ease;
+}
+
+body.page-post-single #content article > section a {
+  --link-highlight-color: rgba(var(--banner-link-rgb), 0.74);
+  text-decoration: none;
+  background-image: linear-gradient(
+    to top,
+    var(--link-highlight-color) 0%,
+    var(--link-highlight-color) 35%,
+    transparent 35%
+  );
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-position: 0 86%;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  transition: color 160ms ease;
+}
+
+body.page-post-single #content article > section .footnotes a {
+  background-image: none;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.16em;
+}
+
+body.page-post-single #content article > section a.footnote-ref {
+  background-image: none;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.46em;
+  height: 1.46em;
+  padding: 0 0.34em;
+  margin-left: 0.08em;
+  border-radius: 999px;
+  font-size: 0.8em;
+  line-height: 1;
+  vertical-align: super;
+  transform: translateY(-0.06em);
+  background-color: rgba(var(--banner-link-rgb), 0.28);
+}
+
+body.page-post-single #content article > section a.footnote-ref:hover,
+body.page-post-single #content article > section a.footnote-ref:focus-visible {
+  background-color: rgba(var(--banner-link-rgb), 0.44);
+}
+
+html.dark body.page-post-single #content article > section a.footnote-ref {
+  background-color: rgba(var(--banner-link-rgb), 0.36);
+}
+
+html.dark body.page-post-single #content article > section a.footnote-ref:hover,
+html.dark body.page-post-single #content article > section a.footnote-ref:focus-visible {
+  background-color: rgba(var(--banner-link-rgb), 0.54);
+}
+
+body.page-post-single #content article > section .footnotes ol {
+  list-style: none;
+  margin-left: 0;
+  padding-left: 0;
+  counter-reset: post-footnote;
+}
+
+body.page-post-single #content article > section .footnotes ol > li {
+  position: relative;
+  counter-increment: post-footnote;
+  padding-left: 1.92em;
+}
+
+body.page-post-single #content article > section .footnotes ol > li::before {
+  content: counter(post-footnote);
+  position: absolute;
+  left: 0;
+  top: calc((1lh - 1.46em) / 2 + 0.6em);
+  transform: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  min-width: 1.46em;
+  height: 1.46em;
+  padding: 0 0.34em;
+  border-radius: 999px;
+  font-size: 0.8em;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  background-color: rgba(var(--banner-link-rgb), 0.28);
+}
+
+html.dark body.page-post-single #content article > section .footnotes ol > li::before {
+  background-color: rgba(var(--banner-link-rgb), 0.36);
+}
+
+#content .corner-entry-body a::after,
+body.is-home #content > section a::after {
+  content: "";
+  display: inline-block;
+  width: 0.9em;
+  height: 0.9em;
+  margin-left: 0;
+  margin-right: 0.12em;
+  vertical-align: baseline;
+  transform: translateY(-0.12em);
+  opacity: 1;
+  background-color: currentColor;
+  -webkit-mask-mode: alpha;
+  mask-mode: alpha;
+  -webkit-mask-image: url("/img/external-open-square-dark.svg");
+  mask-image: url("/img/external-open-square-dark.svg");
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-position: center;
+  mask-position: center;
 }
 
 #content .corner-entry-body > :last-child {
