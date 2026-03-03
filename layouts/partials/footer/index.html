@@ -22,8 +22,97 @@
             const bannerUrls = JSON.parse(bannerEl.dataset.banners || "[]");
             if (!Array.isArray(bannerUrls) || bannerUrls.length === 0) return;
 
+            const bannerColorMap = {
+              blue: "135, 206, 235",
+              purple: "196, 174, 244",
+              pink: "236, 180, 203",
+              green: "191, 216, 140",
+              yellow: "241, 218, 129",
+              yellow2: "236, 208, 118",
+              brown: "191, 164, 132"
+            };
+
+            const applyBannerColor = function (url) {
+              if (!url) return;
+              const match = String(url).match(/banner_([a-z0-9]+)\.[^./?#]+(?:[?#].*)?$/i);
+              if (!match || !match[1]) return;
+              const colorKey = match[1].toLowerCase();
+              const rgb = bannerColorMap[colorKey];
+              if (rgb) {
+                document.documentElement.style.setProperty("--banner-link-rgb", rgb);
+              }
+            };
+
+            const extractDominantBannerColor = function (imgEl) {
+              if (!imgEl || !imgEl.naturalWidth || !imgEl.naturalHeight) return null;
+
+              const maxSampleSide = 96;
+              const scale = Math.min(1, maxSampleSide / Math.max(imgEl.naturalWidth, imgEl.naturalHeight));
+              const sampleWidth = Math.max(1, Math.round(imgEl.naturalWidth * scale));
+              const sampleHeight = Math.max(1, Math.round(imgEl.naturalHeight * scale));
+
+              const canvas = document.createElement("canvas");
+              canvas.width = sampleWidth;
+              canvas.height = sampleHeight;
+              const ctx = canvas.getContext("2d", { willReadFrequently: true });
+              if (!ctx) return null;
+
+              ctx.drawImage(imgEl, 0, 0, sampleWidth, sampleHeight);
+
+              let pixels;
+              try {
+                pixels = ctx.getImageData(0, 0, sampleWidth, sampleHeight).data;
+              } catch (err) {
+                return null;
+              }
+
+              const bins = new Map();
+              for (let i = 0; i < pixels.length; i += 4) {
+                const r = pixels[i];
+                const g = pixels[i + 1];
+                const b = pixels[i + 2];
+                const a = pixels[i + 3];
+                if (a < 20) continue;
+
+                const max = Math.max(r, g, b);
+                const min = Math.min(r, g, b);
+                const saturation = max === 0 ? 0 : (max - min) / max;
+                if (saturation < 0.08) continue;
+
+                const key = `${r >> 3},${g >> 3},${b >> 3}`;
+                const entry = bins.get(key) || { count: 0, r: 0, g: 0, b: 0, score: 0 };
+                entry.count += 1;
+                entry.r += r;
+                entry.g += g;
+                entry.b += b;
+                entry.score += (a / 255) * (0.5 + saturation);
+                bins.set(key, entry);
+              }
+
+              if (bins.size === 0) return null;
+
+              let best = null;
+              bins.forEach(function (entry) {
+                if (!best || entry.score > best.score) best = entry;
+              });
+
+              if (!best || best.count === 0) return null;
+              return [
+                Math.round(best.r / best.count),
+                Math.round(best.g / best.count),
+                Math.round(best.b / best.count)
+              ];
+            };
+
             const randomIndex = Math.floor(Math.random() * bannerUrls.length);
-            bannerEl.src = bannerUrls[randomIndex];
+            const selectedBanner = bannerUrls[randomIndex];
+            applyBannerColor(selectedBanner);
+            bannerEl.addEventListener("load", function () {
+              const dominantRgb = extractDominantBannerColor(bannerEl);
+              if (!dominantRgb) return;
+              document.documentElement.style.setProperty("--banner-link-rgb", dominantRgb.join(", "));
+            }, { once: true });
+            bannerEl.src = selectedBanner;
           })();
         </script>
 
