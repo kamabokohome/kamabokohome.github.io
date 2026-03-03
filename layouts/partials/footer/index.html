@@ -39,13 +39,49 @@
               return match[1].toLowerCase();
             };
 
+            const parseRgbString = function (value) {
+              if (!value) return null;
+              const parts = String(value).split(",").map(function (part) {
+                return parseInt(part.trim(), 10);
+              });
+              if (parts.length !== 3 || parts.some(function (n) { return Number.isNaN(n); })) return null;
+              return parts.map(function (n) {
+                return Math.max(0, Math.min(255, n));
+              });
+            };
+
+            const clampChannel = function (value) {
+              return Math.max(0, Math.min(255, Math.round(value)));
+            };
+
+            const selectedBanner = bannerUrls[Math.floor(Math.random() * bannerUrls.length)];
+            const selectedColorKey = getBannerColorKey(selectedBanner) || "";
+            let baseBannerRgb = null;
+
+            const getAdjustedBannerRgb = function (rgb) {
+              if (!Array.isArray(rgb) || rgb.length !== 3) return null;
+              if (selectedColorKey !== "brown") return rgb;
+              const isDarkMode = document.documentElement.classList.contains("dark");
+              const factor = isDarkMode ? 1 : 1.1;
+              return rgb.map(function (channel) {
+                return clampChannel(channel * factor);
+              });
+            };
+
+            const applyEffectiveBannerColor = function () {
+              if (!baseBannerRgb) return;
+              const adjusted = getAdjustedBannerRgb(baseBannerRgb);
+              if (!adjusted) return;
+              document.documentElement.style.setProperty("--banner-link-rgb", adjusted.join(", "));
+            };
+
             const applyBannerColor = function (url) {
               const colorKey = getBannerColorKey(url);
               if (!colorKey) return;
-              const rgb = bannerColorMap[colorKey];
-              if (rgb) {
-                document.documentElement.style.setProperty("--banner-link-rgb", rgb);
-              }
+              const rgb = parseRgbString(bannerColorMap[colorKey]);
+              if (!rgb) return;
+              baseBannerRgb = rgb;
+              applyEffectiveBannerColor();
             };
 
             const applyBannerOpacityScale = function (url) {
@@ -119,15 +155,21 @@
               ];
             };
 
-            const randomIndex = Math.floor(Math.random() * bannerUrls.length);
-            const selectedBanner = bannerUrls[randomIndex];
             applyBannerColor(selectedBanner);
             applyBannerOpacityScale(selectedBanner);
             bannerEl.addEventListener("load", function () {
               const dominantRgb = extractDominantBannerColor(bannerEl);
               if (!dominantRgb) return;
-              document.documentElement.style.setProperty("--banner-link-rgb", dominantRgb.join(", "));
+              baseBannerRgb = dominantRgb;
+              applyEffectiveBannerColor();
             }, { once: true });
+            const themeObserver = new MutationObserver(function () {
+              applyEffectiveBannerColor();
+            });
+            themeObserver.observe(document.documentElement, {
+              attributes: true,
+              attributeFilter: ["class"]
+            });
             bannerEl.src = selectedBanner;
           })();
         </script>

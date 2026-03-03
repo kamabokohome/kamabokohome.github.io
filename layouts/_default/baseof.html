@@ -257,7 +257,7 @@
         transform: translateX(-50%);
         top: 100%;
         width: 160%;
-        height: 10px;
+        height: 18px;
       }
 
       .site-sticky-nav nav a {
@@ -358,51 +358,45 @@
       }
 
       .site-sticky-nav nav li.nav-menu-item > a {
+        --link-highlight-color: rgba(var(--banner-link-rgb), 0);
+        --nav-link-highlight-width: 150%;
         position: relative;
         display: inline-block;
-        padding: 0.26rem 0.46rem;
-        border-radius: 0.48rem;
+        padding: 0;
+        border-radius: 0;
+        text-decoration: none;
+        background-image: linear-gradient(
+          to top,
+          var(--link-highlight-color) 0%,
+          var(--link-highlight-color) 36%,
+          transparent 36%
+        );
+        background-repeat: no-repeat;
+        background-size: var(--nav-link-highlight-width) 100%;
+        background-position: 50% 86%;
+        box-decoration-break: clone;
+        -webkit-box-decoration-break: clone;
         transition: color 130ms ease;
         z-index: 0;
       }
 
-      .site-sticky-nav nav li.nav-menu-item > a::before {
-        content: "";
-        position: absolute;
-        inset: -0.06rem -0.1rem;
-        border-radius: 0.48rem;
-        opacity: 0;
-        pointer-events: none;
-        transition: opacity 130ms ease;
-        z-index: -1;
-      }
-
-      .site-sticky-nav nav li.nav-menu-item > a:hover::before,
-      .site-sticky-nav nav li.nav-menu-item > a:focus-visible::before {
-        opacity: 1;
-      }
-
-      .site-sticky-nav nav li.nav-menu-item > a:hover::before,
-      .site-sticky-nav nav li.nav-menu-item > a:focus-visible::before {
-        background: rgba(177, 167, 147, 0.18);
-      }
-
-      html.dark .site-sticky-nav nav li.nav-menu-item > a:hover::before,
-      html.dark .site-sticky-nav nav li.nav-menu-item > a:focus-visible::before {
-        background: rgba(123, 135, 152, 0.25);
+      .site-sticky-nav nav li.nav-menu-item > a:hover,
+      .site-sticky-nav nav li.nav-menu-item > a:focus-visible {
+        --link-highlight-color: rgba(var(--banner-link-rgb), calc(0.74 * var(--banner-link-opacity-effective-scale)));
       }
 
       .site-sticky-nav nav .nav-submenu {
         position: absolute;
         left: 50%;
-        top: calc(100% - 1px);
+        top: calc(100% + 0.42rem);
         transform: translateX(-50%);
         margin: 0;
         padding: 0.38rem 0.26rem 0.26rem;
         min-width: 8.2rem;
         display: flex;
         flex-direction: column;
-        gap: 0.12rem;
+        align-items: center;
+        gap: 0.5rem;
         border-radius: 0 0 0.54rem 0.54rem;
         border: none;
         background: transparent;
@@ -417,24 +411,33 @@
       }
 
       .site-sticky-nav nav .nav-submenu a {
+        --link-highlight-color: rgba(var(--banner-link-rgb), 0);
         display: block;
         font-size: 0.72rem;
         line-height: 1.35;
         text-align: center;
         text-decoration: none;
-        padding: 0.36rem 0.56rem;
-        border-radius: 0.48rem;
+        padding: 0.18rem 0.42rem;
+        border-radius: 0;
+        background-image: linear-gradient(
+          to top,
+          var(--link-highlight-color) 0%,
+          var(--link-highlight-color) 36%,
+          transparent 36%
+        );
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        background-position: 0 86%;
+        background-origin: content-box;
+        -webkit-background-origin: content-box;
+        box-decoration-break: clone;
+        -webkit-box-decoration-break: clone;
         white-space: nowrap;
       }
 
       .site-sticky-nav nav .nav-submenu a:hover,
       .site-sticky-nav nav .nav-submenu a:focus-visible {
-        background: rgba(177, 167, 147, 0.18);
-      }
-
-      html.dark .site-sticky-nav nav .nav-submenu a:hover,
-      html.dark .site-sticky-nav nav .nav-submenu a:focus-visible {
-        background: rgba(123, 135, 152, 0.25);
+        --link-highlight-color: rgba(var(--banner-link-rgb), calc(0.74 * var(--banner-link-opacity-effective-scale)));
       }
 
       .site-sticky-nav nav li.nav-with-dropdown:hover > .nav-submenu,
@@ -465,7 +468,10 @@
         display: flex;
         align-items: flex-start;
         justify-content: center;
-        padding: calc(var(--site-sticky-bar-height, 0px) + 0.34rem) 1rem 1rem;
+        padding-top: calc(var(--site-sticky-bar-height, 0px) + 0.34rem);
+        padding-right: max(1rem, calc((100vw - var(--site-content-max-width)) / 2));
+        padding-bottom: 1rem;
+        padding-left: max(1rem, calc((100vw - var(--site-content-max-width)) / 2));
       }
 
       .site-search-backdrop {
@@ -549,16 +555,36 @@
         color: rgb(156 163 175 / 1);
       }
 
+      .site-search-input:focus,
+      .site-search-input:focus-visible {
+        outline: none;
+        box-shadow: none;
+      }
+
       .site-search-results {
         margin: 0;
-        padding: 0 0.45rem 0.66rem;
+        padding: 0 0.45rem 0.66rem 1.1rem;
         list-style: none;
+        display: block;
         overflow-y: auto;
+      }
+
+      .site-sticky-nav nav ul.site-search-results {
+        display: block;
+        width: auto;
+        align-items: stretch;
+        justify-content: flex-start;
+        gap: 0;
+      }
+
+      .site-search-results > li {
+        display: block;
+        width: 100%;
       }
 
       .site-search-results a {
         display: block;
-        padding: 0.46rem 0.48rem;
+        padding: 0.46rem 0.48rem 0.46rem 1.46rem;
         border-radius: 0.5rem;
         text-decoration: none;
       }
@@ -1048,7 +1074,11 @@
         }
 
         .site-search-results {
-          padding: 0 0.42rem 0.64rem;
+          padding: 0 0.42rem 0.64rem 0.82rem;
+        }
+
+        .site-search-results a {
+          padding-left: 1.2rem;
         }
 
         .site-search-result-title {
@@ -2137,8 +2167,9 @@
               item.classList.remove("is-open");
             }
           }
+          const dropdownBgTail = 8;
           const submenuExtent = hasOpenDropdown
-            ? Math.max(0, Math.ceil(maxSubmenuBottom - stickyBarRect.bottom))
+            ? Math.max(0, Math.ceil(maxSubmenuBottom - stickyBarRect.bottom) + dropdownBgTail)
             : 0;
           stickyBar.style.setProperty("--sticky-submenu-extent", submenuExtent + "px");
           stickyBar.classList.toggle("is-submenu-open", hasOpenDropdown);
@@ -2833,7 +2864,11 @@
     <script>
       document.addEventListener("DOMContentLoaded", function() {
         const currentSection = (document.body && document.body.dataset && document.body.dataset.section) || "";
-        if (currentSection === "posts" || currentSection === "collection") return;
+        const isHome = !!(document.body && document.body.classList && document.body.classList.contains("is-home"));
+        const isPostSingle = !!(document.body && document.body.classList && document.body.classList.contains("page-post-single"));
+        if (isHome) return;
+        if (currentSection === "collection") return;
+        if (currentSection === "posts" && !isPostSingle) return;
 
         const titleCache = new Map();
         const inflight = new Map();
@@ -2870,6 +2905,8 @@
           if (!(link instanceof HTMLAnchorElement)) return null;
           if (link.hasAttribute("data-hover-tooltip")) return null;
           if (link.classList.contains("collection-auto-link")) return null;
+          if (link.classList.contains("single-jump-link")) return null;
+          if (link.closest(".single-jump-menu")) return null;
 
           const url = parseLinkUrl(link);
           if (!url) return null;
