@@ -88,6 +88,10 @@
     <div class="home-ripple-water home-ripple-mobile-water" data-ripple-src="{{ $completePigeonBack.RelPermalink }}" style="background-image: url('{{ $completePigeonBack.RelPermalink }}');"></div>
     <img class="home-ripple-mobile-front" src="{{ $completePigeonFront.RelPermalink }}" alt="complete pigeon front" width="{{ $completePigeonFront.Width }}" height="{{ $completePigeonFront.Height }}" loading="lazy" />
   </div>
+  <div class="home-ripple-print">
+    <img class="home-ripple-print-back" src="{{ $completePigeonBack.RelPermalink }}" alt="home main visual back" width="{{ $completePigeonBack.Width }}" height="{{ $completePigeonBack.Height }}" loading="eager" />
+    <img class="home-ripple-print-front" src="{{ $completePigeonFront.RelPermalink }}" alt="home main visual front" width="{{ $completePigeonFront.Width }}" height="{{ $completePigeonFront.Height }}" loading="eager" />
+  </div>
 </figure>
 
 <style>
@@ -198,6 +202,31 @@
     object-position: center;
     pointer-events: none;
     z-index: 2;
+  }
+
+  .home-ripple-print {
+    display: none;
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background: transparent;
+  }
+
+  .home-ripple-print-back,
+  .home-ripple-print-front {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .home-ripple-print-front {
+    z-index: 2;
+    pointer-events: none;
   }
 
   .home-ripple-canvas::before {

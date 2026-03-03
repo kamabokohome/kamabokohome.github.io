@@ -329,11 +329,14 @@
 {{ end }}
 */}}
 
-<div class="flex justify-center" style="margin-top: auto; padding-top: 1rem;">
-  <button type="button" onclick="{{ if and (eq .Section "corner") (eq .Kind "section") }}foldCornerEntries(){{ else }}scrollToTop(){{ end }}" class="pagination-button text-xs font-semibold" style="color: #9CA3AF; text-decoration: none; cursor: pointer; background: none; border: none;">
-    {{ if and (eq .Section "corner") (eq .Kind "section") }}F🍥LD{{ else }}T🍥P{{ end }}
-  </button>
-</div>
+{{ $hideLegacyBottomButton := and (eq .Kind "section") (or (eq .Section "posts") (eq .Section "collection") (eq .Section "corner") (eq .Section "message")) }}
+{{ if not $hideLegacyBottomButton }}
+  <div class="flex justify-center" style="margin-top: auto; padding-top: 1rem;">
+    <button type="button" onclick="{{ if and (eq .Section "corner") (eq .Kind "section") }}foldCornerEntries(){{ else }}scrollToTop(){{ end }}" class="pagination-button text-xs font-semibold" style="color: #9CA3AF; text-decoration: none; cursor: pointer; background: none; border: none;">
+      {{ if and (eq .Section "corner") (eq .Kind "section") }}F🍥LD{{ else }}T🍥P{{ end }}
+    </button>
+  </div>
+{{ end }}
 
 <script>
   const backToTopBtn = document.getElementById('backToTop');
