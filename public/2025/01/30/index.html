@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-US" class="scroll-smooth dark">
-  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="UTF-8" />
+  <head><meta charset="UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#e6f2fb" />
@@ -23,7 +23,7 @@
 在冰岛时和同伴聊到，我好像已经厌倦了旅行打卡。但徒步登山不让人厌倦。每每回忆起徒步的经历，当时走在路上的感觉都能被唤醒。那种记忆是很深刻的。因为身体认真地体验了山、亲近了山。为了保护自然景观，徒步路线中对人的保护措施往往都很简陋，甚至完全没有。如果大意掉下山崖，多半会骨折，甚至有生命危险。相关的噩耗并不少见。因此，我只选择简单到中等难度的路线，而且走的时候都万分小心。自从买了登山杖，徒步就总会带上。在几次中等难度的徒步中，开始感觉到压力后，我都会不由自主地萌生“好想回家，回到熟悉的城市街道，回到火车的座位上”这样的想法。困难路段要靠毅力支撑。走的时候内心在啊啊大叫，只能专心看着脚下，无暇关注风景。但站稳脚跟、眺望远处时，就感觉内心满满都是为美产生的感动。等到麻烦的路段走完、抵达终点后，就不可自拔地沉浸在愉快和成就感中，庆幸“还好来登山了，还好坚持走完了”。我已经小结出一条经验：如果一次徒步中产生了好可怕好想回家的念头，那么恭喜自己，这一定会是一次铭记于心的旅程。
 徒步往返Saxerlücke的路上不仅陡峭，尖尖的小碎石块还特别多。在走得人简直要崩溃的路段，我捡了两块石头，塞进冲锋衣的口袋（还是那件，至今都只有一件冲锋衣）带回了家。现在，这两块尽是棱角的小石头还在我的餐桌上。偶尔把玩它们、体会石头的触感，就会想起那天看到的耀眼的夕阳和云海。当时的恐惧、疲惫早已消散，只剩下了愉悦和感激。"
 />
-<link rel="canonical" href="http://localhost:1313/2025/01/30/" />
+<link rel="canonical" href="https://kamabokohome.com/2025/01/30/" />
 <meta name="robots" content="index,follow" /><link rel="icon" href="/img/favicon.ico" />
 <link rel="icon" type="image/png" href="/img/favicon.png" />
 <link rel="apple-touch-icon" href="/img/favicon.png" />
@@ -33,7 +33,7 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <script type="text/x-mathjax-config">MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });</script>
 
-<link rel="stylesheet" href="/css/app.css" /><style>
+<link rel="stylesheet" href="/css/app.min.af3d4aa597981c6f52fb97550a99c920258c872b106e86dc794777849cea1f6d.css" integrity="sha256-rz1KpZeYHG9S+5dVCpnJICWMhysQbobceUd3hJzqH20=" /><style>
       html {
         scrollbar-gutter: stable;
         --site-content-max-width: 50rem;
@@ -93,7 +93,7 @@
 
       html.dark .site-sticky-bar.is-stuck,
       html.dark .site-sticky-bar.is-submenu-open {
-        --sticky-surface-bg: rgba(47, 47, 47, 0.82);
+        --sticky-surface-bg: rgba(58, 53, 49, 0.82);
         --sticky-surface-shadow: 0 5px 14px rgba(0, 0, 0, 0.3);
       }
 
@@ -207,6 +207,14 @@
           display: inline;
         }
 
+        .page-post-single #content .meta .post-meta-time-full {
+          display: inline;
+        }
+
+        .page-post-single #content .meta .post-meta-time-compact {
+          display: none;
+        }
+
         .site-mobile-breadcrumb {
           display: flex;
           align-items: center;
@@ -226,40 +234,63 @@
           margin-bottom: 0.04rem;
         }
 
+        .page-post-single .site-mobile-breadcrumb {
+          margin-bottom: 1.4rem;
+        }
+
+        .page-post-single #content .meta {
+          margin-top: 0;
+        }
+
         .site-mobile-breadcrumb::-webkit-scrollbar {
           display: none;
         }
 
         .site-mobile-breadcrumb a {
+          --link-highlight-color: rgba(var(--banner-link-rgb), calc(0.74 * var(--banner-link-opacity-effective-scale)));
           color: inherit;
           text-decoration: none;
-          border-radius: 0.3rem;
-          min-height: 32px;
-          padding: 0.06rem 0.18rem;
+          background-image: linear-gradient(
+            to top,
+            var(--link-highlight-color) 0%,
+            var(--link-highlight-color) 36%,
+            transparent 36%
+          );
+          background-repeat: no-repeat;
+          background-size: 100% 100%;
+          background-position: 0 86%;
+          box-decoration-break: clone;
+          -webkit-box-decoration-break: clone;
           flex: 0 0 auto;
-          display: inline-flex;
-          align-items: center;
+          transition: color 160ms ease;
         }
 
-        .site-mobile-breadcrumb a:first-child {
-          padding-left: 0;
-        }
-
-        .site-mobile-breadcrumb a:hover,
-        .site-mobile-breadcrumb a:focus-visible {
-          background: rgba(177, 167, 147, 0.18);
-          color: rgb(107 114 128 / 1);
+        .site-mobile-breadcrumb a::after {
+          content: "";
+          display: inline-block;
+          width: 0.9em;
+          height: 0.9em;
+          margin-left: 0;
+          margin-right: 0.12em;
+          vertical-align: baseline;
+          transform: translateY(-0.12em);
+          opacity: 1;
+          background-color: currentColor;
+          -webkit-mask-mode: alpha;
+          mask-mode: alpha;
+          -webkit-mask-image: url("/img/external-open-square-dark.svg");
+          mask-image: url("/img/external-open-square-dark.svg");
+          -webkit-mask-repeat: no-repeat;
+          mask-repeat: no-repeat;
+          -webkit-mask-size: contain;
+          mask-size: contain;
+          -webkit-mask-position: center;
+          mask-position: center;
         }
 
         .site-mobile-breadcrumb-sep {
           color: rgb(156 163 175 / 1);
           flex: 0 0 auto;
-        }
-
-        html.dark .site-mobile-breadcrumb a:hover,
-        html.dark .site-mobile-breadcrumb a:focus-visible {
-          background: rgba(123, 135, 152, 0.25);
-          color: rgb(209 213 219 / 1);
         }
 
       }
@@ -331,6 +362,18 @@
         user-select: none;
         -webkit-user-drag: none;
         opacity: 0.92;
+      }
+
+      .site-theme-toggle .theme-icon {
+        display: inline-block;
+        width: 1.3rem;
+        height: 1.3rem;
+      }
+
+      .site-theme-toggle .theme-icon img {
+        display: block;
+        width: 100%;
+        height: 100%;
       }
 
       .site-desktop-search-toggle {
@@ -775,18 +818,18 @@
         }
 
         .site-sticky-nav nav .nav-theme-item .toggle-theme {
-          width: 29px !important;
-          height: 29px !important;
-          padding: 3px !important;
+          width: 30.4px !important;
+          height: 30.4px !important;
+          padding: 2px !important;
         }
 
         .site-sticky-nav nav .nav-theme-item .toggle-theme .theme-icon {
-          width: 25px !important;
-          height: 25px !important;
+          width: 1.6rem !important;
+          height: 1.6rem !important;
         }
 
         .site-sticky-nav nav .nav-tools-item {
-          gap: 0;
+          gap: 0.06rem;
         }
 
         .site-sticky-nav nav .site-mobile-menu-item {
@@ -803,8 +846,10 @@
           color: rgb(156 163 175 / 1);
           background: transparent;
           border: none;
-          border-radius: 0.52rem;
-          padding: 0.22rem 0.34rem;
+          border-radius: 0.6rem;
+          width: 30.4px;
+          height: 30.4px;
+          padding: 0;
           display: inline-flex;
           align-items: center;
           justify-content: center;
@@ -813,8 +858,8 @@
 
         .site-mobile-menu-icon {
           display: block;
-          width: 1.64rem;
-          height: 1.64rem;
+          width: 1.6rem;
+          height: 1.6rem;
           object-fit: contain;
           user-select: none;
           -webkit-user-drag: none;
@@ -1779,13 +1824,12 @@
   data-hover-tooltip="電源"
   data-hover-tooltip-delay="1000"
   onclick="toggleTheme()"
-  style="width:25px !important; height:25px !important; padding:2px !important;"
 >
-  <span class="theme-icon light" style="width:23px !important; height:23px !important; display:inline-block;">
-    <img src="/icons/moon.svg" alt="" aria-hidden="true" style="width:100%; height:100%; display:block;" />
+  <span class="theme-icon light">
+    <img src="/icons/moon.svg" alt="" aria-hidden="true" />
   </span>
-  <span class="theme-icon dark" style="width:23px !important; height:23px !important; display:inline-block;">
-    <img src="/icons/sun.svg" alt="" aria-hidden="true" style="width:100%; height:100%; display:block;" />
+  <span class="theme-icon dark">
+    <img src="/icons/sun.svg" alt="" aria-hidden="true" />
   </span>
 </button>
 
@@ -1955,7 +1999,7 @@
         2025-01-30 17:43
       </time>
       <time class="post-meta-time-compact" datetime="2025-01-30 17:43:20 &#43;0100 CET" title='2025-01-30 17:43'>
-        01-30 17:43
+        2025-01-30 17:43
       </time>
     
   

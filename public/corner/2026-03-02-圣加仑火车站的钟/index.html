@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-US" class="scroll-smooth dark page-corner">
-  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="UTF-8" />
+  <head><meta charset="UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#e6f2fb" />
@@ -20,7 +20,7 @@
 另外，还有一个关于瑞士时钟的小知识。瑞士火车站统一使用的时钟，采用一种叫做stop2go的规则。当秒针来到12点方向，会停顿两秒，然后才和分针一起跳向下一格。这样设计，似乎是为了给全国列车校准时间提供缓冲的机会。得知这个小知识后，我在火车站特意观察了一下，发现真的会停顿两秒，以前居然完全没注意到。采用这种特别规则的、和瑞士火车站同款的手表和挂钟，在Mondaine也是可以买到的。
 说回圣加仑的二进制钟……虽然很酷，但是能一眼看懂具体时间的人，想必全世界也寥寥可数吧。急匆匆赶火车的时候，还是查看自己的手表或者别的地方挂着的一般时钟比较可靠哦。毕竟等算出几点几分，可能就来不及了——"
 />
-<link rel="canonical" href="http://localhost:1313/corner/2026-03-02-%E5%9C%A3%E5%8A%A0%E4%BB%91%E7%81%AB%E8%BD%A6%E7%AB%99%E7%9A%84%E9%92%9F/" />
+<link rel="canonical" href="https://kamabokohome.com/corner/2026-03-02-%E5%9C%A3%E5%8A%A0%E4%BB%91%E7%81%AB%E8%BD%A6%E7%AB%99%E7%9A%84%E9%92%9F/" />
 <meta name="robots" content="index,follow" /><link rel="icon" href="/img/favicon.ico" />
 <link rel="icon" type="image/png" href="/img/favicon.png" />
 <link rel="apple-touch-icon" href="/img/favicon.png" />
@@ -30,7 +30,7 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <script type="text/x-mathjax-config">MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });</script>
 
-<link rel="stylesheet" href="/css/app.css" /><style>
+<link rel="stylesheet" href="/css/app.min.af3d4aa597981c6f52fb97550a99c920258c872b106e86dc794777849cea1f6d.css" integrity="sha256-rz1KpZeYHG9S+5dVCpnJICWMhysQbobceUd3hJzqH20=" /><style>
       html {
         scrollbar-gutter: stable;
         --site-content-max-width: 50rem;
@@ -90,7 +90,7 @@
 
       html.dark .site-sticky-bar.is-stuck,
       html.dark .site-sticky-bar.is-submenu-open {
-        --sticky-surface-bg: rgba(47, 47, 47, 0.82);
+        --sticky-surface-bg: rgba(58, 53, 49, 0.82);
         --sticky-surface-shadow: 0 5px 14px rgba(0, 0, 0, 0.3);
       }
 
@@ -204,6 +204,14 @@
           display: inline;
         }
 
+        .page-post-single #content .meta .post-meta-time-full {
+          display: inline;
+        }
+
+        .page-post-single #content .meta .post-meta-time-compact {
+          display: none;
+        }
+
         .site-mobile-breadcrumb {
           display: flex;
           align-items: center;
@@ -223,40 +231,63 @@
           margin-bottom: 0.04rem;
         }
 
+        .page-post-single .site-mobile-breadcrumb {
+          margin-bottom: 1.4rem;
+        }
+
+        .page-post-single #content .meta {
+          margin-top: 0;
+        }
+
         .site-mobile-breadcrumb::-webkit-scrollbar {
           display: none;
         }
 
         .site-mobile-breadcrumb a {
+          --link-highlight-color: rgba(var(--banner-link-rgb), calc(0.74 * var(--banner-link-opacity-effective-scale)));
           color: inherit;
           text-decoration: none;
-          border-radius: 0.3rem;
-          min-height: 32px;
-          padding: 0.06rem 0.18rem;
+          background-image: linear-gradient(
+            to top,
+            var(--link-highlight-color) 0%,
+            var(--link-highlight-color) 36%,
+            transparent 36%
+          );
+          background-repeat: no-repeat;
+          background-size: 100% 100%;
+          background-position: 0 86%;
+          box-decoration-break: clone;
+          -webkit-box-decoration-break: clone;
           flex: 0 0 auto;
-          display: inline-flex;
-          align-items: center;
+          transition: color 160ms ease;
         }
 
-        .site-mobile-breadcrumb a:first-child {
-          padding-left: 0;
-        }
-
-        .site-mobile-breadcrumb a:hover,
-        .site-mobile-breadcrumb a:focus-visible {
-          background: rgba(177, 167, 147, 0.18);
-          color: rgb(107 114 128 / 1);
+        .site-mobile-breadcrumb a::after {
+          content: "";
+          display: inline-block;
+          width: 0.9em;
+          height: 0.9em;
+          margin-left: 0;
+          margin-right: 0.12em;
+          vertical-align: baseline;
+          transform: translateY(-0.12em);
+          opacity: 1;
+          background-color: currentColor;
+          -webkit-mask-mode: alpha;
+          mask-mode: alpha;
+          -webkit-mask-image: url("/img/external-open-square-dark.svg");
+          mask-image: url("/img/external-open-square-dark.svg");
+          -webkit-mask-repeat: no-repeat;
+          mask-repeat: no-repeat;
+          -webkit-mask-size: contain;
+          mask-size: contain;
+          -webkit-mask-position: center;
+          mask-position: center;
         }
 
         .site-mobile-breadcrumb-sep {
           color: rgb(156 163 175 / 1);
           flex: 0 0 auto;
-        }
-
-        html.dark .site-mobile-breadcrumb a:hover,
-        html.dark .site-mobile-breadcrumb a:focus-visible {
-          background: rgba(123, 135, 152, 0.25);
-          color: rgb(209 213 219 / 1);
         }
 
       }
@@ -328,6 +359,18 @@
         user-select: none;
         -webkit-user-drag: none;
         opacity: 0.92;
+      }
+
+      .site-theme-toggle .theme-icon {
+        display: inline-block;
+        width: 1.3rem;
+        height: 1.3rem;
+      }
+
+      .site-theme-toggle .theme-icon img {
+        display: block;
+        width: 100%;
+        height: 100%;
       }
 
       .site-desktop-search-toggle {
@@ -772,18 +815,18 @@
         }
 
         .site-sticky-nav nav .nav-theme-item .toggle-theme {
-          width: 29px !important;
-          height: 29px !important;
-          padding: 3px !important;
+          width: 30.4px !important;
+          height: 30.4px !important;
+          padding: 2px !important;
         }
 
         .site-sticky-nav nav .nav-theme-item .toggle-theme .theme-icon {
-          width: 25px !important;
-          height: 25px !important;
+          width: 1.6rem !important;
+          height: 1.6rem !important;
         }
 
         .site-sticky-nav nav .nav-tools-item {
-          gap: 0;
+          gap: 0.06rem;
         }
 
         .site-sticky-nav nav .site-mobile-menu-item {
@@ -800,8 +843,10 @@
           color: rgb(156 163 175 / 1);
           background: transparent;
           border: none;
-          border-radius: 0.52rem;
-          padding: 0.22rem 0.34rem;
+          border-radius: 0.6rem;
+          width: 30.4px;
+          height: 30.4px;
+          padding: 0;
           display: inline-flex;
           align-items: center;
           justify-content: center;
@@ -810,8 +855,8 @@
 
         .site-mobile-menu-icon {
           display: block;
-          width: 1.64rem;
-          height: 1.64rem;
+          width: 1.6rem;
+          height: 1.6rem;
           object-fit: contain;
           user-select: none;
           -webkit-user-drag: none;
@@ -1776,13 +1821,12 @@
   data-hover-tooltip="電源"
   data-hover-tooltip-delay="1000"
   onclick="toggleTheme()"
-  style="width:25px !important; height:25px !important; padding:2px !important;"
 >
-  <span class="theme-icon light" style="width:23px !important; height:23px !important; display:inline-block;">
-    <img src="/icons/moon.svg" alt="" aria-hidden="true" style="width:100%; height:100%; display:block;" />
+  <span class="theme-icon light">
+    <img src="/icons/moon.svg" alt="" aria-hidden="true" />
   </span>
-  <span class="theme-icon dark" style="width:23px !important; height:23px !important; display:inline-block;">
-    <img src="/icons/sun.svg" alt="" aria-hidden="true" style="width:100%; height:100%; display:block;" />
+  <span class="theme-icon dark">
+    <img src="/icons/sun.svg" alt="" aria-hidden="true" />
   </span>
 </button>
 
