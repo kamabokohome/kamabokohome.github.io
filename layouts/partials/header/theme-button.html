@@ -32,6 +32,9 @@
 
   function setTheme(theme) {
     const html = document.documentElement;
+    const themeColorMeta = document.querySelector('meta[name="theme-color"]');
+    const themeColorLight = '#f9f5ec';
+    const themeColorDark = '#3a3531';
     localStorage.setItem('theme', theme);
 
     if (theme === 'light') {
@@ -45,6 +48,9 @@
     }
 
     const isDark = theme !== 'light';
+    if (themeColorMeta) {
+      themeColorMeta.setAttribute('content', isDark ? themeColorDark : themeColorLight);
+    }
     const toggleButtons = document.querySelectorAll('.toggle-theme');
     toggleButtons.forEach(function(button) {
       button.setAttribute('aria-pressed', isDark ? 'true' : 'false');
