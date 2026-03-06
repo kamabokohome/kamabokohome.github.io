@@ -1,5 +1,20 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>瑞士 on Kamaboko Home | 鱼糕的树屋</title><link>https://kamabokohome.com/tags/%E7%91%9E%E5%A3%AB/</link><description>Recent content in 瑞士 on Kamaboko Home | 鱼糕的树屋</description><generator>Hugo</generator><language>en-US</language><copyright>Kamaboko Home</copyright><lastBuildDate>Mon, 02 Mar 2026 23:41:29 +0100</lastBuildDate><atom:link href="https://kamabokohome.com/tags/%E7%91%9E%E5%A3%AB/index.xml" rel="self" type="application/rss+xml"/><item><title>圣加仑火车站的钟</title><link>https://kamabokohome.com/corner/2026-03-02-%E5%9C%A3%E5%8A%A0%E4%BB%91%E7%81%AB%E8%BD%A6%E7%AB%99%E7%9A%84%E9%92%9F/</link><pubDate>Mon, 02 Mar 2026 23:41:29 +0100</pubDate><guid>https://kamabokohome.com/corner/2026-03-02-%E5%9C%A3%E5%8A%A0%E4%BB%91%E7%81%AB%E8%BD%A6%E7%AB%99%E7%9A%84%E9%92%9F/</guid><description>&lt;p>如果要说圣加仑的哪一点最有趣，那无疑是主火车站的&lt;strong>二进制时钟&lt;/strong>了！&lt;/p>
-&lt;p>圣加仑主火车站并没有呈现传统建筑的样式，正面是一块巨大的、颇具现代感的稍稍透明的白色面板。这个大大面板的中间，是一块大大的宛如棋盘的、3x6的区域，第一排有六个圆形，第二排六个叉，第三排六个正方形，持续闪烁、移动。&lt;/p>
-&lt;p>刚搬来时，完全搞不懂那是什么，只觉得审美上还算不错。后来偶然得知，那其实是一个很酷的二进制时钟。最下排的正方形代表秒数，中间是分钟数，最上面是小时数。每一行的格子从右往左，分别代表1、2、4、8、16、32，只要把所有亮起的格子所代表的数字相加，就知道对应的时间了。当时让我恍然大悟、理解了这个时钟规则的网页在&lt;a href="https://www.bahnhofsuhrsg.ch">这里&lt;/a>！这个网页上也有圣加仑主火车站的照片哦。&lt;/p>
-&lt;p>另外，还有一个关于瑞士时钟的小知识。瑞士火车站统一使用的时钟，采用一种叫做&lt;a href="https://ch.mondaine.com/en/pages/stop2go-clocks">stop2go&lt;/a>的规则。当秒针来到12点方向，会停顿两秒，然后才和分针一起跳向下一格。这样设计，似乎是为了给全国列车校准时间提供缓冲的机会。得知这个小知识后，我在火车站特意观察了一下，发现真的会停顿两秒，以前居然完全没注意到。采用这种特别规则的、和瑞士火车站同款的手表和挂钟，在Mondaine也是可以买到的。&lt;/p>
-&lt;p>说回圣加仑的二进制钟……虽然很酷，但是能一眼看懂具体时间的人，想必全世界也寥寥可数吧。急匆匆赶火车的时候，还是查看自己的手表或者别的地方挂着的一般时钟比较可靠哦。毕竟等算出几点几分，可能就来不及了——&lt;/p></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>瑞士 on Kamaboko Home | 鱼糕的树屋</title>
+    <link>http://localhost:1313/tags/%E7%91%9E%E5%A3%AB/</link>
+    <description>Recent content in 瑞士 on Kamaboko Home | 鱼糕的树屋</description>
+    <generator>Hugo</generator>
+    <language>en-US</language>
+    <copyright>Kamaboko Home</copyright>
+    <lastBuildDate>Mon, 02 Mar 2026 23:41:29 +0100</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/%E7%91%9E%E5%A3%AB/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>圣加仑火车站的钟</title>
+      <link>http://localhost:1313/corner/2026-03-02-%E5%9C%A3%E5%8A%A0%E4%BB%91%E7%81%AB%E8%BD%A6%E7%AB%99%E7%9A%84%E9%92%9F/</link>
+      <pubDate>Mon, 02 Mar 2026 23:41:29 +0100</pubDate>
+      <guid>http://localhost:1313/corner/2026-03-02-%E5%9C%A3%E5%8A%A0%E4%BB%91%E7%81%AB%E8%BD%A6%E7%AB%99%E7%9A%84%E9%92%9F/</guid>
+      <description>&lt;p&gt;如果要说圣加仑的哪一点最有趣，那无疑是主火车站的&lt;strong&gt;二进制时钟&lt;/strong&gt;了！&lt;/p&gt;&#xA;&lt;p&gt;圣加仑主火车站并没有呈现传统建筑的样式，正面是一块巨大的、颇具现代感的稍稍透明的白色面板。这个大大面板的中间，是一块大大的宛如棋盘的、3x6的区域，第一排有六个圆形，第二排六个叉，第三排六个正方形，持续闪烁、移动。&lt;/p&gt;&#xA;&lt;p&gt;刚搬来时，完全搞不懂那是什么，只觉得审美上还算不错。后来偶然得知，那其实是一个很酷的二进制时钟。最下排的正方形代表秒数，中间是分钟数，最上面是小时数。每一行的格子从右往左，分别代表1、2、4、8、16、32，只要把所有亮起的格子所代表的数字相加，就知道对应的时间了。当时让我恍然大悟、理解了这个时钟规则的网页在&lt;a href=&#34;https://www.bahnhofsuhrsg.ch&#34;&gt;这里&lt;/a&gt;！这个网页上也有圣加仑主火车站的照片哦。&lt;/p&gt;&#xA;&lt;p&gt;另外，还有一个关于瑞士时钟的小知识。瑞士火车站统一使用的时钟，采用一种叫做&lt;a href=&#34;https://ch.mondaine.com/en/pages/stop2go-clocks&#34;&gt;stop2go&lt;/a&gt;的规则。当秒针来到12点方向，会停顿两秒，然后才和分针一起跳向下一格。这样设计，似乎是为了给全国列车校准时间提供缓冲的机会。得知这个小知识后，我在火车站特意观察了一下，发现真的会停顿两秒，以前居然完全没注意到。采用这种特别规则的、和瑞士火车站同款的手表和挂钟，在Mondaine也是可以买到的。&lt;/p&gt;&#xA;&lt;p&gt;说回圣加仑的二进制钟……虽然很酷，但是能一眼看懂具体时间的人，想必全世界也寥寥可数吧。急匆匆赶火车的时候，还是查看自己的手表或者别的地方挂着的一般时钟比较可靠哦。毕竟等算出几点几分，可能就来不及了——&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
