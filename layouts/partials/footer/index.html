@@ -28,7 +28,6 @@
               pink: "236, 180, 203",
               green: "191, 216, 140",
               yellow: "241, 218, 129",
-              yellow2: "236, 208, 118",
               brown: "191, 164, 132"
             };
 
@@ -50,29 +49,24 @@
               });
             };
 
-            const clampChannel = function (value) {
-              return Math.max(0, Math.min(255, Math.round(value)));
-            };
-
             const selectedBanner = bannerUrls[Math.floor(Math.random() * bannerUrls.length)];
-            const selectedColorKey = getBannerColorKey(selectedBanner) || "";
             let baseBannerRgb = null;
+            let currentBannerColorKey = null;
 
-            const getAdjustedBannerRgb = function (rgb) {
-              if (!Array.isArray(rgb) || rgb.length !== 3) return null;
-              if (selectedColorKey !== "brown") return rgb;
+            const adjustHighlightRgbForTheme = function (rgb, colorKey) {
+              if (!rgb) return null;
               const isDarkMode = document.documentElement.classList.contains("dark");
-              const factor = isDarkMode ? 1 : 1.1;
-              return rgb.map(function (channel) {
-                return clampChannel(channel * factor);
-              });
+              if (!isDarkMode && colorKey === "yellow") {
+                return [216, 170, 44];
+              }
+              return rgb;
             };
 
             const applyEffectiveBannerColor = function () {
               if (!baseBannerRgb) return;
-              const adjusted = getAdjustedBannerRgb(baseBannerRgb);
-              if (!adjusted) return;
-              document.documentElement.style.setProperty("--banner-link-rgb", adjusted.join(", "));
+              const effectiveRgb = adjustHighlightRgbForTheme(baseBannerRgb, currentBannerColorKey);
+              if (!effectiveRgb) return;
+              document.documentElement.style.setProperty("--banner-link-rgb", effectiveRgb.join(", "));
             };
 
             const applyBannerColor = function (url) {
@@ -80,18 +74,9 @@
               if (!colorKey) return;
               const rgb = parseRgbString(bannerColorMap[colorKey]);
               if (!rgb) return;
+              currentBannerColorKey = colorKey;
               baseBannerRgb = rgb;
               applyEffectiveBannerColor();
-            };
-
-            const applyBannerOpacityScale = function (url) {
-              const colorKey = getBannerColorKey(url);
-              const opacityScale =
-                colorKey === "brown" ? "0.72" :
-                colorKey === "green" ? "0.82" :
-                colorKey === "pink" ? "0.84" :
-                "1";
-              document.documentElement.style.setProperty("--banner-link-opacity-scale", opacityScale);
             };
 
             const extractDominantBannerColor = function (imgEl) {
@@ -156,7 +141,6 @@
             };
 
             applyBannerColor(selectedBanner);
-            applyBannerOpacityScale(selectedBanner);
             bannerEl.addEventListener("load", function () {
               const dominantRgb = extractDominantBannerColor(bannerEl);
               if (!dominantRgb) return;

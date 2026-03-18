@@ -2,7 +2,6 @@
 title: ""
 ---
 
-
 {{< img-ripple >}}
 
 <div style="text-align:center;">
@@ -35,9 +34,8 @@ title: ""
 <div style="height: 0.5rem;"></div>
 
 <style>
-/* 白天模式边框 */
 .treehouse {
-  border: 1px solid #d1d5db;  /* 白天边框 */
+  border: 1px solid #d1d5db;
   border-radius: 12px;
   padding: 16px;
 }
@@ -46,8 +44,7 @@ title: ""
   font-weight: 600;
 }
 
-/* 夜间模式边框，仅作用于 .treehouse */
 html.dark .treehouse {
-  border-color: #6b7280;       /* 夜间边框 */
+  border-color: #6b7280;
 }
 </style>

@@ -8,7 +8,7 @@ description = "鱼糕的树屋 | Kamaboko Home"
 avatar = "img/profile-picture.jpg"
 
 #favicon
-favicon = "favicon2.ico"
+favicon = "favicon.ico"
 
 # disqus is a comment system. see https://disqus.com
 disqusShortname = ""

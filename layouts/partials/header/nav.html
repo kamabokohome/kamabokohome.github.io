@@ -34,19 +34,19 @@
     {{- $isDirectActive := eq $menuPath $pagePath -}}
     {{- $isSectionActive := and (ne .Identifier "home") (eq .Identifier $currentPage.Section) -}}
     <li class="nav-menu-item{{ if or (eq .Identifier "collection") (eq .Identifier "posts") }} nav-with-dropdown{{ end }}">
-      <a href="{{ .URL | relLangURL }}" class="{{ if or $isHomeActive $isDirectActive $isSectionActive }}active{{ end }}">
-        {{ .Name }}
+      <a href="{{ .URL | relLangURL }}" class="nav-link-button {{ if or $isHomeActive $isDirectActive $isSectionActive }}active{{ end }}">
+        <span class="nav-link-label">{{ .Name }}</span>
       </a>
       {{ if eq .Identifier "collection" }}
         <ul class="nav-submenu" aria-label="Collection projects">
           {{ with $benchPage }}
             <li>
-              <a href="{{ .RelPermalink }}" class="{{ if eq (trim .RelPermalink "/") $pagePath }}active{{ end }}">{{ .Title }}</a>
+              <a href="{{ .RelPermalink }}" class="nav-submenu-button {{ if eq (trim .RelPermalink "/") $pagePath }}active{{ end }}"><span class="nav-submenu-label">{{ .Title }}</span></a>
             </li>
           {{ end }}
           {{ with $officePage }}
             <li>
-              <a href="{{ .RelPermalink }}" class="{{ if eq (trim .RelPermalink "/") $pagePath }}active{{ end }}">{{ .Title }}</a>
+              <a href="{{ .RelPermalink }}" class="nav-submenu-button {{ if eq (trim .RelPermalink "/") $pagePath }}active{{ end }}"><span class="nav-submenu-label">{{ .Title }}</span></a>
             </li>
           {{ end }}
         </ul>
@@ -54,7 +54,7 @@
         <ul class="nav-submenu" aria-label="Posts years">
           {{ range $postYears }}
             <li>
-              <a href="{{ (printf "/posts/#posts-year-%d" .) | relLangURL }}">{{ . }}</a>
+              <a href="{{ (printf "/posts/#posts-year-%d" .) | relLangURL }}" class="nav-submenu-button"><span class="nav-submenu-label">{{ . }}</span></a>
             </li>
           {{ end }}
         </ul>
