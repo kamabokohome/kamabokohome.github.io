@@ -41,7 +41,7 @@
     --site-font-sans: var(--site-font-latin), var(--site-font-cjk);
     --banner-link-rgb: 135, 206, 235;
     --banner-link-opacity-scale: 1;
-    --banner-link-opacity-light-factor: 0.9;
+    --banner-link-opacity-light-factor: 1;
     --banner-link-opacity-dark-boost: 1;
     --banner-link-opacity-effective-scale: calc(var(--banner-link-opacity-scale) * var(--banner-link-opacity-light-factor) * var(--banner-link-opacity-dark-boost));
     --sun-halo-center-y: calc(100% - 36px);
@@ -60,7 +60,7 @@
 
   html.dark {
     --banner-link-opacity-light-factor: 1;
-    --banner-link-opacity-dark-boost: 1.1;
+    --banner-link-opacity-dark-boost: 1;
   }
 
   body {
@@ -543,6 +543,16 @@ html.dark summary {
   cursor: pointer;
 }
 
+#content .corner-tag-switch .collection-layout-btn,
+#content .corner-entry-tag.collection-layout-btn {
+  background: rgba(255, 253, 249, 0.92);
+}
+
+#content .corner-tag-switch .collection-layout-btn.is-active,
+#content .corner-entry-tag.collection-layout-btn.is-active {
+  background: rgba(255, 250, 244, 0.96);
+}
+
 #content .corner-entry-item {
   margin: 0;
   --corner-entry-text-start: calc(0.15rem + 0.99rem + 8px + 1.3rem);
@@ -586,13 +596,9 @@ html.dark summary {
 
 #content .corner-entry-body a {
   --link-highlight-color: rgba(var(--banner-link-rgb), calc(0.74 * var(--banner-link-opacity-effective-scale)));
+  color: inherit;
   text-decoration: none;
-  background-image: linear-gradient(
-    to top,
-    var(--link-highlight-color) 0%,
-    var(--link-highlight-color) 36%,
-    transparent 36%
-  );
+  background-image: none;
   background-repeat: no-repeat;
   background-size: 100% 100%;
   background-position: 0 86%;
@@ -601,21 +607,39 @@ html.dark summary {
   transition: color 160ms ease;
 }
 
-body.is-home #content > section a {
-  --link-highlight-color: rgba(var(--banner-link-rgb), calc(0.72 * var(--banner-link-opacity-effective-scale)));
-  text-decoration: none;
+#content .corner-entry-body a:hover,
+#content .corner-entry-body a:focus-visible {
+  color: inherit;
   background-image: linear-gradient(
     to top,
     var(--link-highlight-color) 0%,
     var(--link-highlight-color) 36%,
     transparent 36%
   );
+}
+
+body.is-home #content > section a {
+  --link-highlight-color: rgba(var(--banner-link-rgb), calc(0.72 * var(--banner-link-opacity-effective-scale)));
+  color: inherit;
+  text-decoration: none;
+  background-image: none;
   background-repeat: no-repeat;
   background-size: 100% 100%;
   background-position: 0 86%;
   box-decoration-break: clone;
   -webkit-box-decoration-break: clone;
   transition: color 160ms ease;
+}
+
+body.is-home #content > section a:hover,
+body.is-home #content > section a:focus-visible {
+  color: inherit;
+  background-image: linear-gradient(
+    to top,
+    var(--link-highlight-color) 0%,
+    var(--link-highlight-color) 36%,
+    transparent 36%
+  );
 }
 
 body[data-section="posts"]:not(.page-post-single) #content .section-list-default h5 > a {
@@ -663,10 +687,23 @@ body.page-post-single #content article > section img {
 }
 
 body.page-post-single #content article > section .footnotes a {
+  color: inherit;
+  text-decoration: none;
   background-image: none;
-  text-decoration: underline;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 0.16em;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-position: 0 86%;
+}
+
+body.page-post-single #content article > section .footnotes a:hover,
+body.page-post-single #content article > section .footnotes a:focus-visible {
+  color: inherit;
+  background-image: linear-gradient(
+    to top,
+    var(--link-highlight-color) 0%,
+    var(--link-highlight-color) 36%,
+    transparent 36%
+  );
 }
 
 body.page-post-single #content article > section a.footnote-ref {
@@ -725,18 +762,40 @@ body.page-post-single #content article > section .footnotes ol > li::before {
   background-color: rgba(var(--banner-link-rgb), calc(0.74 * var(--banner-link-opacity-effective-scale)));
 }
 
-#content .corner-entry-body a::after,
-body.is-home #content > section a::after {
+#content .corner-entry-body a::after {
   content: "";
   display: inline-block;
-  width: 0.9em;
-  height: 0.9em;
+  width: 1.08em;
+  height: 1.08em;
   margin-left: 0;
   margin-right: 0.12em;
   vertical-align: baseline;
-  transform: translateY(-0.12em);
+  transform: translateY(-0.08em);
   opacity: 1;
-  background-color: currentColor;
+  background-color: var(--link-highlight-color);
+  -webkit-mask-mode: alpha;
+  mask-mode: alpha;
+  -webkit-mask-image: url("/img/external-open-square-dark.svg");
+  mask-image: url("/img/external-open-square-dark.svg");
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-position: center;
+  mask-position: center;
+}
+
+body.is-home #content > section a::after {
+  content: "";
+  display: inline-block;
+  width: 1.08em;
+  height: 1.08em;
+  margin-left: 0;
+  margin-right: 0.12em;
+  vertical-align: baseline;
+  transform: translateY(-0.08em);
+  opacity: 1;
+  background-color: var(--link-highlight-color);
   -webkit-mask-mode: alpha;
   mask-mode: alpha;
   -webkit-mask-image: url("/img/external-open-square-dark.svg");
@@ -1033,7 +1092,7 @@ html.dark #content .single-jump-link.is-current {
 #content .message-form-row {
   display: flex;
   flex-direction: column;
-  gap: 0.28rem;
+  gap: 0.4rem;
   margin-left: 0;
 }
 
@@ -1057,12 +1116,13 @@ html.dark #content .single-jump-link.is-current {
   padding: 0.52rem 0.62rem;
   line-height: 1.45;
   color: #374151;
-  background: rgba(255, 255, 255, 0.72);
+  background: rgba(255, 253, 249, 0.94);
 }
 
 #content .message-form-row textarea {
   min-height: 10.2rem;
   resize: vertical;
+  margin-bottom: 0.42rem;
 }
 
 #content .message-form-row input:focus,
@@ -1152,8 +1212,18 @@ html.dark #content .message-form-row label {
 html.dark #content .message-form-row input,
 html.dark #content .message-form-row textarea {
   border-color: rgba(123, 135, 152, 0.52);
-  background: rgba(42, 44, 50, 0.7);
+  background: rgba(43, 40, 38, 0.92);
   color: #e5e7eb;
+}
+
+html.dark #content .corner-tag-switch .collection-layout-btn,
+html.dark #content .corner-entry-tag.collection-layout-btn {
+  background: rgba(45, 41, 39, 0.9);
+}
+
+html.dark #content .corner-tag-switch .collection-layout-btn.is-active,
+html.dark #content .corner-entry-tag.collection-layout-btn.is-active {
+  background: rgba(52, 48, 45, 0.94);
 }
 
 html.dark #content .message-form-row input:focus,
@@ -1318,6 +1388,15 @@ input[type="reset"],
 select,
 .site-kamaboko-corner {
   cursor: pointer;
+}
+
+#content a[href],
+#content a[href] *,
+#content a[href]::before,
+#content a[href]::after,
+#content a[href]:hover,
+#content a[href]:focus-visible {
+  cursor: pointer !important;
 }
 
 button:disabled,

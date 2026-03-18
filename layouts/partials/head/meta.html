@@ -18,11 +18,12 @@
 <link rel="canonical" href="{{ .Permalink }}" />
 <meta name="robots" content="index,follow" />
 
+{{- $faviconVersion := "20260318e" -}}
 {{- $faviconIco := resources.Get "img/favicon.ico" -}}
 {{- $faviconPng := resources.Get "img/favicon.png" -}}
-<link rel="icon" href="{{ $faviconIco.RelPermalink }}" />
-<link rel="icon" type="image/png" href="{{ $faviconPng.RelPermalink }}" />
-<link rel="apple-touch-icon" href="{{ $faviconPng.RelPermalink }}" />
+<link rel="icon" href="{{ $faviconIco.RelPermalink }}?v={{ $faviconVersion }}" />
+<link rel="icon" type="image/png" href="{{ $faviconPng.RelPermalink }}?v={{ $faviconVersion }}" />
+<link rel="apple-touch-icon" href="{{ $faviconPng.RelPermalink }}?v={{ $faviconVersion }}" />
 
 {{ if .Site.Config.Services.GoogleAnalytics.ID }}
 <!-- Google Analytics -->
