@@ -47,7 +47,7 @@
       .site-sticky-bar.is-submenu-open {
         --sticky-surface-bg: rgba(249, 245, 236, 0.82);
         --sticky-surface-blur: 11px;
-        --sticky-surface-shadow: 0 5px 14px rgba(0, 0, 0, 0.1);
+        --sticky-surface-shadow: 0 3px 9px rgba(0, 0, 0, 0.08);
       }
 
       .site-sticky-bar.is-stuck .site-sticky-bg {
@@ -63,7 +63,7 @@
       html.dark .site-sticky-bar.is-stuck,
       html.dark .site-sticky-bar.is-submenu-open {
         --sticky-surface-bg: rgba(58, 53, 49, 0.82);
-        --sticky-surface-shadow: 0 5px 14px rgba(0, 0, 0, 0.3);
+        --sticky-surface-shadow: 0 3px 10px rgba(0, 0, 0, 0.24);
       }
 
       html.page-short .site-sticky-bar:not(.is-stuck):not(.is-submenu-open) .site-sticky-bg {
@@ -351,11 +351,11 @@
 
       .site-search-toggle:hover,
       .site-search-toggle:focus-visible {
-        background: rgba(177, 167, 147, 0.18);
+        background: rgba(194, 168, 141, 0.22);
       }
 
       .site-search-toggle[aria-expanded="true"] {
-        background: rgba(177, 167, 147, 0.18);
+        background: rgba(194, 168, 141, 0.22);
       }
 
       .site-hover-tooltip {
@@ -387,11 +387,11 @@
 
       html.dark .site-search-toggle:hover,
       html.dark .site-search-toggle:focus-visible {
-        background: rgba(123, 135, 152, 0.25);
+        background: rgba(118, 95, 80, 0.32);
       }
 
       html.dark .site-search-toggle[aria-expanded="true"] {
-        background: rgba(123, 135, 152, 0.25);
+        background: rgba(118, 95, 80, 0.32);
       }
 
       html.dark .site-hover-tooltip {
@@ -406,8 +406,8 @@
         align-items: center;
         justify-content: center;
         min-height: 2.16rem;
-        min-width: 8.4rem;
-        padding: 0.28rem 1.1rem;
+        min-width: 6.6rem;
+        padding: 0.28rem 0.68rem;
         border-radius: 0.66rem;
         text-decoration: none;
         background: transparent;
@@ -416,17 +416,17 @@
 
       .site-sticky-nav nav li.nav-menu-item > a.nav-link-button:hover,
       .site-sticky-nav nav li.nav-menu-item > a.nav-link-button:focus-visible {
-        background: rgba(177, 167, 147, 0.18);
+        background: rgba(194, 168, 141, 0.22);
       }
 
       html.dark .site-sticky-nav nav li.nav-menu-item > a.nav-link-button:hover,
       html.dark .site-sticky-nav nav li.nav-menu-item > a.nav-link-button:focus-visible {
-        background: rgba(123, 135, 152, 0.25);
+        background: rgba(118, 95, 80, 0.32);
       }
 
       .site-sticky-nav nav li.nav-menu-item > a.nav-link-button > .nav-link-label {
         --link-highlight-color: rgba(var(--banner-link-rgb), 0);
-        --nav-link-highlight-width: 150%;
+        --nav-link-highlight-width: 100%;
         position: relative;
         display: inline-block;
         padding: 0;
@@ -507,8 +507,8 @@
         align-items: center;
         justify-content: center;
         min-height: 1.9rem;
-        min-width: 6.4rem;
-        padding: 0.24rem 0.76rem;
+        min-width: 5rem;
+        padding: 0.24rem 0.46rem;
         border-radius: 0.56rem;
         background: transparent;
         transition: background-color 130ms ease, color 130ms ease;
@@ -516,12 +516,12 @@
 
       .site-sticky-nav nav .nav-submenu a.nav-submenu-button:hover,
       .site-sticky-nav nav .nav-submenu a.nav-submenu-button:focus-visible {
-        background: rgba(177, 167, 147, 0.18);
+        background: rgba(194, 168, 141, 0.22);
       }
 
       html.dark .site-sticky-nav nav .nav-submenu a.nav-submenu-button:hover,
       html.dark .site-sticky-nav nav .nav-submenu a.nav-submenu-button:focus-visible {
-        background: rgba(123, 135, 152, 0.25);
+        background: rgba(118, 95, 80, 0.32);
       }
 
       .site-sticky-nav nav .nav-submenu a.nav-submenu-button > .nav-submenu-label {
@@ -535,7 +535,7 @@
         );
         background-repeat: no-repeat;
         background-size: 100% 100%;
-        background-position: 0 86%;
+        background-position: 50% 86%;
         background-origin: content-box;
         -webkit-background-origin: content-box;
         box-decoration-break: clone;
@@ -916,13 +916,13 @@
         .site-mobile-menu-toggle:hover,
         .site-mobile-menu-toggle:focus-visible,
         .site-mobile-menu-toggle[aria-expanded="true"] {
-          background: rgba(177, 167, 147, 0.18);
+          background: rgba(194, 168, 141, 0.22);
         }
 
         html.dark .site-mobile-menu-toggle:hover,
         html.dark .site-mobile-menu-toggle:focus-visible,
         html.dark .site-mobile-menu-toggle[aria-expanded="true"] {
-          background: rgba(123, 135, 152, 0.25);
+          background: rgba(118, 95, 80, 0.32);
         }
 
         .site-mobile-menu-panel {
@@ -1077,12 +1077,13 @@
         .site-mobile-menu-row > a:focus-visible,
         .site-mobile-menu-subblock a:hover,
         .site-mobile-menu-subblock a:focus-visible {
-          background: rgba(177, 167, 147, 0.18);
+          background: rgba(194, 168, 141, 0.22);
+          color: rgb(55 65 81 / 1);
         }
 
         .site-mobile-submenu-toggle:hover,
         .site-mobile-submenu-toggle:focus-visible {
-          background: rgba(177, 167, 147, 0.18);
+          background: rgba(194, 168, 141, 0.22);
         }
 
         html.dark .site-mobile-menu-subblock {
@@ -1095,25 +1096,26 @@
         html.dark .site-mobile-menu-row > a:focus-visible,
         html.dark .site-mobile-menu-subblock a:hover,
         html.dark .site-mobile-menu-subblock a:focus-visible {
-          background: rgba(123, 135, 152, 0.25);
+          background: rgba(118, 95, 80, 0.32);
+          color: rgb(229 231 235 / 1);
         }
 
         html.dark .site-mobile-submenu-toggle:hover,
         html.dark .site-mobile-submenu-toggle:focus-visible {
-          background: rgba(123, 135, 152, 0.25);
+          background: rgba(118, 95, 80, 0.32);
         }
 
         .site-mobile-menu-line > a.active,
         .site-mobile-menu-row > a.active,
         .site-mobile-menu-subblock a.active {
           background: transparent;
-          color: rgb(156 163 175 / 1);
+          color: rgb(55 65 81 / 1);
         }
 
         html.dark .site-mobile-menu-line > a.active,
         html.dark .site-mobile-menu-row > a.active,
         html.dark .site-mobile-menu-subblock a.active {
-          color: rgb(156 163 175 / 1);
+          color: rgb(229 231 235 / 1);
         }
 
         .site-mobile-search-line {
@@ -1152,12 +1154,12 @@
 
         .site-mobile-search-toggle:hover,
         .site-mobile-search-toggle:focus-visible {
-          background: rgba(177, 167, 147, 0.18);
+          background: rgba(194, 168, 141, 0.22);
         }
 
         html.dark .site-mobile-search-toggle:hover,
         html.dark .site-mobile-search-toggle:focus-visible {
-          background: rgba(123, 135, 152, 0.25);
+          background: rgba(118, 95, 80, 0.32);
         }
 
         .site-search-modal {

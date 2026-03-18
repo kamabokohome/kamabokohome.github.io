@@ -1074,91 +1074,164 @@ html.dark #content .single-jump-link.is-current {
 #content .message-board {
   display: flex;
   flex-direction: column;
-  gap: 0.82rem;
-  padding-top: 0.5rem;
-  padding-bottom: 1.2rem;
+  gap: 1rem;
+  padding: 0.55rem 0 1.4rem;
+}
+
+#content .message-paper {
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+  padding: 2rem 1.6rem;
+  border: none;
+  border-radius: 0.28rem;
+  background:
+    linear-gradient(180deg, rgba(255, 252, 246, 0.99) 0%, rgba(252, 247, 239, 0.98) 100%);
+  box-shadow:
+    0 10px 26px rgba(103, 82, 64, 0.08),
+    0 2px 5px rgba(103, 82, 64, 0.05);
+}
+
+#content .message-paper::before,
+#content .message-paper::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+#content .message-paper::before {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.34) 0%, rgba(255, 255, 255, 0) 26%),
+    repeating-linear-gradient(
+      0deg,
+      rgba(186, 168, 145, 0.055) 0,
+      rgba(186, 168, 145, 0.055) 1px,
+      rgba(255, 255, 255, 0) 1px,
+      rgba(255, 255, 255, 0) 18px
+    );
+  opacity: 0.48;
 }
 
 #content .message-form {
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: column;
-  gap: 0.68rem;
-  padding: 0.86rem 0.92rem;
-  border: 1px solid rgba(186, 180, 168, 0.36);
-  border-radius: 0.72rem;
+  gap: 1.72rem;
+  padding: 0 0.12rem 0.1rem;
+  border: none;
+  border-radius: 0;
   background: transparent;
+}
+
+#content .message-form-main {
+  display: flex;
+  flex-direction: column;
+}
+
+#content .message-form-meta {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.48rem;
 }
 
 #content .message-form-row {
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
+  gap: 0.34rem;
   margin-left: 0;
 }
 
 #content .message-form-row + .message-form-row {
-  margin-top: 0.3rem;
+  margin-top: 0;
 }
 
 #content .message-form-row label {
-  font-size: 0.76rem;
-  line-height: 1.15;
+  display: block;
+  font-size: 0.72rem;
+  line-height: 1.2;
   font-weight: 600;
-  color: #9ca3af;
-  margin-left: 0.2rem;
+  letter-spacing: 0.06em;
+  color: #918477;
+  margin-left: 0;
+  padding-bottom: 0;
 }
 
 #content .message-form-row input,
 #content .message-form-row textarea {
   width: 100%;
-  border: 1px solid rgba(186, 180, 168, 0.5);
-  border-radius: 0.52rem;
-  padding: 0.52rem 0.62rem;
-  line-height: 1.45;
-  color: #374151;
-  background: rgba(255, 253, 249, 0.94);
+  -webkit-appearance: none;
+  appearance: none;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  color: #4b5563;
+  background: transparent;
+  box-shadow: none;
+  border-bottom: 1px solid rgba(176, 154, 128, 0.72);
 }
 
 #content .message-form-row textarea {
-  min-height: 10.2rem;
+  min-height: 8.8rem;
+  padding-top: 0.06rem;
+  padding-bottom: 0.42rem;
   resize: vertical;
-  margin-bottom: 0.42rem;
+  margin-bottom: 0;
+  line-height: 1.9;
+}
+
+#content .message-form-row input {
+  padding: 0.02rem 0.08rem 0.42rem;
+  line-height: 1.65;
 }
 
 #content .message-form-row input:focus,
 #content .message-form-row textarea:focus {
   outline: none;
-  border-color: rgba(156, 163, 175, 0.85);
-  box-shadow: 0 0 0 1px rgba(156, 163, 175, 0.22);
+  box-shadow: none;
+}
+
+#content .message-form-row input:focus {
+  color: #3f3329;
+  border-bottom-color: rgba(143, 118, 90, 0.96);
+}
+
+#content .message-form-row textarea:focus {
+  background: transparent;
+  border-bottom-color: rgba(143, 118, 90, 0.96);
 }
 
 #content .message-form-actions {
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   margin-left: 0;
-  margin-top: 0.24rem;
+  margin-top: -0.24rem;
 }
 
 #content .message-submit-button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.34rem 0.84rem;
-  border-radius: 9999px;
-  border: 1px solid rgba(186, 180, 168, 0.56);
-  background: rgba(248, 242, 227, 0.78);
-  color: #6b7280;
+  min-width: 6.9rem;
+  padding: 0.48rem 1.12rem;
+  border-radius: 0.58rem;
+  border: none;
+  background: rgba(241, 225, 205, 0.82);
+  color: #735f51;
   font-size: 0.76rem;
-  font-weight: 600;
+  font-weight: 500;
   line-height: 1.2;
+  letter-spacing: 0.02em;
+  box-shadow: none;
   transition: background-color 140ms ease, border-color 140ms ease, color 140ms ease;
 }
 
 #content .message-submit-button:hover,
 #content .message-submit-button:focus-visible {
-  background: rgba(248, 242, 227, 0.96);
-  border-color: rgba(156, 163, 175, 0.62);
-  color: #4b5563;
+  background: rgba(235, 215, 191, 0.9);
+  color: #665244;
 }
 
 #content .message-submit-button:disabled {
@@ -1173,11 +1246,11 @@ html.dark #content .single-jump-link.is-current {
 }
 
 #content .message-board-status {
-  margin: 0.2rem 0 0;
+  margin: 0.08rem 0 0;
   font-size: 0.72rem;
   line-height: 1.72;
   font-weight: 400;
-  color: #1f2937;
+  color: #5b4f42;
   text-align: center;
   white-space: normal;
 }
@@ -1200,20 +1273,40 @@ html.dark #content .single-jump-link.is-current {
   box-decoration-break: clone;
 }
 
+html.dark #content .message-paper {
+  background:
+    linear-gradient(180deg, rgba(69, 61, 56, 0.99) 0%, rgba(61, 54, 50, 0.98) 100%);
+  box-shadow:
+    0 12px 28px rgba(0, 0, 0, 0.24),
+    0 2px 5px rgba(0, 0, 0, 0.14);
+}
+
+html.dark #content .message-paper::before {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0) 24%),
+    repeating-linear-gradient(
+      0deg,
+      rgba(157, 140, 121, 0.06) 0,
+      rgba(157, 140, 121, 0.06) 1px,
+      rgba(255, 255, 255, 0) 1px,
+      rgba(255, 255, 255, 0) 18px
+    );
+}
+
 html.dark #content .message-form {
-  border-color: rgba(123, 135, 152, 0.42);
   background: transparent;
 }
 
 html.dark #content .message-form-row label {
-  color: #9ca3af;
+  color: #c3b6a8;
 }
 
 html.dark #content .message-form-row input,
 html.dark #content .message-form-row textarea {
-  border-color: rgba(123, 135, 152, 0.52);
-  background: rgba(43, 40, 38, 0.92);
-  color: #e5e7eb;
+  color: #ece5dd;
+  background: transparent;
+  box-shadow: none;
+  border-bottom-color: rgba(172, 150, 126, 0.68);
 }
 
 html.dark #content .corner-tag-switch .collection-layout-btn,
@@ -1226,23 +1319,39 @@ html.dark #content .corner-entry-tag.collection-layout-btn.is-active {
   background: rgba(52, 48, 45, 0.94);
 }
 
+html.dark #content .message-form-row textarea {
+  background: transparent;
+}
+
 html.dark #content .message-form-row input:focus,
 html.dark #content .message-form-row textarea:focus {
-  border-color: rgba(156, 163, 175, 0.88);
-  box-shadow: 0 0 0 1px rgba(156, 163, 175, 0.26);
+  box-shadow: none;
+}
+
+html.dark #content .message-form-row input {
+  border-bottom-color: rgba(172, 150, 126, 0.68);
+}
+
+html.dark #content .message-form-row input:focus {
+  color: #fff6ee;
+  border-bottom-color: rgba(223, 202, 178, 0.92);
+}
+
+html.dark #content .message-form-row textarea:focus {
+  background: transparent;
+  border-bottom-color: rgba(223, 202, 178, 0.92);
 }
 
 html.dark #content .message-submit-button {
-  border-color: rgba(123, 135, 152, 0.56);
-  background: rgba(68, 72, 79, 0.68);
-  color: #d1d5db;
+  border: none;
+  background: rgba(124, 98, 82, 0.78);
+  color: #f5ebdf;
 }
 
 html.dark #content .message-submit-button:hover,
 html.dark #content .message-submit-button:focus-visible {
-  border-color: rgba(156, 163, 175, 0.74);
-  background: rgba(78, 83, 91, 0.84);
-  color: #f3f4f6;
+  background: rgba(138, 109, 91, 0.9);
+  color: #fff4e8;
 }
 
 html.dark #content .message-board-note {
@@ -1250,7 +1359,7 @@ html.dark #content .message-board-note {
 }
 
 html.dark #content .message-board-status {
-  color: #f3f4f6;
+  color: #ece5dd;
 }
 
 html.dark #content .message-board-status .message-board-status-line {
@@ -1260,6 +1369,35 @@ html.dark #content .message-board-status .message-board-status-line {
     var(--link-highlight-color) 36%,
     transparent 36%
   );
+}
+
+@media (max-width: 640px) {
+  #content .message-paper {
+    padding: 1.32rem 1.08rem;
+    border-radius: 0.2rem;
+  }
+
+  #content .message-form {
+    padding: 0 0.05rem 0.08rem;
+  }
+
+  #content .message-form-row input,
+  #content .message-form-row textarea {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  #content .message-form-row textarea {
+    min-height: 8rem;
+  }
+
+  #content .message-submit-button {
+    width: auto;
+    min-width: 6.2rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
 }
 
 #content .posts-year-separator {
