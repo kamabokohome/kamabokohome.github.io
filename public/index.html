@@ -31,12 +31,14 @@
 
   
 
-<link rel="stylesheet" href="/css/app.css?v=1773830506" />
+<link rel="stylesheet" href="/css/app.css?v=1774019747" />
 <style>
       html {
         scrollbar-gutter: stable;
         --site-content-max-width: 50rem;
         --site-sticky-bar-height: 0px;
+        --site-nav-hover-bg: rgba(236, 226, 213, 0.74);
+        --site-nav-hover-bg-dark: rgba(80, 70, 64, 0.72);
       }
 
       .site-sticky-bar {
@@ -222,7 +224,7 @@
           padding: 0 0.625rem;
           font-size: 0.72rem;
           line-height: 1.35;
-          color: rgb(156 163 175 / 1);
+          color: inherit;
           white-space: nowrap;
           overflow-x: auto;
           -webkit-overflow-scrolling: touch;
@@ -288,7 +290,7 @@
         }
 
         .site-mobile-breadcrumb-sep {
-          color: rgb(156 163 175 / 1);
+          color: inherit;
           flex: 0 0 auto;
         }
 
@@ -381,11 +383,11 @@
 
       .site-search-toggle:hover,
       .site-search-toggle:focus-visible {
-        background: rgba(194, 168, 141, 0.22);
+        background: var(--site-nav-hover-bg);
       }
 
       .site-search-toggle[aria-expanded="true"] {
-        background: rgba(194, 168, 141, 0.22);
+        background: var(--site-nav-hover-bg);
       }
 
       .site-hover-tooltip {
@@ -417,11 +419,11 @@
 
       html.dark .site-search-toggle:hover,
       html.dark .site-search-toggle:focus-visible {
-        background: rgba(118, 95, 80, 0.32);
+        background: var(--site-nav-hover-bg-dark);
       }
 
       html.dark .site-search-toggle[aria-expanded="true"] {
-        background: rgba(118, 95, 80, 0.32);
+        background: var(--site-nav-hover-bg-dark);
       }
 
       html.dark .site-hover-tooltip {
@@ -446,17 +448,18 @@
 
       .site-sticky-nav nav li.nav-menu-item > a.nav-link-button:hover,
       .site-sticky-nav nav li.nav-menu-item > a.nav-link-button:focus-visible {
-        background: rgba(194, 168, 141, 0.22);
+        background: transparent;
       }
 
       html.dark .site-sticky-nav nav li.nav-menu-item > a.nav-link-button:hover,
       html.dark .site-sticky-nav nav li.nav-menu-item > a.nav-link-button:focus-visible {
-        background: rgba(118, 95, 80, 0.32);
+        background: transparent;
       }
 
       .site-sticky-nav nav li.nav-menu-item > a.nav-link-button > .nav-link-label {
         --link-highlight-color: rgba(var(--banner-link-rgb), 0);
         --nav-link-highlight-width: 100%;
+        --nav-side-line-opacity: 0;
         position: relative;
         display: inline-block;
         padding: 0;
@@ -477,12 +480,43 @@
         z-index: 0;
       }
 
+      .site-sticky-nav nav li.nav-menu-item > a.nav-link-button > .nav-link-label::before,
+      .site-sticky-nav nav li.nav-menu-item > a.nav-link-button > .nav-link-label::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        width: 0.18rem;
+        height: 0.48rem;
+        border-radius: 999px;
+        color: var(--link-highlight-color);
+        background: currentColor;
+        opacity: var(--nav-side-line-opacity);
+        box-shadow: 0.24rem 0 0 0 currentColor;
+        transform-origin: center;
+        transition: opacity 130ms ease, transform 130ms ease, color 130ms ease;
+        pointer-events: none;
+      }
+
+      .site-sticky-nav nav li.nav-menu-item > a.nav-link-button > .nav-link-label::before {
+        right: calc(100% + 0.62rem);
+        transform: translateY(-50%) rotate(-14deg) scale(0.82);
+      }
+
+      .site-sticky-nav nav li.nav-menu-item > a.nav-link-button > .nav-link-label::after {
+        left: calc(100% + 0.38rem);
+        transform: translateY(-50%) rotate(14deg) scale(0.82);
+      }
+
       .site-sticky-nav nav li.nav-menu-item > a.nav-link-button.active > .nav-link-label {
         --link-highlight-color: rgba(var(--banner-link-rgb), calc(0.74 * var(--banner-link-opacity-effective-scale)));
       }
 
       .site-sticky-nav nav li.nav-menu-item > a.nav-link-button:hover > .nav-link-label,
-      .site-sticky-nav nav li.nav-menu-item > a.nav-link-button:focus-visible > .nav-link-label,
+      .site-sticky-nav nav li.nav-menu-item > a.nav-link-button:focus-visible > .nav-link-label {
+        --link-highlight-color: rgba(var(--banner-link-rgb), calc(0.74 * var(--banner-link-opacity-effective-scale)));
+        --nav-side-line-opacity: 1;
+      }
+
       .site-sticky-nav nav li.nav-with-dropdown:hover > a.nav-link-button > .nav-link-label,
       .site-sticky-nav nav li.nav-with-dropdown.is-open > a.nav-link-button > .nav-link-label {
         --link-highlight-color: rgba(var(--banner-link-rgb), calc(0.74 * var(--banner-link-opacity-effective-scale)));
@@ -493,10 +527,26 @@
       }
 
       .site-sticky-nav nav:hover li.nav-menu-item > a.nav-link-button:hover > .nav-link-label,
-      .site-sticky-nav nav:hover li.nav-menu-item > a.nav-link-button:focus-visible > .nav-link-label,
+      .site-sticky-nav nav:hover li.nav-menu-item > a.nav-link-button:focus-visible > .nav-link-label {
+        --link-highlight-color: rgba(var(--banner-link-rgb), calc(0.74 * var(--banner-link-opacity-effective-scale)));
+        --nav-side-line-opacity: 1;
+      }
+
       .site-sticky-nav nav:hover li.nav-with-dropdown:hover > a.nav-link-button > .nav-link-label,
       .site-sticky-nav nav:hover li.nav-with-dropdown.is-open > a.nav-link-button > .nav-link-label {
         --link-highlight-color: rgba(var(--banner-link-rgb), calc(0.74 * var(--banner-link-opacity-effective-scale)));
+      }
+
+      .site-sticky-nav nav li.nav-menu-item > a.nav-link-button:hover > .nav-link-label::before,
+      .site-sticky-nav nav li.nav-menu-item > a.nav-link-button:hover > .nav-link-label::after,
+      .site-sticky-nav nav li.nav-menu-item > a.nav-link-button:focus-visible > .nav-link-label::before,
+      .site-sticky-nav nav li.nav-menu-item > a.nav-link-button:focus-visible > .nav-link-label::after {
+        transform: translateY(-50%) rotate(-14deg) scale(1);
+      }
+
+      .site-sticky-nav nav li.nav-menu-item > a.nav-link-button:hover > .nav-link-label::after,
+      .site-sticky-nav nav li.nav-menu-item > a.nav-link-button:focus-visible > .nav-link-label::after {
+        transform: translateY(-50%) rotate(14deg) scale(1);
       }
 
       .site-sticky-nav nav .nav-submenu {
@@ -546,16 +596,18 @@
 
       .site-sticky-nav nav .nav-submenu a.nav-submenu-button:hover,
       .site-sticky-nav nav .nav-submenu a.nav-submenu-button:focus-visible {
-        background: rgba(194, 168, 141, 0.22);
+        background: transparent;
       }
 
       html.dark .site-sticky-nav nav .nav-submenu a.nav-submenu-button:hover,
       html.dark .site-sticky-nav nav .nav-submenu a.nav-submenu-button:focus-visible {
-        background: rgba(118, 95, 80, 0.32);
+        background: transparent;
       }
 
       .site-sticky-nav nav .nav-submenu a.nav-submenu-button > .nav-submenu-label {
         --link-highlight-color: rgba(var(--banner-link-rgb), 0);
+        --nav-side-line-opacity: 0;
+        position: relative;
         display: inline-block;
         background-image: linear-gradient(
           to top,
@@ -573,6 +625,32 @@
         white-space: nowrap;
       }
 
+      .site-sticky-nav nav .nav-submenu a.nav-submenu-button > .nav-submenu-label::before,
+      .site-sticky-nav nav .nav-submenu a.nav-submenu-button > .nav-submenu-label::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        width: 0.16rem;
+        height: 0.42rem;
+        border-radius: 999px;
+        color: var(--link-highlight-color);
+        background: currentColor;
+        opacity: var(--nav-side-line-opacity);
+        box-shadow: 0.22rem 0 0 0 currentColor;
+        transition: opacity 130ms ease, transform 130ms ease, color 130ms ease;
+        pointer-events: none;
+      }
+
+      .site-sticky-nav nav .nav-submenu a.nav-submenu-button > .nav-submenu-label::before {
+        right: calc(100% + 0.54rem);
+        transform: translateY(-50%) rotate(-14deg) scale(0.82);
+      }
+
+      .site-sticky-nav nav .nav-submenu a.nav-submenu-button > .nav-submenu-label::after {
+        left: calc(100% + 0.34rem);
+        transform: translateY(-50%) rotate(14deg) scale(0.82);
+      }
+
       .site-sticky-nav nav .nav-submenu a.nav-submenu-button.active > .nav-submenu-label {
         --link-highlight-color: rgba(var(--banner-link-rgb), calc(0.74 * var(--banner-link-opacity-effective-scale)));
       }
@@ -580,6 +658,7 @@
       .site-sticky-nav nav .nav-submenu a.nav-submenu-button:hover > .nav-submenu-label,
       .site-sticky-nav nav .nav-submenu a.nav-submenu-button:focus-visible > .nav-submenu-label {
         --link-highlight-color: rgba(var(--banner-link-rgb), calc(0.74 * var(--banner-link-opacity-effective-scale)));
+        --nav-side-line-opacity: 1;
       }
 
       .site-sticky-nav nav:hover .nav-submenu a.nav-submenu-button.active > .nav-submenu-label {
@@ -589,6 +668,19 @@
       .site-sticky-nav nav:hover .nav-submenu a.nav-submenu-button:hover > .nav-submenu-label,
       .site-sticky-nav nav:hover .nav-submenu a.nav-submenu-button:focus-visible > .nav-submenu-label {
         --link-highlight-color: rgba(var(--banner-link-rgb), calc(0.74 * var(--banner-link-opacity-effective-scale)));
+        --nav-side-line-opacity: 1;
+      }
+
+      .site-sticky-nav nav .nav-submenu a.nav-submenu-button:hover > .nav-submenu-label::before,
+      .site-sticky-nav nav .nav-submenu a.nav-submenu-button:hover > .nav-submenu-label::after,
+      .site-sticky-nav nav .nav-submenu a.nav-submenu-button:focus-visible > .nav-submenu-label::before,
+      .site-sticky-nav nav .nav-submenu a.nav-submenu-button:focus-visible > .nav-submenu-label::after {
+        transform: translateY(-50%) rotate(-14deg) scale(1);
+      }
+
+      .site-sticky-nav nav .nav-submenu a.nav-submenu-button:hover > .nav-submenu-label::after,
+      .site-sticky-nav nav .nav-submenu a.nav-submenu-button:focus-visible > .nav-submenu-label::after {
+        transform: translateY(-50%) rotate(14deg) scale(1);
       }
 
       .site-sticky-nav nav li.nav-with-dropdown:hover > .nav-submenu,
@@ -1299,6 +1391,16 @@
         body.is-home .site-sticky-bar:not(.is-stuck):not(.is-submenu-open) .site-sticky-nav nav a:hover,
         body.is-home .site-sticky-bar:not(.is-stuck):not(.is-submenu-open) .site-sticky-nav nav a.active {
           color: rgba(246, 246, 248, 0.94);
+        }
+
+        body.is-home .site-sticky-bar:not(.is-stuck):not(.is-submenu-open) .site-sticky-nav nav li.nav-menu-item > a.nav-link-button:hover,
+        body.is-home .site-sticky-bar:not(.is-stuck):not(.is-submenu-open) .site-sticky-nav nav li.nav-menu-item > a.nav-link-button:focus-visible {
+          color: rgb(55 65 81 / 1);
+        }
+
+        html.dark body.is-home .site-sticky-bar:not(.is-stuck):not(.is-submenu-open) .site-sticky-nav nav li.nav-menu-item > a.nav-link-button:hover,
+        html.dark body.is-home .site-sticky-bar:not(.is-stuck):not(.is-submenu-open) .site-sticky-nav nav li.nav-menu-item > a.nav-link-button:focus-visible {
+          color: rgb(229 231 235 / 1);
         }
 
         body.is-home .site-sticky-bar.is-submenu-open .site-sticky-nav nav a {
@@ -2505,8 +2607,8 @@
         const tileIndex = host ? host.getAttribute("data-tile-index") : "";
         const seedByTile = {
           "3": { x: 0.5, y: 0.5 },   
-          "6": { x: 0.31, y: 0.48 }, 
-          "12": { x: 0.84, y: 0.82 } 
+          "6": { x: 0.5, y: 0.64 },  
+          "12": { x: 0.9, y: 0.9 } 
         };
         const seed = seedByTile[tileIndex] || { x: 0.5, y: 0.5 };
         const $water = window.jQuery(water);
@@ -2782,8 +2884,8 @@
           if (pigeonTile) {
             const pigeonRect = pigeonTile.getBoundingClientRect();
             if (pigeonRect.width > 0 && pigeonRect.height > 0) {
-              seedX = (pigeonRect.left - liveRect.left) + (pigeonRect.width * 0.49);
-              seedY = (pigeonRect.top - liveRect.top) + (pigeonRect.height * 0.63);
+              seedX = (pigeonRect.left - liveRect.left) + (pigeonRect.width * 0.54);
+              seedY = (pigeonRect.top - liveRect.top) + (pigeonRect.height * 0.7);
             }
           }
           try {
@@ -3487,7 +3589,9 @@ html.dark .treehouse {
             return;
           }
           const dropdownItems = stickyNav.querySelectorAll("li.nav-with-dropdown");
+          const plainNavItems = stickyNav.querySelectorAll("li.nav-menu-item:not(.nav-with-dropdown)");
           let hasOpenDropdown = false;
+          let hasHoveredPlainNav = false;
           let maxSubmenuBottom = 0;
           const stickyBarRect = stickyBar.getBoundingClientRect();
           for (let i = 0; i < dropdownItems.length; i += 1) {
@@ -3508,12 +3612,23 @@ html.dark .treehouse {
               item.classList.remove("is-open");
             }
           }
+          for (let i = 0; i < plainNavItems.length; i += 1) {
+            const item = plainNavItems[i];
+            const link = item.querySelector("a.nav-link-button");
+            if (!link) continue;
+            const hasHover = link.matches(":hover");
+            const hasFocusVisible = link.matches(":focus-visible");
+            if (hasHover || hasFocusVisible) {
+              hasHoveredPlainNav = true;
+              break;
+            }
+          }
           const dropdownBgTail = 8;
           const submenuExtent = hasOpenDropdown
             ? Math.max(0, Math.ceil(maxSubmenuBottom - stickyBarRect.bottom) + dropdownBgTail)
             : 0;
           stickyBar.style.setProperty("--sticky-submenu-extent", submenuExtent + "px");
-          stickyBar.classList.toggle("is-submenu-open", hasOpenDropdown);
+          stickyBar.classList.toggle("is-submenu-open", hasOpenDropdown || hasHoveredPlainNav);
         };
 
         const queueSubmenuStateUpdate = function() {

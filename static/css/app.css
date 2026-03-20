@@ -2279,12 +2279,12 @@ html.dark #content .single-jump-link.is-current {
 }
 
 html.dark #content .message-paper {
-  background: linear-gradient(180deg, rgba(69, 61, 56, 0.99) 0%, rgba(61, 54, 50, 0.98) 100%);
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.24), 0 2px 5px rgba(0, 0, 0, 0.14);
+  background: linear-gradient(180deg, rgba(62, 58, 55, 0.985) 0%, rgba(57, 53, 50, 0.975) 100%);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18), 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 html.dark #content .message-paper::before {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0) 24%), repeating-linear-gradient(0deg, rgba(157, 140, 121, 0.06) 0, rgba(157, 140, 121, 0.06) 1px, rgba(255, 255, 255, 0) 1px, rgba(255, 255, 255, 0) 18px);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.028) 0%, rgba(255, 255, 255, 0) 24%), repeating-linear-gradient(0deg, rgba(157, 140, 121, 0.045) 0, rgba(157, 140, 121, 0.045) 1px, rgba(255, 255, 255, 0) 1px, rgba(255, 255, 255, 0) 18px);
 }
 
 html.dark #content .message-form {

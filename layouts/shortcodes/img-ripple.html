@@ -455,8 +455,8 @@
         const tileIndex = host ? host.getAttribute("data-tile-index") : "";
         const seedByTile = {
           "3": { x: 0.5, y: 0.5 },   // center
-          "6": { x: 0.31, y: 0.48 }, // pigeon foot
-          "12": { x: 0.84, y: 0.82 } // right-bottom
+          "6": { x: 0.5, y: 0.64 },  // pigeon foot
+          "12": { x: 0.9, y: 0.9 } // right-bottom
         };
         const seed = seedByTile[tileIndex] || { x: 0.5, y: 0.5 };
         const $water = window.jQuery(water);
@@ -732,8 +732,8 @@
           if (pigeonTile) {
             const pigeonRect = pigeonTile.getBoundingClientRect();
             if (pigeonRect.width > 0 && pigeonRect.height > 0) {
-              seedX = (pigeonRect.left - liveRect.left) + (pigeonRect.width * 0.49);
-              seedY = (pigeonRect.top - liveRect.top) + (pigeonRect.height * 0.63);
+              seedX = (pigeonRect.left - liveRect.left) + (pigeonRect.width * 0.54);
+              seedY = (pigeonRect.top - liveRect.top) + (pigeonRect.height * 0.7);
             }
           }
           try {
