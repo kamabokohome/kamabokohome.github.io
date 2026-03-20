@@ -1,4 +1,4 @@
-copyright = 'Kamaboko Home'
+copyright = '2024–{year} Kamaboko Home. All rights reserved.'
 baseURL = 'https://kamabokohome.com/'
 languageCode = 'en-US'
 defaultContentLanguage = 'en'
