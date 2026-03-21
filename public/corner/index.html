@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-US" class="scroll-smooth dark page-corner">
-  <head><meta charset="UTF-8" />
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 <meta name="theme-color" content="#f9f5ec" />
@@ -18,7 +18,7 @@
 ——《和路边的野鸟做朋友》
 "
 />
-<link rel="canonical" href="https://kamabokohome.com/corner/" />
+<link rel="canonical" href="http://localhost:1313/corner/" />
 <meta name="robots" content="index,follow" /><link rel="icon" href="/img/favicon.ico?v=20260318e" />
 <link rel="icon" type="image/png" href="/img/favicon.png?v=20260318e" />
 <link rel="apple-touch-icon" href="/img/favicon.png?v=20260318e" />
@@ -31,7 +31,9 @@
 
 
 
-<link rel="stylesheet" href="/css/app.css?v=20260318ak" />
+  
+
+<link rel="stylesheet" href="/css/app.css?v=1774087280" />
 <style>
       html {
         scrollbar-gutter: stable;
@@ -2644,6 +2646,46 @@
     });
   }
 
+  const postsYearDropdowns = Array.from(document.querySelectorAll('.posts-year-dropdown'));
+  if (postsYearDropdowns.length > 0) {
+    const closePostsYearDropdown = (dropdown) => {
+      if (!dropdown) return;
+      dropdown.open = false;
+    };
+
+    const closeOtherPostsYearDropdowns = (activeDropdown) => {
+      postsYearDropdowns.forEach((dropdown) => {
+        if (dropdown === activeDropdown) return;
+        closePostsYearDropdown(dropdown);
+      });
+    };
+
+    const closeAllPostsYearDropdowns = () => {
+      postsYearDropdowns.forEach((dropdown) => {
+        closePostsYearDropdown(dropdown);
+      });
+    };
+
+    postsYearDropdowns.forEach((dropdown) => {
+      dropdown.addEventListener('toggle', () => {
+        if (!dropdown.open) return;
+        closeOtherPostsYearDropdowns(dropdown);
+      });
+
+      const jumpLinks = dropdown.querySelectorAll('.posts-year-jump-menu a[href^="#posts-year-"]');
+      jumpLinks.forEach((link) => {
+        link.addEventListener('click', () => {
+          window.requestAnimationFrame(() => {
+            closePostsYearDropdown(dropdown);
+          });
+        });
+      });
+    });
+
+    window.addEventListener('hashchange', closeAllPostsYearDropdowns);
+    closeAllPostsYearDropdowns();
+  }
+
   const messageBoard = document.querySelector('[data-message-board]');
   if (messageBoard) {
     const form = messageBoard.querySelector('[data-message-form]');
@@ -3018,9 +3060,9 @@
           })();
         </script>
 
-        <div class="site-footer-copyright flex justify-center items-center text-xs font-semibold" 
-                style="font-size: 0.7rem; padding-bottom: 0.5rem;">
-            © Kamaboko Home 
+        <div class="site-footer-copyright flex justify-center items-center text-xs font-normal" 
+                style="font-size: 0.62rem; padding-bottom: 0.5rem;">
+            © 2024–2026 Kamaboko Home. All rights reserved. 
           </div>     
     
     </footer>
