@@ -56,11 +56,21 @@
     --dark-grad-stop-2: 340px;
     --dark-grad-stop-3: 680px;
     --dark-grad-stop-4: 1440px;
+    --paper-surface-bg: linear-gradient(180deg, rgba(255, 252, 246, 0.99) 0%, rgba(252, 247, 239, 0.98) 100%);
+    --paper-surface-shadow:
+      0 10px 26px rgba(103, 82, 64, 0.08),
+      0 2px 5px rgba(103, 82, 64, 0.05);
+    --paper-surface-border: rgba(203, 187, 166, 0.24);
   }
 
   html.dark {
     --banner-link-opacity-light-factor: 1;
     --banner-link-opacity-dark-boost: 1;
+    --paper-surface-bg: linear-gradient(180deg, rgba(62, 58, 55, 0.985) 0%, rgba(57, 53, 50, 0.975) 100%);
+    --paper-surface-shadow:
+      0 10px 24px rgba(0, 0, 0, 0.18),
+      0 2px 5px rgba(0, 0, 0, 0.1);
+    --paper-surface-border: rgba(157, 140, 121, 0.22);
   }
 
   body {
@@ -813,11 +823,11 @@ body.is-home #content > section a::after {
 }
 
 .site-footer-copyright {
-  color: #6b7280;
+  color: rgba(107, 114, 128, 0.72);
 }
 
 html.dark .site-footer-copyright {
-  color: #9ca3af;
+  color: rgba(156, 163, 175, 0.68);
 }
 
 html.dark #content .corner-entry-date {
@@ -1085,11 +1095,8 @@ html.dark #content .single-jump-link.is-current {
   padding: 2rem 1.6rem;
   border: none;
   border-radius: 0.28rem;
-  background:
-    linear-gradient(180deg, rgba(255, 252, 246, 0.99) 0%, rgba(252, 247, 239, 0.98) 100%);
-  box-shadow:
-    0 10px 26px rgba(103, 82, 64, 0.08),
-    0 2px 5px rgba(103, 82, 64, 0.05);
+  background: var(--paper-surface-bg);
+  box-shadow: var(--paper-surface-shadow);
 }
 
 #content .message-paper::before,
@@ -1274,11 +1281,8 @@ html.dark #content .single-jump-link.is-current {
 }
 
 html.dark #content .message-paper {
-  background:
-    linear-gradient(180deg, rgba(62, 58, 55, 0.985) 0%, rgba(57, 53, 50, 0.975) 100%);
-  box-shadow:
-    0 10px 24px rgba(0, 0, 0, 0.18),
-    0 2px 5px rgba(0, 0, 0, 0.1);
+  background: var(--paper-surface-bg);
+  box-shadow: var(--paper-surface-shadow);
 }
 
 html.dark #content .message-paper::before {
@@ -1455,11 +1459,9 @@ html.dark #content .message-board-status .message-board-status-line {
   margin: 0;
   padding: 0.38rem 0.26rem 0.26rem;
   border-radius: 0 0 0.54rem 0.54rem;
-  border: none;
-  background: rgba(249, 245, 236, 0.66);
-  backdrop-filter: blur(11px);
-  -webkit-backdrop-filter: blur(11px);
-  box-shadow: 0 5px 14px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--paper-surface-border);
+  background: var(--paper-surface-bg);
+  box-shadow: var(--paper-surface-shadow);
 }
 
 #content .posts-year-dropdown[open] .posts-year-jump-menu {
@@ -1489,11 +1491,9 @@ html.dark #content .message-board-status .message-board-status-line {
 }
 
 html.dark #content .posts-year-jump-menu {
-  background: rgba(47, 47, 47, 0.68);
-  border-color: transparent;
-  backdrop-filter: blur(11px);
-  -webkit-backdrop-filter: blur(11px);
-  box-shadow: 0 5px 14px rgba(0, 0, 0, 0.3);
+  border-color: var(--paper-surface-border);
+  background: var(--paper-surface-bg);
+  box-shadow: var(--paper-surface-shadow);
 }
 
 html.dark #content .posts-year-dropdown[open] .posts-year-trigger {
