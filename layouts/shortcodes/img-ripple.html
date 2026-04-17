@@ -6,6 +6,10 @@
 {{ $house1 := resources.Get "home/house1.jpg" }}
 {{ $pigeonBack := resources.Get "home/鸽子_back.jpg" }}
 {{ $pigeonFront := resources.Get "home/鸽子_front.png" }}
+{{ $pigeonBubble1 := resources.Get "home/鸽子_bubble1.png" }}
+{{ $pigeonBubble2 := resources.Get "home/鸽子_bubble2.png" }}
+{{ $pigeonBubble3 := resources.Get "home/鸽子_bubble3.png" }}
+{{ $pigeonBubble4 := resources.Get "home/鸽子_bubble4.png" }}
 {{ $swing := resources.Get "home/swing.jpg" }}
 {{ $house2 := resources.Get "home/house2.jpg" }}
 {{ $tree3 := resources.Get "home/tree3.jpg" }}
@@ -25,6 +29,10 @@
 {{ if not $house1 }}{{ $missing = $missing | append "house1.jpg" }}{{ end }}
 {{ if not $pigeonBack }}{{ $missing = $missing | append "鸽子_back.jpg" }}{{ end }}
 {{ if not $pigeonFront }}{{ $missing = $missing | append "鸽子_front.png" }}{{ end }}
+{{ if not $pigeonBubble1 }}{{ $missing = $missing | append "鸽子_bubble1.png" }}{{ end }}
+{{ if not $pigeonBubble2 }}{{ $missing = $missing | append "鸽子_bubble2.png" }}{{ end }}
+{{ if not $pigeonBubble3 }}{{ $missing = $missing | append "鸽子_bubble3.png" }}{{ end }}
+{{ if not $pigeonBubble4 }}{{ $missing = $missing | append "鸽子_bubble4.png" }}{{ end }}
 {{ if not $swing }}{{ $missing = $missing | append "swing.jpg" }}{{ end }}
 {{ if not $house2 }}{{ $missing = $missing | append "house2.jpg" }}{{ end }}
 {{ if not $tree3 }}{{ $missing = $missing | append "tree3.jpg" }}{{ end }}
@@ -49,7 +57,7 @@
       </div>
       <div class="home-ripple-tile" data-tile-index="3">
         <div class="home-ripple-water" data-ripple-enabled="1" data-ripple-src="{{ $titleBack.RelPermalink }}" style="background-image: url('{{ $titleBack.RelPermalink }}');"></div>
-        <img class="home-ripple-front" src="{{ $titleFront.RelPermalink }}" alt="title front" width="{{ $titleFront.Width }}" height="{{ $titleFront.Height }}" loading="lazy" />
+        <img class="home-ripple-front home-ripple-title-front" src="{{ $titleFront.RelPermalink }}" alt="title front" width="{{ $titleFront.Width }}" height="{{ $titleFront.Height }}" loading="lazy" />
       </div>
       <div class="home-ripple-tile" data-tile-index="4">
         <div class="home-ripple-water" data-ripple-src="{{ $tree2.RelPermalink }}" style="background-image: url('{{ $tree2.RelPermalink }}');"></div>
@@ -59,8 +67,12 @@
         <div class="home-ripple-water" data-ripple-src="{{ $house1.RelPermalink }}" style="background-image: url('{{ $house1.RelPermalink }}');"></div>
       </div>
       <div class="home-ripple-tile" data-tile-index="6">
-        <div class="home-ripple-water" data-ripple-enabled="1" data-ripple-src="{{ $pigeonBack.RelPermalink }}" style="background-image: url('{{ $pigeonBack.RelPermalink }}');"></div>
-        <img class="home-ripple-front" src="{{ $pigeonFront.RelPermalink }}" alt="pigeon front" width="{{ $pigeonFront.Width }}" height="{{ $pigeonFront.Height }}" loading="lazy" />
+        <div class="home-ripple-water" data-ripple-src="{{ $pigeonBack.RelPermalink }}" style="background-image: url('{{ $pigeonBack.RelPermalink }}');"></div>
+        <img class="home-ripple-front home-ripple-pigeon-front" src="{{ $pigeonFront.RelPermalink }}" alt="pigeon front" width="{{ $pigeonFront.Width }}" height="{{ $pigeonFront.Height }}" loading="lazy" />
+        <img class="home-ripple-front home-ripple-pigeon-bubble" data-bubble-index="1" src="{{ $pigeonBubble1.RelPermalink }}" alt="" width="{{ $pigeonBubble1.Width }}" height="{{ $pigeonBubble1.Height }}" loading="eager" aria-hidden="true" />
+        <img class="home-ripple-front home-ripple-pigeon-bubble" data-bubble-index="2" src="{{ $pigeonBubble2.RelPermalink }}" alt="" width="{{ $pigeonBubble2.Width }}" height="{{ $pigeonBubble2.Height }}" loading="eager" aria-hidden="true" />
+        <img class="home-ripple-front home-ripple-pigeon-bubble" data-bubble-index="3" src="{{ $pigeonBubble3.RelPermalink }}" alt="" width="{{ $pigeonBubble3.Width }}" height="{{ $pigeonBubble3.Height }}" loading="eager" aria-hidden="true" />
+        <img class="home-ripple-front home-ripple-pigeon-bubble" data-bubble-index="4" src="{{ $pigeonBubble4.RelPermalink }}" alt="" width="{{ $pigeonBubble4.Width }}" height="{{ $pigeonBubble4.Height }}" loading="eager" aria-hidden="true" />
       </div>
       <div class="home-ripple-tile" data-tile-index="7">
         <div class="home-ripple-water" data-ripple-src="{{ $swing.RelPermalink }}" style="background-image: url('{{ $swing.RelPermalink }}');"></div>
@@ -146,8 +158,19 @@
 
     body.is-home .home-ripple-stage .home-ripple-grid {
       inset: 0;
-      row-gap: 12px;
-      column-gap: 12px;
+      row-gap: 0;
+      column-gap: 0;
+    }
+
+    body.is-home .home-ripple-stage .home-ripple-tile {
+      cursor: grab;
+      touch-action: none;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    body.is-home .home-ripple-stage .home-ripple-tile.is-desktop-tile-dragging {
+      cursor: grabbing;
     }
 
     body.is-home .home-ripple-stage .home-ripple-gapfill {
@@ -185,14 +208,8 @@
 
   .home-ripple-gapfill {
     z-index: 2;
-    background:
-      linear-gradient(to bottom, rgba(255, 255, 255, 0) 44%, var(--home-ripple-page-bg-soft) 100%),
-      radial-gradient(120% 95% at 24% 18%, var(--home-ripple-gap-color-light-soft) 0%, transparent 62%),
-      radial-gradient(135% 110% at 78% 82%, var(--home-ripple-gap-color-deep-soft) 0%, transparent 66%),
-      linear-gradient(145deg, var(--home-ripple-gap-color-light) 0%, var(--home-ripple-gap-color) 52%, var(--home-ripple-gap-color-deep) 100%);
-    opacity: 0.9;
-    backdrop-filter: blur(15px) saturate(124%) contrast(106%);
-    -webkit-backdrop-filter: blur(15px) saturate(124%) contrast(106%);
+    background: transparent;
+    opacity: 0;
   }
 
   .home-ripple-flow {
@@ -253,8 +270,6 @@
     background:
       linear-gradient(115deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 52%, rgba(255, 255, 255, 0.025) 100%),
       radial-gradient(95% 78% at 50% 50%, rgba(255, 255, 255, 0.018) 0%, rgba(255, 255, 255, 0.008) 72%, rgba(0, 0, 0, 0.004) 100%);
-    backdrop-filter: blur(3px) saturate(100%);
-    -webkit-backdrop-filter: blur(3px) saturate(100%);
     opacity: 0.06;
     pointer-events: none;
   }
@@ -265,8 +280,8 @@
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
     grid-template-rows: repeat(3, minmax(0, 1fr));
-    row-gap: clamp(10px, 1.2vw, 16px);
-    column-gap: clamp(12px, 1.5vw, 20px);
+    row-gap: 0;
+    column-gap: 0;
     padding: 0;
     background: transparent;
     box-sizing: border-box;
@@ -277,6 +292,37 @@
     position: relative;
     overflow: hidden;
     background: transparent;
+    cursor: default;
+  }
+
+  .home-ripple-tile[data-tile-index="12"] {
+    z-index: 9;
+  }
+
+  .home-ripple-tile[data-tile-index="3"] {
+    overflow: visible;
+    z-index: 31;
+  }
+
+  .home-ripple-tile[data-tile-index="3"].is-title-active {
+    z-index: 32 !important;
+  }
+
+  .home-ripple-tile[data-tile-index="6"] {
+    overflow: visible;
+    z-index: 33;
+  }
+
+  .home-ripple-tile[data-tile-index="6"].is-pigeon-active {
+    z-index: 34 !important;
+  }
+
+  .home-ripple-tile.is-desktop-tile-dragging {
+    z-index: 36 !important;
+  }
+
+  .home-ripple-tile[data-tile-index="3"].is-desktop-tile-dragging {
+    z-index: 36 !important;
   }
 
   .home-ripple-water {
@@ -285,6 +331,19 @@
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
+  }
+
+  .home-ripple-water[data-ripple-enabled="1"] {
+    overflow: hidden;
+  }
+
+  .home-ripple-water[data-ripple-enabled="1"] > canvas {
+    left: -1px !important;
+    top: -1px !important;
+    right: auto !important;
+    bottom: auto !important;
+    width: calc(100% + 2px) !important;
+    height: calc(100% + 3px) !important;
   }
 
   .home-ripple-canvas.has-shared-ripple .home-ripple-grid .home-ripple-water {
@@ -299,34 +358,80 @@
     object-fit: cover;
     object-position: center;
     pointer-events: none;
-    z-index: 2;
+    z-index: 10;
   }
 
-  .home-ripple-tile[data-tile-index="1"]::before,
-  .home-ripple-tile[data-tile-index="8"]::before,
-  .home-ripple-tile[data-tile-index="11"]::before {
-    content: "";
-    position: absolute;
-    inset: 0;
+  .home-ripple-title-front {
+    cursor: grab;
+    pointer-events: auto;
+    touch-action: none;
+    user-select: none;
+    -webkit-user-select: none;
+    transform: translate3d(var(--title-drag-x, 0px), var(--title-drag-y, 0px), 0);
+    will-change: transform;
+  }
+
+  .home-ripple-title-front.is-title-dragging {
+    cursor: grabbing;
+  }
+
+  .home-ripple-tile.is-title-active {
+    z-index: 32 !important;
+  }
+
+  .home-ripple-title-front {
+    cursor: grab;
+    pointer-events: auto;
+    touch-action: none;
+    user-select: none;
+    -webkit-user-select: none;
+    transform: translate3d(var(--title-drag-x, 0px), var(--title-drag-y, 0px), 0);
+    will-change: transform;
+  }
+
+  .home-ripple-pigeon-front {
+    cursor: grab;
+    pointer-events: auto;
+    touch-action: none;
+    user-select: none;
+    -webkit-user-select: none;
+    transform: translate3d(var(--pigeon-drag-x, 0px), var(--pigeon-drag-y, 0px), 0);
+    will-change: transform;
+  }
+
+  .home-ripple-pigeon-bubble {
+    z-index: 35;
+    opacity: 0;
     pointer-events: none;
-    z-index: 3;
-    backdrop-filter: blur(26px) saturate(128%) contrast(108%);
-    -webkit-backdrop-filter: blur(26px) saturate(128%) contrast(108%);
+    transform: translate3d(var(--pigeon-drag-x, 0px), var(--pigeon-drag-y, 0px), 0);
+    transition: opacity 140ms ease-out;
+    will-change: transform, opacity;
   }
 
-  .home-ripple-tile[data-tile-index="1"]::before {
-    -webkit-mask-image: radial-gradient(150% 150% at 0% 0%, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.94) 36%, rgba(0, 0, 0, 0.68) 68%, rgba(0, 0, 0, 0.18) 90%, rgba(0, 0, 0, 0) 100%);
-    mask-image: radial-gradient(150% 150% at 0% 0%, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.94) 36%, rgba(0, 0, 0, 0.68) 68%, rgba(0, 0, 0, 0.18) 90%, rgba(0, 0, 0, 0) 100%);
+  .home-ripple-tile.is-pigeon-hovered .home-ripple-pigeon-bubble.is-active-bubble,
+  .home-ripple-tile.is-pigeon-active .home-ripple-pigeon-bubble.is-active-bubble {
+    opacity: 1;
   }
 
-  .home-ripple-tile[data-tile-index="8"]::before {
-    -webkit-mask-image: linear-gradient(to left, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.92) 32%, rgba(0, 0, 0, 0.62) 68%, rgba(0, 0, 0, 0.16) 90%, rgba(0, 0, 0, 0) 100%);
-    mask-image: linear-gradient(to left, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.92) 32%, rgba(0, 0, 0, 0.62) 68%, rgba(0, 0, 0, 0.16) 90%, rgba(0, 0, 0, 0) 100%);
+  .home-ripple-pigeon-front.is-pigeon-dragging {
+    cursor: grabbing;
   }
 
-  .home-ripple-tile[data-tile-index="11"]::before {
-    -webkit-mask-image: linear-gradient(to top, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.92) 32%, rgba(0, 0, 0, 0.62) 66%, rgba(0, 0, 0, 0.16) 90%, rgba(0, 0, 0, 0) 100%);
-    mask-image: linear-gradient(to top, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.92) 32%, rgba(0, 0, 0, 0.62) 66%, rgba(0, 0, 0, 0.16) 90%, rgba(0, 0, 0, 0) 100%);
+  .home-ripple-swap-flyer {
+    position: absolute;
+    z-index: 7;
+    pointer-events: none;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    transition: transform 560ms cubic-bezier(0.22, 0.82, 0.24, 1);
+    will-change: transform;
+  }
+
+  .home-ripple-drag-flyer {
+    z-index: 37;
+    cursor: grabbing;
+    transition: none;
   }
 
   @media (max-width: 911px) {
@@ -334,19 +439,33 @@
       margin-top: 0;
     }
 
+    body.is-home .home-ripple-stage {
+      width: 100vw;
+      max-width: none;
+      margin-left: calc(50% - 50vw);
+      margin-right: calc(50% - 50vw);
+    }
+
     .home-ripple-canvas {
       display: none;
     }
 
+    .home-ripple-tile {
+      cursor: default;
+      touch-action: auto;
+    }
+
     .home-ripple-mobile {
       display: block;
+      width: 100vw;
+      max-width: none;
     }
 
     .home-ripple-grid {
       grid-template-columns: repeat(4, minmax(0, 1fr));
       grid-template-rows: repeat(3, minmax(0, 1fr));
-      row-gap: 8px;
-      column-gap: 10px;
+      row-gap: 0;
+      column-gap: 0;
     }
   }
 </style>
@@ -436,6 +555,760 @@
     const desktopRippleWaters = grid ? Array.from(grid.querySelectorAll(".home-ripple-water[data-ripple-src][data-ripple-enabled=\"1\"]")) : [];
     const tileHosts = grid ? Array.from(grid.querySelectorAll(".home-ripple-tile")) : [];
     if (!canvas || !gapfill || !flow || !grid || tileWaters.length === 0 || tileHosts.length === 0) return;
+
+    const setWaterSource = function (water, src) {
+      if (!water || !src) return;
+      water.setAttribute("data-ripple-src", src);
+      water.style.backgroundImage = "url(\"" + src.replace(/"/g, "%22") + "\")";
+
+      if (!hasRipples || water.getAttribute("data-ripple-enabled") !== "1") return;
+      const $water = window.jQuery(water);
+      if (!$water.data("ripples")) return;
+      try {
+        $water.ripples("set", "imageUrl", src);
+      } catch (_) {}
+    };
+
+    const shuffle = function (items) {
+      for (let i = items.length - 1; i > 0; i -= 1) {
+        const j = Math.floor(Math.random() * (i + 1));
+        const temp = items[i];
+        items[i] = items[j];
+        items[j] = temp;
+      }
+      return items;
+    };
+
+    const buildRandomAdjacentPairs = function () {
+      const cols = 4;
+      const rows = 3;
+      const total = cols * rows;
+      const neighbors = Array.from({ length: total }, function (_, index) {
+        const row = Math.floor(index / cols);
+        const col = index % cols;
+        const list = [];
+        if (row > 0) list.push(index - cols);
+        if (row < rows - 1) list.push(index + cols);
+        if (col > 0) list.push(index - 1);
+        if (col < cols - 1) list.push(index + 1);
+        return list;
+      });
+
+      const search = function (remaining, pairs) {
+        if (remaining.size === 0) return pairs;
+        const first = remaining.values().next().value;
+        const candidates = shuffle(neighbors[first].filter(function (neighbor) {
+          return remaining.has(neighbor);
+        }));
+
+        for (let i = 0; i < candidates.length; i += 1) {
+          const next = candidates[i];
+          const nextRemaining = new Set(remaining);
+          nextRemaining.delete(first);
+          nextRemaining.delete(next);
+          const result = search(nextRemaining, pairs.concat([[first, next]]));
+          if (result) return result;
+        }
+        return null;
+      };
+
+      for (let attempt = 0; attempt < 24; attempt += 1) {
+        const result = search(new Set(shuffle(Array.from({ length: total }, function (_, index) { return index; }))), []);
+        if (result && result.length === total / 2) return result;
+      }
+
+      return [[0, 1], [2, 3], [4, 5], [6, 7], [8, 9], [10, 11]];
+    };
+
+    const runRandomAdjacentSwap = function () {
+      if (isNarrowViewport()) return;
+      if (grid.dataset.randomSwapAnimating === "1") return;
+
+      const gridRect = grid.getBoundingClientRect();
+      if (gridRect.width <= 0 || gridRect.height <= 0) return;
+
+      const tileData = tileHosts.map(function (tile) {
+        const water = tile.querySelector(".home-ripple-water[data-ripple-src]");
+        const rect = tile.getBoundingClientRect();
+        return {
+          tile: tile,
+          water: water,
+          src: water ? water.getAttribute("data-ripple-src") : "",
+          x: rect.left - gridRect.left,
+          y: rect.top - gridRect.top,
+          width: rect.width,
+          height: rect.height
+        };
+      });
+
+      if (tileData.length !== 12 || tileData.some(function (item) { return !item.water || !item.src; })) return;
+
+      grid.dataset.randomSwapAnimating = "1";
+      grid.classList.add("is-random-swapping");
+      const pairs = buildRandomAdjacentPairs();
+      const flyers = [];
+
+      tileData.forEach(function (item) {
+        item.water.style.opacity = "0";
+      });
+
+      pairs.forEach(function (pair) {
+        const a = tileData[pair[0]];
+        const b = tileData[pair[1]];
+        const move = function (from, to) {
+          const flyer = document.createElement("div");
+          flyer.className = "home-ripple-swap-flyer";
+          flyer.style.left = from.x + "px";
+          flyer.style.top = from.y + "px";
+          flyer.style.width = from.width + "px";
+          flyer.style.height = from.height + "px";
+          flyer.style.backgroundImage = "url(\"" + from.src.replace(/"/g, "%22") + "\")";
+          flyer.dataset.moveX = (to.x - from.x).toFixed(2);
+          flyer.dataset.moveY = (to.y - from.y).toFixed(2);
+          grid.appendChild(flyer);
+          flyers.push(flyer);
+        };
+
+        move(a, b);
+        move(b, a);
+      });
+
+      requestAnimationFrame(function () {
+        flyers.forEach(function (flyer) {
+          flyer.style.transform = "translate3d(" + flyer.dataset.moveX + "px, " + flyer.dataset.moveY + "px, 0)";
+        });
+      });
+
+      window.setTimeout(function () {
+        pairs.forEach(function (pair) {
+          const a = tileData[pair[0]];
+          const b = tileData[pair[1]];
+          setWaterSource(a.water, b.src);
+          setWaterSource(b.water, a.src);
+        });
+
+        tileData.forEach(function (item) {
+          item.water.style.opacity = "";
+        });
+        flyers.forEach(function (flyer) {
+          flyer.remove();
+        });
+        grid.classList.remove("is-random-swapping");
+        grid.dataset.randomSwapAnimating = "";
+        buildSharedLayers();
+      }, 620);
+    };
+
+    const initDesktopTileSwap = function () {
+      if (grid.dataset.desktopTileSwapInit === "1") return;
+      grid.dataset.desktopTileSwapInit = "1";
+
+      let dragState = null;
+
+      const findTileAtPoint = function (clientX, clientY, sourceTile) {
+        let best = null;
+        let bestDistance = Infinity;
+
+        tileHosts.forEach(function (tile) {
+          if (tile === sourceTile) return;
+          const rect = tile.getBoundingClientRect();
+          if (rect.width <= 0 || rect.height <= 0) return;
+          if (clientX < rect.left || clientX > rect.right || clientY < rect.top || clientY > rect.bottom) return;
+
+          const centerX = rect.left + rect.width * 0.5;
+          const centerY = rect.top + rect.height * 0.5;
+          const distance = Math.hypot(clientX - centerX, clientY - centerY);
+          if (distance < bestDistance) {
+            best = tile;
+            bestDistance = distance;
+          }
+        });
+
+        return best;
+      };
+
+      const makeDragFlyer = function (water) {
+        const src = water ? water.getAttribute("data-ripple-src") : "";
+        if (!src) return null;
+        const gridRect = grid.getBoundingClientRect();
+        const rect = water.getBoundingClientRect();
+        if (gridRect.width <= 0 || gridRect.height <= 0 || rect.width <= 0 || rect.height <= 0) return null;
+
+        const flyer = document.createElement("div");
+        flyer.className = "home-ripple-swap-flyer home-ripple-drag-flyer";
+        flyer.style.left = (rect.left - gridRect.left) + "px";
+        flyer.style.top = (rect.top - gridRect.top) + "px";
+        flyer.style.width = rect.width + "px";
+        flyer.style.height = rect.height + "px";
+        flyer.style.backgroundImage = "url(\"" + src.replace(/"/g, "%22") + "\")";
+        grid.appendChild(flyer);
+        return flyer;
+      };
+
+      const setDragFlyerOffset = function (flyer, x, y) {
+        if (!flyer) return;
+        flyer.style.transform = "translate3d(" + x.toFixed(2) + "px, " + y.toFixed(2) + "px, 0)";
+      };
+
+      const finishDesktopTileDrag = function (event, shouldSwap) {
+        if (!dragState) return;
+        const sourceTile = dragState.tile;
+        const sourceWater = dragState.water;
+        const targetTile = shouldSwap ? findTileAtPoint(event.clientX, event.clientY, sourceTile) : null;
+        const targetWater = targetTile ? targetTile.querySelector(".home-ripple-water[data-ripple-src]") : null;
+
+        if (sourceWater) {
+          sourceWater.style.opacity = "";
+        }
+
+        if (targetWater && sourceWater) {
+          const sourceSrc = sourceWater.getAttribute("data-ripple-src") || "";
+          const targetSrc = targetWater.getAttribute("data-ripple-src") || "";
+          setWaterSource(sourceWater, targetSrc);
+          setWaterSource(targetWater, sourceSrc);
+          buildSharedLayers();
+        }
+
+        try {
+          sourceTile.releasePointerCapture(dragState.pointerId);
+        } catch (_) {}
+        sourceTile.classList.remove("is-desktop-tile-dragging");
+        if (dragState.flyer) {
+          dragState.flyer.remove();
+        }
+        grid.dataset.desktopTileDragging = "";
+        dragState = null;
+
+        if (event && typeof event.preventDefault === "function") {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+      };
+
+      grid.addEventListener("pointerdown", function (event) {
+        if (isNarrowViewport()) return;
+        if (event.button !== 0) return;
+        if (grid.dataset.randomSwapAnimating === "1") return;
+
+        const sourceTile = event.target.closest(".home-ripple-tile");
+        if (!sourceTile || !grid.contains(sourceTile)) return;
+        const sourceWater = sourceTile.querySelector(".home-ripple-water[data-ripple-src]");
+        if (!sourceWater) return;
+        const flyer = makeDragFlyer(sourceWater);
+        if (!flyer) return;
+
+        dragState = {
+          tile: sourceTile,
+          water: sourceWater,
+          flyer: flyer,
+          pointerId: event.pointerId,
+          startX: event.clientX,
+          startY: event.clientY,
+          moved: false
+        };
+
+        sourceTile.classList.add("is-desktop-tile-dragging");
+        sourceWater.style.opacity = "0";
+        grid.dataset.desktopTileDragging = "1";
+        try {
+          sourceTile.setPointerCapture(event.pointerId);
+        } catch (_) {}
+        event.preventDefault();
+      });
+
+      grid.addEventListener("pointermove", function (event) {
+        if (!dragState || dragState.pointerId !== event.pointerId) return;
+        const deltaX = event.clientX - dragState.startX;
+        const deltaY = event.clientY - dragState.startY;
+        if (Math.hypot(deltaX, deltaY) > 5) {
+          dragState.moved = true;
+        }
+        setDragFlyerOffset(dragState.flyer, deltaX, deltaY);
+        event.preventDefault();
+        event.stopPropagation();
+      });
+
+      grid.addEventListener("pointerup", function (event) {
+        if (!dragState || dragState.pointerId !== event.pointerId) return;
+        finishDesktopTileDrag(event, dragState.moved);
+      });
+
+      grid.addEventListener("pointercancel", function (event) {
+        if (!dragState || dragState.pointerId !== event.pointerId) return;
+        finishDesktopTileDrag(event, false);
+      });
+    };
+
+    const initTitleDrag = function () {
+      if (grid.dataset.titleDragInit === "1") return;
+      grid.dataset.titleDragInit = "1";
+
+      const titleTile = grid.querySelector(".home-ripple-tile[data-tile-index=\"3\"]");
+      const title = titleTile ? titleTile.querySelector(".home-ripple-title-front") : null;
+      if (!titleTile || !title) return;
+
+      let currentX = 0;
+      let currentY = 0;
+      let dragState = null;
+      let alphaBounds = null;
+
+      const clamp = function (value, min, max) {
+        if (min > max) return (min + max) * 0.5;
+        return Math.max(min, Math.min(max, value));
+      };
+
+      const applyTitleOffset = function (x, y) {
+        currentX = x;
+        currentY = y;
+        titleTile.style.setProperty("--title-drag-x", currentX.toFixed(2) + "px");
+        titleTile.style.setProperty("--title-drag-y", currentY.toFixed(2) + "px");
+        title.style.setProperty("--title-drag-x", currentX.toFixed(2) + "px");
+        title.style.setProperty("--title-drag-y", currentY.toFixed(2) + "px");
+      };
+
+      const getFallbackAlphaBounds = function () {
+        const naturalWidth = title.naturalWidth || parseFloat(title.getAttribute("width")) || 1;
+        const naturalHeight = title.naturalHeight || parseFloat(title.getAttribute("height")) || 1;
+        return {
+          minX: naturalWidth * 0.08,
+          minY: naturalHeight * 0.08,
+          maxX: naturalWidth * 0.92,
+          maxY: naturalHeight * 0.92,
+          naturalWidth: naturalWidth,
+          naturalHeight: naturalHeight
+        };
+      };
+
+      const readAlphaBounds = function () {
+        const naturalWidth = title.naturalWidth || parseFloat(title.getAttribute("width")) || 0;
+        const naturalHeight = title.naturalHeight || parseFloat(title.getAttribute("height")) || 0;
+        if (naturalWidth <= 0 || naturalHeight <= 0) {
+          alphaBounds = getFallbackAlphaBounds();
+          return;
+        }
+
+        const alphaCanvas = document.createElement("canvas");
+        alphaCanvas.width = naturalWidth;
+        alphaCanvas.height = naturalHeight;
+        const ctx = alphaCanvas.getContext("2d", { willReadFrequently: true });
+        if (!ctx) {
+          alphaBounds = getFallbackAlphaBounds();
+          return;
+        }
+
+        try {
+          ctx.drawImage(title, 0, 0, naturalWidth, naturalHeight);
+          const data = ctx.getImageData(0, 0, naturalWidth, naturalHeight).data;
+          let minX = naturalWidth;
+          let minY = naturalHeight;
+          let maxX = 0;
+          let maxY = 0;
+          let found = false;
+
+          for (let y = 0; y < naturalHeight; y += 1) {
+            for (let x = 0; x < naturalWidth; x += 1) {
+              const alpha = data[((y * naturalWidth + x) * 4) + 3];
+              if (alpha <= 10) continue;
+              found = true;
+              if (x < minX) minX = x;
+              if (y < minY) minY = y;
+              if (x > maxX) maxX = x;
+              if (y > maxY) maxY = y;
+            }
+          }
+
+          alphaBounds = found ? {
+            minX: minX,
+            minY: minY,
+            maxX: maxX + 1,
+            maxY: maxY + 1,
+            naturalWidth: naturalWidth,
+            naturalHeight: naturalHeight
+          } : getFallbackAlphaBounds();
+        } catch (_) {
+          alphaBounds = getFallbackAlphaBounds();
+        }
+      };
+
+      const getMotionBounds = function () {
+        const tileRect = titleTile.getBoundingClientRect();
+        const gridRect = grid.getBoundingClientRect();
+        const naturalWidth = (alphaBounds && alphaBounds.naturalWidth) || title.naturalWidth || parseFloat(title.getAttribute("width")) || 1;
+        const naturalHeight = (alphaBounds && alphaBounds.naturalHeight) || title.naturalHeight || parseFloat(title.getAttribute("height")) || 1;
+        const bounds = alphaBounds || getFallbackAlphaBounds();
+        const scale = Math.max(tileRect.width / naturalWidth, tileRect.height / naturalHeight);
+        const renderedWidth = naturalWidth * scale;
+        const renderedHeight = naturalHeight * scale;
+        const offsetX = (tileRect.width - renderedWidth) * 0.5;
+        const offsetY = (tileRect.height - renderedHeight) * 0.5;
+        const visibleLeft = offsetX + (bounds.minX * scale);
+        const visibleTop = offsetY + (bounds.minY * scale);
+        const visibleRight = offsetX + (bounds.maxX * scale);
+        const visibleBottom = offsetY + (bounds.maxY * scale);
+
+        return {
+          minX: gridRect.left - tileRect.left - visibleLeft,
+          maxX: gridRect.right - tileRect.left - visibleRight,
+          minY: gridRect.top - tileRect.top - visibleTop,
+          maxY: gridRect.bottom - tileRect.top - visibleBottom,
+          visibleLeft: visibleLeft,
+          visibleRight: visibleRight,
+          visibleTop: visibleTop,
+          visibleBottom: visibleBottom
+        };
+      };
+
+      const pointerHitsTitle = function (event) {
+        const tileRect = titleTile.getBoundingClientRect();
+        const motion = getMotionBounds();
+        const x = event.clientX - tileRect.left - currentX;
+        const y = event.clientY - tileRect.top - currentY;
+        return x >= motion.visibleLeft && x <= motion.visibleRight && y >= motion.visibleTop && y <= motion.visibleBottom;
+      };
+
+      const finishTitleDrag = function (event) {
+        if (!dragState) return;
+        try {
+          title.releasePointerCapture(dragState.pointerId);
+        } catch (_) {}
+        title.classList.remove("is-title-dragging");
+        titleTile.classList.remove("is-title-active");
+        dragState = null;
+        if (event && typeof event.preventDefault === "function") {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+      };
+
+      if (title.complete) {
+        readAlphaBounds();
+      } else {
+        title.addEventListener("load", readAlphaBounds, { once: true });
+      }
+
+      title.addEventListener("pointerdown", function (event) {
+        if (isNarrowViewport()) return;
+        if (event.button !== 0) return;
+        if (grid.dataset.randomSwapAnimating === "1") return;
+        if (!alphaBounds) readAlphaBounds();
+        if (!pointerHitsTitle(event)) return;
+
+        const motion = getMotionBounds();
+        dragState = {
+          pointerId: event.pointerId,
+          startX: event.clientX,
+          startY: event.clientY,
+          originX: currentX,
+          originY: currentY,
+          minX: motion.minX,
+          maxX: motion.maxX,
+          minY: motion.minY,
+          maxY: motion.maxY
+        };
+
+        title.classList.add("is-title-dragging");
+        titleTile.classList.add("is-title-active");
+        try {
+          title.setPointerCapture(event.pointerId);
+        } catch (_) {}
+        event.preventDefault();
+        event.stopPropagation();
+      });
+
+      title.addEventListener("pointermove", function (event) {
+        if (!dragState || dragState.pointerId !== event.pointerId) return;
+        const deltaX = event.clientX - dragState.startX;
+        const deltaY = event.clientY - dragState.startY;
+        const nextX = clamp(dragState.originX + deltaX, dragState.minX, dragState.maxX);
+        const nextY = clamp(dragState.originY + deltaY, dragState.minY, dragState.maxY);
+        applyTitleOffset(nextX, nextY);
+        event.preventDefault();
+        event.stopPropagation();
+      });
+
+      title.addEventListener("pointerup", function (event) {
+        if (!dragState || dragState.pointerId !== event.pointerId) return;
+        finishTitleDrag(event);
+      });
+
+      title.addEventListener("pointercancel", function (event) {
+        if (!dragState || dragState.pointerId !== event.pointerId) return;
+        finishTitleDrag(event);
+      });
+
+      window.addEventListener("resize", function () {
+        const motion = getMotionBounds();
+        applyTitleOffset(
+          clamp(currentX, motion.minX, motion.maxX),
+          clamp(currentY, motion.minY, motion.maxY)
+        );
+      }, { passive: true });
+    };
+
+    const initPigeonDrag = function () {
+      if (grid.dataset.pigeonDragInit === "1") return;
+      grid.dataset.pigeonDragInit = "1";
+
+      const pigeonTile = grid.querySelector(".home-ripple-tile[data-tile-index=\"6\"]");
+      const pigeon = pigeonTile ? pigeonTile.querySelector(".home-ripple-pigeon-front") : null;
+      if (!pigeonTile || !pigeon) return;
+
+      let currentX = 0;
+      let currentY = 0;
+      let dragState = null;
+      let alphaBounds = null;
+      let isCurrentlyHovered = false;
+
+      const clamp = function (value, min, max) {
+        if (min > max) return (min + max) * 0.5;
+        return Math.max(min, Math.min(max, value));
+      };
+
+      const applyPigeonOffset = function (x, y) {
+        currentX = x;
+        currentY = y;
+        pigeonTile.style.setProperty("--pigeon-drag-x", currentX.toFixed(2) + "px");
+        pigeonTile.style.setProperty("--pigeon-drag-y", currentY.toFixed(2) + "px");
+        pigeon.style.setProperty("--pigeon-drag-x", currentX.toFixed(2) + "px");
+        pigeon.style.setProperty("--pigeon-drag-y", currentY.toFixed(2) + "px");
+      };
+
+      const setPigeonHover = function (isHovered) {
+        if (isCurrentlyHovered === isHovered) return;
+        isCurrentlyHovered = isHovered;
+        pigeonTile.classList.toggle("is-pigeon-hovered", Boolean(isHovered));
+        if (isHovered) {
+          randomizePigeonBubble();
+        } else {
+          clearPigeonBubbles();
+        }
+      };
+
+      const randomizePigeonBubble = function () {
+        const bubbles = Array.from(pigeonTile.querySelectorAll(".home-ripple-pigeon-bubble"));
+        bubbles.forEach(function (bubble) {
+          bubble.classList.remove("is-active-bubble");
+        });
+        if (bubbles.length > 0) {
+          const randomIndex = Math.floor(Math.random() * bubbles.length);
+          bubbles[randomIndex].classList.add("is-active-bubble");
+        }
+      };
+
+      const clearPigeonBubbles = function () {
+        const bubbles = Array.from(pigeonTile.querySelectorAll(".home-ripple-pigeon-bubble"));
+        bubbles.forEach(function (bubble) {
+          bubble.classList.remove("is-active-bubble");
+        });
+      };
+
+      const getFallbackAlphaBounds = function () {
+        const naturalWidth = pigeon.naturalWidth || parseFloat(pigeon.getAttribute("width")) || 1;
+        const naturalHeight = pigeon.naturalHeight || parseFloat(pigeon.getAttribute("height")) || 1;
+        return {
+          minX: naturalWidth * 0.24,
+          minY: naturalHeight * 0.24,
+          maxX: naturalWidth * 0.76,
+          maxY: naturalHeight * 0.86,
+          naturalWidth: naturalWidth,
+          naturalHeight: naturalHeight
+        };
+      };
+
+      const readAlphaBounds = function () {
+        const naturalWidth = pigeon.naturalWidth || parseFloat(pigeon.getAttribute("width")) || 0;
+        const naturalHeight = pigeon.naturalHeight || parseFloat(pigeon.getAttribute("height")) || 0;
+        if (naturalWidth <= 0 || naturalHeight <= 0) {
+          alphaBounds = getFallbackAlphaBounds();
+          return;
+        }
+
+        const canvas = document.createElement("canvas");
+        canvas.width = naturalWidth;
+        canvas.height = naturalHeight;
+        const ctx = canvas.getContext("2d", { willReadFrequently: true });
+        if (!ctx) {
+          alphaBounds = getFallbackAlphaBounds();
+          return;
+        }
+
+        try {
+          ctx.drawImage(pigeon, 0, 0, naturalWidth, naturalHeight);
+          const data = ctx.getImageData(0, 0, naturalWidth, naturalHeight).data;
+          let minX = naturalWidth;
+          let minY = naturalHeight;
+          let maxX = 0;
+          let maxY = 0;
+          let found = false;
+
+          for (let y = 0; y < naturalHeight; y += 1) {
+            for (let x = 0; x < naturalWidth; x += 1) {
+              const alpha = data[((y * naturalWidth + x) * 4) + 3];
+              if (alpha <= 10) continue;
+              found = true;
+              if (x < minX) minX = x;
+              if (y < minY) minY = y;
+              if (x > maxX) maxX = x;
+              if (y > maxY) maxY = y;
+            }
+          }
+
+          alphaBounds = found ? {
+            minX: minX,
+            minY: minY,
+            maxX: maxX + 1,
+            maxY: maxY + 1,
+            naturalWidth: naturalWidth,
+            naturalHeight: naturalHeight
+          } : getFallbackAlphaBounds();
+        } catch (_) {
+          alphaBounds = getFallbackAlphaBounds();
+        }
+      };
+
+      const getMotionBounds = function () {
+        const tileRect = pigeonTile.getBoundingClientRect();
+        const gridRect = grid.getBoundingClientRect();
+        const naturalWidth = (alphaBounds && alphaBounds.naturalWidth) || pigeon.naturalWidth || parseFloat(pigeon.getAttribute("width")) || 1;
+        const naturalHeight = (alphaBounds && alphaBounds.naturalHeight) || pigeon.naturalHeight || parseFloat(pigeon.getAttribute("height")) || 1;
+        const bounds = alphaBounds || getFallbackAlphaBounds();
+        const scale = Math.max(tileRect.width / naturalWidth, tileRect.height / naturalHeight);
+        const renderedWidth = naturalWidth * scale;
+        const renderedHeight = naturalHeight * scale;
+        const offsetX = (tileRect.width - renderedWidth) * 0.5;
+        const offsetY = (tileRect.height - renderedHeight) * 0.5;
+        const visibleLeft = offsetX + (bounds.minX * scale);
+        const visibleTop = offsetY + (bounds.minY * scale);
+        const visibleRight = offsetX + (bounds.maxX * scale);
+        const visibleBottom = offsetY + (bounds.maxY * scale);
+
+        return {
+          minX: gridRect.left - tileRect.left - visibleLeft,
+          maxX: gridRect.right - tileRect.left - visibleRight,
+          minY: gridRect.top - tileRect.top - visibleTop,
+          maxY: gridRect.bottom - tileRect.top - visibleBottom,
+          visibleLeft: visibleLeft,
+          visibleRight: visibleRight,
+          visibleTop: visibleTop,
+          visibleBottom: visibleBottom
+        };
+      };
+
+      const pointerHitsPigeon = function (event) {
+        const tileRect = pigeonTile.getBoundingClientRect();
+        const motion = getMotionBounds();
+        const x = event.clientX - tileRect.left - currentX;
+        const y = event.clientY - tileRect.top - currentY;
+        return x >= motion.visibleLeft && x <= motion.visibleRight && y >= motion.visibleTop && y <= motion.visibleBottom;
+      };
+
+      const finishPigeonDrag = function (event) {
+        if (!dragState) return;
+        try {
+          pigeon.releasePointerCapture(dragState.pointerId);
+        } catch (_) {}
+        pigeon.classList.remove("is-pigeon-dragging");
+        pigeonTile.classList.remove("is-pigeon-active");
+        dragState = null;
+        const shouldHover = event && !isNarrowViewport() && pointerHitsPigeon(event);
+        setPigeonHover(shouldHover);
+        if (event && typeof event.preventDefault === "function") {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+      };
+
+      if (pigeon.complete) {
+        readAlphaBounds();
+      } else {
+        pigeon.addEventListener("load", readAlphaBounds, { once: true });
+      }
+
+      pigeon.addEventListener("pointerdown", function (event) {
+        if (isNarrowViewport()) return;
+        if (event.button !== 0) return;
+        if (grid.dataset.randomSwapAnimating === "1") return;
+        if (!alphaBounds) readAlphaBounds();
+        if (!pointerHitsPigeon(event)) return;
+
+        const motion = getMotionBounds();
+        dragState = {
+          pointerId: event.pointerId,
+          startX: event.clientX,
+          startY: event.clientY,
+          originX: currentX,
+          originY: currentY,
+          minX: motion.minX,
+          maxX: motion.maxX,
+          minY: motion.minY,
+          maxY: motion.maxY,
+          moved: false
+        };
+
+        pigeon.classList.add("is-pigeon-dragging");
+        pigeonTile.classList.add("is-pigeon-active");
+        setPigeonHover(true);
+        randomizePigeonBubble();
+        try {
+          pigeon.setPointerCapture(event.pointerId);
+        } catch (_) {}
+        event.preventDefault();
+        event.stopPropagation();
+      });
+
+      pigeon.addEventListener("pointermove", function (event) {
+        if (!dragState || dragState.pointerId !== event.pointerId) return;
+        const deltaX = event.clientX - dragState.startX;
+        const deltaY = event.clientY - dragState.startY;
+        if (Math.hypot(deltaX, deltaY) > 5) {
+          dragState.moved = true;
+        }
+        const nextX = clamp(dragState.originX + deltaX, dragState.minX, dragState.maxX);
+        const nextY = clamp(dragState.originY + deltaY, dragState.minY, dragState.maxY);
+        applyPigeonOffset(nextX, nextY);
+        event.preventDefault();
+        event.stopPropagation();
+      });
+
+      pigeon.addEventListener("pointerup", function (event) {
+        if (!dragState || dragState.pointerId !== event.pointerId) return;
+        const shouldShuffle = !dragState.moved;
+        finishPigeonDrag(event);
+        if (shouldShuffle) {
+          runRandomAdjacentSwap();
+        }
+      });
+
+      pigeon.addEventListener("pointercancel", function (event) {
+        if (!dragState || dragState.pointerId !== event.pointerId) return;
+        finishPigeonDrag(event);
+      });
+
+      grid.addEventListener("pointermove", function (event) {
+        if (isNarrowViewport()) return;
+        if (dragState) return;
+        if (grid.dataset.randomSwapAnimating === "1") {
+          setPigeonHover(false);
+          return;
+        }
+        if (!alphaBounds) readAlphaBounds();
+        setPigeonHover(pointerHitsPigeon(event));
+      }, { passive: true });
+
+      grid.addEventListener("pointerleave", function () {
+        if (!dragState) {
+          setPigeonHover(false);
+        }
+      }, { passive: true });
+
+      window.addEventListener("resize", function () {
+        const motion = getMotionBounds();
+        applyPigeonOffset(
+          clamp(currentX, motion.minX, motion.maxX),
+          clamp(currentY, motion.minY, motion.maxY)
+        );
+      }, { passive: true });
+    };
 
     const ensureDesktopTileRipples = function () {
       if (!hasRipples || desktopRippleWaters.length === 0) return;
@@ -773,6 +1646,8 @@
     }
 
     ensureDesktopTileRipples();
+    initDesktopTileSwap();
+    initPigeonDrag();
     buildSharedLayers();
     let resizeTimer = 0;
     window.addEventListener("resize", function () {

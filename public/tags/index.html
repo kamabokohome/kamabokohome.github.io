@@ -30,7 +30,7 @@
 
   
 
-<link rel="stylesheet" href="/css/app.css?v=1774087047" />
+<link rel="stylesheet" href="/css/app.css?v=1776439886" />
 <style>
       html {
         scrollbar-gutter: stable;
@@ -2392,6 +2392,46 @@
     entries.forEach((entry) => {
       entry.open = false;
     });
+  }
+
+  const postsYearDropdowns = Array.from(document.querySelectorAll('.posts-year-dropdown'));
+  if (postsYearDropdowns.length > 0) {
+    const closePostsYearDropdown = (dropdown) => {
+      if (!dropdown) return;
+      dropdown.open = false;
+    };
+
+    const closeOtherPostsYearDropdowns = (activeDropdown) => {
+      postsYearDropdowns.forEach((dropdown) => {
+        if (dropdown === activeDropdown) return;
+        closePostsYearDropdown(dropdown);
+      });
+    };
+
+    const closeAllPostsYearDropdowns = () => {
+      postsYearDropdowns.forEach((dropdown) => {
+        closePostsYearDropdown(dropdown);
+      });
+    };
+
+    postsYearDropdowns.forEach((dropdown) => {
+      dropdown.addEventListener('toggle', () => {
+        if (!dropdown.open) return;
+        closeOtherPostsYearDropdowns(dropdown);
+      });
+
+      const jumpLinks = dropdown.querySelectorAll('.posts-year-jump-menu a[href^="#posts-year-"]');
+      jumpLinks.forEach((link) => {
+        link.addEventListener('click', () => {
+          window.requestAnimationFrame(() => {
+            closePostsYearDropdown(dropdown);
+          });
+        });
+      });
+    });
+
+    window.addEventListener('hashchange', closeAllPostsYearDropdowns);
+    closeAllPostsYearDropdowns();
   }
 
   const messageBoard = document.querySelector('[data-message-board]');
