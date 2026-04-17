@@ -57,7 +57,7 @@
       </div>
       <div class="home-ripple-tile" data-tile-index="3">
         <div class="home-ripple-water" data-ripple-enabled="1" data-ripple-src="{{ $titleBack.RelPermalink }}" style="background-image: url('{{ $titleBack.RelPermalink }}');"></div>
-        <img class="home-ripple-front home-ripple-title-front" src="{{ $titleFront.RelPermalink }}" alt="title front" width="{{ $titleFront.Width }}" height="{{ $titleFront.Height }}" loading="lazy" />
+        <img class="home-ripple-front home-ripple-title-front" src="{{ $titleFront.RelPermalink }}" alt="title front" width="{{ $titleFront.Width }}" height="{{ $titleFront.Height }}" loading="lazy" draggable="false" />
       </div>
       <div class="home-ripple-tile" data-tile-index="4">
         <div class="home-ripple-water" data-ripple-src="{{ $tree2.RelPermalink }}" style="background-image: url('{{ $tree2.RelPermalink }}');"></div>
@@ -68,11 +68,11 @@
       </div>
       <div class="home-ripple-tile" data-tile-index="6">
         <div class="home-ripple-water" data-ripple-src="{{ $pigeonBack.RelPermalink }}" style="background-image: url('{{ $pigeonBack.RelPermalink }}');"></div>
-        <img class="home-ripple-front home-ripple-pigeon-front" src="{{ $pigeonFront.RelPermalink }}" alt="pigeon front" width="{{ $pigeonFront.Width }}" height="{{ $pigeonFront.Height }}" loading="lazy" />
-        <img class="home-ripple-front home-ripple-pigeon-bubble" data-bubble-index="1" src="{{ $pigeonBubble1.RelPermalink }}" alt="" width="{{ $pigeonBubble1.Width }}" height="{{ $pigeonBubble1.Height }}" loading="eager" aria-hidden="true" />
-        <img class="home-ripple-front home-ripple-pigeon-bubble" data-bubble-index="2" src="{{ $pigeonBubble2.RelPermalink }}" alt="" width="{{ $pigeonBubble2.Width }}" height="{{ $pigeonBubble2.Height }}" loading="eager" aria-hidden="true" />
-        <img class="home-ripple-front home-ripple-pigeon-bubble" data-bubble-index="3" src="{{ $pigeonBubble3.RelPermalink }}" alt="" width="{{ $pigeonBubble3.Width }}" height="{{ $pigeonBubble3.Height }}" loading="eager" aria-hidden="true" />
-        <img class="home-ripple-front home-ripple-pigeon-bubble" data-bubble-index="4" src="{{ $pigeonBubble4.RelPermalink }}" alt="" width="{{ $pigeonBubble4.Width }}" height="{{ $pigeonBubble4.Height }}" loading="eager" aria-hidden="true" />
+        <img class="home-ripple-front home-ripple-pigeon-front" src="{{ $pigeonFront.RelPermalink }}" alt="pigeon front" width="{{ $pigeonFront.Width }}" height="{{ $pigeonFront.Height }}" loading="lazy" draggable="false" />
+        <img class="home-ripple-front home-ripple-pigeon-bubble" data-bubble-index="1" src="{{ $pigeonBubble1.RelPermalink }}" alt="" width="{{ $pigeonBubble1.Width }}" height="{{ $pigeonBubble1.Height }}" loading="eager" aria-hidden="true" draggable="false" />
+        <img class="home-ripple-front home-ripple-pigeon-bubble" data-bubble-index="2" src="{{ $pigeonBubble2.RelPermalink }}" alt="" width="{{ $pigeonBubble2.Width }}" height="{{ $pigeonBubble2.Height }}" loading="eager" aria-hidden="true" draggable="false" />
+        <img class="home-ripple-front home-ripple-pigeon-bubble" data-bubble-index="3" src="{{ $pigeonBubble3.RelPermalink }}" alt="" width="{{ $pigeonBubble3.Width }}" height="{{ $pigeonBubble3.Height }}" loading="eager" aria-hidden="true" draggable="false" />
+        <img class="home-ripple-front home-ripple-pigeon-bubble" data-bubble-index="4" src="{{ $pigeonBubble4.RelPermalink }}" alt="" width="{{ $pigeonBubble4.Width }}" height="{{ $pigeonBubble4.Height }}" loading="eager" aria-hidden="true" draggable="false" />
       </div>
       <div class="home-ripple-tile" data-tile-index="7">
         <div class="home-ripple-water" data-ripple-src="{{ $swing.RelPermalink }}" style="background-image: url('{{ $swing.RelPermalink }}');"></div>
@@ -302,6 +302,8 @@
   .home-ripple-tile[data-tile-index="3"] {
     overflow: visible;
     z-index: 31;
+    user-select: none;
+    -webkit-user-select: none;
   }
 
   .home-ripple-tile[data-tile-index="3"].is-title-active {
@@ -367,6 +369,7 @@
     touch-action: none;
     user-select: none;
     -webkit-user-select: none;
+    -webkit-touch-callout: none;
     transform: translate3d(var(--title-drag-x, 0px), var(--title-drag-y, 0px), 0);
     will-change: transform;
   }
@@ -379,22 +382,13 @@
     z-index: 32 !important;
   }
 
-  .home-ripple-title-front {
-    cursor: grab;
-    pointer-events: auto;
-    touch-action: none;
-    user-select: none;
-    -webkit-user-select: none;
-    transform: translate3d(var(--title-drag-x, 0px), var(--title-drag-y, 0px), 0);
-    will-change: transform;
-  }
-
   .home-ripple-pigeon-front {
     cursor: grab;
     pointer-events: auto;
     touch-action: none;
     user-select: none;
     -webkit-user-select: none;
+    -webkit-touch-callout: none;
     transform: translate3d(var(--pigeon-drag-x, 0px), var(--pigeon-drag-y, 0px), 0);
     will-change: transform;
   }
@@ -403,6 +397,9 @@
     z-index: 35;
     opacity: 0;
     pointer-events: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
     transform: translate3d(var(--pigeon-drag-x, 0px), var(--pigeon-drag-y, 0px), 0);
     transition: opacity 140ms ease-out;
     will-change: transform, opacity;
@@ -1045,6 +1042,23 @@
       }, { passive: true });
     };
 
+    const disableContextMenu = function () {
+      const titleTile = grid.querySelector(".home-ripple-tile[data-tile-index=\"3\"]");
+      const pigeonTile = grid.querySelector(".home-ripple-tile[data-tile-index=\"6\"]");
+      
+      if (titleTile) {
+        titleTile.addEventListener("contextmenu", function (e) {
+          e.preventDefault();
+        });
+      }
+      
+      if (pigeonTile) {
+        pigeonTile.addEventListener("contextmenu", function (e) {
+          e.preventDefault();
+        });
+      }
+    };
+
     const initPigeonDrag = function () {
       if (grid.dataset.pigeonDragInit === "1") return;
       grid.dataset.pigeonDragInit = "1";
@@ -1648,6 +1662,7 @@
     ensureDesktopTileRipples();
     initDesktopTileSwap();
     initPigeonDrag();
+    disableContextMenu();
     buildSharedLayers();
     let resizeTimer = 0;
     window.addEventListener("resize", function () {
