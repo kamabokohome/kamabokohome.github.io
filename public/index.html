@@ -31,7 +31,7 @@
 
   
 
-<link rel="stylesheet" href="/css/app.css?v=1776441148" />
+<link rel="stylesheet" href="/css/app.css?v=1776442178" />
 <style>
       html {
         scrollbar-gutter: stable;
@@ -2209,7 +2209,7 @@
       </div>
       <div class="home-ripple-tile" data-tile-index="3">
         <div class="home-ripple-water" data-ripple-enabled="1" data-ripple-src="/home/title_back.jpg" style="background-image: url('/home/title_back.jpg');"></div>
-        <img class="home-ripple-front home-ripple-title-front" src="/home/title_front.png" alt="title front" width="1038" height="778" loading="lazy" />
+        <img class="home-ripple-front home-ripple-title-front" src="/home/title_front.png" alt="title front" width="1038" height="778" loading="lazy" draggable="false" />
       </div>
       <div class="home-ripple-tile" data-tile-index="4">
         <div class="home-ripple-water" data-ripple-src="/home/tree2.jpg" style="background-image: url('/home/tree2.jpg');"></div>
@@ -2220,11 +2220,11 @@
       </div>
       <div class="home-ripple-tile" data-tile-index="6">
         <div class="home-ripple-water" data-ripple-src="/home/%E9%B8%BD%E5%AD%90_back.jpg" style="background-image: url('/home/%E9%B8%BD%E5%AD%90_back.jpg');"></div>
-        <img class="home-ripple-front home-ripple-pigeon-front" src="/home/%E9%B8%BD%E5%AD%90_front.png" alt="pigeon front" width="1180" height="885" loading="lazy" />
-        <img class="home-ripple-front home-ripple-pigeon-bubble" data-bubble-index="1" src="/home/%E9%B8%BD%E5%AD%90_bubble1.png" alt="" width="1180" height="885" loading="eager" aria-hidden="true" />
-        <img class="home-ripple-front home-ripple-pigeon-bubble" data-bubble-index="2" src="/home/%E9%B8%BD%E5%AD%90_bubble2.png" alt="" width="1180" height="885" loading="eager" aria-hidden="true" />
-        <img class="home-ripple-front home-ripple-pigeon-bubble" data-bubble-index="3" src="/home/%E9%B8%BD%E5%AD%90_bubble3.png" alt="" width="1180" height="885" loading="eager" aria-hidden="true" />
-        <img class="home-ripple-front home-ripple-pigeon-bubble" data-bubble-index="4" src="/home/%E9%B8%BD%E5%AD%90_bubble4.png" alt="" width="1180" height="885" loading="eager" aria-hidden="true" />
+        <img class="home-ripple-front home-ripple-pigeon-front" src="/home/%E9%B8%BD%E5%AD%90_front.png" alt="pigeon front" width="1180" height="885" loading="lazy" draggable="false" />
+        <img class="home-ripple-front home-ripple-pigeon-bubble" data-bubble-index="1" src="/home/%E9%B8%BD%E5%AD%90_bubble1.png" alt="" width="1180" height="885" loading="eager" aria-hidden="true" draggable="false" />
+        <img class="home-ripple-front home-ripple-pigeon-bubble" data-bubble-index="2" src="/home/%E9%B8%BD%E5%AD%90_bubble2.png" alt="" width="1180" height="885" loading="eager" aria-hidden="true" draggable="false" />
+        <img class="home-ripple-front home-ripple-pigeon-bubble" data-bubble-index="3" src="/home/%E9%B8%BD%E5%AD%90_bubble3.png" alt="" width="1180" height="885" loading="eager" aria-hidden="true" draggable="false" />
+        <img class="home-ripple-front home-ripple-pigeon-bubble" data-bubble-index="4" src="/home/%E9%B8%BD%E5%AD%90_bubble4.png" alt="" width="1180" height="885" loading="eager" aria-hidden="true" draggable="false" />
       </div>
       <div class="home-ripple-tile" data-tile-index="7">
         <div class="home-ripple-water" data-ripple-src="/home/swing.jpg" style="background-image: url('/home/swing.jpg');"></div>
@@ -2454,6 +2454,8 @@
   .home-ripple-tile[data-tile-index="3"] {
     overflow: visible;
     z-index: 31;
+    user-select: none;
+    -webkit-user-select: none;
   }
 
   .home-ripple-tile[data-tile-index="3"].is-title-active {
@@ -2519,6 +2521,7 @@
     touch-action: none;
     user-select: none;
     -webkit-user-select: none;
+    -webkit-touch-callout: none;
     transform: translate3d(var(--title-drag-x, 0px), var(--title-drag-y, 0px), 0);
     will-change: transform;
   }
@@ -2531,22 +2534,13 @@
     z-index: 32 !important;
   }
 
-  .home-ripple-title-front {
-    cursor: grab;
-    pointer-events: auto;
-    touch-action: none;
-    user-select: none;
-    -webkit-user-select: none;
-    transform: translate3d(var(--title-drag-x, 0px), var(--title-drag-y, 0px), 0);
-    will-change: transform;
-  }
-
   .home-ripple-pigeon-front {
     cursor: grab;
     pointer-events: auto;
     touch-action: none;
     user-select: none;
     -webkit-user-select: none;
+    -webkit-touch-callout: none;
     transform: translate3d(var(--pigeon-drag-x, 0px), var(--pigeon-drag-y, 0px), 0);
     will-change: transform;
   }
@@ -2555,6 +2549,9 @@
     z-index: 35;
     opacity: 0;
     pointer-events: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
     transform: translate3d(var(--pigeon-drag-x, 0px), var(--pigeon-drag-y, 0px), 0);
     transition: opacity 140ms ease-out;
     will-change: transform, opacity;
@@ -3197,6 +3194,23 @@
       }, { passive: true });
     };
 
+    const disableContextMenu = function () {
+      const titleTile = grid.querySelector(".home-ripple-tile[data-tile-index=\"3\"]");
+      const pigeonTile = grid.querySelector(".home-ripple-tile[data-tile-index=\"6\"]");
+      
+      if (titleTile) {
+        titleTile.addEventListener("contextmenu", function (e) {
+          e.preventDefault();
+        });
+      }
+      
+      if (pigeonTile) {
+        pigeonTile.addEventListener("contextmenu", function (e) {
+          e.preventDefault();
+        });
+      }
+    };
+
     const initPigeonDrag = function () {
       if (grid.dataset.pigeonDragInit === "1") return;
       grid.dataset.pigeonDragInit = "1";
@@ -3800,6 +3814,7 @@
     ensureDesktopTileRipples();
     initDesktopTileSwap();
     initPigeonDrag();
+    disableContextMenu();
     buildSharedLayers();
     let resizeTimer = 0;
     window.addEventListener("resize", function () {
