@@ -4,6 +4,8 @@ date: null
 description: '收集了办公室窗外的样子。'
 auto_gallery: true
 ---
+{{< img src="IMG_0086.jpg" caption="2026-04-14 18:25" caption-position="center" >}}
+
 {{< img src="IMG_0085.jpg" caption="2026-03-26 18:20" caption-position="center" >}}
 
 {{< img src="IMG_0084.jpg" caption="2026-03-26 15:54" caption-position="center" >}}
