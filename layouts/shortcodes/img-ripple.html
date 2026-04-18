@@ -116,6 +116,7 @@
     --home-ripple-gap-color-light-soft: rgba(137, 173, 116, 0.68);
     --home-ripple-gap-color-deep-soft: rgba(62, 98, 47, 0.62);
     --home-ripple-page-bg-soft: rgba(253, 250, 243, 0.9);
+    --home-ripple-swap-bg: #6d8056;
     --home-ripple-gap-blend-top: rgba(141, 171, 118, 0.18);
     --home-ripple-gap-blend-bottom: rgba(253, 250, 243, 0.96);
   }
@@ -127,6 +128,7 @@
     --home-ripple-gap-color-light-soft: rgba(52, 85, 42, 0.62);
     --home-ripple-gap-color-deep-soft: rgba(22, 39, 18, 0.62);
     --home-ripple-page-bg-soft: rgba(53, 49, 46, 0.88);
+    --home-ripple-swap-bg: #23361e;
     --home-ripple-gap-blend-top: rgba(96, 88, 78, 0.2);
     --home-ripple-gap-blend-bottom: rgba(53, 49, 46, 0.95);
   }
@@ -163,8 +165,8 @@
     }
 
     body.is-home .home-ripple-stage .home-ripple-tile {
-      cursor: grab;
-      touch-action: none;
+      cursor: default;
+      touch-action: manipulation;
       user-select: none;
       -webkit-user-select: none;
     }
@@ -287,6 +289,10 @@
     box-sizing: border-box;
     z-index: 3;
     touch-action: manipulation;
+  }
+
+  .home-ripple-grid.is-random-swapping {
+    background: var(--home-ripple-swap-bg);
   }
 
   .home-ripple-tile {
@@ -422,7 +428,7 @@
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-    transition: transform 560ms cubic-bezier(0.22, 0.82, 0.24, 1);
+    transition: transform 900ms cubic-bezier(0.22, 0.82, 0.24, 1);
     will-change: transform;
   }
 
@@ -694,7 +700,7 @@
         grid.classList.remove("is-random-swapping");
         grid.dataset.randomSwapAnimating = "";
         buildSharedLayers();
-      }, 620);
+      }, 960);
     };
 
     const initDesktopTileSwap = function () {
@@ -1661,7 +1667,6 @@
     }
 
     ensureDesktopTileRipples();
-    initDesktopTileSwap();
     initPigeonDrag();
     disableContextMenu();
     buildSharedLayers();
