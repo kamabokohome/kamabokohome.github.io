@@ -7,6 +7,8 @@ image_captions:
   "241212.jpg": "2024-12-12 17:18"
   "241124.JPG": "2024-11-24 17:57"
 ---
+{{< img src="260418.jpg" caption="2026-04-18 18:10" caption-position="center" >}}
+
 {{< img src="260407.jpg" caption="2026-04-07 12:39" caption-position="center" >}}
 
 {{< img src="260324.jpg" caption="2026-03-24 17:35" caption-position="center" >}}
