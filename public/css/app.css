@@ -2565,143 +2565,156 @@ textarea {
 }
 
 #content .collection-banner-list {
-  display: flex;
-  flex-direction: column;
-  gap: 0.85rem;
-  padding-top: 0.35rem;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(0.85rem, 2.2vw, 1.35rem);
+  padding-top: 0.65rem;
   padding-bottom: 1.2rem;
 }
 
 #content a.collection-banner-card {
-  position: relative;
-  display: block;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
   width: 100%;
-  height: clamp(68px, 11.5vw, 84px);
-  overflow: hidden;
-  border-radius: 0.78rem;
-  box-shadow: 0 7px 20px rgba(20, 20, 20, 0.14);
-  transition: box-shadow 180ms ease;
+  color: inherit;
   text-decoration: none;
 }
 
-html.dark #content a.collection-banner-card {
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.36);
+#content a.collection-banner-card:hover,
+#content a.collection-banner-card:focus-visible {
+  transform: none;
 }
 
-#content a.collection-banner-card:hover {
-  box-shadow: 0 10px 24px rgba(20, 20, 20, 0.18);
+#content .collection-banner-frame {
+  position: relative;
+  display: block;
+  width: 80%;
+  margin: 0 auto;
+  aspect-ratio: 1712 / 1291;
+  overflow: hidden;
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
+}
+
+html.dark #content .collection-banner-frame {
+  box-shadow: none;
+  background: transparent;
 }
 
 #content .collection-banner-image {
   position: absolute;
   inset: 0;
-  z-index: 0;
   width: 100%;
   height: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
-  -o-object-position: 50% 52%;
-     object-position: 50% 52%;
-  filter: saturate(100%) brightness(0.9) grayscale(0%);
-  transform: scale(1.06);
-  transition: filter 180ms ease;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+
+#content .collection-banner-image-default {
+  opacity: 1;
+}
+
+#content .collection-banner-image-hover {
+  opacity: 0;
+}
+
+#content a.collection-banner-card:hover .collection-banner-image-default,
+#content a.collection-banner-card:focus-visible .collection-banner-image-default {
+  opacity: 0;
+}
+
+#content a.collection-banner-card:hover .collection-banner-image-hover,
+#content a.collection-banner-card:focus-visible .collection-banner-image-hover {
+  opacity: 1;
 }
 
 #content a.collection-banner-card:hover .collection-banner-image,
 #content a.collection-banner-card:focus-visible .collection-banner-image {
-  filter: saturate(95%) brightness(0.9);
-}
-
-#content .collection-banner-frost {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  background: transparent;
-  -webkit-mask-image:
-    linear-gradient(
-      90deg,
-      rgba(0, 0, 0, 1) 0%,
-      rgba(0, 0, 0, 0.86) 35%,
-      rgba(0, 0, 0, 0.48) 66%,
-      rgba(0, 0, 0, 0.14) 86%,
-      rgba(0, 0, 0, 0) 100%
-    );
-  mask-image:
-    linear-gradient(
-      90deg,
-      rgba(0, 0, 0, 1) 0%,
-      rgba(0, 0, 0, 0.86) 35%,
-      rgba(0, 0, 0, 0.48) 66%,
-      rgba(0, 0, 0, 0.14) 86%,
-      rgba(0, 0, 0, 0) 100%
-    );
-  transition: -webkit-backdrop-filter 180ms ease;
-  transition: backdrop-filter 180ms ease;
-  transition: backdrop-filter 180ms ease, -webkit-backdrop-filter 180ms ease;
-}
-
-#content a.collection-banner-card:hover .collection-banner-frost,
-#content a.collection-banner-card:focus-visible .collection-banner-frost {
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
-}
-
-html.dark #content .collection-banner-frost {
-  background: transparent;
-}
-
-#content .collection-banner-mask {
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  background:
-    linear-gradient(
-      180deg,
-      rgba(18, 18, 18, 0.11) 0%,
-      rgba(18, 18, 18, 0.29) 100%
-    );
-  transition: background 180ms ease;
-}
-
-#content a.collection-banner-card:hover .collection-banner-mask,
-#content a.collection-banner-card:focus-visible .collection-banner-mask {
-  background:
-    linear-gradient(
-      180deg,
-      rgba(18, 18, 18, 0.13) 0%,
-      rgba(18, 18, 18, 0.31) 100%
-    );
+  transform: none;
 }
 
 #content .collection-banner-copy {
-  position: absolute;
-  inset: 0;
-  z-index: 3;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  padding: 0.8rem 1rem;
-  text-align: left;
-  color: #f5f5f4;
-  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.45);
+  display: block;
+  margin-top: -0.5rem;
+  text-align: center;
+  color: inherit;
+  text-shadow: none;
 }
 
 #content .collection-banner-title {
-  font-size: clamp(0.98rem, 1.5vw, 1.12rem);
+  display: block;
+  font-size: clamp(0.95rem, 1.35vw, 1.06rem);
   font-weight: 700;
-  line-height: 1.3;
+  line-height: 1.35;
 }
 
 #content .collection-banner-description {
-  margin-top: 0.22rem;
+  display: block;
+  margin-top: 0;
   font-size: clamp(0.72rem, 1.2vw, 0.82rem);
   font-weight: 500;
-  letter-spacing: 0.01em;
-  opacity: 0.95;
+  line-height: 1.65;
+  color: #8a8178;
+}
+
+html.dark #content .collection-banner-description {
+  color: #b9aea3;
+}
+
+#content .collection-detail-title-image-wrap {
+  position: relative;
+  display: block;
+  width: min(25%, 13rem);
+  margin: -0.55rem 0 0;
+  padding-top: 0;
+  line-height: 1;
+  text-decoration: none;
+}
+
+#content .collection-detail-title-image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+#content .collection-detail-title-image-hover {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+}
+
+#content .collection-detail-title-image-wrap:hover .collection-detail-title-image-default,
+#content .collection-detail-title-image-wrap:focus-within .collection-detail-title-image-default {
+  opacity: 0;
+}
+
+#content .collection-detail-title-image-wrap:hover .collection-detail-title-image-hover,
+#content .collection-detail-title-image-wrap:focus-within .collection-detail-title-image-hover {
+  opacity: 1;
+}
+
+@media (max-width: 911px) {
+  #content .collection-banner-copy {
+    margin-top: 0;
+  }
+
+  #content .collection-banner-description {
+    margin-top: 0.1rem;
+  }
+
+  #content .collection-banner-frame {
+    width: 100%;
+  }
+
+  #content .collection-detail-title-image-wrap {
+    width: min(33.333%, 17.333rem);
+  }
+
+  #content .collection-detail-title-image {
+    width: 100%;
+  }
 }
 
 #content .collection-auto-gallery {

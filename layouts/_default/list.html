@@ -24,23 +24,33 @@
 {{ if and (eq .Section "collection") (eq .Kind "section") }}
   {{ $benchPage := .Site.GetPage "/collection/bench" }}
   {{ $officePage := .Site.GetPage "/collection/empa-office" }}
+  {{ $benchDefault := resources.Get "coll/bench1.png" }}
+  {{ $benchHover := resources.Get "coll/bench2.png" }}
+  {{ $officeDefault := resources.Get "coll/office1.png" }}
+  {{ $officeHover := resources.Get "coll/office2.png" }}
   <section class="collection-banner-list" aria-label="Collection projects">
     {{ with $benchPage }}
-      {{ $banner := .Resources.GetMatch "250501.*" }}
       <a class="collection-banner-card" href="{{ .RelPermalink }}">
-        {{ with $banner }}
+        <span class="collection-banner-frame">
+        {{ with $benchDefault }}
           <img
-            class="collection-banner-image"
+            class="collection-banner-image collection-banner-image-default"
             src="{{ .RelPermalink }}"
-            alt="{{ $benchPage.Title }} banner"
+            alt="{{ $benchPage.Title }}"
             loading="lazy"
-            style="object-position: 50% 100%;"
           />
         {{ end }}
-        <span class="collection-banner-frost" aria-hidden="true"></span>
-        <span class="collection-banner-mask" aria-hidden="true"></span>
+        {{ with $benchHover }}
+          <img
+            class="collection-banner-image collection-banner-image-hover"
+            src="{{ .RelPermalink }}"
+            alt=""
+            loading="lazy"
+            aria-hidden="true"
+          />
+        {{ end }}
+        </span>
         <span class="collection-banner-copy">
-          <span class="collection-banner-title">{{ .Title }}</span>
           {{ with .Params.description }}
             <span class="collection-banner-description">{{ . }}</span>
           {{ end }}
@@ -49,21 +59,27 @@
     {{ end }}
 
     {{ with $officePage }}
-      {{ $banner := .Resources.GetMatch "IMG_0001.*" }}
       <a class="collection-banner-card" href="{{ .RelPermalink }}">
-        {{ with $banner }}
+        <span class="collection-banner-frame">
+        {{ with $officeDefault }}
           <img
-            class="collection-banner-image"
+            class="collection-banner-image collection-banner-image-default"
             src="{{ .RelPermalink }}"
-            alt="{{ $officePage.Title }} banner"
+            alt="{{ $officePage.Title }}"
             loading="lazy"
-            style="object-position: 50% 78%;"
           />
         {{ end }}
-        <span class="collection-banner-frost" aria-hidden="true"></span>
-        <span class="collection-banner-mask" aria-hidden="true"></span>
+        {{ with $officeHover }}
+          <img
+            class="collection-banner-image collection-banner-image-hover"
+            src="{{ .RelPermalink }}"
+            alt=""
+            loading="lazy"
+            aria-hidden="true"
+          />
+        {{ end }}
+        </span>
         <span class="collection-banner-copy">
-          <span class="collection-banner-title">{{ .Title }}</span>
           {{ with .Params.description }}
             <span class="collection-banner-description">{{ . }}</span>
           {{ end }}

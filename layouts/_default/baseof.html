@@ -1909,34 +1909,6 @@
     </header>
     <img class="site-kamaboko-corner" src="{{ $kamaboko.RelPermalink }}" alt="kamaboko" role="button" tabindex="0" loading="lazy" data-hover-tooltip="转啊转" data-hover-tooltip-delay="1000">
 
-    {{ if and .IsPage (not .IsHome) }}
-      {{ $sectionPage := site.GetPage (printf "/%s" .Section) }}
-      {{ $sectionLink := "" }}
-      {{ $sectionLabel := .Section | title }}
-      {{ $postYearLink := "" }}
-      {{ $postYearLabel := "" }}
-      {{ if and (eq .Section "posts") .PublishDate }}
-        {{ $sectionLink = "/posts/" | relLangURL }}
-        {{ $sectionLabel = "Posts" }}
-        {{ $postYearLink = (printf "/posts/#posts-year-%d" .PublishDate.Year) | relLangURL }}
-        {{ $postYearLabel = printf "%d" .PublishDate.Year }}
-      {{ else if $sectionPage }}
-        {{ $sectionLink = $sectionPage.RelPermalink }}
-        {{ $sectionLabel = $sectionPage.Title }}
-      {{ else }}
-        {{ $sectionLink = (printf "/%s/" .Section) | relURL }}
-      {{ end }}
-      <nav class="site-mobile-breadcrumb{{ if eq .Section "collection" }} is-collection{{ end }}" aria-label="Breadcrumb">
-        <a href="{{ "/" | relURL }}">Home</a>
-        <span class="site-mobile-breadcrumb-sep" aria-hidden="true">✧</span>
-        <a href="{{ $sectionLink }}">{{ $sectionLabel }}</a>
-        {{ if and (eq .Section "posts") $postYearLink }}
-          <span class="site-mobile-breadcrumb-sep" aria-hidden="true">✧</span>
-          <a href="{{ $postYearLink }}">{{ $postYearLabel }}</a>
-        {{ end }}
-      </nav>
-    {{ end }}
-
     <!-- Main content -->
     <main id="content" class="px-2.5 sm:px-2.5" style="flex: 1 1 auto; display: flex; flex-direction: column;">
       {{- block "main" . -}}
