@@ -8,7 +8,7 @@ title: ""
 ✧ <br><br>
 </div>
 
-<div class="treehouse">
+<div class="treehouse message-paper">
   欢迎来到鱼糕的树屋！<br>
   这个树屋建造于 2024 年末，是一个非常私人的领域。<br>
   <br>
@@ -29,22 +29,43 @@ title: ""
   （但电脑却总是白天模式？）<br>
   <br>
   希望每位来客都能在树屋度过愉快的时间。
+  <br>
+  <span class="treehouse-kamaboko-line">
+    <img class="site-kamaboko-corner treehouse-kamaboko-signature" src="/img/kamaboko.png" alt="kamaboko" role="button" tabindex="0" loading="lazy" data-hover-tooltip="转啊转" data-hover-tooltip-delay="1000">
+  </span>
 </div>
 
 <div style="height: 0.5rem;"></div>
 
 <style>
-.treehouse {
-  border: 1px solid #d1d5db;
-  border-radius: 12px;
-  padding: 16px;
+#content .treehouse.message-paper {
+  padding: 2.45rem 2.35rem;
+}
+
+#content .treehouse.message-paper .treehouse-kamaboko-signature {
+  position: static;
+  width: clamp(40px, 5.2vw, 58px);
+  height: auto;
+}
+
+#content .treehouse-kamaboko-line {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1.2rem;
+  line-height: 0;
 }
 
 .treehouse a {
   font-weight: 600;
 }
 
-html.dark .treehouse {
-  border-color: #6b7280;
+@media (max-width: 640px) {
+  #content .treehouse.message-paper {
+    padding: 1.68rem 1.72rem;
+  }
+
+  #content .treehouse.message-paper .treehouse-kamaboko-signature {
+    width: 44px;
+  }
 }
 </style>

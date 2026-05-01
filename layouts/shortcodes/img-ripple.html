@@ -440,7 +440,7 @@
 
   @media (max-width: 911px) {
     body.is-home #content > section > .home-ripple-stage:first-child {
-      margin-top: 0;
+      margin-top: calc(-1 * var(--site-sticky-bar-height, 0px));
     }
 
     body.is-home .home-ripple-stage {

@@ -96,7 +96,7 @@
         {{- $isDirectActive := eq $menuPath $pagePath -}}
         {{- $isSectionActive := and (ne .Identifier "home") (eq .Identifier $currentPage.Section) -}}
         <li class="site-mobile-menu-line">
-          <a href="{{ .URL | relLangURL }}" class="{{ if or $isHomeActive $isDirectActive $isSectionActive }}active{{ end }}">{{ .Name }}</a>
+          <a href="{{ .URL | relLangURL }}" class="{{ if or $isHomeActive $isDirectActive $isSectionActive }}active{{ end }}"><span class="site-mobile-link-label">{{ .Name }}</span></a>
         </li>
         {{ end }}
         <li class="site-mobile-menu-line site-mobile-search-line">
