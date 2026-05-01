@@ -30,7 +30,7 @@
 
   
 
-<link rel="stylesheet" href="/css/app.css?v=1776791449" />
+<link rel="stylesheet" href="/css/app.css?v=1777652404" />
 <style>
       html {
         scrollbar-gutter: stable;
@@ -351,7 +351,7 @@
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        transition: background-color 130ms ease, opacity 130ms ease;
+        transition: color 130ms ease, opacity 130ms ease;
       }
 
       .site-search-icon {
@@ -382,11 +382,11 @@
 
       .site-search-toggle:hover,
       .site-search-toggle:focus-visible {
-        background: var(--site-nav-hover-bg);
+        background: transparent;
       }
 
       .site-search-toggle[aria-expanded="true"] {
-        background: var(--site-nav-hover-bg);
+        background: transparent;
       }
 
       .site-hover-tooltip {
@@ -418,11 +418,11 @@
 
       html.dark .site-search-toggle:hover,
       html.dark .site-search-toggle:focus-visible {
-        background: var(--site-nav-hover-bg-dark);
+        background: transparent;
       }
 
       html.dark .site-search-toggle[aria-expanded="true"] {
-        background: var(--site-nav-hover-bg-dark);
+        background: transparent;
       }
 
       html.dark .site-hover-tooltip {
@@ -958,12 +958,12 @@
 
         .site-sticky-nav nav .site-mobile-home-link:hover,
         .site-sticky-nav nav .site-mobile-home-link:focus-visible {
-          background: rgba(177, 167, 147, 0.18);
+          background: transparent;
         }
 
         html.dark .site-sticky-nav nav .site-mobile-home-link:hover,
         html.dark .site-sticky-nav nav .site-mobile-home-link:focus-visible {
-          background: rgba(123, 135, 152, 0.25);
+          background: transparent;
         }
 
         .site-mobile-home-title {
@@ -1006,6 +1006,41 @@
           flex: 0 0 auto;
         }
 
+        body.is-home .site-sticky-bar:not(.is-stuck):not(.is-submenu-open) {
+          margin-bottom: 0;
+        }
+
+        body.is-home .site-sticky-bar:not(.is-stuck):not(.is-submenu-open) .site-sticky-inner {
+          justify-content: flex-end;
+          padding-right: max(0.42rem, env(safe-area-inset-right, 0px));
+        }
+
+        body.is-home .site-sticky-bar:not(.is-stuck):not(.is-submenu-open) .site-sticky-nav {
+          width: auto;
+          justify-content: flex-end;
+        }
+
+        body.is-home .site-sticky-bar:not(.is-stuck):not(.is-submenu-open) .site-sticky-nav nav {
+          width: auto;
+        }
+
+        body.is-home .site-sticky-bar:not(.is-stuck):not(.is-submenu-open) .site-sticky-nav nav ul {
+          width: auto;
+          flex-direction: column-reverse;
+          align-items: flex-end;
+          justify-content: flex-start;
+          gap: 0.32rem;
+        }
+
+        body.is-home .site-sticky-bar:not(.is-stuck):not(.is-submenu-open) .site-sticky-nav nav .nav-theme-item {
+          display: none;
+          margin-left: 0;
+        }
+
+        body.is-home .site-sticky-bar:not(.is-stuck):not(.is-submenu-open) .site-sticky-nav nav .nav-tools-item {
+          gap: 0;
+        }
+
         .site-mobile-menu-toggle {
           font: inherit;
           font-size: 0.86rem;
@@ -1037,13 +1072,13 @@
         .site-mobile-menu-toggle:hover,
         .site-mobile-menu-toggle:focus-visible,
         .site-mobile-menu-toggle[aria-expanded="true"] {
-          background: rgba(194, 168, 141, 0.22);
+          background: transparent;
         }
 
         html.dark .site-mobile-menu-toggle:hover,
         html.dark .site-mobile-menu-toggle:focus-visible,
         html.dark .site-mobile-menu-toggle[aria-expanded="true"] {
-          background: rgba(118, 95, 80, 0.32);
+          background: transparent;
         }
 
         .site-mobile-menu-panel {
@@ -1052,9 +1087,11 @@
           top: var(--site-sticky-bar-height, 0px);
           left: 0;
           right: 0;
-          bottom: 0;
+          bottom: auto;
+          max-height: calc(100vh - var(--site-sticky-bar-height, 0px));
+          max-height: calc(100dvh - var(--site-sticky-bar-height, 0px));
           margin: 0;
-          padding: 0.44rem 0.62rem max(0.7rem, env(safe-area-inset-bottom, 0px));
+          padding: 0.68rem 0.62rem max(0.7rem, env(safe-area-inset-bottom, 0px));
           border-radius: 0;
           border: none;
           background: transparent;
@@ -1070,7 +1107,7 @@
         }
 
         .site-mobile-menu-scroll {
-          height: 100%;
+          max-height: inherit;
           overflow-y: auto;
           -webkit-overflow-scrolling: touch;
         }
@@ -1082,35 +1119,87 @@
           display: flex;
           flex-direction: column;
           justify-content: flex-start;
-          align-items: flex-end;
+          align-items: center;
           gap: 0.32rem;
           width: auto;
           max-width: 100%;
           margin-left: auto;
-          margin-right: 0;
-          text-align: right;
+          margin-right: auto;
+          text-align: center;
         }
 
         .site-mobile-menu-line {
           margin: 0;
           width: fit-content;
           max-width: min(86vw, 24rem);
-          align-self: flex-end;
+          align-self: center;
           margin-left: auto;
-          margin-right: 0;
+          margin-right: auto;
         }
 
         .site-mobile-menu-line > a {
-          display: block;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
           font-size: 0.92rem;
           line-height: 1.5;
-          text-align: right;
+          text-align: center;
           text-decoration: none;
           padding: 0.48rem 0.76rem;
           border-radius: 0.62rem;
           white-space: nowrap;
           font-weight: 600;
           color: rgb(156 163 175 / 1);
+          background: transparent;
+          transition: color 130ms ease;
+        }
+
+        .site-mobile-link-label {
+          --link-highlight-color: rgba(var(--banner-link-rgb), 0);
+          --nav-side-line-opacity: 0;
+          position: relative;
+          display: inline-block;
+          padding: 0;
+          background-image: linear-gradient(
+            to top,
+            var(--link-highlight-color) 0%,
+            var(--link-highlight-color) 36%,
+            transparent 36%
+          );
+          background-repeat: no-repeat;
+          background-size: 100% 100%;
+          background-position: 50% 86%;
+          box-decoration-break: clone;
+          -webkit-box-decoration-break: clone;
+          transition: color 130ms ease;
+          z-index: 0;
+        }
+
+        .site-mobile-link-label::before,
+        .site-mobile-link-label::after {
+          content: "";
+          position: absolute;
+          top: 50%;
+          width: 0.18rem;
+          height: 0.48rem;
+          border-radius: 999px;
+          color: var(--link-highlight-color);
+          background: currentColor;
+          opacity: var(--nav-side-line-opacity);
+          box-shadow: 0.24rem 0 0 0 currentColor;
+          transform-origin: center;
+          transition: opacity 130ms ease, transform 130ms ease, color 130ms ease;
+          pointer-events: none;
+        }
+
+        .site-mobile-link-label::before {
+          right: calc(100% + 0.62rem);
+          transform: translateY(-50%) rotate(-14deg) scale(0.82);
+        }
+
+        .site-mobile-link-label::after {
+          left: calc(100% + 0.38rem);
+          transform: translateY(-50%) rotate(14deg) scale(0.82);
         }
 
         .site-mobile-menu-row {
@@ -1198,8 +1287,40 @@
         .site-mobile-menu-row > a:focus-visible,
         .site-mobile-menu-subblock a:hover,
         .site-mobile-menu-subblock a:focus-visible {
-          background: rgba(194, 168, 141, 0.22);
+          background: transparent;
           color: rgb(55 65 81 / 1);
+        }
+
+        .site-mobile-menu-line > a.active > .site-mobile-link-label {
+          --link-highlight-color: rgba(var(--banner-link-rgb), calc(0.74 * var(--banner-link-opacity-effective-scale)));
+        }
+
+        .site-mobile-menu-line > a:hover > .site-mobile-link-label,
+        .site-mobile-menu-line > a:focus-visible > .site-mobile-link-label {
+          --link-highlight-color: rgba(var(--banner-link-rgb), calc(0.74 * var(--banner-link-opacity-effective-scale)));
+          --nav-side-line-opacity: 1;
+        }
+
+        .site-mobile-menu-list:hover .site-mobile-menu-line > a.active > .site-mobile-link-label {
+          --link-highlight-color: rgba(var(--banner-link-rgb), 0);
+        }
+
+        .site-mobile-menu-list:hover .site-mobile-menu-line > a:hover > .site-mobile-link-label,
+        .site-mobile-menu-list:hover .site-mobile-menu-line > a:focus-visible > .site-mobile-link-label {
+          --link-highlight-color: rgba(var(--banner-link-rgb), calc(0.74 * var(--banner-link-opacity-effective-scale)));
+          --nav-side-line-opacity: 1;
+        }
+
+        .site-mobile-menu-line > a:hover > .site-mobile-link-label::before,
+        .site-mobile-menu-line > a:hover > .site-mobile-link-label::after,
+        .site-mobile-menu-line > a:focus-visible > .site-mobile-link-label::before,
+        .site-mobile-menu-line > a:focus-visible > .site-mobile-link-label::after {
+          transform: translateY(-50%) rotate(-14deg) scale(1);
+        }
+
+        .site-mobile-menu-line > a:hover > .site-mobile-link-label::after,
+        .site-mobile-menu-line > a:focus-visible > .site-mobile-link-label::after {
+          transform: translateY(-50%) rotate(14deg) scale(1);
         }
 
         .site-mobile-submenu-toggle:hover,
@@ -1217,7 +1338,7 @@
         html.dark .site-mobile-menu-row > a:focus-visible,
         html.dark .site-mobile-menu-subblock a:hover,
         html.dark .site-mobile-menu-subblock a:focus-visible {
-          background: rgba(118, 95, 80, 0.32);
+          background: transparent;
           color: rgb(229 231 235 / 1);
         }
 
@@ -1265,7 +1386,7 @@
           width: fit-content;
           max-width: min(86vw, 24rem);
           margin-left: auto;
-          margin-right: 0;
+          margin-right: auto;
         }
 
         .site-mobile-search-toggle .site-search-icon {
@@ -1275,12 +1396,12 @@
 
         .site-mobile-search-toggle:hover,
         .site-mobile-search-toggle:focus-visible {
-          background: rgba(194, 168, 141, 0.22);
+          background: transparent;
         }
 
         html.dark .site-mobile-search-toggle:hover,
         html.dark .site-mobile-search-toggle:focus-visible {
-          background: rgba(118, 95, 80, 0.32);
+          background: transparent;
         }
 
         .site-search-modal {
@@ -2095,19 +2216,19 @@
     <div class="site-mobile-menu-scroll">
       <ul class="site-mobile-menu-list" aria-label="Mobile navigation">
         <li class="site-mobile-menu-line">
-          <a href="/" class="">Home</a>
+          <a href="/" class=""><span class="site-mobile-link-label">Home</span></a>
         </li>
         <li class="site-mobile-menu-line">
-          <a href="/posts" class="">Posts</a>
+          <a href="/posts" class=""><span class="site-mobile-link-label">Posts</span></a>
         </li>
         <li class="site-mobile-menu-line">
-          <a href="/collection" class="active">Collection</a>
+          <a href="/collection" class="active"><span class="site-mobile-link-label">Collection</span></a>
         </li>
         <li class="site-mobile-menu-line">
-          <a href="/corner" class="">Corner</a>
+          <a href="/corner" class=""><span class="site-mobile-link-label">Corner</span></a>
         </li>
         <li class="site-mobile-menu-line">
-          <a href="/message" class="">Message</a>
+          <a href="/message" class=""><span class="site-mobile-link-label">Message</span></a>
         </li>
         
         <li class="site-mobile-menu-line site-mobile-search-line">
