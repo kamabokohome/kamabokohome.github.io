@@ -25,10 +25,10 @@ title: ""
   如果有任何想说的话，都欢迎来信 ^ ^<br>
   <br>
   找到电源开关之后，就可以切换白天与黑夜模式喔。<br>
-  我是黑夜模式派，手机屏幕常年都黑黑的。<br>
+  我是黑夜模式派，手机屏幕常年黑黑的。<br>
   （但电脑却总是白天模式？）<br>
   <br>
-  希望每位来客都能在树屋度过愉快的时间。
+  希望每位来客都能度过一段愉快的时间。
   <br>
   <span class="treehouse-kamaboko-line">
     <img class="site-kamaboko-corner treehouse-kamaboko-signature" src="/img/kamaboko.png" alt="kamaboko" role="button" tabindex="0" loading="lazy" data-hover-tooltip="转啊转" data-hover-tooltip-delay="1000">
