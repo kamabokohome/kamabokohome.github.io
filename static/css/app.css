@@ -2102,7 +2102,7 @@ html.dark #content .single-jump-link.is-current {
   border: none;
   border-radius: 0.28rem;
   background: linear-gradient(180deg, rgba(255, 252, 246, 0.99) 0%, rgba(252, 247, 239, 0.98) 100%);
-  box-shadow: 0 10px 26px rgba(103, 82, 64, 0.08), 0 2px 5px rgba(103, 82, 64, 0.05);
+  box-shadow: 0 18px 34px rgba(103, 82, 64, 0.14), 0 6px 12px rgba(103, 82, 64, 0.08), 0 2px 5px rgba(103, 82, 64, 0.05);
 }
 
 #content .message-paper::before,
@@ -2280,7 +2280,7 @@ html.dark #content .single-jump-link.is-current {
 
 html.dark #content .message-paper {
   background: linear-gradient(180deg, rgba(62, 58, 55, 0.985) 0%, rgba(57, 53, 50, 0.975) 100%);
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18), 0 2px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 18px 34px rgba(0, 0, 0, 0.28), 0 6px 12px rgba(0, 0, 0, 0.16), 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 html.dark #content .message-paper::before {

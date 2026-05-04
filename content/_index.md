@@ -4,8 +4,8 @@ title: ""
 
 {{< img-ripple >}}
 
-<div style="text-align:center;">
-✧ <br><br>
+<div class="treehouse-divider" aria-hidden="true">
+✧
 </div>
 
 <div class="treehouse message-paper">
@@ -28,7 +28,7 @@ title: ""
   我是黑夜模式派，手机屏幕常年黑黑的。<br>
   （但电脑却总是白天模式？）<br>
   <br>
-  希望每位来客都能度过一段愉快的时间。
+  鸽子也好人类也好，希望每位来客都能在树屋度过一段愉快的时间。
   <br>
   <span class="treehouse-kamaboko-line">
     <img class="site-kamaboko-corner treehouse-kamaboko-signature" src="/img/kamaboko.png" alt="kamaboko" role="button" tabindex="0" loading="lazy" data-hover-tooltip="转啊转" data-hover-tooltip-delay="1000">
@@ -39,7 +39,13 @@ title: ""
 
 <style>
 #content .treehouse.message-paper {
-  padding: 2.45rem 2.35rem;
+  padding: 2.7rem 2.18rem;
+}
+
+#content .treehouse-divider {
+  margin: 1.25rem 0;
+  text-align: center;
+  line-height: 1;
 }
 
 #content .treehouse.message-paper .treehouse-kamaboko-signature {
@@ -61,7 +67,11 @@ title: ""
 
 @media (max-width: 640px) {
   #content .treehouse.message-paper {
-    padding: 1.68rem 1.72rem;
+    padding: 1.88rem 1.56rem;
+  }
+
+  #content .treehouse-divider {
+    margin: 1.08rem 0;
   }
 
   #content .treehouse.message-paper .treehouse-kamaboko-signature {

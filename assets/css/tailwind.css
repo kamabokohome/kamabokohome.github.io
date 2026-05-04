@@ -58,7 +58,8 @@
     --dark-grad-stop-4: 1440px;
     --paper-surface-bg: linear-gradient(180deg, rgba(255, 252, 246, 0.99) 0%, rgba(252, 247, 239, 0.98) 100%);
     --paper-surface-shadow:
-      0 10px 26px rgba(103, 82, 64, 0.08),
+      0 18px 34px rgba(103, 82, 64, 0.14),
+      0 6px 12px rgba(103, 82, 64, 0.08),
       0 2px 5px rgba(103, 82, 64, 0.05);
     --paper-surface-border: rgba(203, 187, 166, 0.24);
   }
@@ -68,7 +69,8 @@
     --banner-link-opacity-dark-boost: 1;
     --paper-surface-bg: linear-gradient(180deg, rgba(62, 58, 55, 0.985) 0%, rgba(57, 53, 50, 0.975) 100%);
     --paper-surface-shadow:
-      0 10px 24px rgba(0, 0, 0, 0.18),
+      0 18px 34px rgba(0, 0, 0, 0.28),
+      0 6px 12px rgba(0, 0, 0, 0.16),
       0 2px 5px rgba(0, 0, 0, 0.1);
     --paper-surface-border: rgba(157, 140, 121, 0.22);
   }
