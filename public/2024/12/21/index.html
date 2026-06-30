@@ -39,14 +39,14 @@
 
   
 
-<link rel="stylesheet" href="/css/app.css?v=1781602642" />
+<link rel="stylesheet" href="/css/app.css?v=1782814049" />
 <style>
       html {
         scrollbar-gutter: stable;
         --site-content-max-width: 50rem;
         --site-sticky-bar-height: 0px;
-        --site-nav-hover-bg: rgba(236, 226, 213, 0.74);
-        --site-nav-hover-bg-dark: rgba(80, 70, 64, 0.72);
+        --site-nav-hover-bg: rgba(229, 231, 235, 0.72);
+        --site-nav-hover-bg-dark: rgba(75, 85, 99, 0.62);
       }
 
       .site-sticky-bar {
@@ -85,9 +85,11 @@
 
       .site-sticky-bar.is-stuck,
       .site-sticky-bar.is-submenu-open {
-        --sticky-surface-bg: rgba(249, 245, 236, 0.82);
-        --sticky-surface-blur: 11px;
-        --sticky-surface-shadow: 0 3px 9px rgba(0, 0, 0, 0.08);
+        --sticky-surface-bg: rgba(255, 255, 255, 0.48);
+        --sticky-surface-blur: 16px;
+        --sticky-surface-shadow:
+          0 1px 0 rgba(156, 163, 175, 0.12),
+          0 8px 24px rgba(15, 23, 42, 0.035);
       }
 
       .site-sticky-bar.is-stuck .site-sticky-bg {
@@ -102,8 +104,10 @@
 
       html.dark .site-sticky-bar.is-stuck,
       html.dark .site-sticky-bar.is-submenu-open {
-        --sticky-surface-bg: rgba(58, 53, 49, 0.82);
-        --sticky-surface-shadow: 0 3px 10px rgba(0, 0, 0, 0.24);
+        --sticky-surface-bg: rgba(38, 38, 38, 0.54);
+        --sticky-surface-shadow:
+          0 1px 0 rgba(161, 161, 170, 0.12),
+          0 8px 24px rgba(0, 0, 0, 0.16);
       }
 
       html.page-short .site-sticky-bar:not(.is-stuck):not(.is-submenu-open) .site-sticky-bg {
@@ -405,8 +409,8 @@
         transform: translate(-50%, 0);
         padding: 0.22rem 0.46rem;
         border-radius: 0.42rem;
-        border: 1px solid rgba(177, 167, 147, 0.42);
-        background: rgba(249, 245, 236, 0.96);
+        border: none;
+        background: rgba(250, 250, 250, 0.96);
         color: rgb(75 85 99 / 1);
         font-size: 0.68rem;
         line-height: 1.2;
@@ -435,7 +439,7 @@
       }
 
       html.dark .site-hover-tooltip {
-        border-color: rgba(123, 135, 152, 0.5);
+        border: none;
         background: rgba(47, 47, 47, 0.94);
         color: rgb(229 231 235 / 1);
       }
@@ -739,7 +743,7 @@
         max-height: calc(100vh - var(--site-sticky-bar-height, 0px) - 1.34rem);
         overflow: hidden;
         border-radius: 0.72rem;
-        background-color: rgba(249, 245, 236, 0.86);
+        background-color: rgba(250, 250, 250, 0.88);
         backdrop-filter: blur(11px);
         -webkit-backdrop-filter: blur(11px);
         box-shadow: 0 5px 14px rgba(0, 0, 0, 0.1);
@@ -770,7 +774,7 @@
 
       .site-search-close:hover,
       .site-search-close:focus-visible {
-        background: rgba(177, 167, 147, 0.18);
+        background: var(--site-hover-surface);
         color: rgb(55 65 81 / 1);
       }
 
@@ -880,7 +884,7 @@
 
       .site-search-results a:hover,
       .site-search-results a:focus-visible {
-        background: rgba(177, 167, 147, 0.18);
+        background: var(--site-hover-surface);
       }
 
       html.dark .site-search-results a:hover,
@@ -1267,7 +1271,7 @@
           gap: 0.18rem;
           padding: 0.18rem 0.26rem 0.24rem;
           border-radius: 0.62rem;
-          background: rgba(177, 167, 147, 0.08);
+          background: rgba(156, 163, 175, 0.12);
           align-self: flex-end;
           margin-left: auto;
           margin-right: 0;
@@ -1334,7 +1338,7 @@
 
         .site-mobile-submenu-toggle:hover,
         .site-mobile-submenu-toggle:focus-visible {
-          background: rgba(194, 168, 141, 0.22);
+          background: var(--site-hover-surface-strong);
         }
 
         html.dark .site-mobile-menu-subblock {
@@ -1353,7 +1357,7 @@
 
         html.dark .site-mobile-submenu-toggle:hover,
         html.dark .site-mobile-submenu-toggle:focus-visible {
-          background: rgba(118, 95, 80, 0.32);
+          background: var(--site-hover-surface-strong);
         }
 
         .site-mobile-menu-line > a.active,
@@ -1424,7 +1428,7 @@
           max-height: calc(100vh - var(--site-sticky-bar-height, 0px) - 0.82rem);
           margin-top: 0;
           border-radius: 0.62rem;
-          background-color: rgba(249, 245, 236, 0.86);
+          background-color: rgba(250, 250, 250, 0.88);
           backdrop-filter: blur(11px);
           -webkit-backdrop-filter: blur(11px);
           box-shadow: 0 5px 14px rgba(0, 0, 0, 0.1);
@@ -2552,6 +2556,27 @@
             let baseBannerRgb = null;
             let currentBannerColorKey = null;
 
+            const applyFootnoteBanners = function (url) {
+              if (!url) return;
+              const footnoteRules = document.querySelectorAll("body.page-post-single #content .footnotes > hr");
+              footnoteRules.forEach(function (ruleEl) {
+                const existingBanner = ruleEl.parentElement ? ruleEl.parentElement.querySelector(":scope > .post-footnotes-banner") : null;
+                if (existingBanner) {
+                  existingBanner.src = url;
+                  ruleEl.remove();
+                  return;
+                }
+
+                const bannerImg = document.createElement("img");
+                bannerImg.className = "post-footnotes-banner";
+                bannerImg.src = url;
+                bannerImg.alt = "";
+                bannerImg.setAttribute("aria-hidden", "true");
+                bannerImg.loading = "lazy";
+                ruleEl.replaceWith(bannerImg);
+              });
+            };
+
             const adjustHighlightRgbForTheme = function (rgb, colorKey) {
               if (!rgb) return null;
               const isDarkMode = document.documentElement.classList.contains("dark");
@@ -2640,6 +2665,7 @@
             };
 
             applyBannerColor(selectedBanner);
+            applyFootnoteBanners(selectedBanner);
             bannerEl.addEventListener("load", function () {
               const dominantRgb = extractDominantBannerColor(bannerEl);
               if (!dominantRgb) return;
@@ -2694,6 +2720,7 @@
           if (target && target.closest(".collection-layout-switch")) return true;
           if (target && target.closest("a[data-codex-zoom=\"1\"]")) return true;
           if (target && target.closest(".collection-auto-link")) return true;
+          if (target && target.closest(".posts-year-dropdown")) return true;
           const titleArea = document.querySelector(".title-interactive");
           if (titleArea && titleArea.contains(event.target)) return true;
           if (target && target.closest(".home-ripple-water[data-ripple-enabled=\"1\"]")) return true;
@@ -3515,7 +3542,9 @@
           const minX = margin + (tooltipRect.width * 0.5);
           const maxX = window.innerWidth - margin - (tooltipRect.width * 0.5);
           const clampedX = Math.max(minX, Math.min(maxX, center));
-          const top = Math.min(window.innerHeight - tooltipRect.height - margin, rect.bottom + 8);
+          const rawOffsetY = parseFloat(trigger.getAttribute("data-hover-tooltip-offset-y") || "");
+          const offsetY = Number.isFinite(rawOffsetY) ? rawOffsetY : 8;
+          const top = Math.min(window.innerHeight - tooltipRect.height - margin, rect.bottom + offsetY);
           tooltipEl.style.left = clampedX + "px";
           tooltipEl.style.top = top + "px";
         };
