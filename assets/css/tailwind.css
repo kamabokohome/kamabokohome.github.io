@@ -734,6 +734,13 @@ body.page-post-single #content article > section .footnotes > hr {
   display: none;
 }
 
+@media (max-width: 911px) {
+  body.page-post-single .site-footer-banner,
+  body.page-post-single .site-footer-banner-noscript {
+    display: none !important;
+  }
+}
+
 body.page-post-single #content article > section .post-footnotes-banner {
   display: block;
   width: 100%;
