@@ -53,6 +53,27 @@
             let baseBannerRgb = null;
             let currentBannerColorKey = null;
 
+            const applyFootnoteBanners = function (url) {
+              if (!url) return;
+              const footnoteRules = document.querySelectorAll("body.page-post-single #content .footnotes > hr");
+              footnoteRules.forEach(function (ruleEl) {
+                const existingBanner = ruleEl.parentElement ? ruleEl.parentElement.querySelector(":scope > .post-footnotes-banner") : null;
+                if (existingBanner) {
+                  existingBanner.src = url;
+                  ruleEl.remove();
+                  return;
+                }
+
+                const bannerImg = document.createElement("img");
+                bannerImg.className = "post-footnotes-banner";
+                bannerImg.src = url;
+                bannerImg.alt = "";
+                bannerImg.setAttribute("aria-hidden", "true");
+                bannerImg.loading = "lazy";
+                ruleEl.replaceWith(bannerImg);
+              });
+            };
+
             const adjustHighlightRgbForTheme = function (rgb, colorKey) {
               if (!rgb) return null;
               const isDarkMode = document.documentElement.classList.contains("dark");
@@ -141,6 +162,7 @@
             };
 
             applyBannerColor(selectedBanner);
+            applyFootnoteBanners(selectedBanner);
             bannerEl.addEventListener("load", function () {
               const dominantRgb = extractDominantBannerColor(bannerEl);
               if (!dominantRgb) return;

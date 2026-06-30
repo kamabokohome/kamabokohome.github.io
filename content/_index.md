@@ -31,7 +31,7 @@ title: ""
   鸽子也好人类也好，希望每位来客都能在树屋度过一段愉快的时间。
   <br>
   <span class="treehouse-kamaboko-line">
-    <img class="site-kamaboko-corner treehouse-kamaboko-signature" src="/img/kamaboko.png" alt="kamaboko" role="button" tabindex="0" loading="lazy" data-hover-tooltip="转啊转" data-hover-tooltip-delay="1000">
+    <img class="site-kamaboko-corner treehouse-kamaboko-signature" src="/img/kamaboko.png" alt="kamaboko" role="button" tabindex="0" loading="lazy" data-hover-tooltip="转啊转" data-hover-tooltip-delay="1000" data-hover-tooltip-offset-y="-2">
   </span>
 </div>
 
