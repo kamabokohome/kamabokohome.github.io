@@ -9,8 +9,8 @@
           {{ $fallbackBanner = index $bannerURLs 0 }}
         {{ end }}
 
-        <img id="footer-banner" data-banners='{{ $bannerURLs | jsonify }}' class="mb-5" alt="Footer banner">
-        <noscript>
+        <img id="footer-banner" data-banners='{{ $bannerURLs | jsonify }}' class="site-footer-banner mb-5" alt="Footer banner">
+        <noscript class="site-footer-banner-noscript">
           {{ if $fallbackBanner }}
             <img src="{{ $fallbackBanner }}" class="mb-5" alt="Footer banner">
           {{ end }}
