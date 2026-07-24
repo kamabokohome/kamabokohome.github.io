@@ -7,8 +7,15 @@
     <generator>Hugo</generator>
     <language>en-US</language>
     <copyright>2024–{year} Kamaboko Home. All rights reserved.</copyright>
-    <lastBuildDate>Tue, 16 Jun 2026 11:25:43 +0200</lastBuildDate>
+    <lastBuildDate>Fri, 24 Jul 2026 10:33:22 +0200</lastBuildDate>
     <atom:link href="http://localhost:1313/corner/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Jass</title>
+      <link>http://localhost:1313/corner/2026-07-24-jass/</link>
+      <pubDate>Fri, 24 Jul 2026 10:33:22 +0200</pubDate>
+      <guid>http://localhost:1313/corner/2026-07-24-jass/</guid>
+      <description>&lt;p&gt;最近了解到瑞士本土的扑克牌&lt;strong&gt;Jass&lt;/strong&gt;，觉得非常有趣！按照德语来说，读音应该是“yàsi”这样的感觉，和我们经常玩的扑克牌一样，Jass也有四种花色，但每种花色只有9张牌，分别是6、7、8、9、10（Banner/旗帜）、J（Under/下官）、Q（Ober/上官）、K（King）和Ace。而且德语区的Jass的花色很可爱，是铃铛、盾牌、玫瑰和橡子。脑海里都要出现阿尔卑斯的画面了！&lt;/p&gt;&#xA;&lt;img src=&#39;http://localhost:1313/img/Jass1.png?v=20260724-1056&#39;&gt;&#xA;&lt;div style=&#34;text-align: center; margin-bottom: 1em;&#34;&gt;&lt;em&gt;Souce: &lt;a href=&#34;https://www.swisslos.ch/en/jass/informations/jass-rules/principles-of-jass.html&#34;&gt;Swisslos&lt;/a&gt;&lt;/em&gt;&lt;/div&gt;&#xA;&lt;p&gt;粗略理解了一下玩法后发现，Jass的规则和升级有一点相似。比如玩家都是两两一组，有主花色，主花色大于其它花色。然后每一轮下来，牌最大的玩家可以获得所有的分数。虽然细则和升级还是不太一样，整体上比升级更简单一些。&lt;/p&gt;&#xA;&lt;p&gt;另外，经常和Jass配套的、写着大大的Z的计分板似乎也是瑞士的特色之一。大大的“Z”的三笔分别代表100、50和20分，通过在上面划线的方法算分。比如这个计分板的下半部分，代表的分数就是19*100+5*50+18*20+6+3-1=2518哦！很聪明的记分方法呢。&lt;/p&gt;&#xA;&lt;img src=&#39;http://localhost:1313/img/Jass2.png?v=20260724-1100&#39;&gt;&#xA;&lt;div style=&#34;text-align: center;&#34;&gt;&lt;em&gt;Souce: &lt;a href=&#34;https://www.swiss.law/wp-content/uploads/2017/11/Swiss-Jass-Introduction.pdf&#34;&gt;SWISS.LAW&lt;/a&gt;&lt;/em&gt;&lt;/div&gt;</description>
+    </item>
     <item>
       <title>观鸟笔记</title>
       <link>http://localhost:1313/corner/2026-06-16-%E8%A7%82%E9%B8%9F%E7%AC%94%E8%AE%B0/</link>
