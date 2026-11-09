@@ -2883,6 +2883,11 @@ html.dark #content .collection-layout-btn.is-active {
   --link-highlight-color: rgba(var(--banner-link-rgb), calc(0.74 * var(--banner-link-opacity-effective-scale)));
 }
 
+#content .corner-tag-switch .collection-layout-btn,
+#content .corner-entry-tag {
+  font-size: 0.75rem;
+}
+
 #content .corner-tag-switch .collection-layout-label,
 #content .corner-entry-tag .collection-layout-label {
   padding-bottom: 0;

@@ -921,6 +921,15 @@
       }
 
       @media (max-width: 911px) {
+        /* 菜单展开时由同一层模糊覆盖顶部安全区，避免渐变层形成色带。 */
+        html:has(body.is-mobile-menu-open)::before {
+          display: none;
+        }
+
+        body.is-mobile-menu-open::after {
+          top: calc(0px - env(safe-area-inset-top, 0px));
+        }
+
         .site-sticky-bar.is-stuck .site-sticky-bg,
         .site-sticky-bar.is-submenu-open .site-sticky-bg {
           display: none;
