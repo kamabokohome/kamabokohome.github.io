@@ -921,13 +921,20 @@
       }
 
       @media (max-width: 911px) {
-        /* 菜单展开时由同一层模糊覆盖顶部安全区，避免渐变层形成色带。 */
+        /* 直接模糊内容，让 Safari 状态栏和工具栏后方的内容也保持一致。 */
         html:has(body.is-mobile-menu-open)::before {
           display: none;
         }
 
+        body.is-mobile-menu-open > #content,
+        body.is-mobile-menu-open > .mt-auto {
+          filter: blur(6px);
+        }
+
+        /* 保留遮罩拦截点击，避免与内容模糊叠加。 */
         body.is-mobile-menu-open::after {
-          top: calc(0px - env(safe-area-inset-top, 0px));
+          backdrop-filter: none;
+          -webkit-backdrop-filter: none;
         }
 
         .site-sticky-bar.is-stuck .site-sticky-bg,
