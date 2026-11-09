@@ -163,7 +163,7 @@
           const layoutButtons = Array.from(document.querySelectorAll(".collection-layout-btn[data-layout-target]"));
           const layoutStorageKey = "collection-layout:" + window.location.pathname;
           const allowedLayouts = ["single", "double", "triple", "collage"];
-          const mobileMetaQuery = window.matchMedia("(max-width: 911px)");
+          const mobileMetaQuery = window.matchMedia("(max-width: 911px) and (orientation: portrait)");
 
           const titleImage = document.querySelector(".collection-detail-title-image-default");
           const titleHeader = document.querySelector(".collection-detail-header");
@@ -229,7 +229,7 @@
                 const layout = button.getAttribute("data-layout-target");
                 if (!layout) return;
                 setLayout(layout);
-                if (layout === "triple" && window.matchMedia("(max-width: 911px)").matches) {
+                if (layout === "triple" && window.matchMedia("(max-width: 911px) and (orientation: portrait)").matches) {
                   const emojiRun = button.querySelector(".collection-layout-emoji-run");
                   if (!emojiRun) return;
                   emojiRun.classList.remove("is-wobble");

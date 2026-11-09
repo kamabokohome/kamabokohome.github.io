@@ -155,24 +155,6 @@
     background-size: 100% 100%;
   }
 
-  /* 顶部安全区兜底，避免移动端地址栏/刘海区域出现白条 */
-  html::before {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: env(safe-area-inset-top, 0px);
-    pointer-events: none;
-    z-index: 45;
-    background: linear-gradient(
-      180deg,
-      rgba(255, 255, 255, 0.92) 0%,
-      rgba(255, 255, 255, 0.58) 58%,
-      rgba(255, 255, 255, 0) 100%
-    );
-  }
-
   /* Corner 页面：由 html 统一绘制全屏背景，避免两侧与中间分层重绘不同步 */
   html.page-corner {
     background-color: #ffffff;
@@ -213,14 +195,6 @@
     background-position: top left;
   }
 
-  html.dark::before {
-    background: linear-gradient(
-      180deg,
-      rgba(38, 38, 38, 0.9) 0%,
-      rgba(38, 38, 38, 0.56) 58%,
-      rgba(38, 38, 38, 0) 100%
-    );
-  }
 
   html.dark.page-corner {
     background-color: #262626;
@@ -243,7 +217,7 @@
   }
 
   /* 移动端避免星空背景被整体缩小导致“压扁/变小”观感 */
-  @media (max-width: 911px) {
+  @media (max-width: 911px) and (orientation: portrait) {
     :root {
       --light-grad-stop-2: 90px;
       --light-grad-stop-3: 190px;
@@ -724,7 +698,7 @@ body.page-post-single #content article > section .footnotes > hr {
   display: none;
 }
 
-@media (max-width: 911px) {
+@media (max-width: 911px) and (orientation: portrait) {
   body.page-post-single .site-footer-banner,
   body.page-post-single .site-footer-banner-noscript {
     display: none !important;
@@ -1114,7 +1088,7 @@ html.dark #content .single-jump-link.is-current {
   background: rgba(123, 135, 152, 0.34);
 }
 
-@media (max-width: 911px) {
+@media (max-width: 911px) and (orientation: portrait) {
   #content .single-jump-panel {
     width: min(92vw, 344px);
     max-height: 16rem;
@@ -1585,7 +1559,7 @@ textarea {
   cursor: text;
 }
 
-@media (max-width: 911px) {
+@media (max-width: 911px) and (orientation: portrait) {
   #content .corner-entry-body {
     padding-left: var(--corner-entry-text-start);
     padding-right: 0.15rem;
@@ -1722,7 +1696,7 @@ html.dark #content .collection-banner-description {
   opacity: 1;
 }
 
-@media (max-width: 911px) {
+@media (max-width: 911px) and (orientation: portrait) {
   #content .collection-banner-copy {
     margin-top: 0;
   }
@@ -2080,7 +2054,7 @@ html.dark #content .collection-layout-btn.is-active {
   border-radius: 0;
 }
 
-@media (max-width: 911px) {
+@media (max-width: 911px) and (orientation: portrait) {
   #content .collection-layout-switch {
     gap: 0.08rem;
     margin-top: 0.26rem;
@@ -2272,7 +2246,7 @@ html.dark #content .collection-auto-gallery[data-layout="collage"] .collection-c
   cursor: pointer;
 }
 
-@media (max-width: 911px) {
+@media (max-width: 911px) and (orientation: portrait) {
   #content .collection-lightbox {
     padding-left: max(6px, env(safe-area-inset-left, 0px));
     padding-right: max(6px, env(safe-area-inset-right, 0px));

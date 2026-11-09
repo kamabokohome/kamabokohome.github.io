@@ -145,7 +145,7 @@
     margin-top: calc(-1 * var(--site-sticky-bar-height, 0px));
   }
 
-  @media (min-width: 912px) {
+  @media (min-width: 912px), (orientation: landscape) {
     body.is-home .home-ripple-stage {
       width: 100%;
       min-width: 0;
@@ -496,7 +496,7 @@
     transition: none;
   }
 
-  @media (max-width: 911px) {
+  @media (max-width: 911px) and (orientation: portrait) {
     body.is-home #content > section > .home-ripple-stage:first-child {
       margin-top: calc(-1 * var(--site-sticky-bar-height, 0px));
     }
@@ -538,7 +538,7 @@
     const DESKTOP_SHARED_RIPPLE_ENABLED = false;
     const DESKTOP_TILE_RIPPLE_ENABLED = false;
     const isNarrowViewport = function () {
-      return !!(window.matchMedia && window.matchMedia("(max-width: " + NARROW_MAX_WIDTH + "px)").matches);
+      return !!(window.matchMedia && window.matchMedia("(max-width: " + NARROW_MAX_WIDTH + "px) and (orientation: portrait)").matches);
     };
 
     const hasRipples = !!(window.jQuery && window.jQuery.fn && window.jQuery.fn.ripples);
