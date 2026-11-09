@@ -932,13 +932,15 @@
       }
 
       .site-search-result-preview {
-        display: block;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
         margin-top: 0.16rem;
         font-size: 0.72rem;
         line-height: 1.46;
         font-weight: 500;
         color: rgb(107 114 128 / 1);
-        white-space: nowrap;
+        white-space: normal;
         overflow: hidden;
         text-overflow: ellipsis;
       }
@@ -1005,8 +1007,26 @@
         -webkit-backdrop-filter: blur(6px);
       }
 
+      .site-page-surface {
+        display: flex;
+        flex-direction: column;
+        flex: 1 1 auto;
+        min-width: 0;
+      }
+
       @media (max-width: 911px) {
-        /* 菜单展开时由全屏遮罩统一模糊背景，避免正文和页脚各自形成边界。 */
+        /* 统一模糊整段页面内容，也覆盖 Safari 工具栏后方采样到的内容。 */
+        body.is-mobile-menu-open .site-page-surface {
+          filter: blur(6px);
+        }
+
+        /* 遮罩只拦截点击，避免可视区域发生二次模糊。 */
+        body.is-mobile-menu-open::after,
+        body:has(> .site-sticky-bar.is-submenu-open)::after {
+          backdrop-filter: none;
+          -webkit-backdrop-filter: none;
+        }
+
         html:has(body.is-mobile-menu-open)::before {
           display: none;
         }
@@ -1585,11 +1605,12 @@
         }
 
         .site-search-results {
-          padding: 0 0.42rem 0.64rem 0.82rem;
+          padding: 0 0.62rem 0.64rem;
         }
 
-        .site-search-results a {
-          padding-left: 1.2rem;
+        #site-search-results a {
+          padding-left: 0.68rem;
+          padding-right: 0.68rem;
         }
 
         .site-search-result-title {
@@ -2296,6 +2317,7 @@
     {{ partial "tree-art-toggle" (dict "class" "site-desktop-art") }}
     {{ end }}
     <!-- Main content -->
+    {{ if not .IsHome }}<div class="site-page-surface">{{ end }}
     <main id="content" class="px-2.5 sm:px-2.5" style="flex: 1 1 auto; display: flex; flex-direction: column;">
       {{- block "main" . -}}
       {{- end }}
@@ -2303,6 +2325,7 @@
 
     <!-- Footer -->
     {{- partial "footer/index" . -}}
+    {{ if not .IsHome }}</div>{{ end }}
 
     <script>
       (function() {
@@ -2994,11 +3017,13 @@
           if (terms.length === 0) return raw.slice(0, 80);
 
           const lowerRaw = raw.toLowerCase();
-          let matchIndex = -1;
-          for (let i = 0; i < terms.length; i += 1) {
+          let matchIndex = lowerRaw.indexOf(normalize(query));
+          let matchLength = normalize(query).length;
+          for (let i = 0; matchIndex < 0 && i < terms.length; i += 1) {
             const idx = lowerRaw.indexOf(terms[i]);
-            if (idx >= 0 && (matchIndex < 0 || idx < matchIndex)) {
+            if (idx >= 0) {
               matchIndex = idx;
+              matchLength = terms[i].length;
             }
           }
           if (matchIndex < 0) return raw.slice(0, 80);
@@ -3025,19 +3050,12 @@
             sentenceStart += 1;
           }
 
-          let preview = raw.slice(sentenceStart, sentenceEnd).trim();
-          const maxLen = 80;
-          if (preview.length > maxLen) {
-            const keywordOffset = matchIndex - sentenceStart;
-            const sliceStart = Math.max(0, keywordOffset - 20);
-            preview = preview.slice(sliceStart, sliceStart + maxLen).trim();
-            preview = preview.replace(/^[，。！？；：、,.!?;:]+/, "");
-            if (sliceStart > 0) preview = "…" + preview;
-            if (sentenceEnd < raw.length || sliceStart + maxLen < raw.slice(sentenceStart, sentenceEnd).length) {
-              preview += "…";
-            }
-          }
-          return preview;
+          // 关键词前最多保留八个字，避免手机端的省略把匹配内容藏起来。
+          const sliceStart = Math.max(sentenceStart, matchIndex - 8);
+          const maxLen = Math.max(80, matchLength + 8);
+          const sliceEnd = Math.min(raw.length, Math.max(sentenceEnd, matchIndex + matchLength), sliceStart + maxLen);
+          const preview = raw.slice(sliceStart, sliceEnd).trim();
+          return (sliceStart > 0 ? "…" : "") + preview + (sliceEnd < raw.length ? "…" : "");
         };
 
         const renderResults = function(query) {
