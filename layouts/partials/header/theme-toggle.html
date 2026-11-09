@@ -1,0 +1,19 @@
+{{ $moonIcon := resources.Get "icons/moon.svg" }}
+{{ $sunIcon := resources.Get "icons/sun.svg" }}
+
+<button 
+  class="toggle-theme site-search-toggle site-theme-toggle flex items-center justify-center" 
+  type="button"
+  aria-label="Toggle Theme" 
+  aria-pressed="false"
+  data-hover-tooltip="電源"
+  data-hover-tooltip-delay="1000"
+  onclick="toggleTheme()"
+>
+  <span class="theme-icon light">
+    <img src="{{ $moonIcon.RelPermalink }}" alt="" aria-hidden="true" />
+  </span>
+  <span class="theme-icon dark">
+    <img src="{{ $sunIcon.RelPermalink }}" alt="" aria-hidden="true" />
+  </span>
+</button>

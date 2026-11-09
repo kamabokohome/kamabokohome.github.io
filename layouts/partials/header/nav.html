@@ -88,6 +88,7 @@
     </li>
   </ul>
   <div class="site-mobile-menu-panel" id="site-mobile-menu-panel" hidden>
+    {{ partial "tree-art-toggle" (dict "class" "site-mobile-menu-pigeon") }}
     <div class="site-mobile-menu-scroll">
       <ul class="site-mobile-menu-list" aria-label="Mobile navigation">
         {{ range site.Menus.main }}
@@ -100,6 +101,7 @@
         </li>
         {{ end }}
         <li class="site-mobile-menu-line site-mobile-search-line">
+          {{ partial "header/theme-toggle" . }}
           <button
             type="button"
             class="site-mobile-search-toggle"

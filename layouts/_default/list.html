@@ -108,9 +108,9 @@
   {{ $cornerTags = sort (uniq $cornerTags) }}
   {{ if gt (len $cornerTags) 0 }}
     <section class="collection-layout-switch corner-tag-switch" role="group" aria-label="Corner tag filter">
-      <button type="button" class="collection-layout-btn is-active" data-corner-tag="all"><span class="collection-layout-separator" aria-hidden="true">/</span><span class="collection-layout-label">All</span></button>
+      <button type="button" class="collection-layout-btn is-active" data-corner-tag="all"><span class="collection-layout-separator" aria-hidden="true">/</span><span class="collection-layout-label">#All</span></button>
       {{ range $tag := $cornerTags }}
-        <button type="button" class="collection-layout-btn" data-corner-tag="{{ $tag | urlize }}"><span class="collection-layout-separator" aria-hidden="true">/</span><span class="collection-layout-label">{{ $tag }}</span></button>
+        <button type="button" class="collection-layout-btn" data-corner-tag="{{ $tag | urlize }}"><span class="collection-layout-separator" aria-hidden="true">/</span><span class="collection-layout-label">#{{ $tag }}</span></button>
       {{ end }}
     </section>
   {{ end }}
@@ -136,7 +136,7 @@
           {{ with $cornerPage.Params.tags }}
             <div class="corner-entry-tags" aria-label="Entry tags">
               {{ range . }}
-                <button type="button" class="collection-layout-btn corner-entry-tag" data-corner-entry-tag="{{ (printf "%v" .) | urlize }}"><span class="collection-layout-separator" aria-hidden="true">/</span><span class="collection-layout-label">{{ . }}</span></button>
+                <button type="button" class="collection-layout-btn corner-entry-tag" data-corner-entry-tag="{{ (printf "%v" .) | urlize }}"><span class="collection-layout-separator" aria-hidden="true">/</span><span class="collection-layout-label">#{{ . }}</span></button>
               {{ end }}
             </div>
           {{ end }}

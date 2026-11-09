@@ -1,0 +1,6 @@
+{{- $withoutPigeon := (resources.Get "home/complete_鸽子_back.jpg").Resize "640x" -}}
+{{- $pigeon := (resources.Get "home/鸽子_front1.png").Resize "400x" -}}
+<button type="button" class="site-tree-art-toggle {{ .class }}" data-tree-art-toggle aria-label="显示鸽子" aria-pressed="false">
+  <img src="{{ $withoutPigeon.RelPermalink }}" alt="树屋插画" width="{{ $withoutPigeon.Width }}" height="{{ $withoutPigeon.Height }}">
+  <img class="site-tree-art-pigeon-layer" src="{{ $pigeon.RelPermalink }}" alt="" aria-hidden="true" width="{{ $pigeon.Width }}" height="{{ $pigeon.Height }}">
+</button>

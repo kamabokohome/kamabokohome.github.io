@@ -92,6 +92,79 @@
         display: none;
       }
 
+      .site-desktop-art {
+        display: none;
+      }
+
+      .site-tree-art-toggle {
+        padding: 0;
+        border: 0;
+        background: transparent;
+        cursor: pointer;
+        line-height: 0;
+      }
+
+      .site-tree-art-toggle > img {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+
+      .site-tree-art-toggle > .site-tree-art-pigeon-layer {
+        position: absolute;
+        left: 3%;
+        top: 19%;
+        width: 58%;
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .site-tree-art-toggle[aria-pressed="true"] > .site-tree-art-pigeon-layer {
+        opacity: 1;
+      }
+
+      .site-tree-art-toggle:focus-visible {
+        outline: 2px solid currentColor;
+        outline-offset: 4px;
+      }
+
+      .site-footer-bird-slot {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 7rem;
+        height: 5.25rem;
+        margin: 0 auto;
+        padding: 0;
+        border: 0;
+        background: transparent;
+        cursor: pointer;
+      }
+
+      .site-footer-bird {
+        display: block;
+        width: 2.75rem;
+        height: auto;
+        margin: 0;
+        transform: translateY(0.5rem);
+      }
+
+      .site-footer-bird[data-bird="pigeon"] {
+        width: 7rem;
+      }
+
+      @media (min-width: 1200px) {
+        .site-desktop-art {
+          display: block;
+          position: fixed;
+          top: 1.75rem;
+          right: 4rem;
+          width: 7.5rem;
+          height: auto;
+          user-select: none;
+        }
+      }
+
       .site-sticky-side-titles {
         position: fixed;
         left: 0;
@@ -177,7 +250,19 @@
         display: none;
       }
 
+      body.page-post-single #content > article {
+        padding-top: 0;
+      }
+
+      body.page-post-single #content > article > header {
+        margin-bottom: 0.75em;
+      }
+
       @media (max-width: 911px) {
+        body.page-post-single #content > article {
+          padding-top: 0.5rem;
+        }
+
         #content .meta .post-meta-time-full {
           display: none;
         }
@@ -921,20 +1006,9 @@
       }
 
       @media (max-width: 911px) {
-        /* 直接模糊内容，让 Safari 状态栏和工具栏后方的内容也保持一致。 */
+        /* 菜单展开时由全屏遮罩统一模糊背景，避免正文和页脚各自形成边界。 */
         html:has(body.is-mobile-menu-open)::before {
           display: none;
-        }
-
-        body.is-mobile-menu-open > #content,
-        body.is-mobile-menu-open > .mt-auto {
-          filter: blur(6px);
-        }
-
-        /* 保留遮罩拦截点击，避免与内容模糊叠加。 */
-        body.is-mobile-menu-open::after {
-          backdrop-filter: none;
-          -webkit-backdrop-filter: none;
         }
 
         .site-sticky-bar.is-stuck .site-sticky-bg,
@@ -1009,6 +1083,12 @@
           border-radius: 0.44rem;
         }
 
+        .site-mobile-home-link,
+        .site-mobile-menu-toggle {
+          position: relative;
+          top: 0.25rem;
+        }
+
         .site-sticky-nav nav .site-mobile-home-link:hover,
         .site-sticky-nav nav .site-mobile-home-link:focus-visible {
           background: transparent;
@@ -1032,7 +1112,7 @@
         }
 
         .site-sticky-nav nav .nav-theme-item {
-          display: inline-flex;
+          display: none;
           align-items: center;
           margin-left: auto;
           flex: 0 0 auto;
@@ -1057,6 +1137,7 @@
           display: inline-flex;
           align-items: center;
           flex: 0 0 auto;
+          margin-left: auto;
         }
 
         body.is-home .site-sticky-bar:not(.is-stuck):not(.is-submenu-open) {
@@ -1157,6 +1238,15 @@
 
         .site-mobile-menu-panel[hidden] {
           display: none !important;
+        }
+
+        .site-mobile-menu-pigeon {
+          position: absolute;
+          top: 1.55rem;
+          left: 1.25rem;
+          width: min(55vw, calc(100% - 9rem), 19rem);
+          height: auto;
+          user-select: none;
         }
 
         .site-mobile-menu-scroll {
@@ -1414,9 +1504,23 @@
         }
 
         .site-mobile-search-line {
+          display: flex;
+          align-items: center;
+          gap: 0.25rem;
           margin-top: 0.54rem;
           padding-top: 0.44rem;
           border-top: none;
+        }
+
+        .site-mobile-search-line .site-theme-toggle {
+          width: 44px;
+          height: 44px;
+          padding: 0;
+        }
+
+        .site-mobile-search-line .site-theme-toggle .theme-icon {
+          width: 2rem;
+          height: 2rem;
         }
 
         .site-mobile-search-toggle {
@@ -1665,7 +1769,7 @@
         .site-sticky-nav nav > ul > li.nav-tools-item {
           margin-top: 0.75rem;
           margin-left: 0;
-          flex-direction: column;
+          flex-direction: row;
           justify-content: center;
           gap: 0.25rem;
         }
@@ -2189,6 +2293,7 @@
         </div>
       </div>
     </header>
+    {{ partial "tree-art-toggle" (dict "class" "site-desktop-art") }}
     {{ end }}
     <!-- Main content -->
     <main id="content" class="px-2.5 sm:px-2.5" style="flex: 1 1 auto; display: flex; flex-direction: column;">
@@ -2198,6 +2303,46 @@
 
     <!-- Footer -->
     {{- partial "footer/index" . -}}
+
+    <script>
+      (function() {
+        const storageKey = "tree-pigeon-visible";
+        let showPigeon = false;
+        try {
+          const navigation = performance.getEntriesByType("navigation")[0];
+          if (document.body.classList.contains("is-home") && navigation && navigation.type === "reload") {
+            sessionStorage.removeItem(storageKey);
+          }
+          showPigeon = sessionStorage.getItem(storageKey) === "true";
+        } catch (error) {}
+
+        const applyBirdState = function() {
+          document.querySelectorAll("[data-tree-art-toggle]").forEach(function(toggle) {
+            toggle.setAttribute("aria-pressed", String(showPigeon));
+            toggle.setAttribute("aria-label", showPigeon ? "隐藏鸽子" : "显示鸽子");
+          });
+          const footerBird = document.querySelector("[data-footer-bird]");
+          if (footerBird) {
+            footerBird.src = showPigeon ? footerBird.dataset.blackbird : footerBird.dataset.pigeon;
+            footerBird.dataset.bird = showPigeon ? "blackbird" : "pigeon";
+            footerBird.alt = showPigeon ? "乌鸫" : "鸽子";
+            footerBird.width = Number(showPigeon ? footerBird.dataset.blackbirdWidth : footerBird.dataset.pigeonWidth);
+            footerBird.height = Number(showPigeon ? footerBird.dataset.blackbirdHeight : footerBird.dataset.pigeonHeight);
+          }
+          const footerToggle = document.querySelector("[data-footer-bird-toggle]");
+          if (footerToggle) footerToggle.setAttribute("aria-pressed", String(showPigeon));
+        };
+
+        applyBirdState();
+        document.querySelectorAll("[data-tree-art-toggle], [data-footer-bird-toggle]").forEach(function(button) {
+          button.addEventListener("click", function() {
+            showPigeon = !showPigeon;
+            try { sessionStorage.setItem(storageKey, String(showPigeon)); } catch (error) {}
+            applyBirdState();
+          });
+        });
+      })();
+    </script>
 
     <script src="{{ "js/jquery-1.11.0.min.js" | relURL }}"></script>
     <script src="{{ "js/jquery.ripples.min.js?v=20260221j" | relURL }}"></script>

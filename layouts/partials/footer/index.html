@@ -180,6 +180,14 @@
           })();
         </script>
 
+        {{ if not .IsHome }}
+          {{ $pigeon := (resources.Get "home/鸽子_front1.png").Resize "320x" }}
+          {{ $blackbird := resources.Get "img/favicon3.png" }}
+          <button type="button" class="site-footer-bird-slot" data-footer-bird-toggle aria-label="切换小鸟" aria-pressed="false">
+          <img class="site-footer-bird" data-footer-bird data-pigeon="{{ $pigeon.RelPermalink }}" data-blackbird="{{ $blackbird.RelPermalink }}" data-pigeon-width="{{ $pigeon.Width }}" data-pigeon-height="{{ $pigeon.Height }}" data-blackbird-width="{{ $blackbird.Width }}" data-blackbird-height="{{ $blackbird.Height }}" data-bird="pigeon" src="{{ $pigeon.RelPermalink }}" alt="鸽子" width="{{ $pigeon.Width }}" height="{{ $pigeon.Height }}" loading="lazy">
+          </button>
+        {{ end }}
+
         <div class="site-footer-copyright flex justify-center items-center text-xs font-normal" 
                 style="font-size: 0.62rem; padding-bottom: 0.5rem;">
             © {{ replace .Site.Copyright "{year}" now.Year }} 
