@@ -4,22 +4,10 @@
         {{ range resources.Match "img/banner_*.png" }}
             {{ $bannerURLs = $bannerURLs | append .RelPermalink }}
         {{ end }}
-        {{ $fallbackBanner := "" }}
-        {{ if gt (len $bannerURLs) 0 }}
-          {{ $fallbackBanner = index $bannerURLs 0 }}
-        {{ end }}
-
-        <img id="footer-banner" data-banners='{{ $bannerURLs | jsonify }}' class="site-footer-banner mb-5" alt="Footer banner">
-        <noscript class="site-footer-banner-noscript">
-          {{ if $fallbackBanner }}
-            <img src="{{ $fallbackBanner }}" class="mb-5" alt="Footer banner">
-          {{ end }}
-        </noscript>
         <script>
           (function () {
-            const bannerEl = document.getElementById("footer-banner");
-            if (!bannerEl) return;
-            const bannerUrls = JSON.parse(bannerEl.dataset.banners || "[]");
+            const bannerEl = new Image();
+            const bannerUrls = {{ $bannerURLs | jsonify | safeJS }};
             if (!Array.isArray(bannerUrls) || bannerUrls.length === 0) return;
 
             const bannerColorMap = {
