@@ -16,7 +16,7 @@
 {{ end }}
 
 <article id="content-top" class="flex flex-col gap-5" style="flex: 1 1 auto;">
-  <header class="flex flex-col">
+  <header class="flex flex-col{{ if $autoGallery }} collection-detail-header{{ end }}">
     
 {{ if .PublishDate }}
 <div class="meta">
@@ -164,6 +164,19 @@
           const layoutStorageKey = "collection-layout:" + window.location.pathname;
           const allowedLayouts = ["single", "double", "triple", "collage"];
           const mobileMetaQuery = window.matchMedia("(max-width: 911px)");
+
+          const titleImage = document.querySelector(".collection-detail-title-image-default");
+          const titleHeader = document.querySelector(".collection-detail-header");
+          if (titleImage && titleHeader) {
+            const alignLayoutButtons = function() {
+              // 两张箱子插画的画布底部均有 148px 透明留白（原宽 1712px）。
+              const bottomSpace = titleImage.getBoundingClientRect().width * 148 / 1712;
+              titleHeader.style.setProperty("--collection-title-bottom-space", bottomSpace + "px");
+            };
+            alignLayoutButtons();
+            const titleObserver = new ResizeObserver(alignLayoutButtons);
+            titleObserver.observe(titleImage);
+          }
 
           const updateCollectionMetaWrap = function () {
             if (!gallery) return;

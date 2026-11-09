@@ -138,6 +138,9 @@
         padding: 0;
         border: 0;
         background: transparent;
+      }
+
+      button.site-footer-bird-slot {
         cursor: pointer;
       }
 
@@ -251,14 +254,113 @@
       }
 
       body.page-post-single #content > article {
-        padding-top: 0;
+        padding-top: 0.5rem;
       }
 
       body.page-post-single #content > article > header {
         margin-bottom: 0.75em;
       }
 
+      #content .collection-detail-header {
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: flex-end;
+        column-gap: 1rem;
+        margin-bottom: calc(0px - var(--collection-title-bottom-space, 0px));
+      }
+
+      #content article:has(> .collection-detail-header) {
+        row-gap: 1.25rem;
+      }
+
+      #content .collection-detail-header > .meta {
+        flex-basis: 100%;
+      }
+
+      #content .collection-detail-header > .collection-detail-layout-switch {
+        margin-left: auto;
+        margin-top: 0;
+        margin-bottom: var(--collection-title-bottom-space, 0px);
+      }
+
+      #content .collection-detail-header > .collection-detail-title-image-wrap {
+        width: min(32%, 16rem);
+      }
+
+      #content .collection-detail-layout-switch .collection-layout-btn {
+        font-size: 0.9rem;
+        padding: 0.4rem 0.45rem 0;
+        opacity: 0.45;
+        transition: opacity 130ms ease;
+      }
+
+      #content .collection-detail-layout-switch .collection-layout-btn:is(.is-active, :hover, :focus-visible) {
+        opacity: 1;
+      }
+
+      #content .collection-detail-layout-switch .collection-layout-label {
+        padding-bottom: 0.12em;
+      }
+
+      #content .collection-detail-layout-switch .collection-layout-label::before {
+        inset: auto -0.05em 0;
+        height: 0.36em;
+      }
+
+      #content .collection-detail-layout-switch .collection-layout-separator {
+        font-size: 0.85rem;
+      }
+
+      #content .collection-detail-layout-switch .collection-layout-collage-btn {
+        font-size: 0.82rem;
+      }
+
+      #content .corner-tag-switch,
+      #content .corner-entry-tags {
+        column-gap: 0.38rem;
+        row-gap: 0.3rem;
+      }
+
+      #content .corner-tag-switch .collection-layout-btn,
+      #content .corner-entry-tag {
+        padding: 0.32rem 0.38rem;
+        font-size: 0.78rem;
+        font-weight: 500;
+        opacity: 1;
+        transition: opacity 130ms ease;
+      }
+
+      #content .corner-tag-switch .collection-layout-btn:is(.is-active, :hover, :focus-visible),
+      #content .corner-entry-tag:is(.is-active, :hover, :focus-visible) {
+        opacity: 1;
+        --link-highlight-color: rgba(var(--banner-link-rgb), calc(0.92 * var(--banner-link-opacity-effective-scale)));
+      }
+
+      #content .corner-tag-switch .collection-layout-label,
+      #content .corner-entry-tag .collection-layout-label {
+        background-image: linear-gradient(to top, var(--link-highlight-color) 0%, var(--link-highlight-color) 36%, transparent 36%);
+        background-position: 0 86%;
+      }
+
+      #content .corner-tag-dot {
+        display: inline-block;
+        width: 0.42em;
+        height: 0.42em;
+        margin-right: 0.36em;
+        border-radius: 50%;
+        vertical-align: 0.13em;
+        background-color: rgba(var(--banner-link-rgb), calc(0.92 * var(--banner-link-opacity-effective-scale)));
+      }
+
       @media (max-width: 911px) {
+        #content .section-list-default > article + .posts-year-separator {
+          margin-top: 1.5rem !important;
+        }
+
+        #content .collection-detail-header > .collection-detail-title-image-wrap {
+          width: min(38%, 16rem);
+        }
+
         body.page-post-single #content > article {
           padding-top: 0.5rem;
         }
@@ -793,6 +895,12 @@
         display: none !important;
       }
 
+      html.is-search-open,
+      html.is-search-open body {
+        overflow: hidden;
+        overscroll-behavior: none;
+      }
+
       .site-search-modal {
         position: fixed;
         inset: 0;
@@ -820,6 +928,7 @@
 
       .site-search-dialog {
         position: relative;
+        text-align: left;
         width: min(44rem, 100%);
         max-height: calc(100vh - var(--site-sticky-bar-height, 0px) - 1.34rem);
         overflow: hidden;
@@ -861,6 +970,7 @@
       }
 
       .site-search-input-wrap {
+        flex: 0 0 auto;
         padding: 0.9rem 0.9rem 0.54rem;
       }
 
@@ -900,6 +1010,9 @@
         list-style: none;
         display: block;
         overflow-y: auto;
+        min-height: 0;
+        overscroll-behavior: contain;
+        -webkit-overflow-scrolling: touch;
       }
 
       .site-sticky-nav nav ul.site-search-results {
@@ -913,11 +1026,14 @@
       .site-search-results > li {
         display: block;
         width: 100%;
+        padding: 0.46rem 0.48rem 0.46rem 1.46rem;
       }
 
       #site-search-results a {
-        display: block;
-        padding: 0.46rem 0.48rem 0.46rem 1.46rem;
+        display: inline;
+        padding: 0;
+        color: inherit;
+        font: inherit;
         border-radius: 0;
         background: transparent;
         text-decoration: none;
@@ -1014,7 +1130,43 @@
         min-width: 0;
       }
 
+      #content .message-board {
+        padding-top: 1.3rem;
+      }
+
+      @media (min-width: 912px) {
+        #content > .content:first-child {
+          padding-top: 1rem !important;
+        }
+      }
+
+      #content,
+      #content p,
+      #content li,
+      #content blockquote {
+        text-align: left;
+      }
+
+      #content p,
+      #content li,
+      #content blockquote {
+        text-wrap: wrap;
+        line-break: auto;
+        hanging-punctuation: none;
+      }
+
       @media (max-width: 911px) {
+        /* 覆盖根背景的清晰竖线，使用同一背景绘制完整的模糊副本。 */
+        html:has(body.is-mobile-menu-open)::after {
+          content: "";
+          position: fixed;
+          inset: -12px;
+          z-index: -1;
+          background: inherit;
+          filter: blur(6px);
+          pointer-events: none;
+        }
+
         /* 统一模糊整段页面内容，也覆盖 Safari 工具栏后方采样到的内容。 */
         body.is-mobile-menu-open .site-page-surface {
           filter: blur(6px);
@@ -1106,7 +1258,7 @@
         .site-mobile-home-link,
         .site-mobile-menu-toggle {
           position: relative;
-          top: 0.25rem;
+          top: 0.5rem;
         }
 
         .site-sticky-nav nav .site-mobile-home-link:hover,
@@ -1608,7 +1760,7 @@
           padding: 0 0.62rem 0.64rem;
         }
 
-        #site-search-results a {
+        #site-search-results > li {
           padding-left: 0.68rem;
           padding-right: 0.68rem;
         }
@@ -2947,6 +3099,8 @@
         const searchInput = searchModal.querySelector("#site-search-input");
         const resultsEl = searchModal.querySelector("#site-search-results");
         const indexUrl = searchModal.getAttribute("data-index-url") || "/index.json";
+        const root = document.documentElement;
+        let searchScrollPosition = null;
         const setSearchButtonsExpanded = function(expanded) {
           for (let i = 0; i < openButtons.length; i += 1) {
             openButtons[i].setAttribute("aria-expanded", expanded ? "true" : "false");
@@ -3095,17 +3249,20 @@
             const meta = escapeHtml([item.section, item.date].filter(Boolean).join(" · "));
             const href = escapeHtml(item.permalink);
             return (
-              '<li><a href="' + href + '">' +
-                '<span class="site-search-result-title"><span class="site-search-result-title-text">' + title + "</span></span>" +
+              '<li>' +
+                '<span class="site-search-result-title"><a href="' + href + '"><span class="site-search-result-title-text">' + title + "</span></a></span>" +
                 previewHtml +
                 '<span class="site-search-result-meta">' + meta + "</span>" +
-              "</a></li>"
+              "</li>"
             );
           }).join("");
           resultsEl.innerHTML = html;
         };
 
         const openSearch = function() {
+          if (!searchModal.hidden) return;
+          searchScrollPosition = { left: window.scrollX, top: window.scrollY };
+          root.classList.add("is-search-open");
           const isMobileNav = window.matchMedia("(max-width: 911px)").matches;
           if (isMobileNav) {
             document.body.classList.remove("is-mobile-menu-open");
@@ -3129,12 +3286,19 @@
             renderResults(searchInput ? searchInput.value : "");
           });
           window.setTimeout(function() {
-            if (searchInput) searchInput.focus();
+            if (searchInput) searchInput.focus({ preventScroll: true });
           }, 0);
         };
 
         const closeSearch = function() {
+          if (searchModal.hidden) return;
           searchModal.hidden = true;
+          if (searchInput) searchInput.blur();
+          root.classList.remove("is-search-open");
+          if (searchScrollPosition) {
+            window.scrollTo({ left: searchScrollPosition.left, top: searchScrollPosition.top, behavior: "instant" });
+            searchScrollPosition = null;
+          }
           setSearchButtonsExpanded(false);
         };
 
@@ -3166,6 +3330,32 @@
             closeSearch();
           }
         });
+
+        searchModal.addEventListener("click", function(event) {
+          const target = event.target instanceof Element ? event.target : null;
+          if (!target || target.closest(".site-search-input-wrap, #site-search-results a, .site-search-result-preview, .site-search-result-meta")) return;
+          closeSearch();
+        });
+
+        const shouldBlockScroll = function(target, deltaY) {
+          if (!resultsEl.contains(target)) return true;
+          if (resultsEl.scrollHeight <= resultsEl.clientHeight) return true;
+          if (deltaY < 0 && resultsEl.scrollTop <= 0) return true;
+          return deltaY > 0 && resultsEl.scrollTop + resultsEl.clientHeight >= resultsEl.scrollHeight - 1;
+        };
+        searchModal.addEventListener("wheel", function(event) {
+          if (shouldBlockScroll(event.target, event.deltaY)) event.preventDefault();
+        }, { passive: false });
+        let touchY = null;
+        searchModal.addEventListener("touchstart", function(event) {
+          touchY = event.touches.length === 1 ? event.touches[0].clientY : null;
+        }, { passive: true });
+        searchModal.addEventListener("touchmove", function(event) {
+          if (touchY === null || event.touches.length !== 1) return;
+          const nextY = event.touches[0].clientY;
+          if (shouldBlockScroll(event.target, touchY - nextY)) event.preventDefault();
+          touchY = nextY;
+        }, { passive: false });
 
         document.addEventListener("keydown", function(event) {
           if (event.key === "Escape" && !searchModal.hidden) {
@@ -3440,6 +3630,8 @@
           if (!el) return;
           if (el.closest(".single-jump-panel")) return;
           normalizeParagraph(el);
+          // 左对齐使用普通换行，不再插入防止末行孤字的连接字符。
+          if (window.getComputedStyle(el).textAlign !== "justify") return;
           for (let i = 0; i < 3; i += 1) {
             const pattern = getWidowPattern(el);
             if (!pattern) break;

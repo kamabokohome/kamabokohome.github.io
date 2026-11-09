@@ -1,4 +1,4 @@
-<div class="mt-auto" style="margin-top: auto; padding-top: 1.5rem !important;">
+<div class="mt-auto" style="margin-top: auto; padding-top: {{ if .IsHome }}1rem{{ else }}0.5rem{{ end }} !important;">
     <footer class="flex-col items-center" style="padding-bottom: 1.5rem;">
         {{ $bannerURLs := slice }}
         {{ range resources.Match "img/banner_*.png" }}
@@ -180,7 +180,13 @@
           })();
         </script>
 
-        {{ if not .IsHome }}
+        {{ if .IsHome }}
+          {{ with resources.Get "img/favicon3.png" }}
+            <div class="site-footer-bird-slot">
+              <img class="site-footer-bird" src="{{ .RelPermalink }}" alt="乌鸫" width="{{ .Width }}" height="{{ .Height }}" loading="lazy">
+            </div>
+          {{ end }}
+        {{ else }}
           {{ $pigeon := (resources.Get "home/鸽子_front1.png").Resize "320x" }}
           {{ $blackbird := resources.Get "img/favicon3.png" }}
           <button type="button" class="site-footer-bird-slot" data-footer-bird-toggle aria-label="切换小鸟" aria-pressed="false">
