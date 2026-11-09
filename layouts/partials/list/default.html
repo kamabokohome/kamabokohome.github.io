@@ -1,4 +1,4 @@
-<article class="flex flex-col">
+<article{{ if eq .Section "posts" }} id="post-{{ md5 .RelPermalink }}" class="flex flex-col posts-list-entry"{{ else }} class="flex flex-col"{{ end }}>
   
   <div class="flex flex-col">
   

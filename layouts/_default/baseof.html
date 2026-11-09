@@ -108,6 +108,7 @@
         display: block;
         width: 100%;
         height: auto;
+        pointer-events: none;
       }
 
       .site-tree-art-toggle > .site-tree-art-pigeon-layer {
@@ -317,42 +318,94 @@
 
       #content .corner-tag-switch,
       #content .corner-entry-tags {
-        column-gap: 0.38rem;
-        row-gap: 0.3rem;
+        column-gap: 0.75rem;
+        row-gap: 0.4rem;
       }
 
       #content .corner-tag-switch .collection-layout-btn,
       #content .corner-entry-tag {
-        padding: 0.32rem 0.38rem;
+        padding: 0.32rem 0.5rem;
         font-size: 0.78rem;
         font-weight: 500;
         opacity: 1;
-        transition: opacity 130ms ease;
+        color: #9ca3af;
+        transition: color 130ms ease;
       }
 
-      #content .corner-tag-switch .collection-layout-btn:is(.is-active, :hover, :focus-visible),
-      #content .corner-entry-tag:is(.is-active, :hover, :focus-visible) {
-        opacity: 1;
-        --link-highlight-color: rgba(var(--banner-link-rgb), calc(0.92 * var(--banner-link-opacity-effective-scale)));
+      #content .corner-tag-switch .collection-layout-btn.is-active,
+      #content .corner-entry-tag.is-active {
+        color: #374151;
+      }
+
+      html.dark #content .corner-tag-switch .collection-layout-btn,
+      html.dark #content .corner-entry-tag {
+        color: #9ca3af;
+      }
+
+      html.dark #content .corner-tag-switch .collection-layout-btn.is-active,
+      html.dark #content .corner-entry-tag.is-active {
+        color: #e5e7eb;
       }
 
       #content .corner-tag-switch .collection-layout-label,
       #content .corner-entry-tag .collection-layout-label {
-        background-image: linear-gradient(to top, var(--link-highlight-color) 0%, var(--link-highlight-color) 36%, transparent 36%);
-        background-position: 0 86%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.36em;
+        background-image: none;
+      }
+
+      #content .corner-tag-switch .collection-layout-separator,
+      #content .corner-entry-tag .collection-layout-separator {
+        left: -0.375rem;
+      }
+
+      #content .corner-tag-switch .collection-layout-label::before,
+      #content .corner-entry-tag .collection-layout-label::before {
+        content: none;
+      }
+
+      @media (hover: hover) and (pointer: fine) {
+        #content .corner-tag-switch .collection-layout-btn:hover,
+        #content .corner-entry-tag:hover {
+          color: #374151;
+        }
+
+        html.dark #content .corner-tag-switch .collection-layout-btn:hover,
+        html.dark #content .corner-entry-tag:hover {
+          color: #e5e7eb;
+        }
+
+        #content .corner-tag-switch .collection-layout-btn:hover .corner-tag-dot,
+        #content .corner-entry-tag:hover .corner-tag-dot {
+          transform: scale(1);
+        }
+      }
+
+      #content .corner-tag-switch .is-active .corner-tag-dot,
+      #content .corner-entry-tag.is-active .corner-tag-dot {
+        transform: scale(1);
       }
 
       #content .corner-tag-dot {
         display: inline-block;
-        width: 0.42em;
-        height: 0.42em;
-        margin-right: 0.36em;
+        flex: 0 0 0.84em;
+        width: 0.84em;
+        height: 0.84em;
+        margin: 0;
         border-radius: 50%;
-        vertical-align: 0.13em;
+        transform: scale(0.5);
+        transition: transform 130ms ease;
         background-color: rgba(var(--banner-link-rgb), calc(0.92 * var(--banner-link-opacity-effective-scale)));
       }
 
       @media (max-width: 911px) {
+        #content .corner-tag-switch .collection-layout-btn:not(.is-active),
+        #content .corner-entry-tags .corner-entry-tag:not(.is-active) {
+          --link-highlight-color: transparent;
+        }
+
         #content .section-list-default > article + .posts-year-separator {
           margin-top: 1.5rem !important;
         }
@@ -493,6 +546,7 @@
       }
 
       .site-sticky-nav nav a {
+        font-family: var(--site-font-sans);
         font-weight: 600;
       }
 
@@ -1414,14 +1468,19 @@
 
         .site-mobile-menu-pigeon {
           position: absolute;
+          z-index: 2;
           top: 1.55rem;
           left: 1.25rem;
           width: min(55vw, calc(100% - 9rem), 19rem);
           height: auto;
           user-select: none;
+          pointer-events: auto;
+          touch-action: manipulation;
         }
 
         .site-mobile-menu-scroll {
+          position: relative;
+          z-index: 1;
           max-height: inherit;
           overflow-y: auto;
           -webkit-overflow-scrolling: touch;
@@ -2510,7 +2569,8 @@
 
         applyBirdState();
         document.querySelectorAll("[data-tree-art-toggle], [data-footer-bird-toggle]").forEach(function(button) {
-          button.addEventListener("click", function() {
+          button.addEventListener("click", function(event) {
+            event.stopPropagation();
             showPigeon = !showPigeon;
             try { sessionStorage.setItem(storageKey, String(showPigeon)); } catch (error) {}
             applyBirdState();
@@ -3502,8 +3562,6 @@
       document.addEventListener("DOMContentLoaded", function() {
         const paragraphSelector = "#content p, #content li";
         const cjkCharRe = /^[\u3040-\u30ff\u3400-\u9fff\uf900-\ufaff\uff66-\uff9f]$/;
-        const latinDigitRe = /^[A-Za-z0-9]$/;
-        const closingQuoteLikeRe = /^[\"'“”‘’「」『』【】《》（）()\[\]]$/;
         const endingPuncRe = /^[，。！？；：、,.!?;:）)」』】》”’…]$/;
 
         const getLineBands = function(el) {
@@ -3586,57 +3644,34 @@
         };
 
         const getWidowPattern = function(el) {
-          const lines = getLineBands(el);
-          if (lines.length < 2) return null;
-          const paragraphChars = getParagraphChars(el);
-          if (paragraphChars.length < 2) return null;
-          const lastLineChars = getLastLineChars(paragraphChars);
-          if (lastLineChars.length === 1) {
-            const onlyChar = lastLineChars[0].ch;
-            if (endingPuncRe.test(onlyChar)) {
-              return { type: "punct_only", paragraphChars: paragraphChars };
-            }
-            return null;
-          }
-
-          if (lastLineChars.length !== 2) return null;
-          const firstChar = lastLineChars[0].ch;
-          const secondChar = lastLineChars[1].ch;
-          const firstIsLetterLike = cjkCharRe.test(firstChar) || latinDigitRe.test(firstChar) || closingQuoteLikeRe.test(firstChar);
-          if (firstIsLetterLike && endingPuncRe.test(secondChar)) {
-            return { type: "char_plus_punc", paragraphChars: paragraphChars };
-          }
-          return null;
-        };
-
-        const insertNoBreakByPattern = function(pattern) {
-          if (!pattern || !pattern.paragraphChars) return;
-          const paragraphChars = pattern.paragraphChars;
-          let anchorIndex = -1;
-          if (pattern.type === "punct_only") {
-            anchorIndex = paragraphChars.length - 2;
-          } else if (pattern.type === "char_plus_punc") {
-            anchorIndex = paragraphChars.length - 3;
-          }
-          if (anchorIndex < 0 || anchorIndex >= paragraphChars.length) return;
-          const anchor = paragraphChars[anchorIndex];
-          if (!anchor || !anchor.node) return;
-          const text = anchor.node.nodeValue || "";
-          const pos = anchor.offset + 1;
-          anchor.node.nodeValue = text.slice(0, pos) + "\u2060" + text.slice(pos);
+          if (getLineBands(el).length < 2) return null;
+          const chars = getParagraphChars(el);
+          const lastLine = getLastLineChars(chars);
+          const letters = lastLine.filter(function(item) {
+            return !endingPuncRe.test(item.ch);
+          });
+          if (letters.length !== 1 || !cjkCharRe.test(letters[0].ch)) return null;
+          const lonelyIndex = chars.indexOf(letters[0]);
+          if (lonelyIndex < 1) return null;
+          const previous = chars[lonelyIndex - 1];
+          // 只连接末尾相邻的两个汉字，不跨过空格或作者指定的换行。
+          if (!cjkCharRe.test(previous.ch)) return null;
+          const between = document.createRange();
+          between.setStart(previous.node, previous.offset + 1);
+          between.setEnd(letters[0].node, letters[0].offset);
+          const fragment = between.cloneContents();
+          if (fragment.querySelector("br") || /\s/.test(between.toString())) return null;
+          return previous;
         };
 
         const tuneParagraph = function(el) {
-          if (!el) return;
-          if (el.closest(".single-jump-panel")) return;
+          if (!el || el.closest(".single-jump-panel, pre, code")) return;
           normalizeParagraph(el);
-          // 左对齐使用普通换行，不再插入防止末行孤字的连接字符。
-          if (window.getComputedStyle(el).textAlign !== "justify") return;
-          for (let i = 0; i < 3; i += 1) {
-            const pattern = getWidowPattern(el);
-            if (!pattern) break;
-            insertNoBreakByPattern(pattern);
-          }
+          const anchor = getWidowPattern(el);
+          if (!anchor) return;
+          const text = anchor.node.nodeValue || "";
+          const pos = anchor.offset + 1;
+          anchor.node.nodeValue = text.slice(0, pos) + "\u2060" + text.slice(pos);
         };
 
         const applyWidowControl = function() {
@@ -3655,6 +3690,8 @@
         applyWidowControl();
         window.addEventListener("load", applyWidowControl);
         window.addEventListener("resize", scheduleApply);
+        document.addEventListener("toggle", scheduleApply, true);
+        if (document.fonts) document.fonts.ready.then(scheduleApply);
       });
     </script>
 

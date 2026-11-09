@@ -154,7 +154,9 @@
 
       const setActiveTagButton = function(tag) {
         tagButtons.forEach(function(button) {
-          button.classList.toggle("is-active", (button.getAttribute("data-corner-tag") || "all") === tag);
+          const isActive = (button.getAttribute("data-corner-tag") || "all") === tag;
+          button.classList.toggle("is-active", isActive);
+          button.setAttribute("aria-pressed", String(isActive));
         });
       };
 
