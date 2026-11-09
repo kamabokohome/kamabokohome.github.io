@@ -1,6 +1,8 @@
 {{ $tree1 := resources.Get "home/tree1.jpg" }}
 {{ $titleBack := resources.Get "home/title_back.jpg" }}
 {{ $titleFront := resources.Get "home/title_front.png" }}
+{{ $titleCN := resources.Get "img/title_cn.png" }}
+{{ $titleEN := resources.Get "img/title_en.png" }}
 {{ $tree2 := resources.Get "home/tree2.jpg" }}
 {{ $house4 := resources.Get "home/house4.jpg" }}
 {{ $house1 := resources.Get "home/house1.jpg" }}
@@ -45,7 +47,11 @@
 
 {{ if eq (len $missing) 0 }}
 <figure class="mb-5 home-ripple-stage">
-  <div class="home-ripple-canvas">
+  <div class="home-ripple-canvas" style="background-image: url('{{ $completePigeonBack.RelPermalink }}');">
+    <div class="home-square-title">
+      <img class="home-square-title-en" src="{{ $titleEN.RelPermalink }}" alt="Kamaboko’s Home" width="{{ $titleEN.Width }}" height="{{ $titleEN.Height }}" loading="eager" />
+      <img class="home-square-title-cn" src="{{ $titleCN.RelPermalink }}" alt="鱼糕的树屋" width="{{ $titleCN.Width }}" height="{{ $titleCN.Height }}" loading="eager" />
+    </div>
     <div class="home-ripple-gapfill" aria-hidden="true"></div>
     <div class="home-ripple-flow" aria-hidden="true"></div>
     <div class="home-ripple-grid">
@@ -104,7 +110,9 @@
     <img class="home-ripple-print-back" src="{{ $completePigeonBack.RelPermalink }}" alt="home main visual back" width="{{ $completePigeonBack.Width }}" height="{{ $completePigeonBack.Height }}" loading="eager" />
     <img class="home-ripple-print-front" src="{{ $completePigeonFront.RelPermalink }}" alt="home main visual front" width="{{ $completePigeonFront.Width }}" height="{{ $completePigeonFront.Height }}" loading="eager" />
   </div>
+  {{ partial "header/home-nav" .Page }}
 </figure>
+{{ partial "header/search-modal" .Page }}
 
 <style>
   .home-ripple-stage {
@@ -139,29 +147,75 @@
 
   @media (min-width: 912px) {
     body.is-home .home-ripple-stage {
-      width: 100vw;
-      min-width: 100vw;
-      max-width: none;
+      width: 100%;
+      min-width: 0;
+      max-width: 100%;
       min-height: 0;
       position: relative;
-      left: 50%;
-      right: 50%;
-      margin-left: -50vw;
-      margin-right: -50vw;
+      left: auto;
+      right: auto;
+      margin-left: 0;
+      margin-right: 0;
     }
 
     body.is-home .home-ripple-stage .home-ripple-canvas {
-      width: 100vw;
-      min-width: 100vw;
-      max-width: none;
+      width: 100%;
+      min-width: 0;
+      max-width: 100%;
       height: auto;
-      aspect-ratio: 16 / 9;
+      aspect-ratio: 1 / 1;
+      background-size: cover;
+      background-position: center;
     }
 
     body.is-home .home-ripple-stage .home-ripple-grid {
       inset: 0;
-      row-gap: 0;
-      column-gap: 0;
+      display: block;
+    }
+
+    body.is-home .home-ripple-stage .home-ripple-tile:not([data-tile-index="6"]),
+    body.is-home .home-ripple-stage .home-ripple-water,
+    body.is-home .home-ripple-stage .home-ripple-gapfill,
+    body.is-home .home-ripple-stage .home-ripple-flow,
+    body.is-home .home-ripple-stage .home-ripple-canvas::before {
+      display: none;
+    }
+
+    body.is-home .home-ripple-stage .home-square-title {
+      position: absolute;
+      left: 24.5%;
+      top: 5%;
+      width: 51%;
+      z-index: 4;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.85rem;
+      pointer-events: none;
+    }
+
+    body.is-home .home-ripple-stage .home-square-title img {
+      display: block;
+      height: auto;
+      margin: 0;
+      border-radius: 0;
+      box-shadow: none;
+    }
+
+    body.is-home .home-ripple-stage .home-square-title-en {
+      width: 44%;
+    }
+
+    body.is-home .home-ripple-stage .home-square-title-cn {
+      width: 100%;
+    }
+
+    body.is-home .home-ripple-stage .home-ripple-tile[data-tile-index="6"] {
+      position: absolute;
+      left: 8%;
+      top: 27%;
+      width: 45%;
+      height: 33.75%;
     }
 
     body.is-home .home-ripple-stage .home-ripple-tile {
@@ -196,6 +250,10 @@
     background: transparent;
     overflow: hidden;
     z-index: 1;
+  }
+
+  .home-square-title {
+    display: none;
   }
 
   .home-ripple-gapfill,
@@ -478,6 +536,7 @@
   document.addEventListener("DOMContentLoaded", function () {
     const NARROW_MAX_WIDTH = 911;
     const DESKTOP_SHARED_RIPPLE_ENABLED = false;
+    const DESKTOP_TILE_RIPPLE_ENABLED = false;
     const isNarrowViewport = function () {
       return !!(window.matchMedia && window.matchMedia("(max-width: " + NARROW_MAX_WIDTH + "px)").matches);
     };
@@ -1293,11 +1352,7 @@
 
       pigeon.addEventListener("pointerup", function (event) {
         if (!dragState || dragState.pointerId !== event.pointerId) return;
-        const shouldShuffle = !dragState.moved;
         finishPigeonDrag(event);
-        if (shouldShuffle) {
-          runRandomAdjacentSwap();
-        }
       });
 
       pigeon.addEventListener("pointercancel", function (event) {
@@ -1332,7 +1387,7 @@
     };
 
     const ensureDesktopTileRipples = function () {
-      if (!hasRipples || desktopRippleWaters.length === 0) return;
+      if (!DESKTOP_TILE_RIPPLE_ENABLED || !hasRipples || desktopRippleWaters.length === 0) return;
       const desktopRippleTuning = {
         dropRadius: 26,
         perturbance: 0.078,

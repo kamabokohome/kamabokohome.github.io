@@ -35,7 +35,7 @@
     {{- $isSectionActive := and (ne .Identifier "home") (eq .Identifier $currentPage.Section) -}}
     <li class="nav-menu-item{{ if or (eq .Identifier "collection") (eq .Identifier "posts") }} nav-with-dropdown{{ end }}">
       <a href="{{ .URL | relLangURL }}" class="nav-link-button {{ if or $isHomeActive $isDirectActive $isSectionActive }}active{{ end }}">
-        <span class="nav-link-label">{{ .Name }}</span>
+        <span class="nav-link-label">{{ .Name }}{{ if or (eq .Identifier "collection") (eq .Identifier "posts") }}<span class="nav-submenu-connector" aria-hidden="true"></span>{{ end }}</span>
       </a>
       {{ if eq .Identifier "collection" }}
         <ul class="nav-submenu" aria-label="Collection projects">
@@ -115,13 +115,5 @@
       </ul>
     </div>
   </div>
-  <div class="site-search-modal" id="site-search-modal" data-index-url="{{ "index.json" | relURL }}" hidden>
-    <div class="site-search-backdrop" data-site-search-close></div>
-    <section class="site-search-dialog" role="dialog" aria-modal="true" aria-label="Site search">
-      <div class="site-search-input-wrap">
-        <input id="site-search-input" class="site-search-input" type="search" placeholder="在意的关键词是……" autocomplete="off">
-      </div>
-      <ul id="site-search-results" class="site-search-results" aria-label="Search results"></ul>
-    </section>
-  </div>
+  {{ partial "header/search-modal" . }}
 </nav>
