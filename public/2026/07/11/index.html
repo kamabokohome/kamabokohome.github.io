@@ -48,11 +48,14 @@ plenty「ってかさあ」 - YouTube&#160;&#x21a9;&#xfe0e;"
 
   
 
-<link rel="stylesheet" href="/css/app.css?v=1794215896" />
+<link rel="stylesheet" href="/css/app.css?v=1795219619" />
 <style>
       html {
         scrollbar-gutter: stable;
         --site-content-max-width: 50rem;
+        --site-side-space: max(11rem, calc((100vw - var(--site-content-max-width)) / 2));
+        --site-sidebar-width: 8.5rem;
+        --site-art-width: calc(var(--site-side-space) * 0.4);
         --site-sticky-bar-height: 0px;
         --site-nav-hover-bg: rgba(229, 231, 235, 0.72);
         --site-nav-hover-bg-dark: rgba(75, 85, 99, 0.62);
@@ -133,6 +136,87 @@ plenty「ってかさあ」 - YouTube&#160;&#x21a9;&#xfe0e;"
         margin: 0 auto;
         padding: 0 0.625rem;
         z-index: 51;
+      }
+
+      .site-sidebar-title {
+        display: none;
+      }
+
+      .site-desktop-art {
+        display: none;
+      }
+
+      .site-tree-art-toggle {
+        padding: 0;
+        border: 0;
+        background: transparent;
+        cursor: pointer;
+        line-height: 0;
+      }
+
+      .site-tree-art-toggle > img {
+        display: block;
+        width: 100%;
+        height: auto;
+        pointer-events: none;
+      }
+
+      .site-tree-art-toggle > .site-tree-art-pigeon-layer {
+        position: absolute;
+        left: 3%;
+        top: 19%;
+        width: 58%;
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .site-tree-art-toggle[aria-pressed="true"] > .site-tree-art-pigeon-layer {
+        opacity: 1;
+      }
+
+      .site-tree-art-toggle:focus-visible {
+        outline: 2px solid currentColor;
+        outline-offset: 4px;
+      }
+
+      .site-footer-bird-slot {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 7rem;
+        height: 5.25rem;
+        margin: 0 auto;
+        padding: 0;
+        border: 0;
+        background: transparent;
+      }
+
+      button.site-footer-bird-slot {
+        cursor: pointer;
+      }
+
+      .site-footer-bird {
+        display: block;
+        width: 2.75rem;
+        height: auto;
+        margin: 0;
+        transform: translateY(0.5rem);
+      }
+
+      .site-footer-bird[data-bird="pigeon"] {
+        width: 7rem;
+      }
+
+      @media (min-width: 1024px) {
+        .site-desktop-art {
+          display: block;
+          position: fixed;
+          top: 1.75rem;
+          right: calc(var(--site-side-space) * 0.4 - var(--site-art-width) / 2);
+          width: var(--site-art-width);
+          height: auto;
+          user-select: none;
+        }
       }
 
       .site-sticky-side-titles {
@@ -220,7 +304,170 @@ plenty「ってかさあ」 - YouTube&#160;&#x21a9;&#xfe0e;"
         display: none;
       }
 
-      @media (max-width: 911px) {
+      body.page-post-single #content > article {
+        padding-top: 0.5rem;
+      }
+
+      body.page-post-single #content > article > header {
+        margin-bottom: 0.75em;
+      }
+
+      #content .collection-detail-header {
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: flex-end;
+        column-gap: 1rem;
+        margin-bottom: calc(0px - var(--collection-title-bottom-space, 0px));
+      }
+
+      #content article:has(> .collection-detail-header) {
+        row-gap: 1.25rem;
+      }
+
+      #content .collection-detail-header > .meta {
+        flex-basis: 100%;
+      }
+
+      #content .collection-detail-header > .collection-detail-layout-switch {
+        margin-left: auto;
+        margin-top: 0;
+        margin-bottom: var(--collection-title-bottom-space, 0px);
+      }
+
+      #content .collection-detail-header > .collection-detail-title-image-wrap {
+        width: min(32%, 16rem);
+      }
+
+      #content .collection-detail-layout-switch .collection-layout-btn {
+        font-size: 0.9rem;
+        padding: 0.4rem 0.45rem 0;
+        opacity: 0.45;
+        transition: opacity 130ms ease;
+      }
+
+      #content .collection-detail-layout-switch .collection-layout-btn:is(.is-active, :hover, :focus-visible) {
+        opacity: 1;
+      }
+
+      #content .collection-detail-layout-switch .collection-layout-label {
+        padding-bottom: 0.12em;
+      }
+
+      #content .collection-detail-layout-switch .collection-layout-label::before {
+        inset: auto -0.05em 0;
+        height: 0.36em;
+      }
+
+      #content .collection-detail-layout-switch .collection-layout-separator {
+        font-size: 0.85rem;
+      }
+
+      #content .collection-detail-layout-switch .collection-layout-collage-btn {
+        font-size: 0.82rem;
+      }
+
+      #content .corner-tag-switch,
+      #content .corner-entry-tags {
+        column-gap: 0.75rem;
+        row-gap: 0.4rem;
+      }
+
+      #content .corner-tag-switch .collection-layout-btn,
+      #content .corner-entry-tag {
+        padding: 0.32rem 0.5rem;
+        font-size: 0.78rem;
+        font-weight: 500;
+        opacity: 1;
+        color: #9ca3af;
+        transition: color 130ms ease;
+      }
+
+      #content .corner-tag-switch .collection-layout-btn.is-active,
+      #content .corner-entry-tag.is-active {
+        color: #374151;
+      }
+
+      html.dark #content .corner-tag-switch .collection-layout-btn,
+      html.dark #content .corner-entry-tag {
+        color: #9ca3af;
+      }
+
+      html.dark #content .corner-tag-switch .collection-layout-btn.is-active,
+      html.dark #content .corner-entry-tag.is-active {
+        color: #e5e7eb;
+      }
+
+      #content .corner-tag-switch .collection-layout-label,
+      #content .corner-entry-tag .collection-layout-label {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.36em;
+        background-image: none;
+      }
+
+      #content .corner-tag-switch .collection-layout-separator,
+      #content .corner-entry-tag .collection-layout-separator {
+        left: -0.375rem;
+      }
+
+      #content .corner-tag-switch .collection-layout-label::before,
+      #content .corner-entry-tag .collection-layout-label::before {
+        content: none;
+      }
+
+      @media (hover: hover) and (pointer: fine) {
+        #content .corner-tag-switch .collection-layout-btn:hover,
+        #content .corner-entry-tag:hover {
+          color: #374151;
+        }
+
+        html.dark #content .corner-tag-switch .collection-layout-btn:hover,
+        html.dark #content .corner-entry-tag:hover {
+          color: #e5e7eb;
+        }
+
+        #content .corner-tag-switch .collection-layout-btn:hover .corner-tag-dot,
+        #content .corner-entry-tag:hover .corner-tag-dot {
+          transform: scale(1);
+        }
+      }
+
+      #content .corner-tag-switch .is-active .corner-tag-dot,
+      #content .corner-entry-tag.is-active .corner-tag-dot {
+        transform: scale(1);
+      }
+
+      #content .corner-tag-dot {
+        display: inline-block;
+        flex: 0 0 0.84em;
+        width: 0.84em;
+        height: 0.84em;
+        margin: 0;
+        border-radius: 50%;
+        transform: scale(0.5);
+        transition: transform 130ms ease;
+        background-color: rgba(var(--banner-link-rgb), calc(0.92 * var(--banner-link-opacity-effective-scale)));
+      }
+
+      @media (max-width: 1023px) {
+        #content .corner-tag-switch .collection-layout-btn:not(.is-active),
+        #content .corner-entry-tags .corner-entry-tag:not(.is-active) {
+          --link-highlight-color: transparent;
+        }
+
+        #content .section-list-default > article + .posts-year-separator {
+          margin-top: 1.5rem !important;
+        }
+
+        #content .collection-detail-header > .collection-detail-title-image-wrap {
+          width: min(38%, 16rem);
+        }
+
+        body.page-post-single #content > article {
+          padding-top: 0.5rem;
+        }
+
         #content .meta .post-meta-time-full {
           display: none;
         }
@@ -334,6 +581,10 @@ plenty「ってかさあ」 - YouTube&#160;&#x21a9;&#xfe0e;"
         position: relative;
       }
 
+      .nav-submenu-connector {
+        display: none;
+      }
+
       .site-sticky-nav nav li.nav-with-dropdown::after {
         content: "";
         position: absolute;
@@ -345,6 +596,7 @@ plenty「ってかさあ」 - YouTube&#160;&#x21a9;&#xfe0e;"
       }
 
       .site-sticky-nav nav a {
+        font-family: var(--site-font-sans);
         font-weight: 600;
       }
 
@@ -477,6 +729,8 @@ plenty「ってかさあ」 - YouTube&#160;&#x21a9;&#xfe0e;"
         background: transparent;
       }
 
+      #content .home-nav-label,
+      #content .message-submit-label,
       .site-sticky-nav nav li.nav-menu-item > a.nav-link-button > .nav-link-label {
         --link-highlight-color: rgba(var(--banner-link-rgb), 0);
         --nav-link-highlight-width: 100%;
@@ -501,6 +755,10 @@ plenty「ってかさあ」 - YouTube&#160;&#x21a9;&#xfe0e;"
         z-index: 0;
       }
 
+      #content .home-nav-label::before,
+      #content .message-submit-label::before,
+      #content .home-nav-label::after,
+      #content .message-submit-label::after,
       .site-sticky-nav nav li.nav-menu-item > a.nav-link-button > .nav-link-label::before,
       .site-sticky-nav nav li.nav-menu-item > a.nav-link-button > .nav-link-label::after {
         content: "";
@@ -518,11 +776,15 @@ plenty「ってかさあ」 - YouTube&#160;&#x21a9;&#xfe0e;"
         pointer-events: none;
       }
 
+      #content .home-nav-label::before,
+      #content .message-submit-label::before,
       .site-sticky-nav nav li.nav-menu-item > a.nav-link-button > .nav-link-label::before {
         right: calc(100% + 0.62rem);
         transform: translateY(-50%) rotate(-14deg) scale(0.82);
       }
 
+      #content .home-nav-label::after,
+      #content .message-submit-label::after,
       .site-sticky-nav nav li.nav-menu-item > a.nav-link-button > .nav-link-label::after {
         left: calc(100% + 0.38rem);
         transform: translateY(-50%) rotate(14deg) scale(0.82);
@@ -532,6 +794,10 @@ plenty「ってかさあ」 - YouTube&#160;&#x21a9;&#xfe0e;"
         --link-highlight-color: rgba(var(--banner-link-rgb), calc(0.74 * var(--banner-link-opacity-effective-scale)));
       }
 
+      #content .home-nav-link:hover > .home-nav-label,
+      #content .home-nav-link:focus-visible > .home-nav-label,
+      #content .message-submit-button:enabled:hover > .message-submit-label,
+      #content .message-submit-button:enabled:focus-visible > .message-submit-label,
       .site-sticky-nav nav li.nav-menu-item > a.nav-link-button:hover > .nav-link-label,
       .site-sticky-nav nav li.nav-menu-item > a.nav-link-button:focus-visible > .nav-link-label {
         --link-highlight-color: rgba(var(--banner-link-rgb), calc(0.74 * var(--banner-link-opacity-effective-scale)));
@@ -558,6 +824,10 @@ plenty「ってかさあ」 - YouTube&#160;&#x21a9;&#xfe0e;"
         --link-highlight-color: rgba(var(--banner-link-rgb), calc(0.74 * var(--banner-link-opacity-effective-scale)));
       }
 
+      #content .home-nav-link:hover > .home-nav-label::before,
+      #content .home-nav-link:focus-visible > .home-nav-label::before,
+      #content .message-submit-button:enabled:hover > .message-submit-label::before,
+      #content .message-submit-button:enabled:focus-visible > .message-submit-label::before,
       .site-sticky-nav nav li.nav-menu-item > a.nav-link-button:hover > .nav-link-label::before,
       .site-sticky-nav nav li.nav-menu-item > a.nav-link-button:hover > .nav-link-label::after,
       .site-sticky-nav nav li.nav-menu-item > a.nav-link-button:focus-visible > .nav-link-label::before,
@@ -565,6 +835,10 @@ plenty「ってかさあ」 - YouTube&#160;&#x21a9;&#xfe0e;"
         transform: translateY(-50%) rotate(-14deg) scale(1);
       }
 
+      #content .home-nav-link:hover > .home-nav-label::after,
+      #content .home-nav-link:focus-visible > .home-nav-label::after,
+      #content .message-submit-button:enabled:hover > .message-submit-label::after,
+      #content .message-submit-button:enabled:focus-visible > .message-submit-label::after,
       .site-sticky-nav nav li.nav-menu-item > a.nav-link-button:hover > .nav-link-label::after,
       .site-sticky-nav nav li.nav-menu-item > a.nav-link-button:focus-visible > .nav-link-label::after {
         transform: translateY(-50%) rotate(14deg) scale(1);
@@ -725,6 +999,12 @@ plenty「ってかさあ」 - YouTube&#160;&#x21a9;&#xfe0e;"
         display: none !important;
       }
 
+      html.is-search-open,
+      html.is-search-open body {
+        overflow: hidden;
+        overscroll-behavior: none;
+      }
+
       .site-search-modal {
         position: fixed;
         inset: 0;
@@ -741,29 +1021,30 @@ plenty「ってかさあ」 - YouTube&#160;&#x21a9;&#xfe0e;"
       .site-search-backdrop {
         position: absolute;
         inset: 0;
-        background: rgba(0, 0, 0, 0.2);
-        backdrop-filter: blur(2px);
-        -webkit-backdrop-filter: blur(2px);
+        background: rgba(255, 255, 255, 0.86);
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
+      }
+
+      html.dark .site-search-backdrop {
+        background: rgba(38, 38, 38, 0.86);
       }
 
       .site-search-dialog {
         position: relative;
+        text-align: left;
         width: min(44rem, 100%);
         max-height: calc(100vh - var(--site-sticky-bar-height, 0px) - 1.34rem);
         overflow: hidden;
-        border-radius: 0.72rem;
-        background-color: rgba(250, 250, 250, 0.88);
-        backdrop-filter: blur(11px);
-        -webkit-backdrop-filter: blur(11px);
-        box-shadow: 0 5px 14px rgba(0, 0, 0, 0.1);
+        border-radius: 0;
+        background: transparent;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        box-shadow: none;
         border: none;
         display: flex;
         flex-direction: column;
-      }
-
-      html.dark .site-search-dialog {
-        background-color: rgba(47, 47, 47, 0.72);
-        box-shadow: 0 5px 14px rgba(0, 0, 0, 0.3);
+        min-height: 0;
       }
 
       .site-search-close {
@@ -794,6 +1075,7 @@ plenty「ってかさあ」 - YouTube&#160;&#x21a9;&#xfe0e;"
       }
 
       .site-search-input-wrap {
+        flex: 0 0 auto;
         padding: 0.9rem 0.9rem 0.54rem;
       }
 
@@ -804,14 +1086,15 @@ plenty「ってかさあ」 - YouTube&#160;&#x21a9;&#xfe0e;"
         font-size: 0.9rem;
         line-height: 1.4;
         border: none;
-        border-radius: 0.56rem;
+        border-radius: 0;
+        border-bottom: 1px solid var(--site-field-line);
         padding: 0.56rem 0.68rem;
-        background: rgba(255, 255, 255, 0.35);
+        background: transparent;
         color: rgb(55 65 81 / 1);
       }
 
       html.dark .site-search-input {
-        background: rgba(0, 0, 0, 0.22);
+        background: transparent;
         color: rgb(229 231 235 / 1);
       }
 
@@ -823,14 +1106,19 @@ plenty「ってかさあ」 - YouTube&#160;&#x21a9;&#xfe0e;"
       .site-search-input:focus-visible {
         outline: none;
         box-shadow: none;
+        border-bottom-color: var(--site-field-line-focus);
       }
 
       .site-search-results {
+        flex: 1 1 auto;
         margin: 0;
         padding: 0 0.45rem 0.66rem 1.1rem;
         list-style: none;
         display: block;
         overflow-y: auto;
+        min-height: 0;
+        overscroll-behavior: contain;
+        -webkit-overflow-scrolling: touch;
       }
 
       .site-sticky-nav nav ul.site-search-results {
@@ -844,12 +1132,16 @@ plenty「ってかさあ」 - YouTube&#160;&#x21a9;&#xfe0e;"
       .site-search-results > li {
         display: block;
         width: 100%;
+        padding: 0.46rem 0.48rem 0.46rem 1.46rem;
       }
 
-      .site-search-results a {
-        display: block;
-        padding: 0.46rem 0.48rem 0.46rem 1.46rem;
-        border-radius: 0.5rem;
+      #site-search-results a {
+        display: inline;
+        padding: 0;
+        color: inherit;
+        font: inherit;
+        border-radius: 0;
+        background: transparent;
         text-decoration: none;
       }
 
@@ -862,13 +1154,15 @@ plenty「ってかさあ」 - YouTube&#160;&#x21a9;&#xfe0e;"
       }
 
       .site-search-result-preview {
-        display: block;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
         margin-top: 0.16rem;
         font-size: 0.72rem;
         line-height: 1.46;
         font-weight: 500;
         color: rgb(107 114 128 / 1);
-        white-space: nowrap;
+        white-space: normal;
         overflow: hidden;
         text-overflow: ellipsis;
       }
@@ -876,10 +1170,14 @@ plenty「ってかさあ」 - YouTube&#160;&#x21a9;&#xfe0e;"
       .site-search-result-title strong,
       .site-search-result-preview strong {
         font-weight: 800;
-        color: rgb(31 41 55 / 1);
-        background: rgba(250, 204, 21, 0.52);
-        border-radius: 0.16rem;
-        padding: 0 0.12rem;
+        color: inherit;
+        background: transparent;
+      }
+
+      .site-search-result-preview strong {
+        background-color: rgba(var(--banner-link-rgb), calc(0.42 * var(--banner-link-opacity-effective-scale)));
+        padding: 0 0.08em;
+        border-radius: 0.08em;
       }
 
       .site-search-result-meta {
@@ -891,14 +1189,25 @@ plenty「ってかさあ」 - YouTube&#160;&#x21a9;&#xfe0e;"
         color: rgb(156 163 175 / 1);
       }
 
-      .site-search-results a:hover,
-      .site-search-results a:focus-visible {
-        background: var(--site-hover-surface);
+      .site-search-result-title-text {
+        --search-title-highlight: transparent;
+        background-image: linear-gradient(to top, var(--search-title-highlight) 0%, var(--search-title-highlight) 36%, transparent 36%);
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        background-position: 50% 86%;
+        box-decoration-break: clone;
+        -webkit-box-decoration-break: clone;
       }
 
-      html.dark .site-search-results a:hover,
-      html.dark .site-search-results a:focus-visible {
-        background: rgba(123, 135, 152, 0.25);
+      #site-search-results a:hover,
+      #site-search-results a:focus-visible {
+        background: transparent;
+        outline: none;
+      }
+
+      #site-search-results a:hover .site-search-result-title-text,
+      #site-search-results a:focus-visible .site-search-result-title-text {
+        --search-title-highlight: rgba(var(--banner-link-rgb), calc(0.74 * var(--banner-link-opacity-effective-scale)));
       }
 
       html.dark .site-search-result-title {
@@ -909,17 +1218,75 @@ plenty「ってかさあ」 - YouTube&#160;&#x21a9;&#xfe0e;"
         color: rgb(156 163 175 / 1);
       }
 
-      html.dark .site-search-result-title strong,
-      html.dark .site-search-result-preview strong {
-        color: rgb(243 244 246 / 1);
-        background: rgba(250, 204, 21, 0.4);
+      body.is-mobile-menu-open::after,
+      body:has(> .site-sticky-bar.is-submenu-open)::after {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: 45;
+        background: transparent;
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
       }
 
-      @media (max-width: 911px) {
+      .site-page-surface {
+        display: flex;
+        flex-direction: column;
+        flex: 1 1 auto;
+        min-width: 0;
+      }
+
+      #content .message-board {
+        padding-top: 1.3rem;
+      }
+
+      @media (min-width: 1024px) {
+        body:not(.is-home) #content {
+          padding-top: 0.75rem;
+        }
+
+        #content > .content:first-child {
+          padding-top: 1rem !important;
+        }
+      }
+
+      #content,
+      #content p,
+      #content li,
+      #content blockquote {
+        text-align: left;
+      }
+
+      #content p,
+      #content li,
+      #content blockquote {
+        text-wrap: wrap;
+        line-break: auto;
+        hanging-punctuation: none;
+      }
+
+      @media (max-width: 1023px) {
+         
+        body.is-mobile-menu-open .site-page-surface {
+          filter: blur(6px);
+        }
+
+         
+        body.is-mobile-menu-open::after,
+        body:has(> .site-sticky-bar.is-submenu-open)::after {
+          backdrop-filter: none;
+          -webkit-backdrop-filter: none;
+        }
+
+        .site-sticky-bar.is-stuck .site-sticky-bg,
+        .site-sticky-bar.is-submenu-open .site-sticky-bg {
+          display: none;
+        }
+
         .site-sticky-inner {
           padding-left: 0.25rem;
           padding-right: 0.25rem;
-          min-height: 2.38rem;
+          min-height: 3rem;
         }
 
         .site-sticky-nav {
@@ -958,6 +1325,11 @@ plenty「ってかさあ」 - YouTube&#160;&#x21a9;&#xfe0e;"
           flex: 0 0 auto;
         }
 
+        body:not(.is-home) .site-sticky-bar.is-stuck:not(.is-submenu-open) .site-sticky-nav nav .site-mobile-home-item,
+        body:not(.is-home) .site-sticky-bar.is-stuck:not(.is-submenu-open) .site-sticky-nav nav .nav-theme-item .toggle-theme {
+          display: none;
+        }
+
         body.is-home .site-sticky-bar:not(.is-submenu-open) .site-sticky-nav nav .site-mobile-home-item {
           display: none;
         }
@@ -978,6 +1350,16 @@ plenty「ってかさあ」 - YouTube&#160;&#x21a9;&#xfe0e;"
           border-radius: 0.44rem;
         }
 
+        .site-mobile-home-link,
+        .site-mobile-menu-toggle {
+          position: relative;
+          top: 0.5rem;
+        }
+
+        .site-mobile-menu-toggle {
+          top: 0.3rem;
+        }
+
         .site-sticky-nav nav .site-mobile-home-link:hover,
         .site-sticky-nav nav .site-mobile-home-link:focus-visible {
           background: transparent;
@@ -989,7 +1371,7 @@ plenty「ってかさあ」 - YouTube&#160;&#x21a9;&#xfe0e;"
         }
 
         .site-mobile-home-title {
-          height: max(18px, min(30px, calc(var(--sticky-bg-height, 0px) - 8px)));
+          height: max(18px, min(34px, calc(var(--sticky-bg-height, 0px) - 10px)));
           width: auto;
           opacity: 0.94;
           user-select: none;
@@ -1001,21 +1383,21 @@ plenty「ってかさあ」 - YouTube&#160;&#x21a9;&#xfe0e;"
         }
 
         .site-sticky-nav nav .nav-theme-item {
-          display: inline-flex;
+          display: none;
           align-items: center;
           margin-left: auto;
           flex: 0 0 auto;
         }
 
         .site-sticky-nav nav .nav-theme-item .toggle-theme {
-          width: 30.4px !important;
-          height: 30.4px !important;
+          width: 44px !important;
+          height: 44px !important;
           padding: 2px !important;
         }
 
         .site-sticky-nav nav .nav-theme-item .toggle-theme .theme-icon {
-          width: 1.6rem !important;
-          height: 1.6rem !important;
+          width: 2rem !important;
+          height: 2rem !important;
         }
 
         .site-sticky-nav nav .nav-tools-item {
@@ -1026,6 +1408,7 @@ plenty「ってかさあ」 - YouTube&#160;&#x21a9;&#xfe0e;"
           display: inline-flex;
           align-items: center;
           flex: 0 0 auto;
+          margin-left: auto;
         }
 
         body.is-home .site-sticky-bar:not(.is-stuck):not(.is-submenu-open) {
@@ -1072,8 +1455,8 @@ plenty「ってかさあ」 - YouTube&#160;&#x21a9;&#xfe0e;"
           background: transparent;
           border: none;
           border-radius: 0.6rem;
-          width: 30.4px;
-          height: 30.4px;
+          width: 44px;
+          height: 44px;
           padding: 0;
           display: inline-flex;
           align-items: center;
@@ -1083,8 +1466,8 @@ plenty「ってかさあ」 - YouTube&#160;&#x21a9;&#xfe0e;"
 
         .site-mobile-menu-icon {
           display: block;
-          width: 1.6rem;
-          height: 1.6rem;
+          width: 2rem;
+          height: 2rem;
           object-fit: contain;
           user-select: none;
           -webkit-user-drag: none;
@@ -1128,46 +1511,60 @@ plenty「ってかさあ」 - YouTube&#160;&#x21a9;&#xfe0e;"
           display: none !important;
         }
 
+        .site-mobile-menu-pigeon {
+          position: absolute;
+          z-index: 2;
+          top: 1.55rem;
+          left: 1.25rem;
+          width: min(55vw, calc(100% - 9rem), 19rem);
+          height: auto;
+          user-select: none;
+          pointer-events: auto;
+          touch-action: manipulation;
+        }
+
         .site-mobile-menu-scroll {
+          position: relative;
+          z-index: 1;
           max-height: inherit;
           overflow-y: auto;
           -webkit-overflow-scrolling: touch;
         }
 
-        .site-mobile-menu-list {
+        .site-sticky-nav nav .site-mobile-menu-list {
           margin: 0;
           padding: 0;
           list-style: none;
           display: flex;
           flex-direction: column;
           justify-content: flex-start;
-          align-items: center;
+          align-items: flex-end;
           gap: 0.32rem;
           width: auto;
           max-width: 100%;
           margin-left: auto;
           margin-right: auto;
-          text-align: center;
+          text-align: right;
         }
 
         .site-mobile-menu-line {
           margin: 0;
           width: fit-content;
           max-width: min(86vw, 24rem);
-          align-self: center;
+          align-self: flex-end;
           margin-left: auto;
-          margin-right: auto;
+          margin-right: 0;
         }
 
         .site-mobile-menu-line > a {
           display: inline-flex;
           align-items: center;
-          justify-content: center;
-          font-size: 0.92rem;
+          justify-content: flex-end;
+          font-size: 1.04rem;
           line-height: 1.5;
-          text-align: center;
+          text-align: right;
           text-decoration: none;
-          padding: 0.48rem 0.76rem;
+          padding: 0.56rem 0.88rem;
           border-radius: 0.62rem;
           white-space: nowrap;
           font-weight: 600;
@@ -1383,13 +1780,23 @@ plenty「ってかさあ」 - YouTube&#160;&#x21a9;&#xfe0e;"
         }
 
         .site-mobile-search-line {
+          display: flex;
+          align-items: center;
+          gap: 0.25rem;
           margin-top: 0.54rem;
           padding-top: 0.44rem;
-          border-top: 1px solid rgba(156, 163, 175, 0.28);
+          border-top: none;
         }
 
-        html.dark .site-mobile-search-line {
-          border-top-color: rgba(123, 135, 152, 0.42);
+        .site-mobile-search-line .site-theme-toggle {
+          width: 44px;
+          height: 44px;
+          padding: 0;
+        }
+
+        .site-mobile-search-line .site-theme-toggle .theme-icon {
+          width: 2rem;
+          height: 2rem;
         }
 
         .site-mobile-search-toggle {
@@ -1406,14 +1813,16 @@ plenty「ってかさあ」 - YouTube&#160;&#x21a9;&#xfe0e;"
           align-items: center;
           justify-content: center;
           width: fit-content;
+          min-width: 44px;
+          min-height: 44px;
           max-width: min(86vw, 24rem);
           margin-left: auto;
           margin-right: auto;
         }
 
         .site-mobile-search-toggle .site-search-icon {
-          width: 1.82rem;
-          height: 1.82rem;
+          width: 2rem;
+          height: 2rem;
         }
 
         .site-mobile-search-toggle:hover,
@@ -1427,26 +1836,19 @@ plenty「ってかさあ」 - YouTube&#160;&#x21a9;&#xfe0e;"
         }
 
         .site-search-modal {
-          padding: calc(var(--site-sticky-bar-height, 0px) + 0.2rem) 0.62rem 0.62rem;
+          top: var(--site-search-viewport-top, 0px);
+          bottom: auto;
+          height: 100vh;
+          height: var(--site-search-viewport-height, 100dvh);
+          padding: max(0.5rem, env(safe-area-inset-top, 0px)) 0.62rem max(0.75rem, env(safe-area-inset-bottom, 0px));
           align-items: flex-start;
           justify-content: center;
         }
 
         .site-search-dialog {
           width: 100%;
-          max-height: calc(100vh - var(--site-sticky-bar-height, 0px) - 0.82rem);
+          max-height: 100%;
           margin-top: 0;
-          border-radius: 0.62rem;
-          background-color: rgba(250, 250, 250, 0.88);
-          backdrop-filter: blur(11px);
-          -webkit-backdrop-filter: blur(11px);
-          box-shadow: 0 5px 14px rgba(0, 0, 0, 0.1);
-          border: none;
-        }
-
-        html.dark .site-search-dialog {
-          background-color: rgba(47, 47, 47, 0.72);
-          box-shadow: 0 5px 14px rgba(0, 0, 0, 0.3);
         }
 
         .site-search-close {
@@ -1463,11 +1865,12 @@ plenty「ってかさあ」 - YouTube&#160;&#x21a9;&#xfe0e;"
         }
 
         .site-search-results {
-          padding: 0 0.42rem 0.64rem 0.82rem;
+          padding: 0 0.62rem 0.64rem;
         }
 
-        .site-search-results a {
-          padding-left: 1.2rem;
+        #site-search-results > li {
+          padding-left: 0.68rem;
+          padding-right: 0.68rem;
         }
 
         .site-search-result-title {
@@ -1491,93 +1894,181 @@ plenty「ってかさあ」 - YouTube&#160;&#x21a9;&#xfe0e;"
         }
       }
 
-      @media (min-width: 912px) {
-        .site-sticky-nav {
-          width: 100%;
+      @media (min-width: 1024px) {
+        body:not(.is-home) {
+          width: calc(100vw - var(--site-side-space) * 2);
+          margin-left: auto;
+          margin-right: auto;
         }
 
+        .site-sticky-bar {
+          position: fixed;
+          top: calc(max(1rem, env(safe-area-inset-top, 0px)) + 0.375rem);
+          left: calc(var(--site-side-space) * 0.4 - var(--site-sidebar-width) / 2);
+          width: var(--site-sidebar-width);
+          margin: 0;
+          padding: 0;
+        }
+
+        .site-sticky-bar.is-stuck .site-sticky-bg,
+        .site-sticky-bar.is-submenu-open .site-sticky-bg,
+        .site-sticky-bar .site-sticky-side-titles {
+          display: none;
+        }
+
+        .site-sticky-inner {
+          min-height: 0;
+          max-width: none;
+          margin: 0;
+          padding: 0;
+          justify-content: flex-start;
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .site-sidebar-title {
+          display: block;
+          width: 100%;
+          padding: 0;
+          margin-bottom: 0.8rem;
+        }
+
+        .site-sidebar-title img {
+          display: block;
+          width: 100%;
+          height: auto;
+          opacity: 0.94;
+        }
+
+        html:not(.dark) .site-sidebar-title img {
+          filter: grayscale(1) brightness(0.38) contrast(1.08);
+        }
+
+        .site-sticky-nav,
         .site-sticky-nav nav {
           width: 100%;
         }
 
-        .site-sticky-nav nav ul {
+        .site-sticky-nav nav > ul {
           display: flex;
+          flex-direction: column;
+          align-items: stretch;
+          justify-content: flex-start;
+          gap: 0.5rem;
           width: 100%;
-          align-items: center;
-          justify-content: space-between;
-          gap: 0;
+          font-size: 1rem;
         }
 
-        .site-sticky-nav nav ul > li.nav-menu-item,
-        .site-sticky-nav nav ul > li.nav-tools-item {
-          flex: 1 1 0;
+        .site-sticky-nav nav > ul > li.nav-menu-item,
+        .site-sticky-nav nav > ul > li.nav-tools-item {
+          flex: 0 0 auto;
           display: flex;
           align-items: center;
+          justify-content: flex-start;
+        }
+
+        .site-sticky-nav nav li.nav-menu-item > a.nav-link-button {
+          width: 100%;
+          min-width: 0;
           justify-content: center;
         }
 
-        .site-sticky-nav .nav-tools-item {
+        .site-sticky-nav .nav-submenu-connector {
+          display: block;
+          position: absolute;
+          left: calc(100% + 1.25rem);
+          top: 50%;
+          width: calc(4rem - 50%);
+          height: 2px;
+          transform: translateY(-50%);
+          border-radius: 1px;
+          background: rgba(var(--banner-link-rgb), calc(0.74 * var(--banner-link-opacity-effective-scale)));
+          opacity: 0;
+          transition: opacity 130ms ease;
+          pointer-events: none;
+        }
+
+        .site-sticky-nav li.nav-with-dropdown:hover .nav-submenu-connector,
+        .site-sticky-nav li.nav-with-dropdown.is-open .nav-submenu-connector {
+          opacity: 1;
+        }
+
+        .site-sticky-nav nav li.nav-with-dropdown::after {
+          left: 100%;
+          top: 0;
+          width: 1.75rem;
+          height: 100%;
+          transform: none;
+        }
+
+        .site-sticky-nav nav ul.nav-submenu {
+          --submenu-stem-left: -1.5rem;
+          left: calc(100% + 1.5rem);
+          top: 0.21rem;
+          transform: none;
+          width: max-content;
+          align-items: flex-start;
+          justify-content: flex-start;
+          gap: 0.35rem;
+          padding: 0 0.5rem;
+          overflow: visible;
+        }
+
+        .site-sticky-nav nav ul.nav-submenu::before {
+          content: "";
+          position: absolute;
+          left: var(--submenu-stem-left);
+          top: 0.87rem;
+          bottom: 0.95rem;
+          width: 2px;
+          background: rgba(var(--banner-link-rgb), calc(0.74 * var(--banner-link-opacity-effective-scale)));
+          pointer-events: none;
+        }
+
+        .site-sticky-nav nav ul.nav-submenu > li {
+          position: relative;
+          display: flex;
+        }
+
+        .site-sticky-nav nav ul.nav-submenu > li:not(:first-child)::before {
+          content: "";
+          position: absolute;
+          left: calc(var(--submenu-stem-left) - 0.5rem);
+          top: calc(50% - 1px);
+          width: calc(-0.5rem - var(--submenu-stem-left));
+          height: 2px;
+          background: rgba(var(--banner-link-rgb), calc(0.74 * var(--banner-link-opacity-effective-scale)));
+          pointer-events: none;
+        }
+
+        .site-sticky-nav nav .nav-submenu a.nav-submenu-button {
+          font-size: 0.86rem;
+          justify-content: flex-start;
+          text-align: left;
+        }
+
+        .site-sticky-nav nav > ul > li.nav-tools-item {
+          margin-top: 0.75rem;
           margin-left: 0;
+          flex-direction: row;
           justify-content: center;
-          gap: 0.22rem;
+          gap: 0.25rem;
+        }
+
+        .site-sticky-nav .nav-tools-item .site-search-toggle {
+          width: 44px;
+          height: 44px;
+          padding: 0;
+        }
+
+        .site-sticky-nav .nav-tools-item .theme-icon,
+        .site-sticky-nav .nav-tools-item .site-search-icon {
+          width: 1.8rem;
+          height: 1.8rem;
         }
 
         .site-kamaboko-corner {
           width: clamp(24.8px, 3.68vw, 43.2px);
-        }
-
-        body.is-home .site-sticky-bar:not(.is-stuck):not(.is-submenu-open) .site-sticky-nav nav a {
-          color: rgba(239, 239, 242, 0.86);
-        }
-
-        body.is-home .site-sticky-bar:not(.is-stuck):not(.is-submenu-open) .site-sticky-nav nav a:hover,
-        body.is-home .site-sticky-bar:not(.is-stuck):not(.is-submenu-open) .site-sticky-nav nav a.active {
-          color: rgba(246, 246, 248, 0.94);
-        }
-
-        body.is-home .site-sticky-bar:not(.is-stuck):not(.is-submenu-open) .site-sticky-nav nav li.nav-menu-item > a.nav-link-button:hover,
-        body.is-home .site-sticky-bar:not(.is-stuck):not(.is-submenu-open) .site-sticky-nav nav li.nav-menu-item > a.nav-link-button:focus-visible {
-          color: rgb(55 65 81 / 1);
-        }
-
-        html.dark body.is-home .site-sticky-bar:not(.is-stuck):not(.is-submenu-open) .site-sticky-nav nav li.nav-menu-item > a.nav-link-button:hover,
-        html.dark body.is-home .site-sticky-bar:not(.is-stuck):not(.is-submenu-open) .site-sticky-nav nav li.nav-menu-item > a.nav-link-button:focus-visible {
-          color: rgb(229 231 235 / 1);
-        }
-
-        body.is-home .site-sticky-bar.is-submenu-open .site-sticky-nav nav a {
-          color: rgb(156 163 175 / 1);
-        }
-
-        body.is-home .site-sticky-bar.is-submenu-open .site-sticky-nav nav a:hover,
-        body.is-home .site-sticky-bar.is-submenu-open .site-sticky-nav nav a.active {
-          color: rgb(55 65 81 / 1);
-        }
-
-        html.dark body.is-home .site-sticky-bar.is-submenu-open .site-sticky-nav nav a {
-          color: rgb(156 163 175 / 1);
-        }
-
-        html.dark body.is-home .site-sticky-bar.is-submenu-open .site-sticky-nav nav a:hover,
-        html.dark body.is-home .site-sticky-bar.is-submenu-open .site-sticky-nav nav a.active {
-          color: rgb(229 231 235 / 1);
-        }
-
-        body:not(.is-home) .site-sticky-bar:not(.is-stuck) .site-sticky-side-titles {
-          display: block;
-        }
-
-        .site-sticky-bar.is-stuck .site-sticky-side-titles,
-        .site-sticky-bar.is-submenu-open .site-sticky-side-titles {
-          display: block;
-        }
-
-        .site-sticky-side-title-cn {
-          left: max(18px, env(safe-area-inset-left, 0px));
-        }
-
-        .site-sticky-side-title-en {
-          right: max(18px, env(safe-area-inset-right, 0px));
         }
       }
 
@@ -2056,6 +2547,7 @@ plenty「ってかさあ」 - YouTube&#160;&#x21a9;&#xfe0e;"
   >
 
     
+    
     <div class="site-sticky-sentinel" aria-hidden="true"></div>
     <header class="site-sticky-bar">
       <div class="site-sticky-bg" aria-hidden="true"></div>
@@ -2068,6 +2560,9 @@ plenty「ってかさあ」 - YouTube&#160;&#x21a9;&#xfe0e;"
         </a>
       </div>
       <div class="site-sticky-inner">
+        <a class="site-sidebar-title" href="/" aria-label="鱼糕的树屋，回到主页">
+          <img src="/img/title_cn.png" alt="鱼糕的树屋" width="1192" height="269">
+        </a>
         <div class="site-sticky-nav">
           <nav>
   <ul>
@@ -2083,7 +2578,7 @@ plenty「ってかさあ」 - YouTube&#160;&#x21a9;&#xfe0e;"
     </li>
     <li class="nav-menu-item nav-with-dropdown">
       <a href="/posts" class="nav-link-button active">
-        <span class="nav-link-label">Posts</span>
+        <span class="nav-link-label">Posts<span class="nav-submenu-connector" aria-hidden="true"></span></span>
       </a>
       
         <ul class="nav-submenu" aria-label="Posts years">
@@ -2105,7 +2600,7 @@ plenty「ってかさあ」 - YouTube&#160;&#x21a9;&#xfe0e;"
     </li>
     <li class="nav-menu-item nav-with-dropdown">
       <a href="/collection" class="nav-link-button ">
-        <span class="nav-link-label">Collection</span>
+        <span class="nav-link-label">Collection<span class="nav-submenu-connector" aria-hidden="true"></span></span>
       </a>
       
         <ul class="nav-submenu" aria-label="Collection projects">
@@ -2235,6 +2730,11 @@ plenty「ってかさあ」 - YouTube&#160;&#x21a9;&#xfe0e;"
     </li>
   </ul>
   <div class="site-mobile-menu-panel" id="site-mobile-menu-panel" hidden>
+    <button type="button" class="site-tree-art-toggle site-mobile-menu-pigeon" data-tree-art-toggle aria-label="显示鸽子" aria-pressed="false">
+  <img src="/home/complete_%E9%B8%BD%E5%AD%90_back_hu10663449642850605528.jpg" alt="树屋插画" width="640" height="640">
+  <img class="site-tree-art-pigeon-layer" src="/home/%E9%B8%BD%E5%AD%90_front1_hu8593801882437899996.png" alt="" aria-hidden="true" width="400" height="300">
+</button>
+
     <div class="site-mobile-menu-scroll">
       <ul class="site-mobile-menu-list" aria-label="Mobile navigation">
         <li class="site-mobile-menu-line">
@@ -2254,6 +2754,26 @@ plenty「ってかさあ」 - YouTube&#160;&#x21a9;&#xfe0e;"
         </li>
         
         <li class="site-mobile-menu-line site-mobile-search-line">
+          
+
+
+<button 
+  class="toggle-theme site-search-toggle site-theme-toggle flex items-center justify-center" 
+  type="button"
+  aria-label="Toggle Theme" 
+  aria-pressed="false"
+  data-hover-tooltip="電源"
+  data-hover-tooltip-delay="1000"
+  onclick="toggleTheme()"
+>
+  <span class="theme-icon light">
+    <img src="/icons/moon.svg" alt="" aria-hidden="true" />
+  </span>
+  <span class="theme-icon dark">
+    <img src="/icons/sun.svg" alt="" aria-hidden="true" />
+  </span>
+</button>
+
           <button
             type="button"
             class="site-mobile-search-toggle"
@@ -2269,7 +2789,7 @@ plenty「ってかさあ」 - YouTube&#160;&#x21a9;&#xfe0e;"
       </ul>
     </div>
   </div>
-  <div class="site-search-modal" id="site-search-modal" data-index-url="/index.json" hidden>
+    <div class="site-search-modal" id="site-search-modal" data-index-url="/index.json" hidden>
     <div class="site-search-backdrop" data-site-search-close></div>
     <section class="site-search-dialog" role="dialog" aria-modal="true" aria-label="Site search">
       <div class="site-search-input-wrap">
@@ -2278,12 +2798,20 @@ plenty「ってかさあ」 - YouTube&#160;&#x21a9;&#xfe0e;"
       <ul id="site-search-results" class="site-search-results" aria-label="Search results"></ul>
     </section>
   </div>
+
 </nav>
 
         </div>
       </div>
     </header>
+    <button type="button" class="site-tree-art-toggle site-desktop-art" data-tree-art-toggle aria-label="显示鸽子" aria-pressed="false">
+  <img src="/home/complete_%E9%B8%BD%E5%AD%90_back_hu10663449642850605528.jpg" alt="树屋插画" width="640" height="640">
+  <img class="site-tree-art-pigeon-layer" src="/home/%E9%B8%BD%E5%AD%90_front1_hu8593801882437899996.png" alt="" aria-hidden="true" width="400" height="300">
+</button>
+
     
+    
+    <div class="site-page-surface">
     <main id="content" class="px-2.5 sm:px-2.5" style="flex: 1 1 auto; display: flex; flex-direction: column;">
 
 
@@ -2314,7 +2842,7 @@ plenty「ってかさあ」 - YouTube&#160;&#x21a9;&#xfe0e;"
 
     
     
-      <h5 class="title-large" style="margin-top: -0.12rem;">想去图书馆！</h5>
+      <h5 class="title-large" style="margin-top: -0.12rem;"><a class="post-title-back-link" href="/posts/#post-2697bed1c02736147ef7af1800eea7ed" title="返回 Posts 中这篇文章的位置">想去图书馆！</a></h5>
     
     
   </header>
@@ -2361,153 +2889,12 @@ plenty「ってかさあ」 - YouTube&#160;&#x21a9;&#xfe0e;"
 
   
 
-
-
-
-
-  
-
-
-  <div class="single-bottom-nav" style="margin-top: auto; padding-top: 0; transform: translateY(-0.5rem);">
-    <details class="single-jump-menu">
-      <summary class="single-jump-trigger"><span class="single-jump-label">ʕ •ᴥ•ʔ</span></summary>
-      <div class="single-jump-panel" role="menu" aria-label="Posts 列表">
-        
-          
-            <a class="single-jump-link" role="menuitem" href="/2026/09/06/">认真游戏，持续幻想</a>
-          
-        
-          
-            <span class="single-jump-link is-current" aria-current="page">想去图书馆！</span>
-          
-        
-          
-            <a class="single-jump-link" role="menuitem" href="/2026/03/06/">构成了我的一部分的音乐们</a>
-          
-        
-          
-            <a class="single-jump-link" role="menuitem" href="/2026/02/14/">关于埃及的琐碎回忆</a>
-          
-        
-          
-            <a class="single-jump-link" role="menuitem" href="/2026/01/14/">迟到很久的元旦问候</a>
-          
-        
-          
-            <a class="single-jump-link" role="menuitem" href="/2025/11/25/">从邦邦中学会的道理（本篇）</a>
-          
-        
-          
-            <a class="single-jump-link" role="menuitem" href="/2025/11/15/">从邦邦中学会的道理（背景提要）</a>
-          
-        
-          
-            <a class="single-jump-link" role="menuitem" href="/2025/11/11/">苹果、橘子、蓝莓、扇贝</a>
-          
-        
-          
-            <a class="single-jump-link" role="menuitem" href="/2025/09/28/">少しだけの恋話（小学編）</a>
-          
-        
-          
-            <a class="single-jump-link" role="menuitem" href="/2025/09/07/">文字游戏与人生</a>
-          
-        
-          
-            <a class="single-jump-link" role="menuitem" href="/2025/09/03/">偽物</a>
-          
-        
-          
-            <a class="single-jump-link" role="menuitem" href="/2025/06/27/">道德感</a>
-          
-        
-          
-            <a class="single-jump-link" role="menuitem" href="/2025/05/07/">麻木的回归</a>
-          
-        
-          
-            <a class="single-jump-link" role="menuitem" href="/2025/05/01/">四月近况</a>
-          
-        
-          
-            <a class="single-jump-link" role="menuitem" href="/2025/02/14/">漂浮梦</a>
-          
-        
-          
-            <a class="single-jump-link" role="menuitem" href="/2025/01/30/">关于徒步登山的回忆</a>
-          
-        
-          
-            <a class="single-jump-link" role="menuitem" href="/2025/01/16/">Emotion by default</a>
-          
-        
-          
-            <a class="single-jump-link" role="menuitem" href="/2025/01/06/">关于长颈鹿的事</a>
-          
-        
-          
-            <a class="single-jump-link" role="menuitem" href="/2024/12/27/">日语歌单大杂烩始末</a>
-          
-        
-          
-            <a class="single-jump-link" role="menuitem" href="/2024/12/21/">噢、塞纳河的水</a>
-          
-        
-          
-            <a class="single-jump-link" role="menuitem" href="/2024/12/20/">习惯和隐隐约约的忧虑</a>
-          
-        
-          
-            <a class="single-jump-link" role="menuitem" href="/2024/12/18/">来自五年后的问候</a>
-          
-        
-      </div>
-    </details>
-  </div>
-
-
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const jumpMenu = document.querySelector(".single-jump-menu");
-    if (!jumpMenu) return;
-    const jumpTrigger = jumpMenu.querySelector(".single-jump-trigger");
-    let spinTimer = null;
-
-    if (jumpTrigger) {
-      jumpTrigger.addEventListener("click", function () {
-        jumpTrigger.classList.remove("is-spinning");
-        void jumpTrigger.offsetWidth;
-        jumpTrigger.classList.add("is-spinning");
-
-        if (spinTimer) {
-          window.clearTimeout(spinTimer);
-        }
-        spinTimer = window.setTimeout(function () {
-          jumpTrigger.classList.remove("is-spinning");
-          spinTimer = null;
-        }, 760);
-      });
-    }
-
-    document.addEventListener("click", function (event) {
-      const target = event.target instanceof Element ? event.target : null;
-      if (!target || jumpMenu.contains(target)) return;
-      jumpMenu.removeAttribute("open");
-    });
-
-    document.addEventListener("keydown", function (event) {
-      if (event.key !== "Escape") return;
-      jumpMenu.removeAttribute("open");
-    });
-  });
-</script>
-
 </article>
 
 
     </main>
 
-    <div class="mt-auto" style="margin-top: auto; padding-top: 1.5rem !important;">
+    <div class="mt-auto" style="margin-top: auto; padding-top: 0.5rem !important;">
     <footer class="flex-col items-center" style="padding-bottom: 1.5rem;">
         
         
@@ -2523,22 +2910,10 @@ plenty「ってかさあ」 - YouTube&#160;&#x21a9;&#xfe0e;"
         
             
         
-        
-        
-          
-        
-
-        <img id="footer-banner" data-banners='[&#34;/img/banner_blue.png&#34;,&#34;/img/banner_brown.png&#34;,&#34;/img/banner_green.png&#34;,&#34;/img/banner_pink.png&#34;,&#34;/img/banner_purple.png&#34;,&#34;/img/banner_yellow.png&#34;]' class="site-footer-banner mb-5" alt="Footer banner">
-        <noscript class="site-footer-banner-noscript">
-          
-            <img src="/img/banner_blue.png" class="mb-5" alt="Footer banner">
-          
-        </noscript>
         <script>
           (function () {
-            const bannerEl = document.getElementById("footer-banner");
-            if (!bannerEl) return;
-            const bannerUrls = JSON.parse(bannerEl.dataset.banners || "[]");
+            const bannerEl = new Image();
+            const bannerUrls = ["/img/banner_blue.png","/img/banner_brown.png","/img/banner_green.png","/img/banner_pink.png","/img/banner_purple.png","/img/banner_yellow.png"];
             if (!Array.isArray(bannerUrls) || bannerUrls.length === 0) return;
 
             const bannerColorMap = {
@@ -2699,6 +3074,14 @@ plenty「ってかさあ」 - YouTube&#160;&#x21a9;&#xfe0e;"
           })();
         </script>
 
+        
+          
+          
+          <button type="button" class="site-footer-bird-slot" data-footer-bird-toggle aria-label="切换小鸟" aria-pressed="false">
+          <img class="site-footer-bird" data-footer-bird data-pigeon="/home/%E9%B8%BD%E5%AD%90_front1_hu17693504367941418179.png" data-blackbird="/img/favicon3.png" data-pigeon-width="320" data-pigeon-height="240" data-blackbird-width="231" data-blackbird-height="230" data-bird="pigeon" src="/home/%E9%B8%BD%E5%AD%90_front1_hu17693504367941418179.png" alt="鸽子" width="320" height="240" loading="lazy">
+          </button>
+        
+
         <div class="site-footer-copyright flex justify-center items-center text-xs font-normal" 
                 style="font-size: 0.62rem; padding-bottom: 0.5rem;">
             © 2024–2026 Kamaboko Home. All rights reserved. 
@@ -2708,7 +3091,50 @@ plenty「ってかさあ」 - YouTube&#160;&#x21a9;&#xfe0e;"
 </div>
 
     
-<script src="/js/jquery-1.11.0.min.js"></script>
+</div>
+
+    <script>
+      (function() {
+        const storageKey = "tree-pigeon-visible";
+        let showPigeon = false;
+        try {
+          const navigation = performance.getEntriesByType("navigation")[0];
+          if (document.body.classList.contains("is-home") && navigation && navigation.type === "reload") {
+            sessionStorage.removeItem(storageKey);
+          }
+          showPigeon = sessionStorage.getItem(storageKey) === "true";
+        } catch (error) {}
+
+        const applyBirdState = function() {
+          document.querySelectorAll("[data-tree-art-toggle]").forEach(function(toggle) {
+            toggle.setAttribute("aria-pressed", String(showPigeon));
+            toggle.setAttribute("aria-label", showPigeon ? "隐藏鸽子" : "显示鸽子");
+          });
+          const footerBird = document.querySelector("[data-footer-bird]");
+          if (footerBird) {
+            footerBird.src = showPigeon ? footerBird.dataset.blackbird : footerBird.dataset.pigeon;
+            footerBird.dataset.bird = showPigeon ? "blackbird" : "pigeon";
+            footerBird.alt = showPigeon ? "乌鸫" : "鸽子";
+            footerBird.width = Number(showPigeon ? footerBird.dataset.blackbirdWidth : footerBird.dataset.pigeonWidth);
+            footerBird.height = Number(showPigeon ? footerBird.dataset.blackbirdHeight : footerBird.dataset.pigeonHeight);
+          }
+          const footerToggle = document.querySelector("[data-footer-bird-toggle]");
+          if (footerToggle) footerToggle.setAttribute("aria-pressed", String(showPigeon));
+        };
+
+        applyBirdState();
+        document.querySelectorAll("[data-tree-art-toggle], [data-footer-bird-toggle]").forEach(function(button) {
+          button.addEventListener("click", function(event) {
+            event.stopPropagation();
+            showPigeon = !showPigeon;
+            try { sessionStorage.setItem(storageKey, String(showPigeon)); } catch (error) {}
+            applyBirdState();
+          });
+        });
+      })();
+    </script>
+
+    <script src="/js/jquery-1.11.0.min.js"></script>
     <script src="/js/jquery.ripples.min.js?v=20260221j"></script>
 
     <script>
@@ -2912,7 +3338,7 @@ plenty「ってかさあ」 - YouTube&#160;&#x21a9;&#xfe0e;"
           if (!src) return;
 
           const width = window.innerWidth || document.documentElement.clientWidth || 0;
-          const count = width >= 912 ? 48 : 36;
+          const count = width >= 1024 ? 48 : 36;
 
           for (let i = 0; i < count; i += 1) {
             const piece = document.createElement("img");
@@ -3086,7 +3512,7 @@ plenty「ってかさあ」 - YouTube&#160;&#x21a9;&#xfe0e;"
         if (!stickyBar || !stickySentinel) return;
 
         const isMobileNav = function() {
-          return window.matchMedia("(max-width: 911px)").matches;
+          return window.matchMedia("(max-width: 1023px)").matches;
         };
 
         const setMobileSubmenuExpanded = function(link, expanded) {
@@ -3108,6 +3534,7 @@ plenty「ってかさあ」 - YouTube&#160;&#x21a9;&#xfe0e;"
 
         const setMobileMenuOpen = function(open) {
           if (!mobileMenuToggle || !mobileMenuPanel) return;
+          document.body.classList.toggle("is-mobile-menu-open", open);
           mobileMenuToggle.setAttribute("aria-expanded", open ? "true" : "false");
           mobileMenuPanel.hidden = !open;
           if (open) {
@@ -3194,7 +3621,8 @@ plenty「ってかさあ」 - YouTube&#160;&#x21a9;&#xfe0e;"
         };
 
         const updateStickyState = function() {
-          const stickyBarHeight = Math.ceil(stickyBar.offsetHeight);
+          if (!isMobileNav()) setMobileMenuOpen(false);
+          const stickyBarHeight = isMobileNav() ? Math.ceil(stickyBar.offsetHeight) : 0;
           stickyBar.style.setProperty("--sticky-bg-height", stickyBarHeight + "px");
           root.style.setProperty("--site-sticky-bar-height", stickyBarHeight + "px");
           const canScroll = (root.scrollHeight - window.innerHeight) > 2;
@@ -3287,6 +3715,29 @@ plenty「ってかさあ」 - YouTube&#160;&#x21a9;&#xfe0e;"
         const searchInput = searchModal.querySelector("#site-search-input");
         const resultsEl = searchModal.querySelector("#site-search-results");
         const indexUrl = searchModal.getAttribute("data-index-url") || "/index.json";
+        const root = document.documentElement;
+        let searchScrollPosition = null;
+        const searchViewport = window.visualViewport;
+        let searchViewportFrame = null;
+        const syncSearchViewport = function() {
+          if (searchModal.hidden) return;
+          const height = searchViewport ? searchViewport.height : window.innerHeight;
+          const top = searchViewport ? searchViewport.offsetTop : 0;
+          searchModal.style.setProperty("--site-search-viewport-height", Math.max(1, height) + "px");
+          searchModal.style.setProperty("--site-search-viewport-top", top + "px");
+        };
+        const queueSearchViewportUpdate = function() {
+          if (searchModal.hidden || searchViewportFrame !== null) return;
+          searchViewportFrame = window.requestAnimationFrame(function() {
+            searchViewportFrame = null;
+            syncSearchViewport();
+          });
+        };
+        window.addEventListener("resize", queueSearchViewportUpdate, { passive: true });
+        if (searchViewport) {
+          searchViewport.addEventListener("resize", queueSearchViewportUpdate, { passive: true });
+          searchViewport.addEventListener("scroll", queueSearchViewportUpdate, { passive: true });
+        }
         const setSearchButtonsExpanded = function(expanded) {
           for (let i = 0; i < openButtons.length; i += 1) {
             openButtons[i].setAttribute("aria-expanded", expanded ? "true" : "false");
@@ -3357,11 +3808,13 @@ plenty「ってかさあ」 - YouTube&#160;&#x21a9;&#xfe0e;"
           if (terms.length === 0) return raw.slice(0, 80);
 
           const lowerRaw = raw.toLowerCase();
-          let matchIndex = -1;
-          for (let i = 0; i < terms.length; i += 1) {
+          let matchIndex = lowerRaw.indexOf(normalize(query));
+          let matchLength = normalize(query).length;
+          for (let i = 0; matchIndex < 0 && i < terms.length; i += 1) {
             const idx = lowerRaw.indexOf(terms[i]);
-            if (idx >= 0 && (matchIndex < 0 || idx < matchIndex)) {
+            if (idx >= 0) {
               matchIndex = idx;
+              matchLength = terms[i].length;
             }
           }
           if (matchIndex < 0) return raw.slice(0, 80);
@@ -3388,19 +3841,12 @@ plenty「ってかさあ」 - YouTube&#160;&#x21a9;&#xfe0e;"
             sentenceStart += 1;
           }
 
-          let preview = raw.slice(sentenceStart, sentenceEnd).trim();
-          const maxLen = 80;
-          if (preview.length > maxLen) {
-            const keywordOffset = matchIndex - sentenceStart;
-            const sliceStart = Math.max(0, keywordOffset - 20);
-            preview = preview.slice(sliceStart, sliceStart + maxLen).trim();
-            preview = preview.replace(/^[，。！？；：、,.!?;:]+/, "");
-            if (sliceStart > 0) preview = "…" + preview;
-            if (sentenceEnd < raw.length || sliceStart + maxLen < raw.slice(sentenceStart, sentenceEnd).length) {
-              preview += "…";
-            }
-          }
-          return preview;
+          
+          const sliceStart = Math.max(sentenceStart, matchIndex - 8);
+          const maxLen = Math.max(80, matchLength + 8);
+          const sliceEnd = Math.min(raw.length, Math.max(sentenceEnd, matchIndex + matchLength), sliceStart + maxLen);
+          const preview = raw.slice(sliceStart, sliceEnd).trim();
+          return (sliceStart > 0 ? "…" : "") + preview + (sliceEnd < raw.length ? "…" : "");
         };
 
         const renderResults = function(query) {
@@ -3440,19 +3886,23 @@ plenty「ってかさあ」 - YouTube&#160;&#x21a9;&#xfe0e;"
             const meta = escapeHtml([item.section, item.date].filter(Boolean).join(" · "));
             const href = escapeHtml(item.permalink);
             return (
-              '<li><a href="' + href + '">' +
-                '<span class="site-search-result-title">' + title + "</span>" +
+              '<li>' +
+                '<span class="site-search-result-title"><a href="' + href + '"><span class="site-search-result-title-text">' + title + "</span></a></span>" +
                 previewHtml +
                 '<span class="site-search-result-meta">' + meta + "</span>" +
-              "</a></li>"
+              "</li>"
             );
           }).join("");
           resultsEl.innerHTML = html;
         };
 
         const openSearch = function() {
-          const isMobileNav = window.matchMedia("(max-width: 911px)").matches;
+          if (!searchModal.hidden) return;
+          searchScrollPosition = { left: window.scrollX, top: window.scrollY };
+          root.classList.add("is-search-open");
+          const isMobileNav = window.matchMedia("(max-width: 1023px)").matches;
           if (isMobileNav) {
+            document.body.classList.remove("is-mobile-menu-open");
             const stickyBar = document.querySelector(".site-sticky-bar");
             const mobileMenuPanel = document.getElementById("site-mobile-menu-panel");
             const mobileMenuToggle = document.querySelector(".site-mobile-menu-toggle");
@@ -3468,17 +3918,25 @@ plenty「ってかさあ」 - YouTube&#160;&#x21a9;&#xfe0e;"
             }
           }
           searchModal.hidden = false;
+          syncSearchViewport();
           setSearchButtonsExpanded(true);
           loadIndex().then(function() {
             renderResults(searchInput ? searchInput.value : "");
           });
           window.setTimeout(function() {
-            if (searchInput) searchInput.focus();
+            if (searchInput) searchInput.focus({ preventScroll: true });
           }, 0);
         };
 
         const closeSearch = function() {
+          if (searchModal.hidden) return;
           searchModal.hidden = true;
+          if (searchInput) searchInput.blur();
+          root.classList.remove("is-search-open");
+          if (searchScrollPosition) {
+            window.scrollTo({ left: searchScrollPosition.left, top: searchScrollPosition.top, behavior: "instant" });
+            searchScrollPosition = null;
+          }
           setSearchButtonsExpanded(false);
         };
 
@@ -3510,6 +3968,32 @@ plenty「ってかさあ」 - YouTube&#160;&#x21a9;&#xfe0e;"
             closeSearch();
           }
         });
+
+        searchModal.addEventListener("click", function(event) {
+          const target = event.target instanceof Element ? event.target : null;
+          if (!target || target.closest(".site-search-input-wrap, #site-search-results a, .site-search-result-preview, .site-search-result-meta")) return;
+          closeSearch();
+        });
+
+        const shouldBlockScroll = function(target, deltaY) {
+          if (!resultsEl.contains(target)) return true;
+          if (resultsEl.scrollHeight <= resultsEl.clientHeight) return true;
+          if (deltaY < 0 && resultsEl.scrollTop <= 0) return true;
+          return deltaY > 0 && resultsEl.scrollTop + resultsEl.clientHeight >= resultsEl.scrollHeight - 1;
+        };
+        searchModal.addEventListener("wheel", function(event) {
+          if (shouldBlockScroll(event.target, event.deltaY)) event.preventDefault();
+        }, { passive: false });
+        let touchY = null;
+        searchModal.addEventListener("touchstart", function(event) {
+          touchY = event.touches.length === 1 ? event.touches[0].clientY : null;
+        }, { passive: true });
+        searchModal.addEventListener("touchmove", function(event) {
+          if (touchY === null || event.touches.length !== 1) return;
+          const nextY = event.touches[0].clientY;
+          if (shouldBlockScroll(event.target, touchY - nextY)) event.preventDefault();
+          touchY = nextY;
+        }, { passive: false });
 
         document.addEventListener("keydown", function(event) {
           if (event.key === "Escape" && !searchModal.hidden) {
@@ -3559,7 +4043,8 @@ plenty「ってかさあ」 - YouTube&#160;&#x21a9;&#xfe0e;"
           const maxX = window.innerWidth - margin - (tooltipRect.width * 0.5);
           const clampedX = Math.max(minX, Math.min(maxX, center));
           const rawOffsetY = parseFloat(trigger.getAttribute("data-hover-tooltip-offset-y") || "");
-          const offsetY = Number.isFinite(rawOffsetY) ? rawOffsetY : 8;
+          const defaultOffsetY = trigger.matches(".toggle-theme, [data-site-search-open]") ? -2 : 8;
+          const offsetY = Number.isFinite(rawOffsetY) ? rawOffsetY : defaultOffsetY;
           const top = Math.min(window.innerHeight - tooltipRect.height - margin, rect.bottom + offsetY);
           tooltipEl.style.left = clampedX + "px";
           tooltipEl.style.top = top + "px";
@@ -3655,8 +4140,6 @@ plenty「ってかさあ」 - YouTube&#160;&#x21a9;&#xfe0e;"
       document.addEventListener("DOMContentLoaded", function() {
         const paragraphSelector = "#content p, #content li";
         const cjkCharRe = /^[\u3040-\u30ff\u3400-\u9fff\uf900-\ufaff\uff66-\uff9f]$/;
-        const latinDigitRe = /^[A-Za-z0-9]$/;
-        const closingQuoteLikeRe = /^[\"'“”‘’「」『』【】《》（）()\[\]]$/;
         const endingPuncRe = /^[，。！？；：、,.!?;:）)」』】》”’…]$/;
 
         const getLineBands = function(el) {
@@ -3739,55 +4222,34 @@ plenty「ってかさあ」 - YouTube&#160;&#x21a9;&#xfe0e;"
         };
 
         const getWidowPattern = function(el) {
-          const lines = getLineBands(el);
-          if (lines.length < 2) return null;
-          const paragraphChars = getParagraphChars(el);
-          if (paragraphChars.length < 2) return null;
-          const lastLineChars = getLastLineChars(paragraphChars);
-          if (lastLineChars.length === 1) {
-            const onlyChar = lastLineChars[0].ch;
-            if (endingPuncRe.test(onlyChar)) {
-              return { type: "punct_only", paragraphChars: paragraphChars };
-            }
-            return null;
-          }
-
-          if (lastLineChars.length !== 2) return null;
-          const firstChar = lastLineChars[0].ch;
-          const secondChar = lastLineChars[1].ch;
-          const firstIsLetterLike = cjkCharRe.test(firstChar) || latinDigitRe.test(firstChar) || closingQuoteLikeRe.test(firstChar);
-          if (firstIsLetterLike && endingPuncRe.test(secondChar)) {
-            return { type: "char_plus_punc", paragraphChars: paragraphChars };
-          }
-          return null;
-        };
-
-        const insertNoBreakByPattern = function(pattern) {
-          if (!pattern || !pattern.paragraphChars) return;
-          const paragraphChars = pattern.paragraphChars;
-          let anchorIndex = -1;
-          if (pattern.type === "punct_only") {
-            anchorIndex = paragraphChars.length - 2;
-          } else if (pattern.type === "char_plus_punc") {
-            anchorIndex = paragraphChars.length - 3;
-          }
-          if (anchorIndex < 0 || anchorIndex >= paragraphChars.length) return;
-          const anchor = paragraphChars[anchorIndex];
-          if (!anchor || !anchor.node) return;
-          const text = anchor.node.nodeValue || "";
-          const pos = anchor.offset + 1;
-          anchor.node.nodeValue = text.slice(0, pos) + "\u2060" + text.slice(pos);
+          if (getLineBands(el).length < 2) return null;
+          const chars = getParagraphChars(el);
+          const lastLine = getLastLineChars(chars);
+          const letters = lastLine.filter(function(item) {
+            return !endingPuncRe.test(item.ch);
+          });
+          if (letters.length !== 1 || !cjkCharRe.test(letters[0].ch)) return null;
+          const lonelyIndex = chars.indexOf(letters[0]);
+          if (lonelyIndex < 1) return null;
+          const previous = chars[lonelyIndex - 1];
+          
+          if (!cjkCharRe.test(previous.ch)) return null;
+          const between = document.createRange();
+          between.setStart(previous.node, previous.offset + 1);
+          between.setEnd(letters[0].node, letters[0].offset);
+          const fragment = between.cloneContents();
+          if (fragment.querySelector("br") || /\s/.test(between.toString())) return null;
+          return previous;
         };
 
         const tuneParagraph = function(el) {
-          if (!el) return;
-          if (el.closest(".single-jump-panel")) return;
+          if (!el || el.closest(".single-jump-panel, pre, code")) return;
           normalizeParagraph(el);
-          for (let i = 0; i < 3; i += 1) {
-            const pattern = getWidowPattern(el);
-            if (!pattern) break;
-            insertNoBreakByPattern(pattern);
-          }
+          const anchor = getWidowPattern(el);
+          if (!anchor) return;
+          const text = anchor.node.nodeValue || "";
+          const pos = anchor.offset + 1;
+          anchor.node.nodeValue = text.slice(0, pos) + "\u2060" + text.slice(pos);
         };
 
         const applyWidowControl = function() {
@@ -3806,6 +4268,8 @@ plenty「ってかさあ」 - YouTube&#160;&#x21a9;&#xfe0e;"
         applyWidowControl();
         window.addEventListener("load", applyWidowControl);
         window.addEventListener("resize", scheduleApply);
+        document.addEventListener("toggle", scheduleApply, true);
+        if (document.fonts) document.fonts.ready.then(scheduleApply);
       });
     </script>
 
