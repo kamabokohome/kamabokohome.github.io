@@ -14,6 +14,9 @@ tags:
 
 这里一年间有好几个有趣的节日。特别提一下每年12月31日（新除夕）和1月13日（旧除夕）（如果遇上周日会提前到周六）的 [Silvesterchlausen](https://appenzellerland.ch/de/informieren/typisch/braeuche-tradition/silvesterchlausen.html)。这两天，人们会穿上特殊的衣服，背上重重的大铃铛，挨家挨户唱yodel调、舞动着让铃铛响起来，给村里的其他人送上祝福。他们的服装，无论是“美丽”的豪华面具头饰，还是“自然”的绿绿植物造型，或者“丑陋”的明明无比可爱的皮毛怪物，我都非常喜欢。2025年的1月13日，我去Urnäsch镇围观了这个特殊的节日。那天天气很好，但山上还是冷到不行，感觉脸都被风吹到冻僵。有好几支送祝福的队伍同时行动，可以围观完“美丽”的队伍，就转头去看“丑陋”的队伍，虽然大家哼的约德尔调调都差不多啦。铃铛叮叮当当很大声地响起来的时候，我想，过年果然就要热闹一点啊……笑着迎接新的开始、送上祝福的那种氛围，哪怕文化背景不同，也是完全可以体会的呢。
 
+<img src='{{< asset-url path="img/Silvesterchlausen1.jpg" >}}'>
+<div class="corner-image-caption" style="text-align: center; margin-bottom: 1em;">当时拍下的一些照片</div>
+
 今年九月，我再访了Urnäsch围观 [Alpabfahrt](https://www.appenzell.ch/en/culture-traditions/customs-and-traditions/alpine-cattle-drives.html)，也就是赶牛下山节（相应地，春天结束的时候有赶牛上山节）。这个节日比上面提到的新年更普遍，瑞士很多地方都有，但没想到围观的人居然多得多。随着夏天的结束，农户们把牛从阿尔卑斯山上带下来，然后沿着公路，走过一个个小镇，回到自己的农场。那天还有热热闹闹的集市，看了迷你版的小猪赛跑！从一个很酷的猎人阿姨的摊位买到了很喜欢的、用狐狸的牙齿和鹿角做的项链。
 
 另外还有一个圆木的节日 [Bloch](https://appenzellerland.ch/de/informieren/typisch/braeuche-tradition/bloch/urnaescher-bloch.html)，没有亲自参加过，但在博物馆看到觉得也很有意思。这一天从凌晨开始，一支队伍护送一根装扮得很漂亮的大树干游行，走过一个个小镇，最后把这根木头拍卖掉。队伍里人们的角色都是有讲究的哦！像是铁匠、马夫、熊（？）之类的。
@@ -24,4 +27,4 @@ tags:
 
 顺带一提，因为实在喜欢去年的Silvesterchlausen，今年斥巨资130CHF从猎人阿姨的摊位购入了下图的两只超级可爱的小手办！（照片Credit to 同行的朋友）
 
-<img src='{{< asset-url path="img/Silvesterchlausen.jpg" >}}'>
+<img src='{{< asset-url path="img/Silvesterchlausen2.jpg" >}}'>

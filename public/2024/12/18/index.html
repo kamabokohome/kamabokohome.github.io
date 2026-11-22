@@ -37,7 +37,7 @@
 
   
 
-<link rel="stylesheet" href="/css/app.css?v=1795219619" />
+<link rel="stylesheet" href="/css/app.css?v=1795354574" />
 <style>
       html {
         scrollbar-gutter: stable;
@@ -353,6 +353,10 @@
 
       #content .collection-detail-layout-switch .collection-layout-collage-btn {
         font-size: 0.82rem;
+      }
+
+      #content .corner-entry-body > img:has(+ .corner-entry-tags) {
+        margin-bottom: 1.25rem;  
       }
 
       #content .corner-tag-switch,
@@ -1255,6 +1259,16 @@
       }
 
       @media (max-width: 1023px) {
+        html:has(> body.is-mobile-menu-open)::before {
+          content: "";
+          position: fixed;
+          inset: -18px;
+          z-index: -1;
+          background: inherit;
+          filter: blur(6px);
+          pointer-events: none;
+        }
+
          
         body.is-mobile-menu-open .site-page-surface {
           filter: blur(6px);
@@ -1451,6 +1465,11 @@
           align-items: center;
           justify-content: center;
           transition: background-color 130ms ease, opacity 130ms ease;
+        }
+
+        .site-sticky-bar.is-scrolling-down .site-mobile-menu-toggle[aria-expanded="false"]:not(:focus-visible) {
+          opacity: 0;
+          pointer-events: none;
         }
 
         .site-mobile-menu-icon {
@@ -3595,6 +3614,7 @@
           stickyBar.style.setProperty("--sticky-submenu-extent", "0px");
         };
 
+        let lastMenuScrollY = window.scrollY;
         const updateStickyState = function() {
           if (!isMobileNav()) setMobileMenuOpen(false);
           const stickyBarHeight = isMobileNav() ? Math.ceil(stickyBar.offsetHeight) : 0;
@@ -3602,7 +3622,15 @@
           root.style.setProperty("--site-sticky-bar-height", stickyBarHeight + "px");
           const canScroll = (root.scrollHeight - window.innerHeight) > 2;
           const reachedTop = stickySentinel.getBoundingClientRect().top <= 0;
-          const hasScrolled = (window.scrollY || root.scrollTop || 0) > 0;
+          const scrollY = Math.max(0, Math.min(window.scrollY, root.scrollHeight - window.innerHeight));
+          if (!isMobileNav() || !scrollY || (mobileMenuPanel && !mobileMenuPanel.hidden)) {
+            stickyBar.classList.remove("is-scrolling-down");
+            lastMenuScrollY = scrollY;
+          } else if (Math.abs(scrollY - lastMenuScrollY) >= 6) {
+            stickyBar.classList.toggle("is-scrolling-down", scrollY > lastMenuScrollY);
+            lastMenuScrollY = scrollY;
+          }
+          const hasScrolled = scrollY > 0;
           const isStuck = canScroll && reachedTop && hasScrolled;
           stickyBar.classList.toggle("is-stuck", isStuck);
           updateSubmenuState();

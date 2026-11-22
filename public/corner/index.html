@@ -33,7 +33,7 @@
 
   
 
-<link rel="stylesheet" href="/css/app.css?v=1795220185" />
+<link rel="stylesheet" href="/css/app.css?v=1795356488" />
 <style>
       html {
         scrollbar-gutter: stable;
@@ -351,6 +351,10 @@
         font-size: 0.82rem;
       }
 
+      #content .corner-entry-body > img:has(+ .corner-entry-tags) {
+        margin-bottom: 1.25rem;
+      }
+
       #content .corner-tag-switch,
       #content .corner-entry-tags {
         column-gap: 0.75rem;
@@ -360,11 +364,17 @@
       #content .corner-tag-switch .collection-layout-btn,
       #content .corner-entry-tag {
         padding: 0.32rem 0.5rem;
-        font-size: 0.78rem;
         font-weight: 500;
         opacity: 1;
-        color: #9ca3af;
         transition: color 130ms ease;
+      }
+
+      #content .corner-tag-switch .collection-layout-btn,
+      #content .corner-entry-tag,
+      #content .corner-image-caption,
+      #content .corner-entry-body figcaption {
+        font-size: 0.78rem;
+        color: #9ca3af;
       }
 
       #content .corner-tag-switch .collection-layout-btn.is-active,
@@ -1251,6 +1261,16 @@
       }
 
       @media (max-width: 1023px) {
+        html:has(> body.is-mobile-menu-open)::before {
+          content: "";
+          position: fixed;
+          inset: -18px;
+          z-index: -1;
+          background: inherit;
+          filter: blur(6px);
+          pointer-events: none;
+        }
+
          
         body.is-mobile-menu-open .site-page-surface {
           filter: blur(6px);
@@ -1447,6 +1467,11 @@
           align-items: center;
           justify-content: center;
           transition: background-color 130ms ease, opacity 130ms ease;
+        }
+
+        .site-sticky-bar.is-scrolling-down .site-mobile-menu-toggle[aria-expanded="false"]:not(:focus-visible) {
+          opacity: 0;
+          pointer-events: none;
         }
 
         .site-mobile-menu-icon {
@@ -3039,12 +3064,14 @@
 </blockquote>
 <p>正是如此。Appenzell给我的印象是精致的小镇、很多的山、农业（牛和羊），以及得益于它的相对封闭而保留得很好的、很特别的民俗。这里的传统服装非常有山间牧民的感觉！阿彭策尔地区有自己的<a href="https://appenzellerland.ch/de/informieren/typisch/braeuche-tradition.html">旅行资讯官网</a>，点开来应该就能看到。女孩们的裙子还有男士们的红色马甲都非常可爱！想买一条裙子收藏了。</p>
 <p>这里一年间有好几个有趣的节日。特别提一下每年12月31日（新除夕）和1月13日（旧除夕）（如果遇上周日会提前到周六）的 <a href="https://appenzellerland.ch/de/informieren/typisch/braeuche-tradition/silvesterchlausen.html">Silvesterchlausen</a>。这两天，人们会穿上特殊的衣服，背上重重的大铃铛，挨家挨户唱yodel调、舞动着让铃铛响起来，给村里的其他人送上祝福。他们的服装，无论是“美丽”的豪华面具头饰，还是“自然”的绿绿植物造型，或者“丑陋”的明明无比可爱的皮毛怪物，我都非常喜欢。2025年的1月13日，我去Urnäsch镇围观了这个特殊的节日。那天天气很好，但山上还是冷到不行，感觉脸都被风吹到冻僵。有好几支送祝福的队伍同时行动，可以围观完“美丽”的队伍，就转头去看“丑陋”的队伍，虽然大家哼的约德尔调调都差不多啦。铃铛叮叮当当很大声地响起来的时候，我想，过年果然就要热闹一点啊……笑着迎接新的开始、送上祝福的那种氛围，哪怕文化背景不同，也是完全可以体会的呢。</p>
+<img src='/img/Silvesterchlausen1.jpg'>
+<div class="corner-image-caption" style="text-align: center; margin-bottom: 1em;">当时拍下的一些照片</div>
 <p>今年九月，我再访了Urnäsch围观 <a href="https://www.appenzell.ch/en/culture-traditions/customs-and-traditions/alpine-cattle-drives.html">Alpabfahrt</a>，也就是赶牛下山节（相应地，春天结束的时候有赶牛上山节）。这个节日比上面提到的新年更普遍，瑞士很多地方都有，但没想到围观的人居然多得多。随着夏天的结束，农户们把牛从阿尔卑斯山上带下来，然后沿着公路，走过一个个小镇，回到自己的农场。那天还有热热闹闹的集市，看了迷你版的小猪赛跑！从一个很酷的猎人阿姨的摊位买到了很喜欢的、用狐狸的牙齿和鹿角做的项链。</p>
 <p>另外还有一个圆木的节日 <a href="https://appenzellerland.ch/de/informieren/typisch/braeuche-tradition/bloch/urnaescher-bloch.html">Bloch</a>，没有亲自参加过，但在博物馆看到觉得也很有意思。这一天从凌晨开始，一支队伍护送一根装扮得很漂亮的大树干游行，走过一个个小镇，最后把这根木头拍卖掉。队伍里人们的角色都是有讲究的哦！像是铁匠、马夫、熊（？）之类的。</p>
 <p>是不是已经感受到这片区域文化的独特了呢！从网上找到了这个<a href="https://www.appenzell.ch/fileadmin/template_appenzell/user_upload/06_Dokumente/Broschueren_Flyer/Appenzeller_Brauchtum.pdf">小册子</a>，虽说是德语的，但图也很多，可以作为补充的参考。</p>
 <p>另外，如果去Urnäsch的话，哪怕没有碰上活动，当地的传统文化博物馆 <a href="https://www.museum-urnaesch.ch/home">Appenzeller Brauchtumsmuseum</a> 也很值得一逛哦！我去过两次这个镇，于是也去了两次这个博物馆。虽然它不大，而且都是德语的，要带着翻译软件逛。博物馆里面还有Silvesterchlausen的铃铛马甲可以体验！真的很重哦。</p>
 <p>顺带一提，因为实在喜欢去年的Silvesterchlausen，今年斥巨资130CHF从猎人阿姨的摊位购入了下图的两只超级可爱的小手办！（照片Credit to 同行的朋友）</p>
-<img src='/img/Silvesterchlausen.jpg'>
+<img src='/img/Silvesterchlausen2.jpg'>
           
             <div class="corner-entry-tags" aria-label="Entry tags">
               
@@ -3077,11 +3104,11 @@
         <div class="corner-entry-body">
           <p>最近了解到瑞士本土的扑克牌<strong>Jass</strong>，觉得非常有趣！按照德语来说，读音应该是“yàsi”这样的感觉，和我们经常玩的扑克牌一样，Jass也有四种花色，但每种花色只有9张牌，分别是6、7、8、9、10（Banner/旗帜）、J（Under/下官）、Q（Ober/上官）、K（King）和Ace。而且德语区的Jass的花色很可爱，是铃铛、盾牌、玫瑰和橡子。脑海里都要出现阿尔卑斯的画面了！</p>
 <img src='/img/Jass1.png?v=20260724-1056'>
-<div style="text-align: center; margin-bottom: 1em;"><em>Source: <a href="https://www.swisslos.ch/en/jass/informations/jass-rules/principles-of-jass.html">Swisslos</a></em></div>
+<div class="corner-image-caption" style="text-align: center; margin-bottom: 1em;"><em>Source: <a href="https://www.swisslos.ch/en/jass/informations/jass-rules/principles-of-jass.html">Swisslos</a></em></div>
 <p>粗略理解了一下玩法后发现，Jass的规则和升级有一点相似。比如玩家都是两两一组，有主花色，主花色大于其它花色。然后每一轮下来，牌最大的玩家可以获得所有的分数。虽然细则和升级还是不太一样，整体上比升级更简单一些。</p>
 <p>另外，经常和Jass配套的、写着大大的Z的计分板似乎也是瑞士的特色之一。大大的“Z”的三笔分别代表100、50和20分，通过在上面划线的方法算分。比如这个计分板的下半部分，代表的分数就是19*100+5*50+18*20+6+3-1=2518哦！很聪明的记分方法呢。</p>
 <img src='/img/Jass2.png?v=20260724-1100'>
-<div style="text-align: center;"><em>Source: <a href="https://www.swiss.law/wp-content/uploads/2017/11/Swiss-Jass-Introduction.pdf">SWISS.LAW</a></em></div>
+<div class="corner-image-caption" style="text-align: center;"><em>Source: <a href="https://www.swiss.law/wp-content/uploads/2017/11/Swiss-Jass-Introduction.pdf">SWISS.LAW</a></em></div>
 
           
             <div class="corner-entry-tags" aria-label="Entry tags">
@@ -3113,7 +3140,7 @@
         <div class="corner-entry-body">
           <p>上个月发行的放置类（应该算？）游戏<a href="https://store.steampowered.com/app/4111370/"><strong>观鸟笔记</strong></a>，真的非常可爱！本来就很喜欢小鸟的我，读完测评就马上入手了。</p>
 <p>通过收集小鸟拜访后掉落的羽毛和便便，还有家具掉落的星星，就能和乌鸦做交易（变成建筑材料了吗？），获得货币。随后就能购入更多的新家具和作物，吸引更多甚至新种类的小鸟前来拜访。家具的名称都是以小鸟的视角来定的，非常可爱！场景和小鸟们的画风也很可爱。为了收集图鉴，会需要拍摄到每一种鸟的所有动作，这就需要打开相机，捕捉突如其来的每一个瞬间，让这款游戏有了一点挑战性。动作的设定（比如爆冲、打盹、求偶？）都和现实中的一致，可谓相当用心。但即使不强求图鉴，光是看到小鸟们在自己屏幕的一角自由自在地飞来飞去、跑来跑去、睡来睡去……已经足够疗愈了。</p>
-<p>而且如果选择简体中文的话，一些不常见的鸟类名字会有拼音哦！一边玩一边能认识更多小鸟的种类呢。</p>
+<p>而且如果选择简体中文的话，一些不常见的字会有拼音哦！一边玩一边能认识更多小鸟的种类呢。</p>
 <p>高强度玩了一天，发现我现在的身心状态还不适合玩游戏（邦邦除外）……所以暂时卸载了。但真的很喜欢它。反正永远在游戏库里，等什么时候时机到了，就会继续玩下去。目标当然是全图鉴！！</p>
 
           
@@ -4551,6 +4578,7 @@
           stickyBar.style.setProperty("--sticky-submenu-extent", "0px");
         };
 
+        let lastMenuScrollY = window.scrollY;
         const updateStickyState = function() {
           if (!isMobileNav()) setMobileMenuOpen(false);
           const stickyBarHeight = isMobileNav() ? Math.ceil(stickyBar.offsetHeight) : 0;
@@ -4558,7 +4586,15 @@
           root.style.setProperty("--site-sticky-bar-height", stickyBarHeight + "px");
           const canScroll = (root.scrollHeight - window.innerHeight) > 2;
           const reachedTop = stickySentinel.getBoundingClientRect().top <= 0;
-          const hasScrolled = (window.scrollY || root.scrollTop || 0) > 0;
+          const scrollY = Math.max(0, Math.min(window.scrollY, root.scrollHeight - window.innerHeight));
+          if (!isMobileNav() || !scrollY || (mobileMenuPanel && !mobileMenuPanel.hidden)) {
+            stickyBar.classList.remove("is-scrolling-down");
+            lastMenuScrollY = scrollY;
+          } else if (Math.abs(scrollY - lastMenuScrollY) >= 6) {
+            stickyBar.classList.toggle("is-scrolling-down", scrollY > lastMenuScrollY);
+            lastMenuScrollY = scrollY;
+          }
+          const hasScrolled = scrollY > 0;
           const isStuck = canScroll && reachedTop && hasScrolled;
           stickyBar.classList.toggle("is-stuck", isStuck);
           updateSubmenuState();

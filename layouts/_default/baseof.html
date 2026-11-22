@@ -319,6 +319,10 @@
         font-size: 0.82rem;
       }
 
+      #content .corner-entry-body > img:has(+ .corner-entry-tags) {
+        margin-bottom: 1.25rem;
+      }
+
       #content .corner-tag-switch,
       #content .corner-entry-tags {
         column-gap: 0.75rem;
@@ -328,11 +332,17 @@
       #content .corner-tag-switch .collection-layout-btn,
       #content .corner-entry-tag {
         padding: 0.32rem 0.5rem;
-        font-size: 0.78rem;
         font-weight: 500;
         opacity: 1;
-        color: #9ca3af;
         transition: color 130ms ease;
+      }
+
+      #content .corner-tag-switch .collection-layout-btn,
+      #content .corner-entry-tag,
+      #content .corner-image-caption,
+      #content .corner-entry-body figcaption {
+        font-size: 0.78rem;
+        color: #9ca3af;
       }
 
       #content .corner-tag-switch .collection-layout-btn.is-active,
@@ -1219,6 +1229,16 @@
       }
 
       @media (max-width: 1023px) {
+        html:has(> body.is-mobile-menu-open)::before {
+          content: "";
+          position: fixed;
+          inset: -18px;
+          z-index: -1;
+          background: inherit;
+          filter: blur(6px);
+          pointer-events: none;
+        }
+
         /* 模糊整段文档内容，保留工具栏后方及滚动区域的模糊效果。 */
         body.is-mobile-menu-open .site-page-surface {
           filter: blur(6px);
@@ -1415,6 +1435,11 @@
           align-items: center;
           justify-content: center;
           transition: background-color 130ms ease, opacity 130ms ease;
+        }
+
+        .site-sticky-bar.is-scrolling-down .site-mobile-menu-toggle[aria-expanded="false"]:not(:focus-visible) {
+          opacity: 0;
+          pointer-events: none;
         }
 
         .site-mobile-menu-icon {
@@ -3067,6 +3092,7 @@
           stickyBar.style.setProperty("--sticky-submenu-extent", "0px");
         };
 
+        let lastMenuScrollY = window.scrollY;
         const updateStickyState = function() {
           if (!isMobileNav()) setMobileMenuOpen(false);
           const stickyBarHeight = isMobileNav() ? Math.ceil(stickyBar.offsetHeight) : 0;
@@ -3074,7 +3100,15 @@
           root.style.setProperty("--site-sticky-bar-height", stickyBarHeight + "px");
           const canScroll = (root.scrollHeight - window.innerHeight) > 2;
           const reachedTop = stickySentinel.getBoundingClientRect().top <= 0;
-          const hasScrolled = (window.scrollY || root.scrollTop || 0) > 0;
+          const scrollY = Math.max(0, Math.min(window.scrollY, root.scrollHeight - window.innerHeight));
+          if (!isMobileNav() || !scrollY || (mobileMenuPanel && !mobileMenuPanel.hidden)) {
+            stickyBar.classList.remove("is-scrolling-down");
+            lastMenuScrollY = scrollY;
+          } else if (Math.abs(scrollY - lastMenuScrollY) >= 6) {
+            stickyBar.classList.toggle("is-scrolling-down", scrollY > lastMenuScrollY);
+            lastMenuScrollY = scrollY;
+          }
+          const hasScrolled = scrollY > 0;
           const isStuck = canScroll && reachedTop && hasScrolled;
           stickyBar.classList.toggle("is-stuck", isStuck);
           updateSubmenuState();
